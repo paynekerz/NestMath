@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Vercel
+.vercel/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Agent / AI tooling
+.claude/
+.agents/
+.planning/
+memory/
+MEMORY.md
+insights.md
+buy-vs-rent-calculator.md
+roadmap.md
+CLAUDE.md
+.gstack/
+DESIGN.md
+
+nestmath-redesign/

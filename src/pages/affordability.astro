@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { AffordabilityCalculator } from '../components/Affordability/AffordabilityCalculator';
+---
+<Base
+  title="NestMath.app — Home Affordability Calculator"
+  description="Find out how much house you can afford based on your income, debts, and down payment. Free calculator — no account required."
+  canonical="https://nestmath.app/affordability"
+  schemaName="NestMath — Home Affordability Calculator"
+  schemaDescription="Calculate the maximum home price you can afford based on income, debts, and DTI limits."
+>
+  <div class="max-w-[1200px] mx-auto px-6 pt-8 pb-2">
+    <h1 class="text-headline-lg font-bold text-on-surface tracking-tight">Home Affordability Engine</h1>
+    <p class="text-on-surface-variant mt-1 text-body-md">Analyze your purchase power based on income, debt, and current market conditions.</p>
+  </div>
+  <AffordabilityCalculator client:load />
+</Base>

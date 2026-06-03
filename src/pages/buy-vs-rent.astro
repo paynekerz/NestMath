@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { BuyVsRent } from '../components/BuyVsRent/BuyVsRent';
+---
+<Base
+  title="NestMath.app — Buy vs. Rent Calculator"
+  description="Free buy vs. rent calculator that models real costs — mortgage, opportunity cost, appreciation, and taxes — and tells you the exact year buying beats renting."
+  canonical="https://nestmath.app/buy-vs-rent"
+  schemaName="NestMath — Buy vs. Rent Calculator"
+>
+  <div class="max-w-[1280px] mx-auto px-[24px] py-[32px]">
+    <BuyVsRent client:load />
+  </div>
+</Base>

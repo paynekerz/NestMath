@@ -1,0 +1,30 @@
+{
+  "name": "buy-vs-rent-calculator",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "npm audit --audit-level=critical && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/react": "^5.0.4",
+    "@astrojs/vercel": "latest",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/material-symbols-outlined": "^5.2.45",
+    "astro": "^6.3.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "recharts": "^3.8.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "playwright": "^1.60.0",
+    "tailwindcss": "^4.1.18"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

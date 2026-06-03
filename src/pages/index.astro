@@ -1,0 +1,281 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faqItems = [
+  {
+    q: "Is it better to buy or rent right now?",
+    a: "It depends on your timeline and local market. The buy vs. rent calculator shows the exact year when buying pulls ahead — based on your home price, mortgage rate, and what your money would earn if invested instead.",
+  },
+  {
+    q: "How much should I put down on a house?",
+    a: "20% eliminates PMI and reduces your monthly payment. But many buyers put down 3–10% and factor PMI into their budget. The affordability calculator shows how your down payment affects your buying power.",
+  },
+  {
+    q: "What is the 28% rule for buying a house?",
+    a: "Lenders recommend spending no more than 28% of gross monthly income on housing (mortgage, taxes, insurance). At $8,000/month income, that's $2,240 for housing. The affordability calculator applies this rule to find your max home price.",
+  },
+  {
+    q: "How long does it take to save for a down payment?",
+    a: "At $1,000/month into a high-yield savings account earning 4.5%, a 20% down payment on a $400,000 home takes about 5–6 years. The savings planner shows your specific timeline based on your current savings and contributions.",
+  },
+  {
+    q: "Should I refinance my mortgage?",
+    a: "Refinancing makes sense when the rate drop is large enough to recoup closing costs before you sell. The refinance calculator finds your exact break-even month so you know whether it's worth it.",
+  },
+  {
+    q: "Are these calculators free to use?",
+    a: "Yes. NestMath is completely free — no account, no subscription, no data stored. All calculations run in your browser. Revenue comes from ads and donations.",
+  },
+];
+---
+
+<Base
+  title="NestMath.app — Free Home Buying Calculators"
+  description="Free calculators for every home buying decision — buy vs. rent, affordability, payoff, savings, and refinance. No account. No data stored."
+  canonical="https://nestmath.app/"
+  schemaName="NestMath"
+  schemaDescription="Free calculators for every home buying decision. No account. No data stored."
+>
+  <div class="relative overflow-hidden">
+    <!-- Atmospheric blur -->
+    <div
+      class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary-accent/20 blur-[120px] pointer-events-none -translate-y-1/4 translate-x-1/4"
+      aria-hidden="true"
+    ></div>
+
+    <div class="max-w-[1280px] mx-auto px-[24px]">
+
+      <!-- ── Hero ───────────────────────────────── -->
+      <section class="pt-24 pb-16 relative animate-reveal">
+        <!-- Status badge -->
+        <div class="inline-flex items-center gap-[8px] rounded-full bg-primary-container/10 border border-primary/20 px-[16px] py-[8px] mb-[32px]">
+          <span class="w-2 h-2 rounded-full bg-success-emerald animate-pulse-dot" aria-hidden="true"></span>
+          <span class="text-label-sm text-primary">DRAFT - Free &amp; Open Source</span>
+        </div>
+
+        <h1 class="text-headline-xl font-bold text-on-surface max-w-2xl leading-tight -tracking-[0.02em]">
+          DRAFT - Make confident decisions about buying, renting, and managing your home.
+        </h1>
+        <p class="text-body-lg text-on-surface-variant mt-[24px] max-w-[576px]">
+          Free calculators for every home buying decision. No account. No data stored.
+        </p>
+
+        <!-- Trust bar -->
+        <div class="flex flex-wrap items-center gap-x-[24px] gap-y-[8px] mt-[24px]">
+          <span class="flex items-center gap-[6px] text-label-sm text-on-surface-variant">
+            <span class="material-symbols-outlined text-success-emerald text-[16px]" aria-hidden="true">check_circle</span>
+            Free, always.
+          </span>
+          <span class="flex items-center gap-[6px] text-label-sm text-on-surface-variant">
+            <span class="material-symbols-outlined text-success-emerald text-[16px]" aria-hidden="true">no_accounts</span>
+            No account required.
+          </span>
+          <span class="flex items-center gap-[6px] text-label-sm text-on-surface-variant">
+            <span class="material-symbols-outlined text-success-emerald text-[16px]" aria-hidden="true">security</span>
+            No data stored.
+          </span>
+        </div>
+
+        <div class="flex flex-wrap gap-[16px] mt-[32px]">
+          <a
+            href="/buy-vs-rent"
+            class="inline-flex items-center bg-primary-accent text-white px-[32px] py-[16px] rounded-lg text-label-md font-semibold hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary-accent/20"
+          >
+            DRAFT - Get Started
+          </a>
+          <a
+            href="#how-it-works"
+            class="inline-flex items-center border border-border-subtle bg-surface-container-low px-[32px] py-[16px] rounded-lg text-label-md font-semibold text-on-surface hover:border-primary-accent/50 transition-all"
+          >
+            DRAFT - How It Works
+          </a>
+        </div>
+      </section>
+
+      <!-- ── How It Works ──────────────────────── -->
+      <section id="how-it-works" aria-label="How it works" class="mt-[48px] animate-reveal stagger-2">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-[24px] rounded-xl border border-border-subtle bg-surface-container-low p-[24px] sm:p-[32px]">
+
+          <div class="flex items-start gap-[16px]">
+            <span
+              class="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-label-md font-bold text-primary bg-primary-container/20 border border-primary/20"
+              aria-hidden="true"
+            >1</span>
+            <div>
+              <p class="text-body-sm font-semibold text-on-surface">Enter your numbers</p>
+              <p class="text-label-sm text-on-surface-variant mt-[4px]">Home price, rate, rent — takes about 30 seconds.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-[16px]">
+            <span
+              class="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-label-md font-bold text-primary bg-primary-container/20 border border-primary/20"
+              aria-hidden="true"
+            >2</span>
+            <div>
+              <p class="text-body-sm font-semibold text-on-surface">See the answer instantly</p>
+              <p class="text-label-sm text-on-surface-variant mt-[4px]">Results update live — no button, no waiting.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-[16px]">
+            <span
+              class="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-label-md font-bold text-primary bg-primary-container/20 border border-primary/20"
+              aria-hidden="true"
+            >3</span>
+            <div>
+              <p class="text-body-sm font-semibold text-on-surface">Download the results</p>
+              <p class="text-label-sm text-on-surface-variant mt-[4px]">Export to CSV or PDF to share or save.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── Trust signals ──────────────────────── -->
+      <div class="mt-[96px] grid grid-cols-2 md:grid-cols-4 gap-[24px] border-t border-border-subtle pt-[24px] animate-reveal stagger-2">
+        <div>
+          <p class="text-headline-md font-semibold text-on-surface">Free, always.</p>
+          <p class="text-label-sm text-on-surface-variant mt-[4px]">No credit card. No plan.</p>
+        </div>
+        <div>
+          <p class="text-headline-md font-semibold text-on-surface">No account.</p>
+          <p class="text-label-sm text-on-surface-variant mt-[4px]">Your numbers stay in your browser.</p>
+        </div>
+        <div>
+          <p class="text-headline-md font-semibold text-on-surface">No data stored.</p>
+          <p class="text-label-sm text-on-surface-variant mt-[4px]">Zero server, zero tracking.</p>
+        </div>
+        <div>
+          <p class="text-headline-md font-semibold text-on-surface">DRAFT - All math, no fluff.</p>
+          <p class="text-label-sm text-on-surface-variant mt-[4px]">DRAFT - Numbers only.</p>
+        </div>
+      </div>
+
+      <!-- ── Tool cards ─────────────────────────── -->
+      <section id="tools" aria-label="Available calculators" class="mt-[48px]">
+        <p class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">ACTIVE MODULES</p>
+
+        <div class="grid md:grid-cols-3 gap-[24px]">
+
+          <!-- Feature card: Buy vs. Rent -->
+          <a
+            href="/buy-vs-rent"
+            class="glass-card p-[32px] rounded-xl md:col-span-2 md:row-span-2 relative overflow-hidden group block animate-reveal stagger-1"
+            aria-label="Buy vs. Rent Calculator"
+          >
+            <!-- Decorative watermark icon -->
+            <span
+              class="material-symbols-outlined absolute bottom-4 right-4 text-[120px] text-on-surface opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none select-none"
+              aria-hidden="true"
+            >analytics</span>
+
+            <div class="relative">
+              <div class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary-container/20 mb-[24px]">
+                <span class="material-symbols-outlined text-primary text-[20px]" aria-hidden="true">analytics</span>
+              </div>
+              <h2 class="text-headline-lg font-semibold text-on-surface mb-[12px]">Should I buy or rent?</h2>
+              <p class="text-body-md text-on-surface-variant max-w-[480px]">
+                DRAFT - Model the full financial picture of buying vs. renting — equity, opportunity cost, and the year buying pays off.
+              </p>
+              <span class="inline-flex items-center gap-[8px] mt-[24px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
+                Calculate
+                <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_forward</span>
+              </span>
+            </div>
+          </a>
+
+          <!-- Small card 1: Affordability -->
+          <a
+            href="/affordability"
+            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-2"
+            aria-label="Home Affordability Calculator"
+          >
+            <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
+              <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">payments</span>
+            </div>
+            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much house can I afford?</h2>
+            <p class="text-body-sm text-on-surface-variant mb-[16px]">
+              DRAFT - Work backward from your income to find your real buying power.
+            </p>
+            <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
+              Calculate
+              <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_forward</span>
+            </span>
+          </a>
+
+          <!-- Small card 2: Payoff -->
+          <a
+            href="/payoff"
+            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-3"
+            aria-label="Mortgage Payoff Calculator"
+          >
+            <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
+              <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">schedule</span>
+            </div>
+            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">What if I pay extra each month?</h2>
+            <p class="text-body-sm text-on-surface-variant mb-[16px]">
+              DRAFT - See how extra payments shrink your loan term and total interest paid.
+            </p>
+            <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
+              Calculate
+              <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_forward</span>
+            </span>
+          </a>
+
+          <!-- Horizontal strip: Savings Planner + Refinance -->
+          <div class="md:col-span-3 bg-surface-container-low rounded-xl border border-border-subtle overflow-hidden animate-reveal stagger-4">
+            <div class="grid grid-cols-2 divide-x divide-border-subtle">
+              <a
+                href="/savings-planner"
+                class="flex items-center gap-[16px] p-[24px] hover:bg-surface-container transition-colors group"
+                aria-label="Down Payment Savings Planner"
+              >
+                <div class="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container">
+                  <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">savings</span>
+                </div>
+                <div>
+                  <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">How long until I can afford to buy?</p>
+                  <p class="text-label-sm text-on-surface-variant mt-[2px]">Savings Planner</p>
+                </div>
+                <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-auto shrink-0" aria-hidden="true">arrow_forward</span>
+              </a>
+              <a
+                href="/refinance"
+                class="flex items-center gap-[16px] p-[24px] hover:bg-surface-container transition-colors group"
+                aria-label="Refinance Break-Even Calculator"
+              >
+                <div class="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container">
+                  <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">sync_alt</span>
+                </div>
+                <div>
+                  <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Is refinancing worth it?</p>
+                  <p class="text-label-sm text-on-surface-variant mt-[2px]">Refinance Calculator</p>
+                </div>
+                <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-auto shrink-0" aria-hidden="true">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── FAQ ───────────────────────────────── -->
+      <section aria-label="Frequently asked questions" class="mt-[48px] mb-[64px]">
+        <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[8px]">FAQ</h2>
+        <div class="flex flex-col gap-[8px]">
+          {faqItems.map((item) => (
+            <details class="group rounded-xl border border-border-subtle bg-surface-elevated">
+              <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[12px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+                {item.q}
+                <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true">expand_more</span>
+              </summary>
+              <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </div>
+</Base>

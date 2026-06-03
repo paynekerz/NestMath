@@ -1,0 +1,249 @@
+@import "tailwindcss";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/material-symbols-outlined/400.css";
+
+@theme {
+  /* ─── Surface hierarchy ───────────────────────── */
+  --color-background:                  oklch(15% 0.01 240);
+  --color-surface:                     #0f141a;
+  --color-surface-elevated:            oklch(20% 0.01 240);
+  --color-surface-container-lowest:    #090f15;
+  --color-surface-container-low:       #171c23;
+  --color-surface-container:           #1b2027;
+  --color-surface-container-high:      #252a31;
+  --color-surface-container-highest:   #30353c;
+
+  /* ─── Borders ─────────────────────────────────── */
+  --color-border-subtle:               oklch(25% 0.01 240);
+
+  /* ─── Text ────────────────────────────────────── */
+  --color-on-surface:                  #dee3ec;
+  --color-on-surface-variant:          #c3c6d7;
+
+  /* ─── Brand / Primary ─────────────────────────── */
+  --color-primary:                     #b4c5ff;
+  --color-primary-accent:              oklch(55% 0.18 250);
+  --color-primary-container:           #1d58d8;
+  --color-on-primary-container:        #d5ddff;
+
+  /* ─── Secondary ───────────────────────────────── */
+  --color-secondary:                   #b9c7e5;
+  --color-secondary-container:         #394760;
+  --color-on-secondary-container:      #a7b6d3;
+
+  /* ─── Tertiary ────────────────────────────────── */
+  --color-tertiary-container:          oklch(55% 0.14 50);
+
+  /* ─── Semantic ────────────────────────────────── */
+  --color-success-emerald:             oklch(70% 0.15 150);
+  --color-error:                       #ffb4ab;
+  --color-error-container:             #93000a;
+  --color-outline:                     #8d90a0;
+  --color-outline-variant:             #434654;
+
+  /* ─── Font families ───────────────────────────── */
+  --font-sans:        Inter, sans-serif;
+  --font-mono-data:   ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* ─── Type scale ──────────────────────────────── */
+  --text-headline-xl:       40px;
+  --text-headline-lg:       32px;
+  --text-headline-md:       24px;
+  --text-headline-md-mobile: 20px;
+  --text-body-lg:           18px;
+  --text-body-md:           16px;
+  --text-body-sm:           14px;
+  --text-label-md:          14px;
+  --text-label-sm:          12px;
+  --text-label-sm-mobile:   11px;
+  --text-mono-data:         14px;
+
+  /* ─── Spacing ─────────────────────────────────── */
+  --spacing-base:    4px;
+  --spacing-xs:      8px;
+  --spacing-sm:      12px;
+  --spacing-md:      16px;
+  --spacing-lg:      24px;
+  --spacing-xl:      32px;
+  --spacing-gutter:  24px;
+}
+
+/* ─── Base ───────────────────────────────────────── */
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: Inter, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─── Material Symbols ───────────────────────────── */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined', sans-serif;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  user-select: none;
+}
+
+/* ─── Range sliders ──────────────────────────────── */
+input[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  background: var(--color-border-subtle);
+  border-radius: 2px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  background: var(--color-primary-accent);
+  border-radius: 50%;
+  margin-top: -6px;
+  box-shadow: 0 0 10px rgba(21, 84, 212, 0.4);
+  transition: box-shadow 0.2s;
+}
+input[type="range"]:hover::-webkit-slider-thumb {
+  box-shadow: 0 0 14px rgba(21, 84, 212, 0.6);
+}
+input[type="range"]::-moz-range-track {
+  height: 4px;
+  background: var(--color-border-subtle);
+  border-radius: 2px;
+}
+input[type="range"]::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  background: var(--color-primary-accent);
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 0 10px rgba(21, 84, 212, 0.4);
+}
+
+/* ─── Number inputs ──────────────────────────────── */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  transition: border-color 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+input[type="number"]:hover {
+  border-color: var(--color-primary-accent);
+}
+
+/* ─── Scrollbar ──────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-surface-container-lowest);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-container-highest);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-outline);
+}
+
+/* ─── Animations ─────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.animate-reveal    { animation: fadeIn  0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.animate-slide-up  { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-pulse-dot { animation: pulse   1.8s ease-in-out infinite; }
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+
+/* ─── Table helpers ──────────────────────────────── */
+.zebra-row:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* ─── Glass panel ────────────────────────────────── */
+.glass-panel {
+  background: rgba(27, 32, 39, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(25% 0.01 240);
+  border-radius: 12px;
+}
+
+/* ─── Glass card ─────────────────────────────────── */
+.glass-card {
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 12px;
+  transition: border-color 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.glass-card:hover {
+  border-color: var(--color-primary-accent);
+}
+
+/* ─── Print ──────────────────────────────────────── */
+@media print {
+  :root {
+    --color-background:         white;
+    --color-surface:            #f9fafb;
+    --color-surface-elevated:   #f9fafb;
+    --color-border-subtle:      #d1d5db;
+    --color-on-surface-variant: #6b7280;
+    --color-primary-accent:     #2563eb;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  [data-print="hide"] {
+    display: none !important;
+  }
+
+  [data-print="table-container"] {
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  [data-print="table"] {
+    display: table !important;
+  }
+
+  [data-print="title"]::before {
+    content: attr(data-print-title) " \2014 " attr(data-date);
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: black;
+  }
+}
