@@ -129,8 +129,6 @@ export function SavingsPlannerCalculator() {
               <KofiButton label="☕ a coffee seems fair." />
             </p>
 
-            <AdSlot format="auto" className="w-full" />
-
             {result.months.length > 0 && (
               <SavingsPlannerChart result={result} currentSavings={inputs.currentSavings} />
             )}

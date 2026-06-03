@@ -156,8 +156,6 @@ export function RefinanceCalculator() {
               <KofiButton label="☕ a coffee seems fair." />
             </p>
 
-            <AdSlot format="auto" className="w-full" />
-
             <RefinanceChart result={result} />
 
             <div data-print="hide" className="flex gap-3 justify-end">

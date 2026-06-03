@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { KofiButton } from '../components/ui/KofiButton';
 import { Nav } from '../components/ui/Nav';
 import { BottomNav } from '../components/ui/BottomNav';
+import { Breadcrumb } from '../components/ui/Breadcrumb';
 
 interface Props {
   title: string;
@@ -10,6 +11,7 @@ interface Props {
   canonical?: string;
   schemaName?: string;
   schemaDescription?: string;
+  breadcrumbTool?: string;
 }
 
 const {
@@ -18,6 +20,7 @@ const {
   canonical,
   schemaName = 'NestMath',
   schemaDescription = description,
+  breadcrumbTool,
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
@@ -50,15 +53,15 @@ const schema = JSON.stringify({
     <script type="application/ld+json" set:html={schema} />
   </head>
   <body>
-<Nav currentPath={currentPath} />
+    <Nav currentPath={currentPath} />
+    {breadcrumbTool && <Breadcrumb tool={breadcrumbTool} />}
     <main>
       <slot />
     </main>
     <footer data-print="hide" class="flex items-center justify-center gap-3 py-6 text-body-sm text-on-surface-variant border-t border-border-subtle mt-auto">
       <KofiButton />
       <span aria-hidden="true">·</span>
-      <!-- TODO: replace href with nestmath GitHub repo URL once created -->
-      <a href="#" class="text-primary hover:underline">GitHub</a>
+      <a href="https://github.com/paynekerz/NestMath" target="_blank" rel="noopener" class="text-primary hover:underline">GitHub</a>
       <span aria-hidden="true">·</span>
       <a href="https://www.flaticon.com/free-icons/furniture-and-household" title="furniture and household icons created by Grafixpoint - Flaticon" target="_blank" rel="noopener" class="text-primary hover:underline">Icons by Grafixpoint</a>
       <span aria-hidden="true">·</span>

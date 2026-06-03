@@ -2,32 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nestmath.app/</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://nestmath.app/buy-vs-rent</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://nestmath.app/affordability</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://nestmath.app/payoff</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://nestmath.app/savings-planner</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://nestmath.app/refinance</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://nestmath.app/raise-vs-job-hop</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://nestmath.app/renovation-roi</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://nestmath.app/car-lease-vs-buy</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://nestmath.app/investment-fees</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://nestmath.app/effective-hourly</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://nestmath.app/hysa-calculator</loc>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
   </url>
 </urlset>
