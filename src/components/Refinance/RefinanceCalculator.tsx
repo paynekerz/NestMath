@@ -89,7 +89,6 @@ const FAQ_ITEMS: FAQItem[] = [
 
 export function RefinanceCalculator() {
   const [inputs, setInputs] = useState<RefinanceInputs>(DEFAULT_REFINANCE_INPUTS);
-
   function handleChange(key: keyof RefinanceInputs, value: number) {
     setInputs(prev => ({ ...prev, [key]: value }));
   }
@@ -98,14 +97,12 @@ export function RefinanceCalculator() {
     setInputs(prev => {
       const switching = !prev.usesFlatClosingCost;
       if (switching) {
-        // switching to flat dollar — derive from current pct
         return {
           ...prev,
           usesFlatClosingCost: true,
           closingCostsDollar: Math.round(prev.currentBalance * prev.closingCostsPct),
         };
       } else {
-        // switching back to pct — derive from current dollar
         return {
           ...prev,
           usesFlatClosingCost: false,
@@ -138,48 +135,81 @@ export function RefinanceCalculator() {
   }
 
   return (
-    <div className="flex flex-col gap-4 p-4 max-w-5xl mx-auto">
-      <RefinanceInputsPanel
-        inputs={inputs}
-        onChange={handleChange}
-        onToggleCostMode={handleToggleCostMode}
-        errors={errors}
-      />
+    <div className="max-w-[1280px] mx-auto px-gutter pb-8">
 
-      <div data-print="title" data-print-title="Refinance Break-Even Calculator" data-date={today} className="flex flex-col gap-4">
+      {/* Header row */}
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+        <div>
+          <h1 className="text-headline-lg text-on-surface font-bold">Refinance Break-Even Calculator</h1>
+          <p className="text-body-md text-on-surface-variant mt-1">See exactly when you break even on closing costs — and whether refinancing makes financial sense.</p>
+        </div>
+        <div data-print="hide" className="flex gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={handleCsv}
+            disabled={!result}
+            className="flex items-center gap-1.5 px-md py-xs rounded-lg border border-border-subtle text-label-md text-on-surface-variant hover:border-primary-accent hover:text-on-surface transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>download</span>
+            Download CSV
+          </button>
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="flex items-center gap-1.5 px-md py-xs rounded-lg border border-border-subtle text-label-md text-on-surface-variant hover:border-primary-accent hover:text-on-surface transition-colors"
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>print</span>
+            Export PDF
+          </button>
+        </div>
+      </div>
+
+      {/* Main bento grid */}
+      <div
+        data-print="title"
+        data-print-title="Refinance Break-Even Calculator"
+        data-date={today}
+        className="grid grid-cols-1 lg:grid-cols-12 gap-6"
+      >
+        {/* Input panels — col-span-8 */}
+        <div className="lg:col-span-8 h-full">
+          <RefinanceInputsPanel
+            inputs={inputs}
+            onChange={handleChange}
+            onToggleCostMode={handleToggleCostMode}
+            errors={errors}
+          />
+        </div>
+
+        {/* Verdict panel — col-span-4 */}
+        <div className="lg:col-span-4">
+          <RefinanceSummary result={result} />
+        </div>
+
+        {/* Chart — full width */}
         {result && (
-          <>
-            <RefinanceSummary result={result} />
-
-            <p data-print="hide" className="text-sm text-center text-muted">
-              If this helped you decide on your refinance,{' '}
-              <KofiButton label="☕ a coffee seems fair." />
-            </p>
-
+          <div className="lg:col-span-12">
             <RefinanceChart result={result} />
-
-            <div data-print="hide" className="flex gap-3 justify-end">
-              <button
-                type="button"
-                onClick={handleCsv}
-                className="rounded-lg border border-border bg-surface px-4 py-2 text-sm hover:bg-border transition-colors"
-              >
-                Download CSV
-              </button>
-              <button
-                type="button"
-                onClick={() => window.print()}
-                className="rounded-lg border border-border bg-surface px-4 py-2 text-sm hover:bg-border transition-colors"
-              >
-                Print / Save PDF
-              </button>
-            </div>
-
-            <RefinanceTable result={result} />
-          </>
+          </div>
         )}
       </div>
-      <div data-print="hide">
+
+      {/* Ko-fi nudge */}
+      {result && (
+        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+          If this helped you decide on your refinance,{' '}
+          <KofiButton label="☕ a coffee seems fair." />
+        </p>
+      )}
+
+      {/* Year-by-year table */}
+      {result && (
+        <div className="mt-6">
+          <RefinanceTable result={result} />
+        </div>
+      )}
+
+      <div data-print="hide" className="mt-4">
         <FAQSection items={FAQ_ITEMS} />
       </div>
     </div>

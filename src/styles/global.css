@@ -25,6 +25,7 @@
 
   /* ─── Brand / Primary ─────────────────────────── */
   --color-primary:                     #b4c5ff;
+  --color-on-primary:                  #002a78;
   --color-primary-accent:              oklch(55% 0.18 250);
   --color-primary-container:           #1d58d8;
   --color-on-primary-container:        #d5ddff;
@@ -72,7 +73,12 @@
 }
 
 /* ─── Base ───────────────────────────────────────── */
+html {
+  overflow-x: hidden;
+}
+
 body {
+  overflow-x: hidden;
   background-color: var(--color-background);
   color: var(--color-on-surface);
   font-family: Inter, sans-serif;

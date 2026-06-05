@@ -1,9 +1,9 @@
 import type { SavingsPlannerResult } from '../../lib/savings';
-import { StatCard } from '../ui/StatCard';
-import { InfoTooltip } from '../ui/InfoTooltip';
+import { ProgressBar } from '../ui/ProgressBar';
 
 interface Props {
   result: SavingsPlannerResult;
+  currentSavings: number;
 }
 
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
@@ -23,70 +23,43 @@ function formatMonths(months: number): string {
   return `${yrs} yr ${mo} mo`;
 }
 
-export function SavingsPlannerSummary({ result }: Props) {
-  const alreadyThere = result.monthsToGoal === 0;
-  const reachable = result.monthsToGoal !== null;
+export function SavingsPlannerSummary({ result, currentSavings }: Props) {
+  const progressPct = result.cashToClose > 0
+    ? Math.min(100, (currentSavings / result.cashToClose) * 100)
+    : 100;
 
-  let headlineValue: string;
-  let headlineLabel: string;
-  let subtext: string;
-
-  if (alreadyThere) {
-    headlineValue = 'Ready now';
-    headlineLabel = 'Time to goal';
-    subtext = `You already have ${cur.format(result.totalSaved)} saved — enough to cover ${cur.format(result.cashToClose)} in cash needed to close.`;
-  } else if (reachable) {
-    headlineValue = formatMonths(result.monthsToGoal!);
-    headlineLabel = 'Time to goal';
-    subtext = `Projected date: ${projectedDate(result.monthsToGoal!)} · Cash needed to close: ${cur.format(result.cashToClose)}`;
-  } else {
-    headlineValue = '30+ years';
-    headlineLabel = 'Time to goal';
-    subtext = `At this savings rate you won't reach ${cur.format(result.cashToClose)} within 30 years. Try increasing your monthly savings.`;
-  }
+  const subText = result.monthsToGoal === null
+    ? 'Not reachable in 30 years — increase monthly savings'
+    : result.monthsToGoal === 0
+    ? 'You already have enough to close'
+    : `${formatMonths(result.monthsToGoal)} to goal · On track for ${projectedDate(result.monthsToGoal)}`;
 
   return (
-    <div className="rounded-lg border border-border bg-surface p-6 flex flex-col gap-4">
-      <div className={`rounded-lg p-4 border ${reachable ? 'border-accent/30 bg-accent/10' : 'border-border bg-background'}`}>
-        <div className="flex items-center gap-1.5">
-          <p className="text-xs text-muted uppercase tracking-wide">{headlineLabel}</p>
-          <InfoTooltip text="How long until your savings cover the full cash needed to close — down payment plus closing costs." />
-        </div>
-        <p className="text-3xl font-bold mt-1 tabular-nums">{headlineValue}</p>
-        <p className="text-sm text-muted mt-2">{subtext}</p>
+    <div className="flex flex-col gap-lg">
+      {/* Cash to Close */}
+      <div className="glass-card p-lg rounded-xl border-l-4 border-l-primary flex flex-col gap-sm">
+        <p className="text-label-md text-on-surface-variant uppercase tracking-wide">Cash Needed to Close</p>
+        <p className="text-headline-xl font-mono-data font-bold text-on-surface tabular-nums">
+          {cur.format(result.cashToClose)}
+        </p>
+        <ProgressBar pct={progressPct} />
+        <p className="text-label-sm text-on-surface-variant">{subText}</p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        <StatCard
-          label="Cash needed to close"
-          value={cur.format(result.cashToClose)}
-          tooltip="Down payment plus closing costs — the total cash you need on hand to finalize the purchase."
-        />
-        <StatCard
-          label="Down payment"
-          value={cur.format(result.downPayment)}
-          tooltip="The upfront cash portion of the home price you pay before borrowing the rest."
-        />
-        <StatCard
-          label="Closing costs"
-          value={cur.format(result.closingCosts)}
-          tooltip="Fees paid at closing — title, escrow, lender fees. Usually 2–5% of the purchase price."
-        />
-        <StatCard
-          label="Total saved at goal"
-          value={cur.format(result.totalSaved)}
-          tooltip="Your total savings balance when you reach the down payment and closing cost target."
-        />
-        <StatCard
-          label="Growth from returns"
-          value={cur.format(result.growthFromReturns)}
-          tooltip="How much your savings grew from interest or investment returns — money earned without additional contributions."
-        />
-        <StatCard
-          label="Projected date"
-          value={result.monthsToGoal !== null ? projectedDate(result.monthsToGoal) : '—'}
-          tooltip="The calendar month when your savings are projected to reach the cash-to-close target."
-        />
+      {/* Growth From Returns */}
+      <div className="glass-card p-lg rounded-xl border-l-4 border-l-success-emerald flex flex-col gap-sm">
+        <p className="text-label-md text-on-surface-variant uppercase tracking-wide">Growth From Returns</p>
+        <div className="flex items-center gap-xs">
+          <p className="text-headline-xl font-mono-data font-bold text-success-emerald tabular-nums">
+            {cur.format(result.growthFromReturns)}
+          </p>
+          <span className="material-symbols-outlined text-success-emerald" style={{ fontSize: '20px' }}>
+            trending_up
+          </span>
+        </div>
+        <p className="text-label-sm text-on-surface-variant">
+          Money earned without additional contributions
+        </p>
       </div>
     </div>
   );

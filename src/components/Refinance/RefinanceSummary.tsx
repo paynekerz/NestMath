@@ -1,12 +1,19 @@
 import type { RefinanceResult } from '../../lib/calculator';
-import { StatCard } from '../ui/StatCard';
 import { InfoTooltip } from '../ui/InfoTooltip';
 
 interface Props {
-  result: RefinanceResult;
+  result: RefinanceResult | null;
 }
 
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+function formatMonths(months: number): string {
+  const yrs = Math.floor(months / 12);
+  const mo = months % 12;
+  if (yrs === 0) return `${mo} mo`;
+  if (mo === 0) return `${yrs} yr`;
+  return `${yrs} yr ${mo} mo`;
+}
 
 function breakEvenDateStr(months: number): string {
   const d = new Date();
@@ -14,87 +21,78 @@ function breakEvenDateStr(months: number): string {
   return d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 }
 
-function formatMonths(months: number): string {
-  const yrs = Math.floor(months / 12);
-  const mo = months % 12;
-  if (yrs === 0) return `${mo} month${mo !== 1 ? 's' : ''}`;
-  if (mo === 0) return `${yrs} yr${yrs !== 1 ? 's' : ''}`;
-  return `${yrs} yr ${mo} mo`;
-}
-
 export function RefinanceSummary({ result }: Props) {
-  const hasPositiveSavings = result.monthlySavings > 0;
-
-  let verdictValue: string;
-  let verdictLabel: string;
-  let verdictSubtext: string;
-  let verdictPositive: boolean;
-
-  if (!hasPositiveSavings) {
-    verdictValue = 'Not worth it';
-    verdictLabel = 'Verdict';
-    verdictSubtext = 'The new rate does not reduce your monthly payment, so there is no break-even point.';
-    verdictPositive = false;
-  } else if (result.worthIt) {
-    verdictValue = `${formatMonths(result.breakEvenMonths!)}`;
-    verdictLabel = 'Break-even — worth it';
-    verdictSubtext = `You recoup ${cur.format(result.closingCostsDollar)} in closing costs by ${breakEvenDateStr(result.breakEvenMonths!)} — before your remaining term ends.`;
-    verdictPositive = true;
-  } else {
-    verdictValue = `${formatMonths(result.breakEvenMonths!)}`;
-    verdictLabel = 'Break-even — not worth it';
-    verdictSubtext = `Break-even falls after your remaining loan term ends. You'd pay ${cur.format(result.closingCostsDollar)} in closing costs without recouping them.`;
-    verdictPositive = false;
-  }
+  const hasPositiveSavings = result ? result.monthlySavings > 0 : false;
 
   return (
-    <div className="rounded-lg border border-border bg-surface p-6 flex flex-col gap-4">
-      <div className={`rounded-lg p-4 border ${verdictPositive ? 'border-accent/30 bg-accent/10' : 'border-border bg-background'}`}>
-        <div className="flex items-center gap-1.5">
-          <p className="text-xs text-muted uppercase tracking-wide">{verdictLabel}</p>
-          <InfoTooltip text="The number of months until your monthly savings have fully paid back the refinance closing costs." />
+    <div className="bg-surface-elevated rounded-xl border border-success-emerald/30 overflow-hidden flex flex-col h-full">
+      {/* Header */}
+      <div className="px-lg py-sm flex items-center justify-between border-b border-success-emerald/10">
+        <div className="flex items-center gap-2">
+          <span className="material-symbols-outlined text-success-emerald" style={{ fontSize: '18px' }}>check_circle</span>
+          <span className="text-label-md uppercase tracking-widest text-on-surface-variant font-semibold">VERDICT</span>
         </div>
-        <p className="text-3xl font-bold mt-1 tabular-nums">{verdictValue}</p>
-        <p className="text-sm text-muted mt-2">{verdictSubtext}</p>
+        {result?.worthIt && (
+          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-label-sm font-semibold bg-success-emerald/10 text-success-emerald border border-success-emerald/20">
+            <span className="w-1.5 h-1.5 rounded-full bg-success-emerald animate-pulse inline-block" />
+            DRAFT - High Opportunity
+          </span>
+        )}
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        <StatCard
-          label="Current monthly payment"
-          value={cur.format(result.currentMonthlyPayment)}
-          tooltip="Your principal and interest payment on the current mortgage each month."
-        />
-        <StatCard
-          label="New monthly payment"
-          value={cur.format(result.newMonthlyPayment)}
-          tooltip="Your principal and interest payment on the refinanced mortgage each month."
-        />
-        <StatCard
-          label="Monthly savings"
-          value={result.monthlySavings >= 0 ? cur.format(result.monthlySavings) : `-${cur.format(Math.abs(result.monthlySavings))}`}
-          tooltip="How much less (or more) you'd pay each month after refinancing."
-        />
-        <StatCard
-          label="Closing costs"
-          value={cur.format(result.closingCostsDollar)}
-          tooltip="The upfront fees you pay to close the new loan — what you need to recoup through monthly savings."
-        />
-        <StatCard
-          label="Total interest — current"
-          value={cur.format(result.totalInterestCurrent)}
-          tooltip="Total interest you'll pay over the remaining life of your current loan."
-        />
-        <StatCard
-          label="Total interest — refinanced"
-          value={cur.format(result.totalInterestRefinanced)}
-          tooltip="Total interest you'll pay over the full term of the new refinanced loan."
-        />
-        <StatCard
-          label="Net savings"
-          value={result.netSavings >= 0 ? cur.format(result.netSavings) : `-${cur.format(Math.abs(result.netSavings))}`}
-          tooltip="Interest saved on the current path minus the new path, minus closing costs. Positive means refinancing saves money overall."
-        />
-      </div>
+      {result ? (
+        <>
+          {/* Monthly savings hero */}
+          <div className="flex-1 flex flex-col items-center justify-center gap-1 px-lg py-xl text-center">
+            <p className="text-label-sm text-on-surface-variant uppercase tracking-widest">Monthly Savings</p>
+            <p className={`text-[48px] font-bold font-mono-data tabular-nums leading-none mt-2 ${hasPositiveSavings ? 'text-success-emerald' : 'text-error'}`}>
+              {result.monthlySavings >= 0
+                ? cur.format(result.monthlySavings)
+                : `-${cur.format(Math.abs(result.monthlySavings))}`}
+            </p>
+          </div>
+
+          {/* 2-col stats */}
+          <div className="grid grid-cols-2 gap-4 px-lg pb-lg border-t border-border-subtle pt-lg">
+            <div>
+              <div className="flex items-center gap-1 mb-1">
+                <p className="text-label-sm text-on-surface-variant">Lifetime Savings</p>
+                <InfoTooltip text="Total interest saved by refinancing, after deducting closing costs." />
+              </div>
+              <p className={`text-headline-md font-bold font-mono-data tabular-nums ${result.netSavings >= 0 ? 'text-on-surface' : 'text-error'}`}>
+                {result.netSavings >= 0
+                  ? cur.format(result.netSavings)
+                  : `-${cur.format(Math.abs(result.netSavings))}`}
+              </p>
+            </div>
+            <div>
+              <div className="flex items-center gap-1 mb-1">
+                <p className="text-label-sm text-on-surface-variant">Break-Even</p>
+                <InfoTooltip text="Months until monthly savings have fully paid back the closing costs." />
+              </div>
+              <p className="text-headline-md font-bold font-mono-data tabular-nums text-on-surface">
+                {result.breakEvenMonths !== null ? formatMonths(result.breakEvenMonths) : 'N/A'}
+              </p>
+            </div>
+          </div>
+
+          {/* Footer recommendation */}
+          <div className="bg-success-emerald/5 border-t border-success-emerald/10 px-lg py-sm">
+            <p className="text-body-sm text-on-surface-variant">
+              {!hasPositiveSavings
+                ? 'DRAFT - The new rate does not lower your monthly payment. Refinancing is not recommended with these numbers.'
+                : result.worthIt
+                ? `DRAFT - Break-even by ${breakEvenDateStr(result.breakEvenMonths!)} — refinancing saves money before your loan ends.`
+                : `DRAFT - Break-even falls after your loan ends. These terms do not justify the closing costs.`}
+            </p>
+          </div>
+        </>
+      ) : (
+        <div className="flex flex-col items-center justify-center p-xl text-center gap-3 min-h-[300px]">
+          <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: '32px' }}>calculate</span>
+          <p className="text-body-sm text-on-surface-variant">Fill in your loan details and click Calculate Verdict to see your refinance analysis.</p>
+        </div>
+      )}
     </div>
   );
 }

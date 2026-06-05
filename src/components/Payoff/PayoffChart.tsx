@@ -1,6 +1,6 @@
 import {
-  LineChart,
-  Line,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -25,65 +25,75 @@ const fmtTooltip = (v: number) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v);
 
 export function PayoffChart({ result }: Props) {
-  const data = [
-    {
-      year: 0,
-      'Original Balance': result.initialBalance,
-      'With Extra Payments': result.initialBalanceExtra,
-    },
-    ...result.years.map(yr => ({
-      year: yr.year,
-      'Original Balance': yr.balanceOriginal,
-      'With Extra Payments': yr.balanceExtra,
-    })),
-  ];
+  const data = result.years.map((yr, i) => {
+    const prevCumOrig = i === 0 ? 0 : result.years[i - 1].cumulativeInterestOriginal;
+    const prevCumExtra = i === 0 ? 0 : result.years[i - 1].cumulativeInterestExtra;
+    return {
+      year: `Yr ${yr.year}`,
+      'Standard': Math.max(0, yr.cumulativeInterestOriginal - prevCumOrig),
+      'Accelerated': Math.max(0, yr.cumulativeInterestExtra - prevCumExtra),
+    };
+  });
 
-  const extraPayoffYear = result.extraPayoffMonths / 12;
+  const extraPayoffYear = result.monthsSaved > 0
+    ? `Yr ${Math.ceil(result.extraPayoffMonths / 12)}`
+    : null;
 
   return (
-    <div className="rounded-lg border border-border bg-surface p-4">
-      <h2 className="text-sm font-semibold text-accent uppercase tracking-wide mb-4">Remaining Balance Over Time</h2>
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={data} margin={{ top: 4, right: 16, left: 0, bottom: 16 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="oklch(25% 0.02 260)" />
+    <div className="glass-panel p-4 rounded-xl">
+      <div className="flex items-center justify-between mb-1">
+        <h2 className="text-label-md font-semibold text-on-surface">Annual Interest Cost</h2>
+        <span className="text-label-sm text-on-surface-variant px-2 py-0.5 rounded bg-surface-container-high">Interest View</span>
+      </div>
+      <p className="text-label-sm text-on-surface-variant mb-4">
+        Interest paid each year — standard schedule vs. accelerated payoff
+      </p>
+      <ResponsiveContainer width="100%" height={280}>
+        <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 4 }} barCategoryGap="25%">
+          <CartesianGrid strokeDasharray="3 3" stroke="oklch(25% 0.01 240)" vertical={false} />
           <XAxis
             dataKey="year"
             tick={{ fill: 'oklch(55% 0.01 260)', fontSize: 11 }}
             axisLine={{ stroke: 'oklch(25% 0.02 260)' }}
             tickLine={false}
-            label={{ value: 'Year', position: 'insideBottom', offset: -8, fill: 'oklch(55% 0.01 260)', fontSize: 11 }}
+            interval="preserveStartEnd"
           />
           <YAxis
             tickFormatter={fmtAxis}
             tick={{ fill: 'oklch(55% 0.01 260)', fontSize: 11 }}
-            axisLine={{ stroke: 'oklch(25% 0.02 260)' }}
+            axisLine={false}
             tickLine={false}
-            width={64}
+            width={60}
           />
           <Tooltip
-            formatter={(v: unknown) => fmtTooltip(v as number)}
+            formatter={(v: unknown, name: string) => [fmtTooltip(v as number), name]}
             contentStyle={{
               background: 'oklch(17% 0.025 260)',
               border: '1px solid oklch(25% 0.02 260)',
-              borderRadius: '6px',
+              borderRadius: '8px',
               fontSize: '12px',
               color: 'oklch(90% 0.01 260)',
             }}
-            labelStyle={{ color: 'oklch(90% 0.01 260)', marginBottom: '4px' }}
+            labelStyle={{ color: 'oklch(90% 0.01 260)', marginBottom: '4px', fontWeight: 600 }}
             itemStyle={{ color: 'oklch(90% 0.01 260)' }}
           />
-          <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '8px' }} />
-          {result.monthsSaved > 0 && (
+          <Legend
+            wrapperStyle={{ fontSize: '12px', paddingTop: '12px' }}
+            formatter={(value) => (
+              <span style={{ color: 'oklch(75% 0.01 260)' }}>{value}</span>
+            )}
+          />
+          {extraPayoffYear && (
             <ReferenceLine
-              x={Math.round(extraPayoffYear)}
-              stroke="oklch(55% 0.01 260)"
+              x={extraPayoffYear}
+              stroke="oklch(70% 0.15 150)"
               strokeDasharray="4 4"
-              label={{ value: 'Paid off', position: 'top', fill: 'oklch(55% 0.01 260)', fontSize: 10 }}
+              label={{ value: 'Paid off', position: 'top', fill: 'oklch(70% 0.15 150)', fontSize: 10 }}
             />
           )}
-          <Line type="monotone" dataKey="Original Balance" stroke="#6b8df7" strokeWidth={2} dot={false} activeDot={{ r: 4 }} />
-          <Line type="monotone" dataKey="With Extra Payments" stroke="#4ade80" strokeWidth={2} dot={false} activeDot={{ r: 4 }} />
-        </LineChart>
+          <Bar dataKey="Standard" fill="oklch(50% 0.01 260)" opacity={0.35} radius={[2, 2, 0, 0]} />
+          <Bar dataKey="Accelerated" fill="oklch(55% 0.18 250)" radius={[2, 2, 0, 0]} />
+        </BarChart>
       </ResponsiveContainer>
     </div>
   );

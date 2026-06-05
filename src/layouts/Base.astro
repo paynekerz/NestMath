@@ -2,7 +2,6 @@
 import '../styles/global.css';
 import { KofiButton } from '../components/ui/KofiButton';
 import { Nav } from '../components/ui/Nav';
-import { BottomNav } from '../components/ui/BottomNav';
 import { Breadcrumb } from '../components/ui/Breadcrumb';
 
 interface Props {
@@ -53,7 +52,7 @@ const schema = JSON.stringify({
     <script type="application/ld+json" set:html={schema} />
   </head>
   <body>
-    <Nav currentPath={currentPath} />
+    <Nav currentPath={currentPath} client:load />
     {breadcrumbTool && <Breadcrumb tool={breadcrumbTool} />}
     <main>
       <slot />
@@ -67,6 +66,5 @@ const schema = JSON.stringify({
       <span aria-hidden="true">·</span>
       <span data-portfolio-link>Made by Payne Kerz</span>
     </footer>
-    <BottomNav client:load />
   </body>
 </html>

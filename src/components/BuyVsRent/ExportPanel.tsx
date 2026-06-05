@@ -6,6 +6,7 @@ interface Props {
   assumptions: Assumptions;
   years: YearResult[];
   breakEvenYear: number | null;
+  disabled?: boolean;
 }
 
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
@@ -101,7 +102,7 @@ function buildCsv(
   return lines.join('\n');
 }
 
-export function ExportPanel({ buy, rent, assumptions, years, breakEvenYear }: Props) {
+export function ExportPanel({ buy, rent, assumptions, years, breakEvenYear, disabled }: Props) {
   function handleCsv() {
     const today = new Date().toISOString().split('T')[0];
     const csv = buildCsv(buy, rent, assumptions, years, breakEvenYear);
@@ -115,19 +116,22 @@ export function ExportPanel({ buy, rent, assumptions, years, breakEvenYear }: Pr
   }
 
   return (
-    <div data-print="hide" className="flex gap-3 justify-end">
+    <div data-print="hide" className="flex gap-2 shrink-0">
       <button
         type="button"
         onClick={handleCsv}
-        className="rounded-lg border border-border-subtle bg-surface-elevated px-md py-xs text-body-sm text-on-surface hover:bg-surface-container-high transition-colors"
+        disabled={disabled}
+        className="flex items-center gap-1.5 px-md py-xs rounded-lg border border-border-subtle text-label-md text-on-surface-variant hover:border-primary-accent hover:text-on-surface transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
       >
+        <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>download</span>
         Download CSV
       </button>
       <button
         type="button"
         onClick={() => window.print()}
-        className="rounded-lg border border-border-subtle bg-surface-elevated px-md py-xs text-body-sm text-on-surface hover:bg-surface-container-high transition-colors"
+        className="flex items-center gap-1.5 px-md py-xs rounded-lg border border-border-subtle text-label-md text-on-surface-variant hover:border-primary-accent hover:text-on-surface transition-colors"
       >
+        <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>print</span>
         Print / Save PDF
       </button>
     </div>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import type { BuyInputs, RentInputs } from '../../lib/calculator';
 import type { ValidationErrors } from '../../lib/validation';
 import { InfoTooltip } from '../ui/InfoTooltip';
@@ -67,6 +68,13 @@ function SliderField({ label, displayValue, value, min, max, step, onChange, acc
 }
 
 function Field({ id, label, value, onChange, prefix, suffix, step = 1, min = 0, tooltip, error }: FieldProps) {
+  const [draft, setDraft] = useState(String(value));
+  const [focused, setFocused] = useState(false);
+
+  useEffect(() => {
+    if (!focused) setDraft(String(value));
+  }, [value, focused]);
+
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-1.5">
@@ -78,10 +86,16 @@ function Field({ id, label, value, onChange, prefix, suffix, step = 1, min = 0, 
         <input
           id={id}
           type="number"
-          value={value}
+          value={draft}
           step={step}
           min={min}
-          onChange={e => onChange(parseFloat(e.target.value) || 0)}
+          onChange={e => setDraft(e.target.value)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => {
+            setFocused(false);
+            const parsed = parseFloat(draft);
+            onChange(isNaN(parsed) ? 0 : parsed);
+          }}
           className="flex-1 min-w-0 bg-transparent outline-none text-body-sm text-right font-mono-data text-on-surface"
         />
         {suffix && <span className="text-on-surface-variant text-body-sm select-none">{suffix}</span>}

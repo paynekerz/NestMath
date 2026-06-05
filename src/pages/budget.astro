@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { BudgetCalculator } from '../components/Budget/BudgetCalculator';
+---
+<Base
+  title="NestMath.app — Personal Budget Calculator"
+  description="See where your money goes. Enter your income and monthly expenses to find your net savings and project your financial future — no account, no data stored."
+  canonical="https://nestmath.app/budget"
+  schemaName="NestMath — Personal Budget Calculator"
+  schemaDescription="Calculate your net monthly savings from income and expenses. All calculations run in your browser — no data stored."
+  breadcrumbTool="Budget"
+>
+  <div class="max-w-5xl mx-auto px-[24px] pt-[32px] pb-[8px]">
+    <h1 class="text-headline-lg font-bold text-on-surface">Personal Budget Calculator</h1>
+    <p class="text-body-md text-on-surface-variant mt-[8px] max-w-[576px]">
+      Enter your income and monthly expenses to see your real take-home, net savings, and how they compound over time.
+    </p>
+  </div>
+  <BudgetCalculator client:load />
+</Base>

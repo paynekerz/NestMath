@@ -87,17 +87,6 @@ export function AssumptionsPanel({ assumptions, onAssumptionsChange, errors = {}
             tooltip="The percentage of your income that goes to federal taxes. Homeowners can sometimes reduce their tax bill by deducting mortgage interest."
             error={errors['marginalTaxRate']}
           />
-          <Field
-            id="assump-yearsToModel"
-            label="Years to model"
-            value={assumptions.yearsToModel}
-            onChange={v => onAssumptionsChange('yearsToModel', Math.round(v))}
-            suffix="yrs"
-            min={1}
-            max={50}
-            tooltip="How many years into the future you want to compare buying vs. renting."
-            error={errors['yearsToModel']}
-          />
         </div>
       )}
     </div>

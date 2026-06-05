@@ -39,7 +39,7 @@ export function NetWorthChart({ years, breakEvenYear, yearsToModel }: Props) {
   const buyWins = breakEvenYear !== null;
 
   return (
-    <div className="glass-card rounded-xl p-[24px] flex flex-col gap-[24px]">
+    <div className="glass-card rounded-xl p-[24px] flex flex-col gap-[24px] min-w-0">
       {/* Chart header */}
       <div className="flex items-center justify-between">
         <h2 className="text-headline-md font-semibold text-on-surface">

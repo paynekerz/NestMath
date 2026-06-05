@@ -134,7 +134,33 @@ export function AffordabilityCalculator() {
   }
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 pb-8">
+    <div className="max-w-[1200px] mx-auto px-6 pt-8 pb-8">
+
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+        <div>
+          <h1 className="text-headline-lg text-on-surface font-bold">Home Affordability Engine</h1>
+          <p className="text-body-md text-on-surface-variant mt-1">Analyze your purchase power based on income, debt, and current market conditions.</p>
+        </div>
+        <div data-print="hide" className="flex gap-2 shrink-0">
+          <button
+            type="button"
+            onClick={handleCsv}
+            disabled={!result}
+            className="flex items-center gap-1.5 px-md py-xs rounded-lg border border-border-subtle text-label-md text-on-surface-variant hover:border-primary-accent hover:text-on-surface transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>download</span>
+            Download CSV
+          </button>
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="flex items-center gap-1.5 px-md py-xs rounded-lg border border-border-subtle text-label-md text-on-surface-variant hover:border-primary-accent hover:text-on-surface transition-colors"
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>print</span>
+            Print / Save PDF
+          </button>
+        </div>
+      </div>
 
       <div
         data-print="title"
@@ -148,14 +174,19 @@ export function AffordabilityCalculator() {
         </div>
 
         {/* Results column */}
-        <div className="lg:col-span-5 flex flex-col">
+        <div className="lg:col-span-5 flex flex-col gap-4">
           {result ? (
-            <div className="flex-1">
+            <>
               <AffordabilityResult
                 result={result}
                 backEndDTILimit={inputs.backEndDTI}
+                proInsight={proInsight}
               />
-            </div>
+              <p data-print="hide" className="text-sm text-center text-muted">
+                If this helped you figure out your budget,{' '}
+                <KofiButton label="☕ a coffee seems fair." />
+              </p>
+            </>
           ) : (
             <div className="glass-panel p-8 rounded-xl flex flex-col items-center justify-center gap-3 text-center min-h-[200px]">
               <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: '32px' }}>
@@ -169,46 +200,11 @@ export function AffordabilityCalculator() {
         </div>
       </div>
 
-      {/* Pro Insight */}
-      {result && (
-        <>
-          <div className="mt-4 glass-panel p-6 rounded-xl flex gap-4 items-start">
-            <div className="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-primary">lightbulb</span>
-            </div>
-            <div>
-              <h5 className="text-label-md text-on-surface mb-1">Pro Insight</h5>
-              <p className="text-body-sm text-on-surface-variant">{proInsight}</p>
-            </div>
-          </div>
-          <p data-print="hide" className="text-sm text-center text-muted mt-3">
-            If this helped you figure out your budget,{' '}
-            <KofiButton label="☕ a coffee seems fair." />
-          </p>
-        </>
-      )}
-
       {/* Cost Breakdown Table */}
       {result && amortization.length > 0 && (
         <section className="mt-4 glass-panel rounded-xl overflow-hidden">
-          <div className="px-6 py-4 border-b border-border-subtle flex justify-between items-center">
+          <div className="px-6 py-4 border-b border-border-subtle">
             <h3 className="text-label-md font-bold text-on-surface">Cost Breakdown Projections</h3>
-            <div data-print="hide" className="flex gap-2">
-              <button
-                type="button"
-                onClick={handleCsv}
-                className="px-4 py-1.5 rounded-lg bg-surface-container-high text-label-sm text-on-surface-variant hover:text-on-surface transition-colors"
-              >
-                Export CSV
-              </button>
-              <button
-                type="button"
-                onClick={() => window.print()}
-                className="px-4 py-1.5 rounded-lg bg-primary text-background font-bold text-label-sm shadow-sm hover:opacity-90 active:scale-95 transition-all"
-              >
-                Detailed Report
-              </button>
-            </div>
           </div>
           <div className="px-6 py-4 overflow-x-auto">
             <table className="w-full text-left">
