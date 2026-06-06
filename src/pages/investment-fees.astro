@@ -1,16 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import { InvestmentFeesCalculator } from '../components/InvestmentFees/InvestmentFeesCalculator';
 ---
 <Base
-  title="NestMath.app — Investment Fee Calculator"
-  description="How much does your expense ratio actually cost you over time? See the compounding dollar drag of a high-fee fund vs. a low-cost alternative."
+  title="Investment Fee Impact Calculator — NestMath"
+  description="How much does your expense ratio actually cost you over time? See the compounding dollar drag of a high-fee fund vs. a low-cost index fund alternative."
   canonical="https://nestmath.app/investment-fees"
-  schemaName="NestMath — Investment Fee Calculator"
+  schemaName="NestMath — Investment Fee Impact Calculator"
   schemaDescription="Calculate the long-term dollar impact of investment expense ratios by comparing a high-fee fund against a low-cost alternative."
   breadcrumbTool="Investment Fees"
 >
-  <div class="max-w-5xl mx-auto px-4 pt-8 pb-16">
-    <h1 class="text-headline-lg font-bold text-on-surface tracking-tight">Investment Fee Calculator</h1>
-    <p class="text-on-surface-variant mt-2 text-body-md">How much does your expense ratio actually cost you over time? Coming soon.</p>
-  </div>
+  <InvestmentFeesCalculator client:load />
 </Base>

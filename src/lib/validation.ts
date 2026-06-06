@@ -1,6 +1,12 @@
 import type { AffordabilityInputs } from './affordability';
 import type { BuyInputs, RentInputs, Assumptions, PayoffInputs, RefinanceInputs } from './calculator';
 import type { SavingsPlannerInputs } from './savings';
+import type { RaiseVsJobHopInputs } from './raise-vs-job-hop';
+import type { CarLeaseVsBuyInputs } from './car-lease-vs-buy';
+import type { RenovationROIInputs } from './renovation-roi';
+import type { InvestmentFeesInputs } from './investment-fees';
+import type { HYSAInputs } from './hysa';
+import type { EffectiveHourlyInputs } from './effective-hourly';
 
 export type ValidationErrors = Partial<Record<string, string>>;
 
@@ -159,4 +165,123 @@ export function validateAssumptions(inputs: Assumptions): ValidationErrors {
 
 export function sanitizeCurrency(raw: string): number {
   return parseFloat(raw.replace(/[$,\s]/g, '')) || 0;
+}
+
+const RAISE_VS_JOB_HOP_BOUNDS: Record<keyof RaiseVsJobHopInputs, Bounds> = {
+  currentSalary: { min: 10_000,  max: 5_000_000, label: 'Current salary' },
+  stayRaise:     { min: -0.10,   max: 1.00,      label: 'Stay raise rate' },
+  hopSalary:     { min: 10_000,  max: 5_000_000, label: 'New offer salary' },
+  hopRaise:      { min: -0.10,   max: 1.00,      label: 'Hop raise rate' },
+  yearsToModel:  { min: 1,       max: 50,         label: 'Years to model' },
+};
+
+export function validateRaiseVsJobHopInputs(inputs: RaiseVsJobHopInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(RAISE_VS_JOB_HOP_BOUNDS) as Array<keyof RaiseVsJobHopInputs>) {
+    const err = checkRange(inputs[key], RAISE_VS_JOB_HOP_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  return errors;
+}
+
+const CAR_LEASE_BOUNDS: Record<keyof CarLeaseVsBuyInputs, Bounds> = {
+  carPrice:             { min: 1_000,    max: 500_000,  label: 'Car price' },
+  downPaymentPct:       { min: 0,        max: 1,        label: 'Down payment' },
+  loanRate:             { min: 0.001,    max: 0.30,     label: 'Loan rate' },
+  loanTermMonths:       { min: 12,       max: 120,      label: 'Loan term' },
+  monthlyLeasePayment:  { min: 50,       max: 10_000,   label: 'Monthly lease payment' },
+  leaseTermMonths:      { min: 12,       max: 60,       label: 'Lease term' },
+  leaseUpfrontCost:     { min: 0,        max: 50_000,   label: 'Lease upfront cost' },
+  annualDepreciation:   { min: 0,        max: 0.50,     label: 'Annual depreciation' },
+  annualInvestReturn:   { min: -0.20,    max: 0.50,     label: 'Annual investment return' },
+  yearsToModel:         { min: 1,        max: 10,       label: 'Years to model' },
+};
+
+export function validateCarLeaseVsBuyInputs(inputs: CarLeaseVsBuyInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(CAR_LEASE_BOUNDS) as Array<keyof CarLeaseVsBuyInputs>) {
+    const err = checkRange(inputs[key], CAR_LEASE_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  if (inputs.yearsToModel * 12 < inputs.leaseTermMonths) {
+    errors['yearsToModel'] = 'Years to model must be at least as long as the lease term.';
+  }
+  return errors;
+}
+
+const RENOVATION_ROI_BOUNDS: Record<keyof RenovationROIInputs, Bounds> = {
+  renovationCost:     { min: 100,       max: 5_000_000, label: 'Renovation cost' },
+  homeValue:          { min: 10_000,    max: 50_000_000, label: 'Home value' },
+  valueIncreasePct:   { min: 0,         max: 2.0,        label: 'Value increase' },
+  yearsUntilSale:     { min: 1,         max: 50,         label: 'Years until sale' },
+  annualAppreciation: { min: -0.20,     max: 0.50,       label: 'Annual appreciation' },
+  annualInvestReturn: { min: -0.20,     max: 0.50,       label: 'Annual investment return' },
+};
+
+export function validateRenovationROIInputs(inputs: RenovationROIInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(RENOVATION_ROI_BOUNDS) as Array<keyof RenovationROIInputs>) {
+    const err = checkRange(inputs[key], RENOVATION_ROI_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  return errors;
+}
+
+const INVESTMENT_FEES_BOUNDS: Record<keyof InvestmentFeesInputs, Bounds> = {
+  initialInvestment:   { min: 0,      max: 100_000_000, label: 'Initial investment' },
+  monthlyContribution: { min: 0,      max: 1_000_000,   label: 'Monthly contribution' },
+  annualGrossReturn:   { min: -0.20,  max: 0.50,        label: 'Annual gross return' },
+  currentExpenseRatio: { min: 0,      max: 0.05,        label: 'Current expense ratio' },
+  lowCostExpenseRatio: { min: 0,      max: 0.05,        label: 'Low-cost expense ratio' },
+  yearsToModel:        { min: 1,      max: 50,          label: 'Years to model' },
+};
+
+export function validateInvestmentFeesInputs(inputs: InvestmentFeesInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(INVESTMENT_FEES_BOUNDS) as Array<keyof InvestmentFeesInputs>) {
+    const err = checkRange(inputs[key], INVESTMENT_FEES_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  if (inputs.lowCostExpenseRatio > inputs.currentExpenseRatio) {
+    errors['lowCostExpenseRatio'] = 'Low-cost ratio must be less than or equal to the current expense ratio.';
+  }
+  return errors;
+}
+
+const HYSA_BOUNDS: Record<keyof HYSAInputs, Bounds> = {
+  initialDeposit:       { min: 0,     max: 10_000_000, label: 'Initial deposit' },
+  monthlyContribution:  { min: 0,     max: 100_000,    label: 'Monthly contribution' },
+  hysaAPY:              { min: 0,     max: 0.20,       label: 'HYSA APY' },
+  traditionalAPY:       { min: 0,     max: 0.10,       label: 'Traditional savings APY' },
+  yearsToModel:         { min: 1,     max: 30,         label: 'Years to model' },
+};
+
+export function validateHYSAInputs(inputs: HYSAInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(HYSA_BOUNDS) as Array<keyof HYSAInputs>) {
+    const err = checkRange(inputs[key], HYSA_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  return errors;
+}
+
+const EFFECTIVE_HOURLY_BOUNDS: Record<keyof EffectiveHourlyInputs, Bounds> = {
+  annualGrossSalary:       { min: 10_000,  max: 5_000_000, label: 'Annual salary' },
+  federalTaxRate:          { min: 0,       max: 0.50,      label: 'Federal tax rate' },
+  stateTaxRate:            { min: 0,       max: 0.50,      label: 'State tax rate' },
+  weeklyHoursWorked:       { min: 1,       max: 120,       label: 'Weekly hours worked' },
+  weeklyUnpaidOvertime:    { min: 0,       max: 80,        label: 'Weekly unpaid overtime' },
+  weeklyCommuteHours:      { min: 0,       max: 80,        label: 'Weekly commute hours' },
+  weeklyPrepDecompression: { min: 0,       max: 40,        label: 'Weekly prep/decompression' },
+  monthlyWorkExpenses:     { min: 0,       max: 10_000,    label: 'Monthly work expenses' },
+  weeksWorkedPerYear:      { min: 1,       max: 52,        label: 'Weeks worked per year' },
+};
+
+export function validateEffectiveHourlyInputs(inputs: EffectiveHourlyInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(EFFECTIVE_HOURLY_BOUNDS) as Array<keyof EffectiveHourlyInputs>) {
+    const err = checkRange(inputs[key], EFFECTIVE_HOURLY_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  return errors;
 }

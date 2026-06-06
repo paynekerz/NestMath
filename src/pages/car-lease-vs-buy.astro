@@ -1,16 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import { CarLeaseVsBuyCalculator } from '../components/CarLeaseVsBuy/CarLeaseVsBuyCalculator';
 ---
 <Base
-  title="NestMath.app — Car Lease vs. Buy Calculator"
-  description="Should you lease, buy, or buy cheaper and invest the difference? A true three-way comparison of total financial impact over your ownership period."
+  title="Car Lease vs. Buy Calculator — NestMath"
+  description="Should you lease, buy, or buy cheaper and invest the difference? A true three-way comparison of total financial impact over your vehicle ownership period."
   canonical="https://nestmath.app/car-lease-vs-buy"
   schemaName="NestMath — Car Lease vs. Buy Calculator"
   schemaDescription="Compare the true financial cost of leasing, buying, and investing the difference over a vehicle ownership period."
   breadcrumbTool="Car Lease vs. Buy"
 >
-  <div class="max-w-5xl mx-auto px-4 pt-8 pb-16">
-    <h1 class="text-headline-lg font-bold text-on-surface tracking-tight">Car Lease vs. Buy Calculator</h1>
-    <p class="text-on-surface-variant mt-2 text-body-md">Should you lease, buy, or invest the difference? Coming soon.</p>
-  </div>
+  <CarLeaseVsBuyCalculator client:load />
 </Base>

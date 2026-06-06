@@ -1,16 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import { HYSACalculator } from '../components/HYSA/HYSACalculator';
 ---
 <Base
-  title="NestMath.app — High-Yield Savings Account Calculator"
-  description="How much will your money grow in a HYSA — and how much more is that than a regular savings account? Free HYSA calculator, no account required."
+  title="High-Yield Savings Account Calculator — NestMath"
+  description="How much more will your money earn in a HYSA vs. a traditional savings account? Free HYSA calculator — see the difference compounding at 4%+ makes over time."
   canonical="https://nestmath.app/hysa-calculator"
-  schemaName="NestMath — HYSA Calculator"
+  schemaName="NestMath — High-Yield Savings Account Calculator"
   schemaDescription="Calculate and compare high-yield savings account growth against a traditional savings account over time."
   breadcrumbTool="HYSA Calculator"
 >
-  <div class="max-w-5xl mx-auto px-4 pt-8 pb-16">
-    <h1 class="text-headline-lg font-bold text-on-surface tracking-tight">High-Yield Savings Account Calculator</h1>
-    <p class="text-on-surface-variant mt-2 text-body-md">How much more will you earn in a HYSA vs. a regular savings account? Coming soon.</p>
-  </div>
+  <HYSACalculator client:load />
 </Base>

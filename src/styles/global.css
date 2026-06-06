@@ -218,17 +218,28 @@ input[type="number"]:hover {
 /* ─── Print ──────────────────────────────────────── */
 @media print {
   :root {
-    --color-background:         white;
-    --color-surface:            #f9fafb;
-    --color-surface-elevated:   #f9fafb;
-    --color-border-subtle:      #d1d5db;
-    --color-on-surface-variant: #6b7280;
-    --color-primary-accent:     #2563eb;
+    --color-background:                  white;
+    --color-surface:                     white;
+    --color-surface-elevated:            white;
+    --color-surface-container-lowest:    #f9fafb;
+    --color-surface-container-low:       #f9fafb;
+    --color-surface-container:           #f3f4f6;
+    --color-surface-container-high:      #e5e7eb;
+    --color-surface-container-highest:   #d1d5db;
+    --color-border-subtle:               #9ca3af;
+    --color-on-surface:                  #111827;
+    --color-on-surface-variant:          #374151;
+    --color-primary:                     #1d4ed8;
+    --color-primary-accent:              #2563eb;
+    --color-success-emerald:             #065f46;
+    --color-error:                       #b91c1c;
+    --color-outline:                     #6b7280;
+    --color-outline-variant:             #9ca3af;
   }
 
   body {
     background: white !important;
-    color: black !important;
+    color: #111827 !important;
   }
 
   [data-print="hide"] {
@@ -250,6 +261,20 @@ input[type="number"]:hover {
     font-size: 1.125rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    color: black;
+    color: #111827;
   }
+
+  /* ─── Chart card — keep on one page ─── */
+  [data-print="chart"] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* ─── Glass panel / card ─── */
+  .glass-panel {
+    background: white !important;
+    backdrop-filter: none !important;
+    border-color: #9ca3af !important;
+  }
+
 }

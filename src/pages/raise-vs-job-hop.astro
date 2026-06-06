@@ -1,16 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import { RaiseVsJobHopCalculator } from '../components/RaiseVsJobHop/RaiseVsJobHopCalculator';
 ---
 <Base
   title="NestMath.app — Raise vs. Job Hop Calculator"
-  description="Should you stay for a raise or switch jobs for more money? Model cumulative earnings for both paths and find the break-even year."
+  description="Model cumulative earnings for staying vs. switching jobs. Find the break-even year and see which path pays off more over time."
   canonical="https://nestmath.app/raise-vs-job-hop"
   schemaName="NestMath — Raise vs. Job Hop Calculator"
-  schemaDescription="Calculate whether staying for a raise or switching jobs produces higher cumulative earnings over time."
+  schemaDescription="Compare cumulative earnings between taking a raise at your current job and accepting a higher-paying offer elsewhere."
   breadcrumbTool="Raise vs. Job Hop"
 >
-  <div class="max-w-5xl mx-auto px-4 pt-8 pb-16">
-    <h1 class="text-headline-lg font-bold text-on-surface tracking-tight">Raise vs. Job Hop Calculator</h1>
-    <p class="text-on-surface-variant mt-2 text-body-md">Should you stay for a raise or switch jobs for more money? Coming soon.</p>
-  </div>
+  <RaiseVsJobHopCalculator client:load />
 </Base>
