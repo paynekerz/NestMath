@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { EmergencyFundCalculator } from '../components/EmergencyFund/EmergencyFundCalculator';
+---
+<Base
+  title="Emergency Fund Calculator — NestMath"
+  description="Find out how many months you're covered and how long until you hit your 3-month or 6-month emergency fund goal. Free calculator — see the savings path with HYSA growth."
+  canonical="https://nestmath.app/emergency-fund"
+  schemaName="NestMath — Emergency Fund Calculator"
+  schemaDescription="Calculate your emergency fund coverage and the time it takes to reach your 3-month and 6-month savings goals with HYSA compounding."
+  breadcrumbTool="Emergency Fund Calculator"
+>
+  <EmergencyFundCalculator client:load />
+</Base>

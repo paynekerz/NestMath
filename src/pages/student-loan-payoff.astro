@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { StudentLoanPayoffCalculator } from '../components/StudentLoanPayoff/StudentLoanPayoffCalculator';
+---
+<Base
+  title="Student Loan Payoff Calculator — NestMath"
+  description="See exactly when your student loans will be paid off and how much extra payments save you. Free student loan payoff calculator with year-by-year breakdown."
+  canonical="https://nestmath.app/student-loan-payoff"
+  schemaName="NestMath — Student Loan Payoff Calculator"
+  schemaDescription="Calculate your student loan payoff date, total interest, and how much extra payments save you over the life of the loan."
+  breadcrumbTool="Student Loan Payoff"
+>
+  <StudentLoanPayoffCalculator client:load />
+</Base>

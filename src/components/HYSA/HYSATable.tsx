@@ -19,6 +19,7 @@ export function HYSATable({ result }: Props) {
         type="button"
         onClick={() => setOpen(o => !o)}
         aria-expanded={open}
+        data-print="hide"
         className="flex w-full items-center justify-between px-4 py-3 hover:bg-surface-container-high transition-colors"
       >
         <h3 className="text-label-md font-semibold text-on-surface">Year-by-Year Breakdown</h3>
@@ -27,8 +28,7 @@ export function HYSATable({ result }: Props) {
         </span>
       </button>
 
-      {open && (
-        <div className="overflow-x-auto border-t border-border-subtle" data-print="table-container">
+      <div className={`overflow-x-auto border-t border-border-subtle${open ? '' : ' hidden'}`} data-print="table-container">
           <table className="w-full text-left" data-print="table">
             <thead>
               <tr className="text-on-surface-variant text-label-sm uppercase tracking-wide bg-surface-container">
@@ -78,8 +78,7 @@ export function HYSATable({ result }: Props) {
               ))}
             </tbody>
           </table>
-        </div>
-      )}
+      </div>
     </div>
   );
 }

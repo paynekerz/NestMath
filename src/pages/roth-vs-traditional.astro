@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { RothVsTraditionalCalculator } from '../components/RothVsTraditional/RothVsTraditionalCalculator';
+---
+<Base
+  title="Roth vs. Traditional IRA Calculator — NestMath"
+  description="Compare Roth vs. Traditional IRA after-tax wealth at retirement. See which account type saves you more in taxes given your current and expected future tax rates."
+  canonical="https://nestmath.app/roth-vs-traditional"
+  schemaName="NestMath — Roth vs. Traditional IRA Calculator"
+  schemaDescription="Free Roth vs. Traditional IRA calculator. Enter your annual contribution, years to retirement, and tax rates to see which account type produces more after-tax wealth."
+  breadcrumbTool="Roth vs. Traditional IRA"
+>
+  <RothVsTraditionalCalculator client:load />
+</Base>

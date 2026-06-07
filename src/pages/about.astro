@@ -1,0 +1,161 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="About NestMath — Free & Open Source Financial Planning"
+  description="NestMath is a free, open source financial toolkit. No paywalls, no account, no data collected. Learn why we built it and how it works."
+  canonical="https://nestmath.app/about"
+  schemaName="NestMath — About"
+  schemaDescription="Free and open source financial planning tools for everyone. No account. No data stored."
+>
+  <div class="relative overflow-hidden">
+    <div
+      class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary-accent/20 blur-[120px] pointer-events-none -translate-y-1/4 translate-x-1/4"
+      aria-hidden="true"
+    ></div>
+
+    <div class="max-w-[768px] mx-auto px-[24px] py-[64px]">
+
+      <!-- Header -->
+      <div class="animate-reveal mb-[64px]">
+        <div class="inline-flex items-center gap-[8px] rounded-full bg-primary-container/10 border border-primary/20 px-[16px] py-[8px] mb-[32px]">
+          <span class="w-2 h-2 rounded-full bg-success-emerald animate-pulse-dot" aria-hidden="true"></span>
+          <span class="text-label-sm text-primary">Free &amp; Open Source</span>
+        </div>
+        <h1 class="text-headline-xl font-bold text-on-surface leading-tight -tracking-[0.02em] mb-[24px]">
+          Financial freedom shouldn't come with a subscription.
+        </h1>
+        <p class="text-body-lg text-on-surface-variant leading-relaxed">
+          NestMath is a free, open source financial toolkit built to give everyone access to the tools they need to understand their money — no account, no paywall, no strings attached.
+        </p>
+      </div>
+
+      <!-- Origin story -->
+      <section class="animate-reveal stagger-1 mb-[48px]">
+        <h2 class="text-headline-md font-semibold text-on-surface mb-[16px]">How it started</h2>
+        <div class="prose-surface space-y-[16px]">
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            NestMath started as a side project — a buy vs. rent calculator I built to teach myself the real math behind one of the biggest financial decisions most people make. The further I got, the clearer something became: the tools that could help people make these decisions were either buried behind paywalls, cluttered with ads, or just didn't exist for free.
+          </p>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            That calculator became a full toolkit. The toolkit became a conviction: financial literacy and the tools to act on it should be accessible to everyone — not just people who can afford a financial advisor or a premium app subscription.
+          </p>
+        </div>
+      </section>
+
+      <!-- Mission callout -->
+      <section class="animate-reveal stagger-2 mb-[48px]">
+        <div class="rounded-xl border border-primary/20 bg-primary-container/10 px-[32px] py-[28px]">
+          <p class="text-label-sm font-semibold text-primary uppercase tracking-widest mb-[12px]">Mission</p>
+          <p class="text-headline-md font-semibold text-on-surface leading-snug">
+            Financial freedom and education should never be behind a paywall.
+          </p>
+        </div>
+      </section>
+
+      <!-- What NestMath is -->
+      <section class="animate-reveal stagger-2 mb-[48px]">
+        <h2 class="text-headline-md font-semibold text-on-surface mb-[16px]">What it is</h2>
+        <p class="text-body-md text-on-surface-variant leading-relaxed mb-[24px]">
+          NestMath is an all-in-one financial planner covering the decisions that shape people's lives — buying a home, paying off debt, understanding their real take-home pay, planning savings goals, and more. Every tool is built for individuals, households, and classrooms alike.
+        </p>
+
+        <div class="grid sm:grid-cols-3 gap-[16px]">
+          <div class="rounded-xl border border-border-subtle bg-surface-container-low p-[20px]">
+            <span class="material-symbols-outlined text-primary text-[24px] mb-[8px]" aria-hidden="true">lock_open</span>
+            <p class="text-label-md font-semibold text-on-surface mb-[4px]">Always free</p>
+            <p class="text-label-sm text-on-surface-variant">No plan, no trial, no credit card.</p>
+          </div>
+          <div class="rounded-xl border border-border-subtle bg-surface-container-low p-[20px]">
+            <span class="material-symbols-outlined text-primary text-[24px] mb-[8px]" aria-hidden="true">code</span>
+            <p class="text-label-md font-semibold text-on-surface mb-[4px]">Open source</p>
+            <p class="text-label-sm text-on-surface-variant">Every line of code is public on GitHub.</p>
+          </div>
+          <div class="rounded-xl border border-border-subtle bg-surface-container-low p-[20px]">
+            <span class="material-symbols-outlined text-primary text-[24px] mb-[8px]" aria-hidden="true">security</span>
+            <p class="text-label-md font-semibold text-on-surface mb-[4px]">Private by design</p>
+            <p class="text-label-sm text-on-surface-variant">Your numbers never leave your browser.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="animate-reveal stagger-3 mb-[64px]">
+        <h2 class="text-headline-md font-semibold text-on-surface mb-[24px]">Common questions</h2>
+
+        <div class="flex flex-col gap-[8px]">
+
+          <details class="group rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[16px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              Do you collect any data?
+              <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true">expand_more</span>
+            </summary>
+            <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">
+              No. All data you enter stays in your browser — nothing is sent to a server, logged, or stored anywhere outside your device. There are no analytics scripts, no cookies, no account system. What you type stays with you.
+            </p>
+          </details>
+
+          <details class="group rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[16px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              Is this really free?
+              <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true">expand_more</span>
+            </summary>
+            <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">
+              Yes, completely. NestMath is funded by voluntary donations through Ko-fi. If it's useful to you, a coffee goes a long way toward keeping the site running and building more tools — but it's entirely optional.
+            </p>
+          </details>
+
+          <details class="group rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[16px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              Can I use this in a classroom or financial literacy program?
+              <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true">expand_more</span>
+            </summary>
+            <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">
+              Absolutely. That's exactly the kind of use this was built for. Share it freely — no attribution required, no license to worry about.
+            </p>
+          </details>
+
+          <details class="group rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[16px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              Who built this?
+              <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true">expand_more</span>
+            </summary>
+            <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">
+              NestMath is built and maintained by me, Payne Kerz. I'm a software engineer by trade. It's a personal open source project, no company, no team, no VC money.
+            </p>
+          </details>
+
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="animate-reveal stagger-4 rounded-xl border border-border-subtle bg-surface-container-low p-[32px] text-center">
+        <p class="text-body-md text-on-surface-variant mb-[20px]">
+          If NestMath has helped you — or your students — consider supporting it so it stays free for everyone.
+        </p>
+        <div class="flex flex-wrap justify-center gap-[12px]">
+          <a
+            href="https://ko-fi.com/paynekerz"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-[8px] bg-primary-accent text-white px-[24px] py-[12px] rounded-lg text-label-md font-semibold hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary-accent/20"
+          >
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">coffee</span>
+            Support on Ko-fi
+          </a>
+          <a
+            href="https://github.com/paynekerz/NestMath"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-[8px] border border-border-subtle bg-surface px-[24px] py-[12px] rounded-lg text-label-md font-semibold text-on-surface hover:border-primary-accent/50 transition-all"
+          >
+            <span class="material-symbols-outlined text-[18px]" aria-hidden="true">code</span>
+            View on GitHub
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</Base>

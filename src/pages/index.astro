@@ -24,7 +24,7 @@ const faqItems = [
   },
   {
     q: "Are these calculators free to use?",
-    a: "Yes. NestMath is completely free — no account, no subscription, no data stored. All calculations run in your browser. Revenue comes from ads and donations.",
+    a: "Yes. NestMath is completely free — no account, no subscription, no data stored. All calculations run in your browser. The site is funded by voluntary donations through Ko-fi.",
   },
 ];
 ---
@@ -54,7 +54,7 @@ const faqItems = [
         </div>
 
         <h1 class="text-headline-xl font-bold text-on-surface max-w-2xl leading-tight -tracking-[0.02em]">
-          DRAFT - Make confident decisions about buying, renting, and managing your home.
+          DRAFT - Financial freedom and education with no paywall.
         </h1>
         <p class="text-body-lg text-on-surface-variant mt-[24px] max-w-[576px]">
           Free calculators for every home buying decision. No account. No data stored.
@@ -178,6 +178,40 @@ const faqItems = [
             </span>
           </div>
         </a>
+
+        <!-- Budget featured tools -->
+        <div class="mt-[16px] bg-surface-container-low rounded-xl border border-border-subtle overflow-hidden">
+          <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border-subtle">
+            <a
+              href="/emergency-fund"
+              class="flex items-center gap-[16px] p-[24px] hover:bg-surface-container transition-colors group"
+              aria-label="Emergency Fund Calculator"
+            >
+              <div class="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container">
+                <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">shield</span>
+              </div>
+              <div>
+                <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Do I have enough saved for an emergency?</p>
+                <p class="text-label-sm text-on-surface-variant mt-[2px]">Emergency Fund Calculator</p>
+              </div>
+              <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-auto shrink-0" aria-hidden="true">arrow_forward</span>
+            </a>
+            <a
+              href="/net-worth"
+              class="flex items-center gap-[16px] p-[24px] hover:bg-surface-container transition-colors group"
+              aria-label="Net Worth Snapshot"
+            >
+              <div class="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container">
+                <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">account_balance</span>
+              </div>
+              <div>
+                <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">What am I actually worth right now?</p>
+                <p class="text-label-sm text-on-surface-variant mt-[2px]">Net Worth Snapshot</p>
+              </div>
+              <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-auto shrink-0" aria-hidden="true">arrow_forward</span>
+            </a>
+          </div>
+        </div>
       </section>
 
       <!-- ── Tool cards ─────────────────────────── -->
@@ -384,6 +418,31 @@ const faqItems = [
             </div>
             <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much will my savings earn?</h2>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Compare HYSA growth against a traditional savings account over time.</p>
+            <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
+              Calculate
+              <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_forward</span>
+            </span>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- ── Debt tools ─────────────────────────── -->
+      <section id="debt-tools" aria-label="Debt calculators" class="mt-[48px]">
+        <p class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">DEBT MODULES</p>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-[16px]">
+
+          <a
+            href="/credit-card-payoff"
+            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-1"
+            aria-label="Credit Card Payoff Calculator"
+          >
+            <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
+              <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">credit_card</span>
+            </div>
+            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">When will my credit card be paid off?</h2>
+            <p class="text-body-sm text-on-surface-variant mb-[16px]">See your payoff date and how much interest you save vs. paying only the minimum.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
               <span class="material-symbols-outlined text-[16px]" aria-hidden="true">arrow_forward</span>

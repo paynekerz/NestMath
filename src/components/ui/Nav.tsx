@@ -6,6 +6,11 @@ interface Tool {
   desc: string;
 }
 
+const BUDGET_TOOLS: Tool[] = [
+  { href: '/emergency-fund', label: 'Emergency Fund',    desc: 'Do I have enough saved for an emergency?' },
+  { href: '/net-worth',      label: 'Net Worth Snapshot', desc: 'What am I actually worth right now?' },
+];
+
 const HOME_TOOLS: Tool[] = [
   { href: '/buy-vs-rent',     label: 'Buy vs. Rent',     desc: 'Should I buy or rent?' },
   { href: '/affordability',   label: 'Affordability',    desc: 'How much house can I afford?' },
@@ -14,13 +19,24 @@ const HOME_TOOLS: Tool[] = [
   { href: '/refinance',       label: 'Refinance',        desc: 'Is refinancing worth it?' },
 ];
 
+const DEBT_TOOLS: Tool[] = [
+  { href: '/credit-card-payoff',   label: 'Credit Card Payoff',   desc: 'When will my credit card be paid off?' },
+  { href: '/student-loan-payoff',  label: 'Student Loan Payoff',  desc: 'How long until my loans are gone?' },
+  { href: '/debt-payoff-planner',  label: 'Debt Payoff Planner',  desc: 'Avalanche vs. snowball — which saves more?' },
+];
+
+const INVEST_TOOLS: Tool[] = [
+  { href: '/hysa-calculator',        label: 'HYSA Calculator',        desc: 'How much will my savings earn?' },
+  { href: '/investment-fees',        label: 'Investment Fees',        desc: 'How much do fees cost me?' },
+  { href: '/retirement-projector',   label: '401(k) Projector',       desc: 'Am I on track to retire?' },
+  { href: '/roth-vs-traditional',    label: 'Roth vs. Traditional',   desc: 'Which IRA saves me more in taxes?' },
+];
+
 const LIFE_TOOLS: Tool[] = [
   { href: '/raise-vs-job-hop',  label: 'Raise vs. Job Hop',  desc: 'Should I stay or switch jobs?' },
   { href: '/renovation-roi',    label: 'Renovation ROI',     desc: 'Is renovating worth it?' },
   { href: '/car-lease-vs-buy',  label: 'Car Lease vs. Buy',  desc: 'Should I lease or buy a car?' },
-  { href: '/investment-fees',   label: 'Investment Fees',    desc: 'How much do fees cost me?' },
   { href: '/effective-hourly',  label: 'Effective Hourly',   desc: 'What am I actually making?' },
-  { href: '/hysa-calculator',   label: 'HYSA Calculator',    desc: 'How much will my savings earn?' },
 ];
 
 function ToolDropdown({
@@ -111,18 +127,32 @@ export function Nav({ currentPath }: NavProps) {
             </a>
             <div className="hidden md:flex items-center gap-lg">
               <a
-                href="/budget"
+                href="/about"
                 className={
                   'text-body-sm font-medium transition-colors pb-1 ' +
-                  (normalized === '/budget'
+                  (normalized === '/about'
                     ? 'text-primary border-b-2 border-primary'
                     : 'text-on-surface-variant hover:text-primary')
                 }
               >
-                Budget
+                About
               </a>
+              <ToolDropdown label="Budget" tools={BUDGET_TOOLS} normalized={normalized} />
               <ToolDropdown label="Home" tools={HOME_TOOLS} normalized={normalized} />
+              <ToolDropdown label="Debt" tools={DEBT_TOOLS} normalized={normalized} />
+              <ToolDropdown label="Invest" tools={INVEST_TOOLS} normalized={normalized} />
               <ToolDropdown label="Life" tools={LIFE_TOOLS} normalized={normalized} />
+              <a
+                href="/glossary"
+                className={
+                  'text-body-sm font-medium transition-colors pb-1 ' +
+                  (normalized === '/glossary'
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-on-surface-variant hover:text-primary')
+                }
+              >
+                Glossary
+              </a>
             </div>
           </div>
 
@@ -226,22 +256,73 @@ export function Nav({ currentPath }: NavProps) {
             (mobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4')
           }
         >
-          {/* Budget */}
+          {/* About */}
           <a
-            href="/budget"
-            aria-current={normalized === '/budget' ? 'page' : undefined}
+            href="/about"
+            aria-current={normalized === '/about' ? 'page' : undefined}
             onClick={close}
-            className={navItemClass('/budget')}
+            className={navItemClass('/about')}
           >
-            <span className="text-body-sm font-semibold">Budget</span>
-            <span className="text-label-sm text-on-surface-variant mt-0.5">Where is my money going?</span>
+            <span className="text-body-sm font-semibold">About</span>
+            <span className="text-label-sm text-on-surface-variant mt-0.5">What is NestMath and why it's free</span>
           </a>
+
+          {/* Budget section */}
+          <p className="px-4 pt-5 pb-2 text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">
+            Budget
+          </p>
+          {BUDGET_TOOLS.map(({ href, label, desc }) => (
+            <a
+              key={href}
+              href={href}
+              aria-current={normalized === href ? 'page' : undefined}
+              onClick={close}
+              className={navItemClass(href)}
+            >
+              <span className="text-body-sm font-semibold">{label}</span>
+              <span className="text-label-sm text-on-surface-variant mt-0.5">{desc}</span>
+            </a>
+          ))}
 
           {/* Home section */}
           <p className="px-4 pt-5 pb-2 text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">
             Home
           </p>
           {HOME_TOOLS.map(({ href, label, desc }) => (
+            <a
+              key={href}
+              href={href}
+              aria-current={normalized === href ? 'page' : undefined}
+              onClick={close}
+              className={navItemClass(href)}
+            >
+              <span className="text-body-sm font-semibold">{label}</span>
+              <span className="text-label-sm text-on-surface-variant mt-0.5">{desc}</span>
+            </a>
+          ))}
+
+          {/* Debt section */}
+          <p className="px-4 pt-5 pb-2 text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">
+            Debt
+          </p>
+          {DEBT_TOOLS.map(({ href, label, desc }) => (
+            <a
+              key={href}
+              href={href}
+              aria-current={normalized === href ? 'page' : undefined}
+              onClick={close}
+              className={navItemClass(href)}
+            >
+              <span className="text-body-sm font-semibold">{label}</span>
+              <span className="text-label-sm text-on-surface-variant mt-0.5">{desc}</span>
+            </a>
+          ))}
+
+          {/* Invest section */}
+          <p className="px-4 pt-5 pb-2 text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">
+            Invest
+          </p>
+          {INVEST_TOOLS.map(({ href, label, desc }) => (
             <a
               key={href}
               href={href}
@@ -270,6 +351,17 @@ export function Nav({ currentPath }: NavProps) {
               <span className="text-label-sm text-on-surface-variant mt-0.5">{desc}</span>
             </a>
           ))}
+
+          {/* Glossary */}
+          <a
+            href="/glossary"
+            aria-current={normalized === '/glossary' ? 'page' : undefined}
+            onClick={close}
+            className={navItemClass('/glossary')}
+          >
+            <span className="text-body-sm font-semibold">Glossary</span>
+            <span className="text-label-sm text-on-surface-variant mt-0.5">Plain-English definitions for every financial term</span>
+          </a>
 
           {/* Divider + utility links */}
           <div className="h-px bg-border-subtle my-5 mx-1" />

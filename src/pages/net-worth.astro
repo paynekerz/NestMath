@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { NetWorthCalculator } from '../components/NetWorth/NetWorthCalculator';
+---
+<Base
+  title="Net Worth Calculator — NestMath"
+  description="Calculate your net worth in minutes. Add up your assets and liabilities to see exactly where you stand — with a year-over-year comparison and visual breakdown."
+  canonical="https://nestmath.app/net-worth"
+  schemaName="NestMath — Net Worth Calculator"
+  schemaDescription="Free net worth snapshot calculator. Enter assets and liabilities to get your total net worth, debt-to-asset ratio, and a category breakdown — with optional year-over-year delta."
+  breadcrumbTool="Net Worth Calculator"
+>
+  <NetWorthCalculator client:load />
+</Base>

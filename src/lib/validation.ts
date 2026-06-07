@@ -7,6 +7,14 @@ import type { RenovationROIInputs } from './renovation-roi';
 import type { InvestmentFeesInputs } from './investment-fees';
 import type { HYSAInputs } from './hysa';
 import type { EffectiveHourlyInputs } from './effective-hourly';
+import type { CreditCardPayoffInputs } from './credit-card-payoff';
+import type { StudentLoanPayoffInputs } from './student-loan-payoff';
+import type { DebtItem } from './debt-payoff';
+import type { EmergencyFundInputs } from './emergency-fund';
+import type { NetWorthInputs } from './net-worth';
+import type { RetirementProjectorInputs } from './retirement-projector';
+import type { RothVsTraditionalInputs } from './roth-vs-traditional';
+import type { SocialSecurityInputs } from './social-security';
 
 export type ValidationErrors = Partial<Record<string, string>>;
 
@@ -282,6 +290,203 @@ export function validateEffectiveHourlyInputs(inputs: EffectiveHourlyInputs): Va
   for (const key of Object.keys(EFFECTIVE_HOURLY_BOUNDS) as Array<keyof EffectiveHourlyInputs>) {
     const err = checkRange(inputs[key], EFFECTIVE_HOURLY_BOUNDS[key]);
     if (err) errors[key] = err;
+  }
+  return errors;
+}
+
+const CC_PAYOFF_BOUNDS = {
+  balance:        { min: 1,     max: 500_000, label: 'Balance' },
+  apr:            { min: 0.001, max: 0.60,    label: 'APR' },
+  monthlyPayment: { min: 1,     max: 100_000, label: 'Monthly payment' },
+  desiredMonths:  { min: 1,     max: 600,     label: 'Desired payoff months' },
+};
+
+export function validateCreditCardPayoffInputs(inputs: CreditCardPayoffInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+
+  const balanceErr = checkRange(inputs.balance, CC_PAYOFF_BOUNDS.balance);
+  if (balanceErr) errors['balance'] = balanceErr;
+
+  const aprErr = checkRange(inputs.apr, CC_PAYOFF_BOUNDS.apr);
+  if (aprErr) errors['apr'] = aprErr;
+
+  if (inputs.paymentMode === 'payment') {
+    const pmtErr = checkRange(inputs.monthlyPayment, CC_PAYOFF_BOUNDS.monthlyPayment);
+    if (pmtErr) {
+      errors['monthlyPayment'] = pmtErr;
+    } else if (!errors['balance'] && !errors['apr']) {
+      const monthlyInterest = inputs.balance * (inputs.apr / 12);
+      if (inputs.monthlyPayment <= monthlyInterest) {
+        errors['monthlyPayment'] = `Payment must exceed monthly interest to reduce the balance.`;
+      }
+    }
+  } else {
+    const moErr = checkRange(inputs.desiredMonths, CC_PAYOFF_BOUNDS.desiredMonths);
+    if (moErr) errors['desiredMonths'] = moErr;
+  }
+
+  return errors;
+}
+
+const STUDENT_LOAN_BOUNDS: Record<keyof StudentLoanPayoffInputs, Bounds> = {
+  loanBalance:       { min: 100,   max: 2_000_000, label: 'Loan balance' },
+  interestRate:      { min: 0.001, max: 0.30,      label: 'Interest rate' },
+  standardTermYears: { min: 1,     max: 30,        label: 'Standard term' },
+  extraMonthly:      { min: 0,     max: 50_000,    label: 'Extra monthly payment' },
+};
+
+export function validateStudentLoanPayoffInputs(inputs: StudentLoanPayoffInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(STUDENT_LOAN_BOUNDS) as Array<keyof StudentLoanPayoffInputs>) {
+    const err = checkRange(inputs[key], STUDENT_LOAN_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  return errors;
+}
+
+export type DebtPayoffErrors = {
+  debts: Array<Partial<Record<'name' | 'balance' | 'apr' | 'minPayment', string>>>;
+  extraBudget?: string;
+};
+
+const DEBT_ITEM_BOUNDS = {
+  balance:    { min: 1,     max: 1_000_000, label: 'Balance' },
+  apr:        { min: 0,     max: 0.60,      label: 'APR' },
+  minPayment: { min: 1,     max: 10_000,    label: 'Minimum payment' },
+};
+
+export function validateDebtPayoffInputs(
+  debts: DebtItem[],
+  extraBudget: number,
+): DebtPayoffErrors {
+  const errors: DebtPayoffErrors = { debts: debts.map(() => ({})) };
+
+  for (let i = 0; i < debts.length; i++) {
+    const d = debts[i];
+    if (!d.name.trim()) errors.debts[i].name = 'Name is required.';
+
+    const balErr = checkRange(d.balance, DEBT_ITEM_BOUNDS.balance);
+    if (balErr) errors.debts[i].balance = balErr;
+
+    const aprErr = checkRange(d.apr, DEBT_ITEM_BOUNDS.apr);
+    if (aprErr) errors.debts[i].apr = aprErr;
+
+    const minErr = checkRange(d.minPayment, DEBT_ITEM_BOUNDS.minPayment);
+    if (minErr) errors.debts[i].minPayment = minErr;
+  }
+
+  const extraErr = checkRange(extraBudget, { min: 0, max: 50_000, label: 'Extra budget' });
+  if (extraErr) errors.extraBudget = extraErr;
+
+  return errors;
+}
+
+export function hasDebtErrors(errors: DebtPayoffErrors): boolean {
+  if (errors.extraBudget) return true;
+  return errors.debts.some(d => Object.keys(d).length > 0);
+}
+
+const EMERGENCY_FUND_BOUNDS: Record<keyof EmergencyFundInputs, Bounds> = {
+  monthlyExpenses: { min: 100,       max: 100_000,    label: 'Monthly expenses' },
+  currentSavings:  { min: 0,         max: 10_000_000, label: 'Current savings' },
+  monthlySavings:  { min: 0,         max: 50_000,     label: 'Monthly savings' },
+  hysaAPY:         { min: 0,         max: 0.20,       label: 'HYSA APY' },
+};
+
+export function validateEmergencyFundInputs(inputs: EmergencyFundInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(EMERGENCY_FUND_BOUNDS) as Array<keyof EmergencyFundInputs>) {
+    const err = checkRange(inputs[key], EMERGENCY_FUND_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  return errors;
+}
+
+type NetWorthNumericKey = Exclude<keyof NetWorthInputs, 'lastYearNetWorth'>;
+
+const NET_WORTH_BOUNDS: Record<NetWorthNumericKey, Bounds> = {
+  checkingSavings:     { min: 0, max: 100_000_000, label: 'Checking / savings' },
+  investments:         { min: 0, max: 100_000_000, label: 'Investments' },
+  retirement:          { min: 0, max: 100_000_000, label: 'Retirement accounts' },
+  homeEquity:          { min: 0, max: 100_000_000, label: 'Home equity' },
+  vehicleValue:        { min: 0, max: 100_000_000, label: 'Vehicle value' },
+  otherAssets:         { min: 0, max: 100_000_000, label: 'Other assets' },
+  mortgageBalance:     { min: 0, max: 100_000_000, label: 'Mortgage balance' },
+  carLoans:            { min: 0, max: 100_000_000, label: 'Car loans' },
+  creditCardBalances:  { min: 0, max: 100_000_000, label: 'Credit card balances' },
+  studentLoans:        { min: 0, max: 100_000_000, label: 'Student loans' },
+  otherDebt:           { min: 0, max: 100_000_000, label: 'Other debt' },
+};
+
+export function validateNetWorthInputs(inputs: NetWorthInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(NET_WORTH_BOUNDS) as NetWorthNumericKey[]) {
+    const err = checkRange(inputs[key] as number, NET_WORTH_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  if (inputs.lastYearNetWorth !== null) {
+    const err = checkRange(inputs.lastYearNetWorth, { min: -100_000_000, max: 100_000_000, label: 'Last year net worth' });
+    if (err) errors['lastYearNetWorth'] = err;
+  }
+  return errors;
+}
+
+const RETIREMENT_PROJECTOR_BOUNDS: Record<keyof RetirementProjectorInputs, Bounds> = {
+  currentAge:           { min: 18,    max: 79,          label: 'Current age' },
+  retirementAge:        { min: 19,    max: 80,          label: 'Retirement age' },
+  currentBalance:       { min: 0,     max: 100_000_000, label: 'Current balance' },
+  annualContribution:   { min: 0,     max: 100_000,     label: 'Annual contribution' },
+  employerMatchPct:     { min: 0,     max: 1,           label: 'Employer match' },
+  matchLimitPct:        { min: 0,     max: 1,           label: 'Match limit' },
+  annualSalary:         { min: 0,     max: 10_000_000,  label: 'Annual salary' },
+  expectedAnnualReturn: { min: -0.20, max: 0.30,        label: 'Annual return' },
+  expectedInflation:    { min: 0,     max: 0.15,        label: 'Inflation rate' },
+  targetAnnualExpenses: { min: 0,     max: 10_000_000,  label: 'Annual expenses' },
+};
+
+export function validateRetirementProjectorInputs(inputs: RetirementProjectorInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(RETIREMENT_PROJECTOR_BOUNDS) as Array<keyof RetirementProjectorInputs>) {
+    const err = checkRange(inputs[key], RETIREMENT_PROJECTOR_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  if (!errors.currentAge && !errors.retirementAge && inputs.retirementAge <= inputs.currentAge) {
+    errors['retirementAge'] = 'Retirement age must be greater than current age.';
+  }
+  return errors;
+}
+
+const ROTH_VS_TRADITIONAL_BOUNDS: Record<keyof RothVsTraditionalInputs, Bounds> = {
+  annualContribution:    { min: 1,     max: 100_000, label: 'Annual contribution' },
+  yearsToRetirement:     { min: 1,     max: 50,      label: 'Years to retirement' },
+  currentTaxRate:        { min: 0,     max: 0.50,    label: 'Current tax rate' },
+  retirementTaxRate:     { min: 0,     max: 0.50,    label: 'Retirement tax rate' },
+  expectedAnnualReturn:  { min: -0.20, max: 0.30,    label: 'Annual return' },
+};
+
+export function validateRothVsTraditionalInputs(inputs: RothVsTraditionalInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(ROTH_VS_TRADITIONAL_BOUNDS) as Array<keyof RothVsTraditionalInputs>) {
+    const err = checkRange(inputs[key], ROTH_VS_TRADITIONAL_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  return errors;
+}
+
+const SS_BOUNDS = {
+  annualIncome:    { min: 0,   max: 10_000_000, label: 'Annual income' },
+  currentAge:      { min: 18,  max: 80,         label: 'Current age' },
+  lifeExpectancy:  { min: 63,  max: 110,        label: 'Life expectancy' },
+};
+
+export function validateSocialSecurityInputs(inputs: SocialSecurityInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(SS_BOUNDS) as Array<keyof typeof SS_BOUNDS>) {
+    const err = checkRange(inputs[key as keyof SocialSecurityInputs] as number, SS_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  if (!errors.currentAge && !errors.lifeExpectancy && inputs.lifeExpectancy <= inputs.currentAge) {
+    errors['lifeExpectancy'] = 'Life expectancy must be greater than current age.';
   }
   return errors;
 }

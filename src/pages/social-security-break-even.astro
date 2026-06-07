@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { SocialSecurityCalculator } from '../components/SocialSecurity/SocialSecurityCalculator';
+---
+<Base
+  title="Social Security Break-Even Calculator — NestMath"
+  description="Find the optimal age to claim Social Security. Compare lifetime benefits at 62, 67, and 70, see your break-even ages, and model what happens if trust fund reserves are depleted."
+  canonical="https://nestmath.app/social-security-break-even"
+  schemaName="NestMath — Social Security Break-Even Calculator"
+  schemaDescription="Free Social Security break-even calculator. Estimates your monthly benefit from income using the SSA bend-point formula, shows cumulative lifetime totals at 62/67/70, and identifies the optimal claiming age based on your life expectancy."
+  breadcrumbTool="Social Security Break-Even"
+>
+  <SocialSecurityCalculator client:load />
+</Base>

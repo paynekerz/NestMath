@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { DebtPayoffCalculator } from '../components/DebtPayoff/DebtPayoffCalculator';
+---
+<Base
+  title="Debt Payoff Planner — Avalanche vs. Snowball | NestMath"
+  description="Compare the avalanche and snowball debt payoff methods across up to 6 debts. See which strategy saves you the most interest and when you'll be debt-free."
+  canonical="https://nestmath.app/debt-payoff-planner"
+  schemaName="NestMath — Debt Payoff Planner"
+  schemaDescription="Compare avalanche vs. snowball debt payoff strategies. See payoff timelines, total interest, and which method saves you more money."
+  breadcrumbTool="Debt Payoff Planner"
+>
+  <DebtPayoffCalculator client:load />
+</Base>

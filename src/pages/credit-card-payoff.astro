@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { CreditCardPayoffCalculator } from '../components/CreditCardPayoff/CreditCardPayoffCalculator';
+---
+<Base
+  title="Credit Card Payoff Calculator — NestMath"
+  description="See exactly when your credit card will be paid off and how much interest you'll save vs. paying minimums. Free calculator — no account required."
+  canonical="https://nestmath.app/credit-card-payoff"
+  schemaName="NestMath — Credit Card Payoff Calculator"
+  schemaDescription="Calculate your credit card payoff timeline and see how much interest you save compared to minimum payments."
+  breadcrumbTool="Credit Card Payoff"
+>
+  <CreditCardPayoffCalculator client:load />
+</Base>
