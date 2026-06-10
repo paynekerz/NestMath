@@ -3,6 +3,7 @@ import '../styles/global.css';
 import interFont from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 import { Nav } from '../components/ui/Nav';
 import { Breadcrumb } from '../components/ui/Breadcrumb';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title: string;
@@ -59,6 +60,7 @@ const schema = JSON.stringify({
     <link rel="alternate" hreflang="en" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script type="application/ld+json" set:html={schema} />
+    <Analytics />
   </head>
   <body>
     <Nav currentPath={currentPath} client:idle />
