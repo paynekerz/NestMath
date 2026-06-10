@@ -1,5 +1,4 @@
 {
-  "routes": [{ "handle": "error" }, { "status": 500, "dest": "/500" }],
   "headers": [
     {
       "source": "/(.*)",
