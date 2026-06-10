@@ -199,16 +199,10 @@ export function PayoffCalculator() {
         data-date={today}
         className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start"
       >
-        {/* Left column — inputs + tax advantage + ko-fi */}
+        {/* Left column — inputs + tax advantage */}
         <div ref={inputsRef} className="lg:col-span-4 flex flex-col gap-4">
           <PayoffInputsPanel inputs={inputs} onChange={handleChange} errors={errors} />
           {result && <TaxAdvantageCard result={result} />}
-          {result && (
-            <p data-print="hide" className="text-body-sm text-center text-on-surface-variant">
-              If this helped you figure out your payoff strategy,{' '}
-              <KofiButton label="☕ a coffee seems fair." />
-            </p>
-          )}
         </div>
 
         {/* Right column — results */}
@@ -237,6 +231,8 @@ export function PayoffCalculator() {
           )}
         </div>
       </div>
+
+      {result && <KofiButton message="If this helped you figure out your payoff strategy," />}
 
       {/* Yearly Projection — full-width, collapsible, default open */}
       {result && (

@@ -5,31 +5,31 @@ import { EmergencyFundCalculator } from '../components/EmergencyFund/EmergencyFu
 const faqItems = [
   {
     q: "How much should I have in an emergency fund?",
-    a: "The standard guideline is 3–6 months of essential living expenses. Essential expenses include rent or mortgage, groceries, utilities, insurance premiums, and minimum debt payments — not discretionary spending like dining out or subscriptions. Someone with stable employment in a large field might be comfortable at 3 months. Someone self-employed, in a volatile industry, or with dependents should target 6 months or more. The calculator shows both targets based on your actual monthly essential expenses."
+    a: "The standard guideline is 3–6 months of essential living expenses. Essential expenses include rent or <a href=\"/glossary#mortgage\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">mortgage</a>, groceries, utilities, insurance premiums, and <a href=\"/glossary#minimum-payment\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">minimum debt payments</a> not discretionary spending like dining out or subscriptions. Someone with stable employment in a large field might be comfortable at 3 months. Someone self-employed, in a volatile industry, or with dependents should target 6 months or more. The calculator shows both targets based on your actual monthly essential expenses."
   },
   {
     q: "Where should I keep my emergency fund?",
-    a: "A high-yield savings account (HYSA) is the optimal home for an emergency fund. It needs to be liquid (accessible within 1–2 business days), FDIC-insured (no risk to principal), and earning enough to offset at least part of inflation. Current HYSA rates of 4–5% APY make this a no-brainer compared to keeping emergency funds in a checking account at 0%. Avoid investing emergency funds in stocks, bonds, or CDs — the risk of needing the money during a market downturn or before a CD matures is too high."
+    a: "Keep your <a href=\"/glossary#emergency-fund\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">emergency fund</a> in a <a href=\"/glossary#hysa\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">high-yield savings account (HYSA)</a>: liquid (accessible in 1–2 business days), FDIC-insured, and currently earning 4–5% <a href=\"/glossary#apy\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">APY</a>. Avoid stocks, bonds, or CDs — you may need the money during the same downturn that tanks them."
   },
   {
     q: "Should I pay off debt or build an emergency fund first?",
-    a: "Build a small emergency fund first — typically 1 month of expenses — before aggressively paying down debt. Without any cash buffer, one unexpected expense (car repair, medical bill) forces you back into high-interest debt, undoing your progress. Once you have that initial buffer, direct extra money toward high-interest debt while maintaining the minimum. After becoming debt-free, build the full 3–6 month fund. This hybrid approach avoids the counterproductive cycle of repeatedly paying down and recharging debt."
+    a: "Build a small emergency fund first typically 1 month of expenses before aggressively paying down debt. Without any cash buffer, one unexpected expense (car repair, medical bill) forces you back into high-interest debt, undoing your progress. Once you have that initial buffer, direct extra money toward high-interest debt while maintaining the minimum. After becoming debt-free, build the full 3–6 month fund. This hybrid approach avoids the counterproductive cycle of repeatedly paying down and recharging debt."
   },
   {
     q: "How long does it take to build an emergency fund?",
-    a: "It depends on your current savings and monthly contribution. On default assumptions ($3,500/month expenses, $2,000 saved, $300/month contribution), the 3-month target is $10,500 and the 6-month target is $21,000. At $300/month it takes about 28 months to reach the 6-month target from $2,000. Increasing your contribution to $600/month cuts that to about 16 months. The calculator shows the exact timeline for both targets with HYSA interest factored in."
+    a: "It depends on your current savings and monthly contribution. On default assumptions ($3,500/month expenses, $2,000 saved, $300/month contribution), the 3-month target is $10,500 and the 6-month target is $21,000. At $300/month it takes about 28 months to reach the 6-month target from $2,000. Increasing your contribution to $600/month cuts that to about 16 months. "
   },
   {
     q: "Do I need an emergency fund if I have a credit card?",
-    a: "A credit card is not an emergency fund substitute. Credit limits can be reduced or accounts closed by the issuer, often at the worst time (during a financial crisis). Credit card debt at 20%+ APR turns a $3,000 car repair into a much more expensive problem if you can't pay it off immediately. An emergency fund in a HYSA costs nothing to maintain and earns interest — it's always there and always usable regardless of your credit situation."
+    a: "A credit card is not an <a href=\"/glossary#emergency-fund\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">emergency fund</a> substitute. Issuers can cut limits or close accounts without warning — often during the same financial crisis that makes you want to use them. Credit card debt at 20%+ <a href=\"/glossary#apr\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">APR</a> turns a $3,000 car repair into a much more expensive problem if you can't pay it off immediately. An emergency fund in a <a href=\"/glossary#hysa\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">HYSA</a> costs nothing to maintain and earns interest it's always there and always usable regardless of your credit situation."
   }
 ];
 ---
 <Base
-  title="Emergency Fund Calculator — NestMath"
-  description="Find out how many months you're covered and how long until you hit your 3-month or 6-month emergency fund goal. Free calculator — see the savings path with HYSA growth."
+  title="Emergency Fund Calculator NestMath"
+  description="Find out how many months you're covered and how long until you hit your 3-month or 6-month emergency fund goal. Free calculator see the savings path with HYSA growth."
   canonical="https://nestmath.app/emergency-fund"
-  schemaName="NestMath — Emergency Fund Calculator"
+  schemaName="NestMath Emergency Fund Calculator"
   schemaDescription="Calculate your emergency fund coverage and the time it takes to reach your 3-month and 6-month savings goals with HYSA compounding."
   breadcrumbTool="Emergency Fund Calculator"
 >
@@ -38,27 +38,27 @@ const faqItems = [
     <EmergencyFundCalculator client:load />
   </div>
 
-  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+  <div data-print="hide" class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">How the calculator works</h2>
+      <div class="flex flex-col gap-[16px]">
         <p class="text-body-md text-on-surface-variant leading-relaxed">The current months of coverage is simply your current savings divided by your monthly essential expenses. This gives you an immediate read on where you stand: under 1 month is critically low (shown in red), 1–3 months is building but insufficient for most circumstances (yellow), and 3+ months meets the minimum standard guideline (green). The 3-month and 6-month targets are calculated as your monthly expenses multiplied by 3 and 6 respectively.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">To project when you'll reach each target, the calculator runs a monthly savings simulation with HYSA compounding. Each month it applies interest (APY ÷ 12) to the current balance and adds your monthly savings contribution. The simulation runs until the balance reaches each target; the months required is your "months to goal." HYSA interest is included because it meaningfully accelerates the timeline at current rates of 4–5%.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">To project when you'll reach each target, the calculator runs a monthly savings simulation with <a href="/glossary#hysa" class="text-primary hover:underline" target="_blank" rel="noopener">HYSA</a> compounding. Each month it applies interest (<a href="/glossary#apy" class="text-primary hover:underline" target="_blank" rel="noopener">APY</a> ÷ 12) to the current balance and adds your monthly savings contribution. The simulation runs until the balance reaches each target; the months required is your "months to goal." HYSA interest is included because it meaningfully accelerates the timeline at current rates of 4–5%.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The savings chart plots your balance growth alongside two horizontal dashed target lines. This visual shows your progress in context: the point where your savings curve crosses each line is your projected goal date. The interest earned along the way shows how much of your final balance came from growth rather than your own contributions, which underscores the value of using a HYSA instead of a zero-rate checking account.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Understanding your results</h2>
+      <div class="flex flex-col gap-[16px]">
         <p class="text-body-md text-on-surface-variant leading-relaxed">The months of coverage number is your most immediate financial safety indicator. At under 1 month, you're one unexpected expense away from debt. At 1–3 months, you have some cushion but job loss or a major repair would be a serious financial stress. At 3–6 months, you can weather most emergencies (a job search, a medical situation, or an unexpected major expense) without derailing your finances.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The months-to-goal figures help you prioritize. If you're 18 months from your 3-month target, increasing your monthly contribution by $200 might cut that to 14 months, a concrete trade-off you can evaluate against other financial priorities. If you're already at the 3-month target and just need to reach 6 months, the remaining path is typically faster because the hardest saving is already done.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Frequently asked questions</h2>
       <div class="flex flex-col gap-[8px]">
         {faqItems.map((item) => (
           <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
@@ -68,7 +68,7 @@ const faqItems = [
             </summary>
             <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
               <div class="overflow-hidden">
-                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle" set:html={item.a}></p>
               </div>
             </div>
           </details>
@@ -76,8 +76,8 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Related calculators</h2>
       <div class="grid sm:grid-cols-2 gap-[12px]">
         <a href="/hysa-calculator" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">HYSA Calculator</p>

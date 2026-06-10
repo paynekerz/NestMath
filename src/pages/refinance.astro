@@ -5,11 +5,11 @@ import { RefinanceCalculator } from '../components/Refinance/RefinanceCalculator
 const faqItems = [
   {
     q: "How do I know if refinancing is worth it?",
-    a: "Refinancing makes financial sense when the monthly savings from a lower rate exceed the closing costs before you plan to sell or move. The break-even point is closing costs divided by monthly savings. If you'll stay in the home longer than the break-even period — typically 2–5 years for a 1% rate reduction — refinancing saves you money. If you're likely to move before break-even, you'll pay more in fees than you recover in savings."
+    a: "<a href=\"/glossary#refinancing\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">Refinancing</a> makes financial sense when the monthly savings from a lower rate exceed the <a href=\"/glossary#closing-costs\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">closing costs</a> before you plan to sell or move. The <a href=\"/glossary#break-even\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">break-even point</a> is closing costs divided by monthly savings. If you'll stay in the home longer than the break-even period typically 2–5 years for a 1% rate reduction refinancing saves you money. If you're likely to move before break-even, you'll pay more in fees than you recover in savings."
   },
   {
     q: "What is the break-even point for refinancing?",
-    a: "The break-even point is the number of months it takes for your accumulated monthly savings to equal the upfront closing costs. For example, if your new loan saves you $250/month and closing costs are $6,000, your break-even is 24 months. After month 24, every month in the home produces net savings. The calculator also shows the break-even date in calendar terms so you can compare it directly against your expected move date."
+    a: "The <a href=\"/glossary#break-even\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">break-even point</a> is the number of months it takes for your accumulated monthly savings to equal the upfront <a href=\"/glossary#closing-costs\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">closing costs</a>. For example, if your new loan saves you $250/month and closing costs are $6,000, your break-even is 24 months. After month 24, every month in the home produces net savings. The calculator also shows the break-even date in calendar terms so you can compare it directly against your expected move date."
   },
   {
     q: "Is it worth refinancing for 1% lower interest rate?",
@@ -17,19 +17,19 @@ const faqItems = [
   },
   {
     q: "What are typical refinance closing costs?",
-    a: "Refinance closing costs typically run 2–3% of the loan balance. On a $300,000 balance, expect $6,000–$9,000 in fees. These include origination fees (0.5–1%), appraisal ($400–$700), title insurance, recording fees, and prepaid items like escrow setup and prepaid interest. Some lenders offer no-closing-cost refinances, but these fold the costs into a higher rate or larger balance — you still pay them, just over time."
+    a: "Refinance closing costs typically run 2–3% of the loan balance. On a $300,000 balance, expect $6,000–$9,000 in fees. These include origination fees (0.5–1%), appraisal ($400–$700), title insurance, recording fees, and prepaid items like escrow setup and prepaid interest. Some lenders offer no-closing-cost refinances, but these fold the costs into a higher rate or larger balance you still pay them, just over time."
   },
   {
     q: "Should I refinance to a shorter loan term?",
-    a: "Refinancing from a 30-year to a 15-year term typically cuts your interest rate by 0.5–0.75% and dramatically reduces total interest paid. The trade-off is a higher monthly payment — often 30–40% higher than the 30-year equivalent. The calculator models any combination of new rate and new term, so you can compare a 30-year refinance against a 15-year refinance side by side and see the difference in monthly payment, total interest, and break-even timing."
+    a: "Refinancing from a 30-year to a 15-year term typically cuts your interest rate by 0.5–0.75% and dramatically reduces total interest paid. The trade-off is a higher monthly payment often 30–40% higher than the 30-year equivalent. The calculator models any combination of new rate and new term, so you can compare a 30-year refinance against a 15-year refinance side by side and see the difference in monthly payment, total interest, and break-even timing."
   }
 ];
 ---
 <Base
-  title="Mortgage Refinance Calculator — NestMath"
+  title="Mortgage Refinance Calculator NestMath"
   description="Should I refinance my mortgage? Enter your current rate, new rate, and closing costs to find your exact break-even month and total interest saved. Free calculator."
   canonical="https://nestmath.app/refinance"
-  schemaName="NestMath — Refinance Break-Even Calculator"
+  schemaName="NestMath Refinance Break-Even Calculator"
   schemaDescription="Calculate the break-even point for refinancing your mortgage based on rate, term, and closing costs."
   breadcrumbTool="Refinance"
 >
@@ -38,27 +38,27 @@ const faqItems = [
     <RefinanceCalculator client:load />
   </div>
 
-  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+  <div data-print="hide" class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator computes monthly payments for both your current loan and the proposed refinanced loan using the standard amortization formula: payment = principal × (rate × (1 + rate)^n) / ((1 + rate)^n − 1), where rate is the monthly interest rate and n is the number of remaining payments. The difference between these two payments is your monthly savings from refinancing.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">Break-even is calculated as closing costs divided by monthly savings. This tells you how many months of lower payments it takes to recover the upfront cost of refinancing. The calculator also converts this to a calendar date so you can compare it directly against your plans. If you expect to move or sell before the break-even date, refinancing would leave you worse off than staying on your current loan.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">Beyond break-even, the calculator computes total interest paid over the full remaining term of each path. This "lifetime savings" figure is often much larger than the monthly savings suggests. Even a modest rate reduction can save tens of thousands over 20+ years. However, refinancing to a new 30-year term resets the amortization clock, meaning more of your early payments go back to interest rather than principal. The year-by-year table shows cumulative interest paid under each path so you can see this effect clearly.</p>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">How the calculator works</h2>
+      <div class="flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator computes monthly payments for both your current loan and the proposed <a href="/glossary#refinancing" class="text-primary hover:underline" target="_blank" rel="noopener">refinanced</a> loan using the standard <a href="/glossary#amortization" class="text-primary hover:underline" target="_blank" rel="noopener">amortization</a> formula: payment = <a href="/glossary#principal" class="text-primary hover:underline" target="_blank" rel="noopener">principal</a> × (rate × (1 + rate)^n) / ((1 + rate)^n − 1), where rate is the monthly interest rate and n is the number of remaining payments. The difference between these two payments is your monthly savings from refinancing.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed"><a href="/glossary#break-even" class="text-primary hover:underline" target="_blank" rel="noopener">Break-even</a> is calculated as <a href="/glossary#closing-costs" class="text-primary hover:underline" target="_blank" rel="noopener">closing costs</a> divided by monthly savings. This tells you how many months of lower payments it takes to recover the upfront cost of refinancing. The calculator also converts this to a calendar date so you can compare it directly against your plans. If you expect to move or sell before the break-even date, refinancing would leave you worse off than staying on your current loan.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Beyond break-even, the calculator computes total interest paid over the full remaining term of each path. This "lifetime savings" figure is often much larger than the monthly savings suggests. Even a modest rate reduction can save tens of thousands over 20+ years. However, <a href="/glossary#refinancing" class="text-primary hover:underline" target="_blank" rel="noopener">refinancing</a> to a new 30-year term resets the amortization clock, meaning more of your early payments go back to interest rather than <a href="/glossary#principal" class="text-primary hover:underline" target="_blank" rel="noopener">principal</a>. The year-by-year table shows cumulative interest paid under each path so you can see this effect clearly.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Understanding your results</h2>
+      <div class="flex flex-col gap-[16px]">
         <p class="text-body-md text-on-surface-variant leading-relaxed">The verdict card summarizes the decision: if your break-even is shorter than your remaining loan term, refinancing saves money over the long run. A break-even under 30 months is generally considered a strong case to refinance. Over 48 months, the decision depends heavily on how confident you are about staying put. The monthly savings figure is useful for cash flow planning. A lower payment frees up money each month even if the lifetime savings math is marginal.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">Pay attention to the net savings over remaining term metric, which subtracts closing costs from your interest savings. This is the true financial gain from refinancing after accounting for what you paid to get the new rate. A refinance that saves $40,000 in interest but costs $8,000 in closing costs has a net benefit of $32,000, which is still substantial, but the gross number overstates the actual gain.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Frequently asked questions</h2>
       <div class="flex flex-col gap-[8px]">
         {faqItems.map((item) => (
           <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
@@ -68,7 +68,7 @@ const faqItems = [
             </summary>
             <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
               <div class="overflow-hidden">
-                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle" set:html={item.a}></p>
               </div>
             </div>
           </details>
@@ -76,8 +76,8 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Related calculators</h2>
       <div class="grid sm:grid-cols-2 gap-[12px]">
         <a href="/payoff" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Mortgage Payoff Calculator</p>

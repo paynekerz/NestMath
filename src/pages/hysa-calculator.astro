@@ -5,31 +5,31 @@ import { HYSACalculator } from '../components/HYSA/HYSACalculator';
 const faqItems = [
   {
     q: "What is a high-yield savings account?",
-    a: "A high-yield savings account (HYSA) is a deposit account that pays a significantly higher interest rate than a traditional bank savings account. HYSAs are typically offered by online banks and credit unions, which have lower overhead costs than brick-and-mortar banks and pass those savings along as higher yields. They are FDIC-insured up to $250,000 — just like a regular savings account — so there is no additional risk compared to a standard bank account."
+    a: "A <a href=\"/glossary#hysa\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">high-yield savings account (HYSA)</a> is a deposit account that pays a significantly higher interest rate than a traditional bank savings account. HYSAs are typically offered by online banks and credit unions, which have lower overhead costs than brick-and-mortar banks and pass those savings along as higher yields. They are FDIC-insured up to $250,000 just like a regular savings account so there is no additional risk compared to a standard bank account."
   },
   {
     q: "What is a good APY for a high-yield savings account?",
-    a: "As of 2025, competitive HYSA rates range from 4.0% to 5.0% APY, depending on the institution and current Federal Reserve policy. The national average for traditional savings accounts is around 0.4–0.5% APY. A 'good' HYSA APY is anything well above the national average — ideally within 0.5–1.0% of the top rates available. Because rates change with the federal funds rate, the best HYSA APY in any given month shifts frequently."
+    a: "As of 2025, competitive <a href=\"/glossary#hysa\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">HYSA</a> rates range from 4.0% to 5.0% <a href=\"/glossary#apy\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">APY</a>, depending on the institution and current Federal Reserve policy. The national average for traditional savings accounts is around 0.4–0.5% APY. A 'good' HYSA APY is anything well above the national average ideally within 0.5–1.0% of the top rates available. Because rates change with the federal funds rate, the best HYSA APY in any given month shifts frequently."
   },
   {
     q: "How is HYSA interest calculated?",
-    a: "HYSA interest is calculated using compound interest, typically compounded daily and credited monthly. The APY (Annual Percentage Yield) already accounts for the compounding frequency — it represents the effective annual return after compounding. This calculator uses monthly compounding for simplicity; the difference between daily and monthly compounding at consumer HYSA rates is less than $1 per $10,000 per year, making it negligible for planning purposes."
+    a: "<a href=\"/glossary#hysa\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">HYSA</a> interest is calculated using <a href=\"/glossary#compound-interest\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">compound interest</a>, typically compounded daily and credited monthly. The <a href=\"/glossary#apy\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">APY</a> (Annual Percentage Yield) already accounts for the compounding frequency it represents the effective annual return after compounding. This calculator uses monthly compounding for simplicity; the difference between daily and monthly compounding at consumer HYSA rates is less than $1 per $10,000 per year, making it negligible for planning purposes."
   },
   {
     q: "Is a high-yield savings account worth it compared to a regular savings account?",
-    a: "Yes, for any money you're keeping in cash savings. The interest difference between a 4.5% HYSA and a 0.45% traditional account is a 10x multiplier. On $10,000 over 5 years with $300/month contributions, you'd earn roughly $3,800 more in a HYSA than a traditional account. The only real trade-off is that some HYSAs have slightly slower transfer times (1–2 business days) than accounts at your primary bank."
+    a: "Yes, for any money you're keeping in cash savings. The interest difference between a 4.5% HYSA and a 0.45% traditional account is a 10x multiplier. On $10,000 over 5 years with $300/month contributions, you'd earn roughly $3,800 more in a HYSA than a traditional account. Some HYSAs take 1–2 business days to transfer funds, slower than same-day at your primary bank."
   },
   {
     q: "Should I use a HYSA for my emergency fund?",
-    a: "Yes — a HYSA is the ideal home for an emergency fund. Emergency funds need to be liquid (accessible quickly), safe (FDIC insured, no market risk), and earning at least enough to offset inflation. HYSAs check all three boxes. Putting your emergency fund in a HYSA instead of a checking account earning 0% means the money is working for you while it waits. Use the emergency fund calculator to figure out how much you need, then use this calculator to see how fast it grows in a HYSA."
+    a: "Yes a <a href=\"/glossary#hysa\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">HYSA</a> is the ideal home for an <a href=\"/glossary#emergency-fund\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">emergency fund</a>. Emergency funds need to be liquid (accessible quickly), safe (FDIC insured, no market risk), and earning at least enough to offset <a href=\"/glossary#inflation\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">inflation</a>. HYSAs check all three boxes. Putting your emergency fund in a HYSA instead of a checking account earning 0% means the money is working for you while it waits. Use the emergency fund calculator to figure out how much you need, then use this calculator to see how fast it grows in a HYSA."
   }
 ];
 ---
 <Base
-  title="High-Yield Savings Account Calculator — NestMath"
-  description="How much more will your money earn in a HYSA vs. a traditional savings account? Free HYSA calculator — see the difference compounding at 4%+ makes over time."
+  title="High-Yield Savings Account Calculator NestMath"
+  description="How much more will your money earn in a HYSA vs. a traditional savings account? Free HYSA calculator see the difference compounding at 4%+ makes over time."
   canonical="https://nestmath.app/hysa-calculator"
-  schemaName="NestMath — High-Yield Savings Account Calculator"
+  schemaName="NestMath High-Yield Savings Account Calculator"
   schemaDescription="Calculate and compare high-yield savings account growth against a traditional savings account over time."
   breadcrumbTool="HYSA Calculator"
 >
@@ -38,27 +38,27 @@ const faqItems = [
     <HYSACalculator client:load />
   </div>
 
-  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+  <div data-print="hide" class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
-        <p class="text-body-md text-on-surface-variant leading-relaxed">Both the HYSA and traditional savings paths use the standard compound interest formula with monthly compounding and monthly contributions: FV = PV × (1 + r)^n + PMT × ((1 + r)^n − 1) / r, where r is the monthly rate (APY ÷ 12), n is the number of months, PV is your initial deposit, and PMT is your monthly contribution. The HYSA path uses your entered HYSA APY; the traditional path uses the national average rate for comparison.</p>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">How the calculator works</h2>
+      <div class="flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Both the <a href="/glossary#hysa" class="text-primary hover:underline" target="_blank" rel="noopener">HYSA</a> and traditional savings paths use the standard <a href="/glossary#compound-interest" class="text-primary hover:underline" target="_blank" rel="noopener">compound interest</a> formula with monthly compounding and monthly contributions: FV = PV × (1 + r)^n + PMT × ((1 + r)^n − 1) / r, where r is the monthly rate (<a href="/glossary#apy" class="text-primary hover:underline" target="_blank" rel="noopener">APY</a> ÷ 12), n is the number of months, PV is your initial deposit, and PMT is your monthly contribution. The HYSA path uses your entered HYSA APY; the traditional path uses the national average rate for comparison.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">Interest earned is calculated as final balance minus total contributions (initial deposit plus all monthly contributions). The "extra earned vs. traditional" metric is the difference in interest earned between the two paths. This is the concrete dollar benefit of choosing the higher-yield account. Over longer time horizons, this number grows substantially due to compounding: the HYSA earns interest on previous interest at a faster rate than the traditional account.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The line chart shows the two balance curves diverging over time. In the early months the lines are close together; as the account grows and the rate difference compounds, the gap widens. This visual is particularly useful for understanding why starting a HYSA early matters. Even moderate balances see significant differential growth over 3–5 year periods.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Understanding your results</h2>
+      <div class="flex flex-col gap-[16px]">
         <p class="text-body-md text-on-surface-variant leading-relaxed">The final balance cards show both account totals at the end of your modeled period. The number that matters most for evaluating the HYSA decision is extra earned vs. traditional. This is pure additional money you receive for choosing the higher-rate account. It requires no additional risk and no change in behavior beyond opening the right type of account.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">HYSA rates fluctuate with Federal Reserve policy. The calculator uses your entered rate as a fixed assumption for the full period, which may overestimate returns if rates fall or underestimate them if rates rise. For planning purposes, using a rate 0.5–1% below the current advertised rate is a conservative approach that accounts for potential rate cuts over a multi-year savings horizon.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Frequently asked questions</h2>
       <div class="flex flex-col gap-[8px]">
         {faqItems.map((item) => (
           <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
@@ -68,7 +68,7 @@ const faqItems = [
             </summary>
             <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
               <div class="overflow-hidden">
-                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle" set:html={item.a}></p>
               </div>
             </div>
           </details>
@@ -76,8 +76,8 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Related calculators</h2>
       <div class="grid sm:grid-cols-2 gap-[12px]">
         <a href="/emergency-fund" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Emergency Fund Calculator</p>

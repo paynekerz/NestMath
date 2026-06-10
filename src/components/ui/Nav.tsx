@@ -164,6 +164,17 @@ export function Nav({ currentPath }: NavProps) {
               >
                 Dashboard
               </a>
+              <a
+                href="/budget"
+                className={
+                  'text-body-sm font-medium transition-colors pb-1 ' +
+                  (normalized === '/budget'
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-on-surface-variant hover:text-primary')
+                }
+              >
+                Budget
+              </a>
               <ToolDropdown label="Home" tools={HOME_TOOLS} normalized={normalized} />
               <ToolDropdown label="Debt" tools={DEBT_TOOLS} normalized={normalized} />
               <ToolDropdown label="Invest" tools={INVEST_TOOLS} normalized={normalized} />
@@ -291,7 +302,7 @@ export function Nav({ currentPath }: NavProps) {
             <span className="text-label-sm text-on-surface-variant mt-0.5">About the project and why it's free</span>
           </a>
 
-          {/* Budget — direct link to dashboard */}
+          {/* Budget section */}
           <p className="px-4 pt-5 pb-2 text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">
             Budget
           </p>
@@ -303,6 +314,15 @@ export function Nav({ currentPath }: NavProps) {
           >
             <span className="text-body-sm font-semibold">Dashboard</span>
             <span className="text-label-sm text-on-surface-variant mt-0.5">Your full financial picture in one place</span>
+          </a>
+          <a
+            href="/budget"
+            aria-current={normalized === '/budget' ? 'page' : undefined}
+            onClick={close}
+            className={navItemClass('/budget')}
+          >
+            <span className="text-body-sm font-semibold">Budget</span>
+            <span className="text-label-sm text-on-surface-variant mt-0.5">Track income, expenses, and savings</span>
           </a>
 
           {/* Home section */}

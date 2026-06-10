@@ -5,31 +5,31 @@ import { AffordabilityCalculator } from '../components/Affordability/Affordabili
 const faqItems = [
   {
     q: "How much house can I afford on my salary?",
-    a: "A common guideline is the 28% rule: your total monthly housing costs (principal, interest, property taxes, insurance, and HOA) should not exceed 28% of your gross monthly income. On an $80,000 salary ($6,667/month), that's a maximum housing payment of about $1,867. The exact home price you can afford depends on your interest rate, down payment, and local tax and insurance rates — which is why this calculator solves for home price rather than asking you to guess."
+    a: "A common guideline is the 28% rule: your total monthly housing costs (<a href=\"/glossary#principal\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">principal</a>, interest, property taxes, insurance, and <a href=\"/glossary#hoa-fee\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">HOA</a>) should not exceed 28% of your <a href=\"/glossary#gross-income\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">gross monthly income</a>. On an $80,000 salary ($6,667/month), that's a maximum housing payment of about $1,867. The exact home price you can afford depends on your interest rate, <a href=\"/glossary#down-payment\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">down payment</a>, and local tax and insurance rates."
   },
   {
     q: "What is the 28/36 rule for mortgages?",
-    a: "The 28/36 rule is a lender guideline that sets two debt-to-income limits. Front-end DTI (housing costs only) should stay at or below 28% of gross monthly income. Back-end DTI (all debt payments, including housing) should stay at or below 36%. The calculator applies both limits and flags when your existing debts push the back-end DTI over the threshold — meaning your car payment or student loans are reducing how much house you can afford."
+    a: "The 28/36 rule is a lender guideline that sets two <a href=\"/glossary#debt-to-income-ratio\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">debt-to-income</a> limits. Front-end DTI (housing costs only) should stay at or below 28% of <a href=\"/glossary#gross-income\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">gross monthly income</a>. Back-end DTI (all debt payments, including housing) should stay at or below 36%. The calculator applies both limits and flags when your existing debts push the back-end DTI over the threshold meaning your car payment or student loans are reducing how much house you can afford."
   },
   {
     q: "What is the difference between front-end and back-end DTI?",
-    a: "Front-end DTI includes only your housing costs: mortgage principal and interest, property taxes, homeowner's insurance, and HOA fees. Back-end DTI adds all other recurring debt payments on top of that — car loans, student loans, credit card minimums. Lenders use back-end DTI to assess your total debt load. A high back-end DTI (above 36–43% depending on the lender) can disqualify you for a loan even if your housing costs alone look reasonable."
+    a: "Front-end <a href=\"/glossary#debt-to-income-ratio\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">DTI</a> includes only your housing costs: <a href=\"/glossary#mortgage\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">mortgage</a> <a href=\"/glossary#principal\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">principal</a> and interest, property taxes, homeowner's insurance, and <a href=\"/glossary#hoa-fee\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">HOA</a> fees. Back-end DTI adds all other recurring debt payments on top of that car loans, student loans, credit card minimums. Lenders use back-end DTI to assess your total debt load. A high back-end DTI (above 36–43% depending on the lender) can disqualify you for a loan even if your housing costs alone look reasonable."
   },
   {
     q: "How much do I need to make to afford a $400,000 house?",
-    a: "With 20% down, a 6.75% rate, and a 30-year term, a $400,000 home has a monthly principal and interest payment of about $2,087. Adding typical property taxes (1.2%) and insurance (0.5%) brings PITI to roughly $2,620/month. At the 28% front-end DTI limit, you'd need a gross monthly income of at least $9,357 — about $112,000 per year. With a lower down payment or higher rate, the required income increases."
+    a: "With 20% down, a 6.75% rate, and a 30-year term, a $400,000 home has a monthly <a href=\"/glossary#principal\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">principal</a> and interest payment of about $2,087. Adding typical property taxes (1.2%) and insurance (0.5%) brings <a href=\"/glossary#piti\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">PITI</a> to roughly $2,620/month. At the 28% front-end <a href=\"/glossary#debt-to-income-ratio\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">DTI</a> limit, you'd need a <a href=\"/glossary#gross-income\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">gross monthly income</a> of at least $9,357 about $112,000 per year. With a lower <a href=\"/glossary#down-payment\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">down payment</a> or higher rate, the required income increases."
   },
   {
     q: "Does this calculator account for PMI?",
-    a: "PMI (private mortgage insurance) is required when your down payment is below 20%. The current calculator uses the inputs you provide for insurance and doesn't separately model PMI. If you're putting down less than 20%, add an estimated PMI cost (typically 0.5–1.5% of the loan amount annually, divided by 12) to your monthly insurance figure to get an accurate affordability estimate."
+    a: "<a href=\"/glossary#pmi\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">PMI (private mortgage insurance)</a> is required when your <a href=\"/glossary#down-payment\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">down payment</a> is below 20%. The current calculator uses the inputs you provide for insurance and doesn't separately model PMI. If you're putting down less than 20%, add an estimated PMI cost (typically 0.5–1.5% of the loan amount annually, divided by 12) to your monthly insurance figure to get an accurate affordability estimate."
   }
 ];
 ---
 <Base
-  title="Home Affordability Calculator — NestMath"
-  description="How much house can I afford? Work backward from income, debts, and down payment to find your maximum home price and DTI limits. Free calculator — no account required."
+  title="Home Affordability Calculator NestMath"
+  description="How much house can I afford? Work backward from income, debts, and down payment to find your maximum home price and DTI limits. Free calculator no account required."
   canonical="https://nestmath.app/affordability"
-  schemaName="NestMath — Home Affordability Calculator"
+  schemaName="NestMath Home Affordability Calculator"
   schemaDescription="Calculate the maximum home price you can afford based on income, debts, and DTI limits."
   breadcrumbTool="Affordability"
 >
@@ -38,28 +38,28 @@ const faqItems = [
     <AffordabilityCalculator client:load />
   </div>
 
-  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+  <div data-print="hide" class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator starts from your gross monthly income and applies the 28% front-end DTI rule to find the maximum monthly housing payment you can carry. "Housing payment" here means PITI: principal, interest, property taxes, insurance, and HOA or maintenance fees. The front-end limit is what most conventional lenders use as their primary qualifying threshold.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">From that maximum monthly payment, the calculator works backward to find the maximum home price. This requires an iterative solve: property taxes and insurance are percentages of home price, so the relationship is circular. The calculator runs a binary search until the monthly PITI at the derived price matches the DTI limit within a small margin of error. The result is the highest home price where your housing costs stay within the 28% guideline.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The back-end DTI check adds your existing monthly debt payments (car, student loans, credit cards) to the housing payment and compares the total against the 36% back-end limit. If your debts push the combined ratio over that threshold, the back-end limit becomes the binding constraint and the calculator shows the lower maximum.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">Cash needed to close combines your down payment with estimated closing costs (typically 2–3% of purchase price). This number tells you the total cash you need in hand before you can complete a home purchase, separate from your monthly payment capacity.</p>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">How the calculator works</h2>
+      <div class="flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator starts from your <a href="/glossary#gross-income" class="text-primary hover:underline" target="_blank" rel="noopener">gross monthly income</a> and applies the 28% front-end <a href="/glossary#debt-to-income-ratio" class="text-primary hover:underline" target="_blank" rel="noopener">DTI</a> rule to find the maximum monthly housing payment you can carry. "Housing payment" here means <a href="/glossary#piti" class="text-primary hover:underline" target="_blank" rel="noopener">PITI</a>: <a href="/glossary#principal" class="text-primary hover:underline" target="_blank" rel="noopener">principal</a>, interest, property taxes, insurance, and <a href="/glossary#hoa-fee" class="text-primary hover:underline" target="_blank" rel="noopener">HOA</a> or maintenance fees. The front-end limit is what most conventional lenders use as their primary qualifying threshold.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">From that maximum monthly payment, the calculator works backward to find the maximum home price. This requires an iterative solve: property taxes and insurance are percentages of home price, so the relationship is circular. The calculator runs a binary search until the monthly <a href="/glossary#piti" class="text-primary hover:underline" target="_blank" rel="noopener">PITI</a> at the derived price matches the DTI limit within a small margin of error. The result is the highest home price where your housing costs stay within the 28% guideline.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The back-end <a href="/glossary#debt-to-income-ratio" class="text-primary hover:underline" target="_blank" rel="noopener">DTI</a> check adds your existing monthly debt payments (car, student loans, credit cards) to the housing payment and compares the total against the 36% back-end limit. If your debts push the combined ratio over that threshold, the back-end limit becomes the binding constraint and the calculator shows the lower maximum.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Cash needed to close combines your <a href="/glossary#down-payment" class="text-primary hover:underline" target="_blank" rel="noopener">down payment</a> with estimated <a href="/glossary#closing-costs" class="text-primary hover:underline" target="_blank" rel="noopener">closing costs</a> (typically 2–3% of purchase price). This number tells you the total cash you need in hand before you can complete a home purchase, separate from your monthly payment capacity.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The max home price is an affordability ceiling, not a recommendation. It tells you the highest price where a conventional lender would likely approve your application under standard guidelines. Many financial advisors recommend buying below your maximum. A more conservative target leaves breathing room for rate increases, unexpected repairs, or income changes. The front-end and back-end DTI percentages are shown explicitly so you can see how close you are to each limit.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The cash-needed-to-close figure is often the real constraint for first-time buyers. Even if your income supports a $400,000 purchase, coming up with $80,000–$92,000 in cash (20% down plus closing costs) takes years of saving. If your down payment is below 20%, remember to factor in PMI costs when evaluating total monthly payment affordability.</p>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Understanding your results</h2>
+      <div class="flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The max home price is an affordability ceiling, not a recommendation. It tells you the highest price where a conventional lender would likely approve your application under standard guidelines. Many financial advisors recommend buying below your maximum. A more conservative target leaves breathing room for rate increases, unexpected repairs, or income changes. The front-end and back-end <a href="/glossary#debt-to-income-ratio" class="text-primary hover:underline" target="_blank" rel="noopener">DTI</a> percentages are shown explicitly so you can see how close you are to each limit.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The cash-needed-to-close figure is often the real constraint for first-time buyers. Even if your income supports a $400,000 purchase, coming up with $80,000–$92,000 in cash (20% down plus <a href="/glossary#closing-costs" class="text-primary hover:underline" target="_blank" rel="noopener">closing costs</a>) takes years of saving. If your <a href="/glossary#down-payment" class="text-primary hover:underline" target="_blank" rel="noopener">down payment</a> is below 20%, remember to factor in <a href="/glossary#pmi" class="text-primary hover:underline" target="_blank" rel="noopener">PMI</a> costs when evaluating total monthly payment affordability.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Frequently asked questions</h2>
       <div class="flex flex-col gap-[8px]">
         {faqItems.map((item) => (
           <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
@@ -69,7 +69,7 @@ const faqItems = [
             </summary>
             <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
               <div class="overflow-hidden">
-                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle" set:html={item.a}></p>
               </div>
             </div>
           </details>
@@ -77,8 +77,8 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Related calculators</h2>
       <div class="grid sm:grid-cols-2 gap-[12px]">
         <a href="/buy-vs-rent" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Buy vs. Rent Calculator</p>

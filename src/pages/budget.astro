@@ -1,11 +1,11 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import { BudgetCalculator } from '../components/Budget/BudgetCalculator';
 
 const faqItems = [
   {
     q: "What is the 50/30/20 budget rule?",
-    a: "The 50/30/20 rule is a budgeting guideline that divides after-tax income into three categories: 50% for needs (rent, groceries, utilities, minimum debt payments, insurance), 30% for wants (dining out, entertainment, subscriptions, travel), and 20% for savings and debt repayment above minimums. It's a starting framework, not a law — people with high housing costs in expensive cities may find 50% impossible for needs, while people optimizing aggressively for early retirement might target 50% or more for savings. The calculator shows your actual percentages across categories."
+    a: "The 50/30/20 rule is a budgeting guideline that divides after-tax income into three categories: 50% for needs (rent, groceries, utilities, <a href=\"/glossary#minimum-payment\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">minimum debt payments</a>, insurance), 30% for wants (dining out, entertainment, subscriptions, travel), and 20% for savings and debt repayment above minimums. It's a starting framework, not a law people with high housing costs in expensive cities may find 50% impossible for needs, while people optimizing aggressively for early retirement might target 50% or more for savings. The calculator shows your actual percentages across categories."
   },
   {
     q: "How do I figure out where my money is going?",
@@ -13,11 +13,11 @@ const faqItems = [
   },
   {
     q: "How much of my income should I save each month?",
-    a: "Financial planners commonly recommend 20% of after-tax income as a savings target (matching the 50/30/20 rule's savings tier). A more aggressive target for early financial independence is 30–50%. The specific percentage that's right for you depends on your age, existing savings, income level, and financial goals. At minimum, contribute enough to your 401(k) to capture any employer match — that's an immediate 50–100% return on those dollars. Beyond that, target your emergency fund (3–6 months expenses) before aggressive investing."
+    a: "Financial planners commonly recommend 20% of after-tax income as a savings target (matching the 50/30/20 rule's savings tier). A more aggressive target for early financial independence is 30–50%. The specific percentage that's right for you depends on your age, existing savings, income level, and financial goals. At minimum, contribute enough to your <a href=\"/glossary#401k\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">401(k)</a> to capture any employer match that's an immediate 50–100% return on those dollars. Beyond that, target your <a href=\"/glossary#emergency-fund\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">emergency fund</a> (3–6 months expenses) before aggressive investing."
   },
   {
     q: "What is the difference between gross income and take-home pay?",
-    a: "Gross income is your salary or wages before any deductions — the number on your offer letter or W-2. Take-home pay (net pay) is what actually lands in your bank account after federal income tax withholding, state income tax, FICA (Social Security + Medicare), and any pre-tax deductions like 401(k) contributions and health insurance premiums. For most W-2 employees, take-home is 65–80% of gross. Budget calculators should use take-home pay, not gross — this calculator asks for your actual monthly take-home."
+    a: "<a href=\"/glossary#gross-income\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">Gross income</a> is your salary or wages before any deductions the number on your offer letter or W-2. Take-home pay (net pay) is what actually lands in your bank account after federal income tax <a href=\"/glossary#withholding\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">withholding</a>, state income tax, <a href=\"/glossary#fica-tax\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">FICA</a> (Social Security + Medicare), and any pre-tax deductions like <a href=\"/glossary#401k\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">401(k)</a> contributions and health insurance premiums. For most W-2 employees, take-home is 65–80% of gross. Budget calculators should use take-home pay, not gross this calculator asks for your actual monthly take-home."
   },
   {
     q: "How do I build a budget for an irregular income?",
@@ -26,10 +26,10 @@ const faqItems = [
 ];
 ---
 <Base
-  title="Personal Budget Calculator — NestMath"
+  title="Personal Budget Calculator NestMath"
   description="See where your money goes. Enter your income and monthly expenses to find your net savings and project your financial future. No account. Your data stays on your device."
   canonical="https://nestmath.app/budget"
-  schemaName="NestMath — Personal Budget Calculator"
+  schemaName="NestMath Personal Budget Calculator"
   schemaDescription="Calculate your net monthly savings from income and expenses. All calculations run in your browser. Your data stays on your device."
   breadcrumbTool="Budget"
 >
@@ -41,27 +41,27 @@ const faqItems = [
   </div>
   <BudgetCalculator client:load />
 
-  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+  <div data-print="hide" class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator takes your monthly after-tax income and subtracts all entered expenses to produce your monthly net savings. Expenses are organized into standard categories: housing (rent/mortgage, utilities, insurance), transportation (car payment, fuel, transit), food (groceries, dining), debt payments, subscriptions, and discretionary spending. Each category is totaled and displayed as a dollar amount and percentage of income.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The savings projection compounds your monthly net savings at your chosen investment return rate. This shows how consistent savings, even modest amounts, grow significantly over 10–30 year horizons due to compounding. The projection assumes savings are invested in a diversified account. It's not modeling a savings account rate but a long-term investment return. Adjust the rate to match your actual strategy (e.g., 4–5% for conservative, 7–8% for a stock-heavy portfolio).</p>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">How the calculator works</h2>
+      <div class="flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator takes your monthly after-tax income and subtracts all entered expenses to produce your monthly net savings. Expenses are organized into standard categories: housing (rent/<a href="/glossary#mortgage" class="text-primary hover:underline" target="_blank" rel="noopener">mortgage</a>, utilities, insurance), transportation (car payment, fuel, transit), food (groceries, dining), debt payments, subscriptions, and discretionary spending. Each category is totaled and displayed as a dollar amount and percentage of income.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The savings projection compounds your monthly net savings at your chosen investment return rate. This shows how consistent savings, even modest amounts, grow significantly over 10–30 year horizons due to <a href="/glossary#compound-interest" class="text-primary hover:underline" target="_blank" rel="noopener">compound interest</a>. The projection assumes savings are invested in a diversified account. It's not modeling a savings account rate but a long-term investment return. Adjust the rate to match your actual strategy (e.g., 4–5% for conservative, 7–8% for a stock-heavy portfolio).</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The category breakdown chart shows spending allocation visually. Seeing housing at 45% of income or dining at 18% makes the tradeoffs concrete. The 50/30/20 guideline overlays show where your actual spending lands relative to the common framework, helping you identify which categories have room to move and which are already optimized.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Understanding your results</h2>
+      <div class="flex flex-col gap-[16px]">
         <p class="text-body-md text-on-surface-variant leading-relaxed">Monthly net savings is the most actionable number. A positive number means you're building financial assets each month; a negative number means you're drawing down savings or adding to debt. If your net savings is below 10–15% of take-home, the category breakdown shows where the largest opportunities are to increase it. Reducing the largest expense categories typically yields the most significant savings increase per dollar of lifestyle change.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The savings projection gives context for why monthly savings rate matters. Increasing monthly savings by $300 doesn't sound transformative, but compounded over 20 years at 7% it adds approximately $185,000 to your final balance. The chart makes this concrete: the gap between scenarios is visible, and the numbers are easy to evaluate against specific goals like a home down payment, education costs, or retirement.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Frequently asked questions</h2>
       <div class="flex flex-col gap-[8px]">
         {faqItems.map((item) => (
           <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
@@ -71,7 +71,7 @@ const faqItems = [
             </summary>
             <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
               <div class="overflow-hidden">
-                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle" set:html={item.a}></p>
               </div>
             </div>
           </details>
@@ -79,8 +79,8 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Related calculators</h2>
       <div class="grid sm:grid-cols-2 gap-[12px]">
         <a href="/emergency-fund" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Emergency Fund Calculator</p>
