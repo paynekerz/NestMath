@@ -162,7 +162,7 @@ export function RefinanceInputs({ inputs, onChange, onToggleCostMode, errors }: 
             <div className="flex items-center justify-between gap-1.5">
               <div className="flex items-center gap-1.5">
                 <label htmlFor="rf-closingCosts" className="text-label-sm text-on-surface-variant">Closing costs</label>
-                <InfoTooltip text="Fees to close the new loan — lender fees, title insurance, appraisal. Usually 2–5% of the loan balance." />
+                <InfoTooltip text="Fees to close the new loan: lender fees, title insurance, appraisal. Usually 2–5% of the loan balance." />
               </div>
               <button
                 type="button"

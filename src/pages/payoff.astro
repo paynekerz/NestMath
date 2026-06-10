@@ -1,14 +1,126 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import { PayoffCalculator } from '../components/Payoff/PayoffCalculator';
+
+const faqItems = [
+  {
+    q: "How much do extra mortgage payments actually save?",
+    a: "The savings depend on your loan balance, interest rate, and how early you start paying extra. On a $320,000 loan at 6.75%, an extra $200/month saves roughly $65,000 in interest and cuts about 5 years off the loan. The earlier in the loan term you make extra payments, the more impactful they are — since more of your early payments go toward interest rather than principal."
+  },
+  {
+    q: "Does paying extra principal reduce my monthly payment?",
+    a: "On a standard fixed-rate mortgage, paying extra principal does not reduce your required monthly payment — it reduces your loan balance and therefore the number of payments remaining. Your scheduled monthly payment stays the same; you just pay off the loan sooner and skip the final months of payments. Some lenders offer loan recasting (reamortization) which can lower your payment for a fee, but that's a separate process."
+  },
+  {
+    q: "Is it worth paying extra on my mortgage?",
+    a: "It depends on your other financial priorities. If you have high-interest debt (credit cards, personal loans), paying that off first almost always makes more sense than prepaying a 6–7% mortgage. If your only debt is the mortgage, prepaying gives you a guaranteed return equal to your interest rate. Compare that against your investment return expectations: if you expect 7%+ in the market and your mortgage rate is 6.5%, investing may produce better outcomes — but prepaying the mortgage is risk-free."
+  },
+  {
+    q: "How do I pay off my 30-year mortgage in 15 years?",
+    a: "The extra monthly payment required to halve a 30-year term is typically around 50–65% of your standard payment. On a $320,000 loan at 6.75%, the standard payment is about $2,076. To pay it off in 15 years you'd need to pay roughly $2,840/month — an extra $764. The calculator shows the exact extra payment amount needed for any target payoff date."
+  },
+  {
+    q: "What happens to a lump-sum payment applied at the start of a loan?",
+    a: "A lump sum applied at closing or early in the loan term reduces your principal balance from day one. All subsequent interest charges are calculated on the lower balance, so the savings compound throughout the remaining term. A $10,000 lump sum on a $320,000 loan at 6.75% saves approximately $23,000 in interest and shortens the term by about 18 months — far more than applying the same $10,000 spread across many monthly extra payments later."
+  }
+];
 ---
 <Base
-  title="NestMath.app — Mortgage Payoff Calculator"
-  description="See how much extra payments save — and how fast they pay off your loan. Free calculator, no account required."
+  title="Mortgage Payoff Calculator — NestMath"
+  description="See exactly how much time and interest extra monthly payments save on your mortgage. Model any extra payment amount or lump sum — free calculator, no account required."
   canonical="https://nestmath.app/payoff"
   schemaName="NestMath — Mortgage Payoff Calculator"
   schemaDescription="Calculate how extra monthly payments or a lump sum reduce your mortgage payoff date and total interest paid."
   breadcrumbTool="Payoff"
 >
-  <PayoffCalculator client:load />
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
+    <PayoffCalculator client:load />
+  </div>
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator runs two amortization schedules in parallel: your original loan as written, and an accelerated version with your extra payment added each month. For each monthly period, it applies the interest charge (balance × monthly rate), subtracts the total payment (standard + extra) from the balance, and repeats until the balance reaches zero. The month the accelerated balance hits zero is your new payoff date.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The optional lump-sum field applies a one-time principal reduction at the start of the loan. This immediately lowers the balance on which future interest is calculated. Because mortgage interest front-loads into the early years of a 30-year loan, an early lump sum has an outsized effect on total interest paid, more so than the same amount spread over many small extra payments later in the loan.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Both paths accumulate total interest paid, and the calculator shows the difference as "interest saved." The line chart plots remaining balance over time for both schedules. The point where the accelerated line hits zero is visually striking on longer loans, often cutting off years of the standard schedule.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Months saved and interest saved are the two numbers that matter most. A 30-year mortgage at 6.75% on a $320,000 loan costs about $422,000 in total payments, including more than $100,000 in interest alone. Even modest extra payments chip away at that dramatically. The months-saved figure translates directly to months of your life where you're no longer writing a mortgage check, which has real value beyond the interest calculation.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The year-by-year table is useful for tracking equity milestones, particularly if you're planning to sell at a specific point and want to know your expected payoff versus market value. It also helps you see when the accelerated path crosses specific balance thresholds, like paying below the original purchase price or reaching 20% equity to cancel PMI.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+      <div class="flex flex-col gap-[8px]">
+        {faqItems.map((item) => (
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[12px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              {item.q}
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+      <div class="grid sm:grid-cols-2 gap-[12px]">
+        <a href="/refinance" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Mortgage Refinance Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See if a lower rate justifies the closing costs</p>
+        </a>
+        <a href="/buy-vs-rent" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Buy vs. Rent Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Model the full financial comparison including opportunity cost</p>
+        </a>
+        <a href="/affordability" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Home Affordability Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Find your maximum home price from income and DTI</p>
+        </a>
+        <a href="/debt-payoff-planner" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Debt Payoff Strategy Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Compare avalanche vs. snowball across all your debts</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('details.faq-item').forEach(details => {
+      const summary = details.querySelector('summary');
+      const grid = details.querySelector(':scope > div') as HTMLElement | null;
+      const chevron = summary?.querySelector('.faq-chevron');
+      summary?.addEventListener('click', e => {
+        e.preventDefault();
+        const isOpen = details.open;
+        if (!isOpen) {
+          details.open = true;
+          requestAnimationFrame(() => {
+            if (grid) grid.style.gridTemplateRows = '1fr';
+            chevron?.classList.add('rotate-180');
+          });
+        } else {
+          if (grid) grid.style.gridTemplateRows = '0fr';
+          chevron?.classList.remove('rotate-180');
+          grid?.addEventListener('transitionend', () => { details.open = false; }, { once: true });
+        }
+      });
+    });
+  </script>
+
 </Base>

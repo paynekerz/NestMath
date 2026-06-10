@@ -9,8 +9,6 @@ import { NetWorthInputs as NetWorthInputsPanel } from './NetWorthInputs';
 import { NetWorthSummary } from './NetWorthSummary';
 import { NetWorthChart } from './NetWorthChart';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 function buildCsv(inputs: NetWorthInputs, result: ReturnType<typeof calcNetWorth>): string {
@@ -50,29 +48,6 @@ function buildCsv(inputs: NetWorthInputs, result: ReturnType<typeof calcNetWorth
 
   return rows.join('\n');
 }
-
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'What is net worth and how is it calculated?',
-    a: 'Net worth is the difference between everything you own (assets) and everything you owe (liabilities). Assets include cash, investments, retirement accounts, home equity, and the value of vehicles or other property. Liabilities include mortgage balances, car loans, credit card debt, student loans, and any other money you owe. Net worth = total assets − total liabilities.',
-  },
-  {
-    q: 'What is a good net worth by age?',
-    a: "There's no universal answer, but a common benchmark is: by 30, aim for 1× your annual income; by 40, 3× your income; by 50, 6×; by 60, 10×. The Federal Reserve\'s Survey of Consumer Finances shows the median net worth for Americans under 35 is around $39,000, rising to roughly $1.2 million for those 65–74. These are medians — if you're below them, focus on the trend, not the absolute number.",
-  },
-  {
-    q: 'Should I include my home equity in net worth?',
-    a: 'Yes — home equity (current market value minus outstanding mortgage) is a real asset. Use a realistic estimate of your home\'s current value, not what you paid for it. Keep in mind that home equity is illiquid: you can\'t spend it without selling, refinancing, or taking out a HELOC. Some people calculate their net worth both ways to see their "liquid" vs. total net worth.',
-  },
-  {
-    q: 'How often should I calculate my net worth?',
-    a: 'Once or twice a year is the sweet spot for most people. More frequent tracking can cause anxiety over short-term fluctuations (especially in investment accounts). An annual snapshot — ideally on the same date each year — makes year-over-year comparisons meaningful and helps you spot trends without obsessing over daily market moves.',
-  },
-  {
-    q: 'Is it OK to have a negative net worth?',
-    a: 'Yes — a negative net worth is common and often expected, especially when you\'re young, have student loans, or recently bought a home with a small down payment. What matters is the trend. If your net worth is improving over time — even from very negative to less negative — you\'re moving in the right direction. Focus on increasing assets (saving, investing) and reducing liabilities (paying down debt) simultaneously.',
-  },
-];
 
 export function NetWorthCalculator() {
   const [inputs, setInputs] = useState<NetWorthInputs>(DEFAULT_NET_WORTH_INPUTS);
@@ -134,7 +109,7 @@ export function NetWorthCalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">Net Worth Snapshot</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">Add up everything you own and everything you owe to see where you stand.</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Add up your assets and liabilities to calculate your current net worth, with a visual category breakdown and optional year-over-year comparison to track whether your financial position is improving.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -197,15 +172,12 @@ export function NetWorthCalculator() {
 
       {/* Ko-fi nudge */}
       {result && (
-        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
           If this helped you get a clear picture of where you stand,{' '}
           <KofiButton label="☕ a coffee seems fair." />
         </p>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

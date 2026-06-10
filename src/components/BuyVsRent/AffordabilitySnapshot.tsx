@@ -19,10 +19,12 @@ export function AffordabilitySnapshot({ buy }: Props) {
   const yearsToSave = monthsToSave !== null ? (monthsToSave / 12).toFixed(1) : null;
 
   return (
-    <div className="rounded-xl border border-border bg-surface p-5 flex flex-col gap-4">
-      <h2 className="text-base font-semibold">Affordability Snapshot</h2>
+    <div className="glass-card p-[24px] rounded-xl flex flex-col gap-[20px]">
+      <p className="text-label-sm text-on-surface-variant uppercase tracking-wider">
+        Affordability Snapshot
+      </p>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-[16px] sm:grid-cols-3">
         <StatCard
           label="Required Household Income"
           value={cur.format(aff.requiredAnnualIncome)}
@@ -47,13 +49,13 @@ export function AffordabilitySnapshot({ buy }: Props) {
           data-print="hide"
           type="button"
           onClick={() => setShowSavings(true)}
-          className="self-start text-sm text-accent underline-offset-2 hover:underline"
+          className="self-start text-body-sm text-primary underline-offset-2 hover:underline"
         >
           How long to save for a down payment?
         </button>
       ) : (
-        <div data-print="hide" className="flex items-center gap-3">
-          <label htmlFor="monthly-savings" className="text-sm text-muted whitespace-nowrap">
+        <div data-print="hide" className="flex flex-wrap items-center gap-[12px]">
+          <label htmlFor="monthly-savings" className="text-body-sm text-on-surface-variant">
             Monthly savings toward down payment
           </label>
           <input
@@ -64,7 +66,7 @@ export function AffordabilitySnapshot({ buy }: Props) {
             value={monthlySavings}
             onChange={e => setMonthlySavings(e.target.value)}
             placeholder="e.g. 1000"
-            className="w-32 rounded-md border border-border bg-background px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+            className="w-32 rounded-lg border border-border-subtle bg-surface-container px-[12px] py-[6px] text-body-sm text-on-surface focus:outline-none focus:ring-1 focus:ring-primary-accent"
           />
         </div>
       )}

@@ -10,8 +10,6 @@ import { RenovationROISummary } from './RenovationROISummary';
 import { RenovationROIChart } from './RenovationROIChart';
 import { RenovationROITable } from './RenovationROITable';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 function buildCsv(inputs: RenovationROIInputs, result: ReturnType<typeof calcRenovationROI>): string {
@@ -57,29 +55,6 @@ function buildCsv(inputs: RenovationROIInputs, result: ReturnType<typeof calcRen
   return rows.join('\n');
 }
 
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'Is home renovation a good investment?',
-    a: "It depends on the renovation and your hold period. High-ROI projects like kitchen and bathroom updates typically recoup 60–80% of cost at resale — but that means they lose money in isolation. The real question is whether the compounding appreciation on that added value beats what you'd earn investing the same cash in the market. This calculator shows you the crossover point.",
-  },
-  {
-    q: 'What home improvements have the best ROI?',
-    a: "According to Remodeling Magazine's annual Cost vs. Value report, top performers include garage door replacements (~100% cost recoup), minor kitchen remodels (~80%), and manufactured stone veneer (~90%). Major additions and luxury upgrades tend to recoup 50–60%. Projects that add functional space or curb appeal consistently outperform purely cosmetic updates.",
-  },
-  {
-    q: 'Is it better to renovate or invest the money?',
-    a: "Investing in a broad index fund has historically returned 7–10% annually, which compounds aggressively over a decade. Most home renovations return less than the renovation cost at resale, and the appreciation premium only compounds at the home's appreciation rate (typically 3–4%). For shorter hold periods, investing usually wins. For longer holds in appreciating markets, the renovation can catch up.",
-  },
-  {
-    q: 'How do I calculate the return on a home renovation?',
-    a: "Start with the value the renovation adds to your home (a real estate agent or appraiser can estimate this). That premium compounds with your home's annual appreciation until you sell. At sale, subtract the original renovation cost from the appreciated premium to get net gain. Divide by renovation cost for ROI %. Compare that net gain against what the cash would grow to if invested at market rates.",
-  },
-  {
-    q: 'Does renovating your home increase its value?',
-    a: "Usually, but rarely dollar-for-dollar. Most renovations recoup 50–80% of their cost at resale — meaning a $50,000 kitchen remodel might add $30,000–$40,000 in home value. Exceptions exist in hot markets or for specific high-demand improvements. The added value also compounds with home appreciation over time, which is why hold period matters: the longer you stay, the more the renovation premium grows.",
-  },
-];
-
 export function RenovationROICalculator() {
   const [inputs, setInputs] = useState<RenovationROIInputs>(DEFAULT_RENOVATION_ROI_INPUTS);
 
@@ -114,7 +89,7 @@ export function RenovationROICalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">Renovation ROI vs. Investing Calculator</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">Compare the return on a home renovation against investing the same cash in the market.</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Enter your renovation cost, the expected value increase to your home, and your planned years until sale to see whether the renovation outperforms putting that same cash in the market, with a year-by-year comparison of both paths.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -168,7 +143,7 @@ export function RenovationROICalculator() {
 
       {/* Ko-fi nudge */}
       {result && (
-        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
           If this helped you make your renovation decision,{' '}
           <KofiButton label="☕ a coffee seems fair." />
         </p>
@@ -181,9 +156,6 @@ export function RenovationROICalculator() {
         </div>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

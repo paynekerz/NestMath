@@ -42,7 +42,7 @@ export function AffordabilityInputs({ inputs, onChange, errors }: Props) {
           />
         </div>
         {errors.grossMonthlyIncome && (
-          <p className="text-xs text-red-400">{errors.grossMonthlyIncome}</p>
+          <p className="text-label-sm text-error">{errors.grossMonthlyIncome}</p>
         )}
       </div>
 
@@ -76,7 +76,7 @@ export function AffordabilityInputs({ inputs, onChange, errors }: Props) {
       <div className="glass-panel p-6 rounded-xl flex flex-col gap-4">
         <div className="flex items-center gap-1.5">
           <h3 className="text-label-md text-on-surface">Monthly Debts</h3>
-          <InfoTooltip text="Monthly payments you already owe — car loans, student loans, and credit card minimums. Do not include housing costs here." />
+          <InfoTooltip text="Monthly payments you already owe: car loans, student loans, and credit card minimums. Do not include housing costs." />
         </div>
         <div className="relative">
           <span className="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant select-none">$</span>
@@ -93,7 +93,7 @@ export function AffordabilityInputs({ inputs, onChange, errors }: Props) {
           Include car loans, student loans, and credit card minimums.
         </p>
         {errors.monthlyDebts && (
-          <p className="text-xs text-red-400">{errors.monthlyDebts}</p>
+          <p className="text-label-sm text-error">{errors.monthlyDebts}</p>
         )}
       </div>
 
@@ -115,7 +115,7 @@ export function AffordabilityInputs({ inputs, onChange, errors }: Props) {
             className={`bg-surface-container border rounded-lg p-4 text-body-md font-mono-data focus:border-primary-accent outline-none transition-all ${errors.mortgageRate ? 'border-red-500/70' : 'border-border-subtle'}`}
           />
           {errors.mortgageRate && (
-            <p className="text-xs text-red-400">{errors.mortgageRate}</p>
+            <p className="text-label-sm text-error">{errors.mortgageRate}</p>
           )}
         </div>
         <div className="flex flex-col gap-2">
@@ -162,14 +162,14 @@ export function AffordabilityInputs({ inputs, onChange, errors }: Props) {
               onChange={v => onChange('frontEndDTI', v / 100)}
               className={`bg-surface-container border rounded-lg p-3 text-body-md font-mono-data focus:border-primary-accent outline-none transition-all ${errors.frontEndDTI ? 'border-red-500/70' : 'border-border-subtle'}`}
             />
-            {errors.frontEndDTI && <p className="text-xs text-red-400">{errors.frontEndDTI}</p>}
+            {errors.frontEndDTI && <p className="text-label-sm text-error">{errors.frontEndDTI}</p>}
           </div>
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-1.5">
               <label htmlFor="aff-backEndDTI" className="text-label-sm text-on-surface-variant">
                 Back-End DTI (%)
               </label>
-              <InfoTooltip text="The max percentage of your income that can go toward all debt payments combined — housing plus car loans, student loans, and credit cards." />
+              <InfoTooltip text="The max percentage of your income that can go toward all debt payments combined: housing, car loans, student loans, and credit cards." />
             </div>
             <NumericInput
               id="aff-backEndDTI"
@@ -180,7 +180,7 @@ export function AffordabilityInputs({ inputs, onChange, errors }: Props) {
               onChange={v => onChange('backEndDTI', v / 100)}
               className={`bg-surface-container border rounded-lg p-3 text-body-md font-mono-data focus:border-primary-accent outline-none transition-all ${errors.backEndDTI ? 'border-red-500/70' : 'border-border-subtle'}`}
             />
-            {errors.backEndDTI && <p className="text-xs text-red-400">{errors.backEndDTI}</p>}
+            {errors.backEndDTI && <p className="text-label-sm text-error">{errors.backEndDTI}</p>}
           </div>
         </div>
       </div>
@@ -245,7 +245,7 @@ export function AffordabilityInputs({ inputs, onChange, errors }: Props) {
               <label htmlFor="aff-closingCosts" className="text-label-sm text-on-surface-variant">
                 Closing Costs (% of price)
               </label>
-              <InfoTooltip text="Extra fees you pay when finalizing the purchase — paperwork, bank fees, and title checks. Usually 2–5% of the price." />
+              <InfoTooltip text="Extra fees at closing: paperwork, bank fees, and title checks. Usually 2–5% of the price." />
             </div>
             <NumericInput
               id="aff-closingCosts"

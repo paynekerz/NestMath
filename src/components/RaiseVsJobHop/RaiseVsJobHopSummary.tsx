@@ -83,7 +83,7 @@ export function RaiseVsJobHopSummary({ result, yearsToModel }: Props) {
             <div>
               <div className="flex items-center gap-1 mb-1">
                 <p className="text-label-sm text-on-surface-variant">Lifetime Delta</p>
-                <InfoTooltip text={`Total cumulative earnings difference over ${yearsToModel} years — positive means the hop earns more in total.`} />
+                <InfoTooltip text={`Total cumulative earnings difference over ${yearsToModel} years; positive means the hop earns more in total.`} />
               </div>
               <p className={`text-headline-md font-bold font-mono-data tabular-nums ${result.lifetimeDelta >= 0 ? 'text-primary' : 'text-success-emerald'}`}>
                 {result.lifetimeDelta >= 0

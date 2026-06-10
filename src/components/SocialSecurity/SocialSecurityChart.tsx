@@ -55,7 +55,7 @@ export function SocialSecurityChart({ result }: Props) {
         ))}
       </div>
 
-      <div ref={chartRef}>
+      <div ref={chartRef} role="img" aria-label="Cumulative Lifetime Benefits chart">
         <ResponsiveContainer width="100%" height={320}>
           <LineChart data={data} margin={{ top: 8, right: 16, left: 0, bottom: 16 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="oklch(25% 0.02 260)" />
@@ -121,7 +121,7 @@ export function SocialSecurityChart({ result }: Props) {
       </div>
 
       {/* 3-col insight row */}
-      <div className="grid grid-cols-3 gap-4 border-t border-border-subtle pt-lg mt-2">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-border-subtle pt-lg mt-2">
         {([
           { label: 'Claiming at 62', total: result.lifetimeTotalAt62, monthly: result.monthlyBenefitAt62, color: COLOR_62 },
           { label: 'Claiming at 67', total: result.lifetimeTotalAt67, monthly: result.monthlyBenefitAt67, color: COLOR_67 },

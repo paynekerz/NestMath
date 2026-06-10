@@ -75,7 +75,7 @@ export function NetWorthSummary({ result }: Props) {
         <div className="border-t border-border-subtle px-lg py-sm">
           <div className="flex items-center gap-1 mb-1.5">
             <p className="text-label-sm text-on-surface-variant">Debt-to-asset ratio</p>
-            <InfoTooltip text="Total liabilities divided by total assets. Lower is better — below 50% means more than half your assets are unencumbered by debt." />
+            <InfoTooltip text="Total liabilities divided by total assets. Lower is better; below 50% means more than half your assets are unencumbered by debt." />
           </div>
           <div className="h-2 rounded-full bg-surface-container overflow-hidden mb-1">
             <div

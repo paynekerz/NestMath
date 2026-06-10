@@ -1,4 +1,5 @@
 import type { CalculationResult } from '../../lib/calculator';
+import { InfoTooltip } from '../ui/InfoTooltip';
 
 interface Props {
   result: CalculationResult;
@@ -20,10 +21,11 @@ export function SummaryVerdict({ result, yearsToModel }: Props) {
         >
           <span className="material-symbols-outlined text-[80px]">account_balance</span>
         </div>
-        <p className="text-label-md uppercase tracking-wider text-on-surface-variant mb-[4px]">
+        <p className="text-label-md uppercase tracking-wider text-on-surface-variant mb-[4px] flex items-center gap-[4px]">
           Buy Net Worth (yr {yearsToModel})
+          <InfoTooltip text="Home value minus remaining loan balance." />
         </p>
-        <h3 className="text-headline-lg font-bold font-mono-data text-primary-accent mb-[4px]">
+        <h3 className="text-headline-md sm:text-headline-lg font-bold font-mono-data text-primary-accent mb-[4px]">
           {finalYear ? fmt.format(finalYear.buyNetWorth) : '—'}
         </h3>
         <p className="text-body-sm text-on-surface-variant">Projected equity + home appreciation</p>
@@ -37,10 +39,11 @@ export function SummaryVerdict({ result, yearsToModel }: Props) {
         >
           <span className="material-symbols-outlined text-[80px]">trending_up</span>
         </div>
-        <p className="text-label-md uppercase tracking-wider text-on-surface-variant mb-[4px]">
+        <p className="text-label-md uppercase tracking-wider text-on-surface-variant mb-[4px] flex items-center gap-[4px]">
           Rent Net Worth (yr {yearsToModel})
+          <InfoTooltip text="Total value of savings and investments, compounded." />
         </p>
-        <h3 className="text-headline-lg font-bold font-mono-data text-success-emerald mb-[4px]">
+        <h3 className="text-headline-md sm:text-headline-lg font-bold font-mono-data text-success-emerald mb-[4px]">
           {finalYear ? fmt.format(finalYear.rentNetWorth) : '—'}
         </h3>
         <p className="text-body-sm text-on-surface-variant">Projected portfolio value (compounded)</p>

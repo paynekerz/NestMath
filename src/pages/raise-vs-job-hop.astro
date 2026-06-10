@@ -1,14 +1,126 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import { RaiseVsJobHopCalculator } from '../components/RaiseVsJobHop/RaiseVsJobHopCalculator';
+
+const faqItems = [
+  {
+    q: "Is it better to get a raise or switch jobs?",
+    a: "Switching jobs typically produces a larger immediate salary jump — studies consistently show job changers earn 10–20% more on average, while typical annual raises are 3–5%. But the math isn't purely about the starting salary. The post-hop raise rate matters too, as does how quickly you ramp up in the new role. The calculator models cumulative earnings over your chosen horizon, so you can see whether a higher starting salary at a new job catches up with — and surpasses — steady compounding raises at your current one."
+  },
+  {
+    q: "How much of a raise is worth switching jobs for?",
+    a: "There's no universal threshold, but a 10–15% increase is often cited as the minimum worth seriously considering — less than that, and the disruption, adjustment period, and potential loss of unvested equity or benefits may not be worth it. The financial break-even depends on whether your new employer has a strong raise history. An $80,000 offer growing at 2% per year will eventually fall behind a $70,000 salary growing at 5% per year — the calculator shows exactly when."
+  },
+  {
+    q: "Does job hopping hurt your career long-term?",
+    a: "From a pure earnings standpoint, job hopping has historically correlated with higher lifetime income for knowledge workers. The financial penalty for staying too long at one employer comes from missing out on market-rate raises that only happen at transitions. That said, this calculator models only the financial dimension — it doesn't account for career growth trajectory, relationships, learning opportunities, or the risk premium of changing roles. Treat it as one input in a broader decision."
+  },
+  {
+    q: "How is the break-even year calculated?",
+    a: "The break-even year is the first year where cumulative earnings under the job-hop path exceed cumulative earnings under the stay path. Cumulative earnings is the running total of all salaries paid from year 1 through year N — not just the salary in year N. In the early years of a high-paying new job, the cumulative advantage may not outweigh the salary advantage your current role has from years of compounding raises. The chart shows both lines so you can see where they cross."
+  },
+  {
+    q: "What if the new job has a signing bonus or equity?",
+    a: "This calculator models base salary only. Signing bonuses and equity grants can significantly change the math, especially in early years. A $20,000 signing bonus adds directly to year-1 earnings for the hop path. RSU or option vesting schedules are more complex — they're real compensation but conditional on staying. If you have concrete equity numbers, you can add them to the new job salary in year 1 (for a bonus) or spread across the vest period to get a rough comparison."
+  }
+];
 ---
 <Base
-  title="NestMath.app — Raise vs. Job Hop Calculator"
-  description="Model cumulative earnings for staying vs. switching jobs. Find the break-even year and see which path pays off more over time."
+  title="Raise vs. Job Hop Calculator — NestMath"
+  description="Stay or switch jobs? Compare cumulative earnings between your current raise and a new offer. See the break-even year and which path pays more over your career."
   canonical="https://nestmath.app/raise-vs-job-hop"
   schemaName="NestMath — Raise vs. Job Hop Calculator"
   schemaDescription="Compare cumulative earnings between taking a raise at your current job and accepting a higher-paying offer elsewhere."
   breadcrumbTool="Raise vs. Job Hop"
 >
-  <RaiseVsJobHopCalculator client:load />
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
+    <RaiseVsJobHopCalculator client:load />
+  </div>
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Both paths use compound growth applied to annual salary. The stay path compounds your current salary at your expected annual raise rate for each year of the model horizon. The hop path starts at the new offer salary and compounds at the post-hop raise rate. Year N salary is base × (1 + raise rate)^N for each path.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Cumulative earnings is the running sum of annual salaries, not just the year-N salary. This is the number that actually matters for lifetime financial outcomes: the total gross pay you receive over the modeled period. The hop path starts with a higher year-1 salary but may have a lower raise rate, while the stay path starts lower and compounds at a different rate. The chart shows where the cumulative lines cross.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The break-even year is the first year where hop cumulative earnings exceed stay cumulative earnings. Before that year, staying has the cumulative edge (because the current employer's years of raises accumulate). After it, the higher starting salary of the new job has overcome the compounding advantage of the stay path.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The lifetime delta is the cumulative earnings difference at the end of your modeled horizon. A $200,000 lifetime delta means the winning path produces $200,000 more in gross salary over the period. This number tends to be more meaningful than the annual salary difference alone, as it captures the compounding effect of starting at a higher or lower base.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The year-by-year table shows annual salary and cumulative totals for both paths. It's useful for identifying years when major life events intersect with the earnings comparison, such as a planned home purchase, education expense, or retirement contribution milestone. The salary at year N for each path is also shown so you can compare what you'd be earning at a specific future point.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+      <div class="flex flex-col gap-[8px]">
+        {faqItems.map((item) => (
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[12px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              {item.q}
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+      <div class="grid sm:grid-cols-2 gap-[12px]">
+        <a href="/effective-hourly" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Effective Hourly Rate Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Find your true hourly rate after taxes, commute, and expenses</p>
+        </a>
+        <a href="/side-income" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Side Income After-Tax Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See what freelance or gig income nets after self-employment tax</p>
+        </a>
+        <a href="/retirement-projector" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Retirement Projector</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See how a salary increase accelerates your retirement timeline</p>
+        </a>
+        <a href="/tax-withholding" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Tax Withholding Estimator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Check if a new salary changes your withholding situation</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('details.faq-item').forEach(details => {
+      const summary = details.querySelector('summary');
+      const grid = details.querySelector(':scope > div') as HTMLElement | null;
+      const chevron = summary?.querySelector('.faq-chevron');
+      summary?.addEventListener('click', e => {
+        e.preventDefault();
+        const isOpen = details.open;
+        if (!isOpen) {
+          details.open = true;
+          requestAnimationFrame(() => {
+            if (grid) grid.style.gridTemplateRows = '1fr';
+            chevron?.classList.add('rotate-180');
+          });
+        } else {
+          if (grid) grid.style.gridTemplateRows = '0fr';
+          chevron?.classList.remove('rotate-180');
+          grid?.addEventListener('transitionend', () => { details.open = false; }, { once: true });
+        }
+      });
+    });
+  </script>
+
 </Base>

@@ -27,7 +27,9 @@ export function RenovationROITable({ result }: Props) {
         </span>
       </button>
 
-      <div className={`overflow-x-auto border-t border-border-subtle${open ? '' : ' hidden'}`} data-print="table-container">
+      <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+        <div className="overflow-hidden">
+          <div className="overflow-x-auto border-t border-border-subtle" data-print="table-container">
           <table className="w-full text-left" data-print="table">
             <thead>
               <tr className="text-on-surface-variant text-label-sm uppercase tracking-wide">
@@ -85,6 +87,8 @@ export function RenovationROITable({ result }: Props) {
               ))}
             </tbody>
           </table>
+          </div>
+        </div>
       </div>
     </div>
   );

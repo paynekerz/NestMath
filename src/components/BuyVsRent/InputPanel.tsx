@@ -196,7 +196,7 @@ export function InputPanel({ buy, rent, investmentReturn, onBuyChange, onRentCha
             onChange={v => onBuyChange('closingCostsPct', v / 100)}
             suffix="%"
             step={0.5}
-            tooltip="Extra fees you pay when you finalize the home purchase — things like paperwork, bank fees, and title checks."
+            tooltip="Extra fees at closing: paperwork, bank fees, and title checks. Usually 2–5% of the purchase price."
             error={buyErrors['closingCostsPct']}
           />
         </div>

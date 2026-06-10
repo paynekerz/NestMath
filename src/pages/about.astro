@@ -7,7 +7,7 @@ import Base from '../layouts/Base.astro';
   description="NestMath is a free, open source financial toolkit. No paywalls, no account, no data collected. Learn why we built it and how it works."
   canonical="https://nestmath.app/about"
   schemaName="NestMath — About"
-  schemaDescription="Free and open source financial planning tools for everyone. No account. No data stored."
+  schemaDescription="Free and open source financial planning tools for everyone. No account. Your data stays on your device."
 >
   <div class="relative overflow-hidden">
     <div
@@ -27,7 +27,7 @@ import Base from '../layouts/Base.astro';
           Financial freedom shouldn't come with a subscription.
         </h1>
         <p class="text-body-lg text-on-surface-variant leading-relaxed">
-          NestMath is a free, open source financial toolkit built to give everyone access to the tools they need to understand their money — no account, no paywall, no strings attached.
+          NestMath is a free, open-source toolkit for personal financial decisions. No account. No cost. Nothing tracked.
         </p>
       </div>
 
@@ -36,10 +36,10 @@ import Base from '../layouts/Base.astro';
         <h2 class="text-headline-md font-semibold text-on-surface mb-[16px]">How it started</h2>
         <div class="prose-surface space-y-[16px]">
           <p class="text-body-md text-on-surface-variant leading-relaxed">
-            NestMath started as a side project — a buy vs. rent calculator I built to teach myself the real math behind one of the biggest financial decisions most people make. The further I got, the clearer something became: the tools that could help people make these decisions were either buried behind paywalls, cluttered with ads, or just didn't exist for free.
+            NestMath started as a buy vs. rent calculator I built to understand the real math behind buying a home. The useful tools I found were either behind paywalls, buried in ads, or missing entirely.
           </p>
           <p class="text-body-md text-on-surface-variant leading-relaxed">
-            That calculator became a full toolkit. The toolkit became a conviction: financial literacy and the tools to act on it should be accessible to everyone — not just people who can afford a financial advisor or a premium app subscription.
+            One calculator turned into many. The common thread: people making big financial decisions should be able to run the numbers themselves, without a subscription or an advisor.
           </p>
         </div>
       </section>
@@ -58,7 +58,7 @@ import Base from '../layouts/Base.astro';
       <section class="animate-reveal stagger-2 mb-[48px]">
         <h2 class="text-headline-md font-semibold text-on-surface mb-[16px]">What it is</h2>
         <p class="text-body-md text-on-surface-variant leading-relaxed mb-[24px]">
-          NestMath is an all-in-one financial planner covering the decisions that shape people's lives — buying a home, paying off debt, understanding their real take-home pay, planning savings goals, and more. Every tool is built for individuals, households, and classrooms alike.
+          NestMath covers the financial decisions most people face: buying a home, paying off debt, understanding take-home pay, and planning savings. The tools work for individuals, households, and classrooms.
         </p>
 
         <div class="grid sm:grid-cols-3 gap-[16px]">
@@ -86,53 +86,92 @@ import Base from '../layouts/Base.astro';
 
         <div class="flex flex-col gap-[8px]">
 
-          <details class="group rounded-xl border border-border-subtle bg-surface-elevated">
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
             <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[16px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
               Do you collect any data?
-              <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true">expand_more</span>
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
             </summary>
-            <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">
-              No. All data you enter stays in your browser — nothing is sent to a server, logged, or stored anywhere outside your device. There are no analytics scripts, no cookies, no account system. What you type stays with you.
-            </p>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">
+                  No. Everything you enter stays in your browser. Nothing goes to a server, gets logged, or leaves your device. No analytics, no cookies, no account system.
+                </p>
+              </div>
+            </div>
           </details>
 
-          <details class="group rounded-xl border border-border-subtle bg-surface-elevated">
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
             <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[16px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
               Is this really free?
-              <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true">expand_more</span>
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
             </summary>
-            <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">
-              Yes, completely. NestMath is funded by voluntary donations through Ko-fi. If it's useful to you, a coffee goes a long way toward keeping the site running and building more tools — but it's entirely optional.
-            </p>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">
+                  Yes. NestMath runs on voluntary donations through Ko-fi. If it's useful, a coffee helps keep it running and adds more tools. Entirely optional.
+                </p>
+              </div>
+            </div>
           </details>
 
-          <details class="group rounded-xl border border-border-subtle bg-surface-elevated">
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
             <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[16px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
               Can I use this in a classroom or financial literacy program?
-              <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true">expand_more</span>
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
             </summary>
-            <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">
-              Absolutely. That's exactly the kind of use this was built for. Share it freely — no attribution required, no license to worry about.
-            </p>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">
+                  Yes, that's exactly what it's built for. Share it freely. No attribution required, no license to worry about.
+                </p>
+              </div>
+            </div>
           </details>
 
-          <details class="group rounded-xl border border-border-subtle bg-surface-elevated">
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
             <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[16px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
               Who built this?
-              <span class="material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 group-open:rotate-180 transition-transform" aria-hidden="true">expand_more</span>
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
             </summary>
-            <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">
-              NestMath is built and maintained by me, Payne Kerz. I'm a software engineer by trade. It's a personal open source project, no company, no team, no VC money.
-            </p>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">
+                  NestMath is built and maintained by me, Payne Kerz. I'm a software engineer by trade. It's a personal open source project, no company, no team, no VC money.
+                </p>
+              </div>
+            </div>
           </details>
 
         </div>
+
+        <script>
+          document.querySelectorAll('details.faq-item').forEach(details => {
+            const summary = details.querySelector('summary');
+            const grid = details.querySelector(':scope > div');
+            const chevron = summary?.querySelector('.faq-chevron');
+            summary?.addEventListener('click', e => {
+              e.preventDefault();
+              const isOpen = details.open;
+              if (!isOpen) {
+                details.open = true;
+                requestAnimationFrame(() => {
+                  grid.style.gridTemplateRows = '1fr';
+                  chevron?.classList.add('rotate-180');
+                });
+              } else {
+                grid.style.gridTemplateRows = '0fr';
+                chevron?.classList.remove('rotate-180');
+                grid.addEventListener('transitionend', () => { details.open = false; }, { once: true });
+              }
+            });
+          });
+        </script>
       </section>
 
       <!-- CTA -->
       <section class="animate-reveal stagger-4 rounded-xl border border-border-subtle bg-surface-container-low p-[32px] text-center">
         <p class="text-body-md text-on-surface-variant mb-[20px]">
-          If NestMath has helped you — or your students — consider supporting it so it stays free for everyone.
+          If NestMath saved you time or helped you make a decision, a coffee goes a long way toward keeping it running.
         </p>
         <div class="flex flex-wrap justify-center gap-[12px]">
           <a

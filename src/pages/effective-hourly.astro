@@ -1,6 +1,29 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import { EffectiveHourlyCalculator } from '../components/EffectiveHourly/EffectiveHourlyCalculator';
+
+const faqItems = [
+  {
+    q: "How do I calculate my effective hourly rate?",
+    a: "Start with your annual take-home pay (after income taxes and FICA). Subtract annual work-related expenses — commute costs, work clothes, tools, professional memberships, coffee, lunches. Divide by total real hours worked per year — not contracted hours, but contracted hours plus unpaid overtime, commute time, and prep or decompression time tied to work. The result is what you actually earn for each hour your job consumes from your life, not just the hours you're officially at a desk."
+  },
+  {
+    q: "What is my real hourly rate after taxes and commute?",
+    a: "For most salaried workers, the gap between stated gross hourly rate and effective net hourly rate is significant. A $75,000 salary sounds like about $36/hour on a 40-hour week. After a 27% combined tax burden (federal + state + FICA), that's $26/hour. Add 5 hours/week of commute, 5 hours of unpaid overtime, and 3 hours of prep/decompression — now you're dividing the take-home by 53 total hours instead of 40. Subtract $200/month in work expenses and the effective rate drops to around $16–$18/hour. That's the real number."
+  },
+  {
+    q: "How do I compare two job offers on a true hourly basis?",
+    a: "Calculate the effective hourly rate for each offer using the same inputs. Use each job's expected total hours (including commute, required overtime, and prep time) and subtract the specific work expenses for each role. A higher nominal salary with a longer commute, required professional clothing, and expensive work lunches may produce a lower effective rate than a remote role paying $10,000 less. The calculator handles one scenario at a time — run it twice with each job's inputs and compare the outputs."
+  },
+  {
+    q: "How much does commuting cost in time per year?",
+    a: "A 30-minute one-way commute is 1 hour per round trip. Over 50 weeks of a 5-day work week, that's 250 hours per year — more than 6 full weeks of 40-hour work. At an effective rate of $20/hour, that's $5,000 in time value consumed by commuting annually. This doesn't count the financial cost of the commute itself (gas, tolls, parking, or transit fare). Remote work or a shorter commute is often worth thousands of dollars annually when you quantify the time cost."
+  },
+  {
+    q: "Is my salary worth it after commute and expenses?",
+    a: "The answer depends on your alternatives. The effective hourly rate calculation tells you your true hourly value from your job — compare it against remote or local opportunities. Many people find that a slightly lower salary at a remote or hybrid role produces a higher effective rate once commute time and costs are removed. The calculator also helps calibrate whether picking up side work makes financial sense: if your side hustle pays your effective hourly rate or better, it's additive. If it pays less, it may not be worth the trade-off."
+  }
+];
 ---
 <Base
   title="Effective Hourly Rate Calculator — NestMath"
@@ -10,5 +33,94 @@ import { EffectiveHourlyCalculator } from '../components/EffectiveHourly/Effecti
   schemaDescription="Calculate your true effective hourly rate after taxes, commute time, unpaid overtime, and work-related expenses."
   breadcrumbTool="Effective Hourly"
 >
-  <EffectiveHourlyCalculator client:load />
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
+    <EffectiveHourlyCalculator client:load />
+  </div>
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator starts by computing annual take-home pay. It subtracts federal income tax, state income tax, and FICA (Social Security + Medicare at 7.65%, the employee portion only). The sum of these deductions is applied to gross income to produce the net annual take-home. Monthly work expenses are then annualized and subtracted to produce adjusted take-home, which is the money that actually reaches your pocket after covering what the job requires you to spend.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Total real hours worked per year is contracted hours plus unpaid overtime, commute, and prep/decompression time, all multiplied by weeks worked per year. This is the denominator. Dividing adjusted take-home by total real hours gives the effective net hourly rate: how much you earn per hour your job consumes from your life, not just hours you're clocked in.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The stated gross hourly rate (gross salary ÷ contracted hours × weeks) is shown alongside the effective rate so you can see the delta directly. The bar chart visualizes both rates side by side, making the gap immediately apparent. Hidden hours per week is the total unpaid time tied to work that never appears in your employment contract.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The delta between stated and effective rates is where most of the insight lies. A large delta usually signals that the job has a long commute, significant unpaid time, or high work-specific expenses. Identifying which factor dominates helps you decide where to negotiate: a shorter commute (or remote arrangement) often delivers the largest improvement in effective rate because it reduces both time cost and financial cost simultaneously.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The effective hourly rate is also a useful benchmark for evaluating side income opportunities, freelance work, or career changes. If a consulting project pays $50/hour but requires significant prep and travel, the effective rate on those engagements may be closer to $35/hour. Use the effective rate as your comparison point, not the headline rate.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+      <div class="flex flex-col gap-[8px]">
+        {faqItems.map((item) => (
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[12px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              {item.q}
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+      <div class="grid sm:grid-cols-2 gap-[12px]">
+        <a href="/raise-vs-job-hop" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Raise vs. Job Hop Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Compare cumulative earnings between staying and switching jobs</p>
+        </a>
+        <a href="/side-income" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Side Income After-Tax Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See what freelance income nets after self-employment tax</p>
+        </a>
+        <a href="/tax-withholding" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Tax Withholding Estimator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Check if your withholding matches your estimated tax bill</p>
+        </a>
+        <a href="/retirement-projector" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Retirement Savings Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Project how your effective take-home compounds over a career</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('details.faq-item').forEach(details => {
+      const summary = details.querySelector('summary');
+      const grid = details.querySelector(':scope > div') as HTMLElement | null;
+      const chevron = summary?.querySelector('.faq-chevron');
+      summary?.addEventListener('click', e => {
+        e.preventDefault();
+        const isOpen = details.open;
+        if (!isOpen) {
+          details.open = true;
+          requestAnimationFrame(() => {
+            if (grid) grid.style.gridTemplateRows = '1fr';
+            chevron?.classList.add('rotate-180');
+          });
+        } else {
+          if (grid) grid.style.gridTemplateRows = '0fr';
+          chevron?.classList.remove('rotate-180');
+          grid?.addEventListener('transitionend', () => { details.open = false; }, { once: true });
+        }
+      });
+    });
+  </script>
+
 </Base>

@@ -10,8 +10,6 @@ import { InvestmentFeesSummary } from './InvestmentFeesSummary';
 import { InvestmentFeesChart } from './InvestmentFeesChart';
 import { InvestmentFeesTable } from './InvestmentFeesTable';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 function buildCsv(inputs: InvestmentFeesInputs, result: ReturnType<typeof calcInvestmentFees>): string {
@@ -55,29 +53,6 @@ function buildCsv(inputs: InvestmentFeesInputs, result: ReturnType<typeof calcIn
   return rows.join('\n');
 }
 
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'How much does a 1% expense ratio cost over 30 years?',
-    a: "A lot more than you'd think. On a $50,000 starting investment with $500/month contributions at 8% gross return, a 1% expense ratio can cost over $250,000 compared to a 0.04% index fund over 30 years. This happens because fees compound just like returns do — every dollar taken as a fee is a dollar that can't grow. The longer your horizon, the more devastating the drag.",
-  },
-  {
-    q: 'What is a good expense ratio for an index fund?',
-    a: "For broad market index funds, anything under 0.10% is excellent. Vanguard VTSAX charges 0.04%, Schwab SWTSX charges 0.03%, and Fidelity ZERO funds charge 0%. Most actively managed funds charge 0.5–1.5%, and hedge funds or complex products can charge 2%+ plus performance fees. For most long-term investors, a low-cost index fund outperforms the average actively managed fund after fees — not because the manager is worse, but because the fee hurdle is nearly impossible to consistently clear.",
-  },
-  {
-    q: 'How do investment fees affect long-term returns?',
-    a: "Fees reduce your net return every year. If your fund earns 8% gross but charges 1%, your net return is 7%. That 1% gap compounds against you — each year you earn less, which means the next year's compounding base is smaller. Over 20–30 years, this creates a large and growing gap. It's often called the \"tyranny of compounding costs\" — the same math that makes investing powerful also makes fees destructive over time.",
-  },
-  {
-    q: 'What is the difference between an expense ratio and a management fee?',
-    a: "An expense ratio is the all-in annual cost of owning a mutual fund or ETF, expressed as a percentage of your assets. It typically covers the fund manager's salary, administrative costs, marketing (12b-1 fees), and trading costs — all rolled into one number that's deducted from the fund's assets daily. A management fee is the specific slice going to the portfolio manager, and it's usually a component inside the broader expense ratio. When comparing funds, the expense ratio is the number that matters.",
-  },
-  {
-    q: 'Is a 0.5% expense ratio too high?',
-    a: "It depends on what you're getting. For a simple broad market index fund, 0.5% is 10–12x what Vanguard or Fidelity charge for the same exposure — so yes, it's too high for a passive fund. For a specialized or actively managed fund, 0.5% is actually below average. The real question is: does the fund's after-fee performance justify the cost? Studies consistently show that most actively managed funds underperform a low-cost index fund after fees over long periods.",
-  },
-];
-
 export function InvestmentFeesCalculator() {
   const [inputs, setInputs] = useState<InvestmentFeesInputs>(DEFAULT_INVESTMENT_FEES_INPUTS);
 
@@ -112,7 +87,7 @@ export function InvestmentFeesCalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">Investment Fee Impact Calculator</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">See the long-term dollar cost of your expense ratio vs. a low-cost index fund alternative.</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Enter your portfolio balance, monthly contributions, gross return rate, and two expense ratios to see the dollar cost of fees over time, including total fee drag and the portfolio value you're giving up to higher costs.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -166,7 +141,7 @@ export function InvestmentFeesCalculator() {
 
       {/* Ko-fi nudge */}
       {result && (
-        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
           If this helped you rethink your fund fees,{' '}
           <KofiButton label="☕ a coffee seems fair." />
         </p>
@@ -179,9 +154,6 @@ export function InvestmentFeesCalculator() {
         </div>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

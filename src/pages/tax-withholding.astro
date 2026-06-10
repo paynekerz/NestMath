@@ -1,0 +1,126 @@
+﻿---
+import Base from '../layouts/Base.astro';
+import { TaxWithholdingCalculator } from '../components/TaxWithholding/TaxWithholdingCalculator';
+
+const faqItems = [
+  {
+    q: "How do I know if my federal tax withholding is correct?",
+    a: "Compare your estimated tax owed for the year to your year-to-date withholding. If withholding exceeds your estimated tax, you're getting a refund. If your estimated tax exceeds withholding, you'll owe at filing and may owe an underpayment penalty. The IRS generally charges a penalty if you owe more than $1,000 and paid less than 90% of current-year tax or 100% of prior-year tax (110% if prior-year AGI exceeded $150,000). This calculator helps you check both directions."
+  },
+  {
+    q: "What is an effective tax rate vs. marginal tax rate?",
+    a: "Your marginal tax rate is the rate that applies to your last dollar of income — the highest bracket you reach. For a single filer with $90,000 in taxable income in 2025, the marginal rate is 22%. Your effective tax rate is total tax owed divided by total taxable income — for that same filer, it's closer to 16–17% because lower brackets (10%, 12%) apply to the first portions of income. The marginal rate matters for decisions about additional income or deductions. The effective rate reflects your actual overall tax burden."
+  },
+  {
+    q: "How do I adjust my W-4 to get closer to withholding exactly right?",
+    a: "If you're consistently over-withheld (large refund), submit a new W-4 to your employer and reduce the additional withholding amount or claim more allowances. If you're under-withheld (owing at filing), add additional withholding in Step 4(c) of the W-4. The amount to add is approximately (estimated tax shortfall) ÷ (remaining pay periods in the year). Making changes mid-year requires dividing the adjustment across fewer pay periods. The calculator shows you your current shortfall or excess to use as a starting point."
+  },
+  {
+    q: "Do I need to pay quarterly estimated taxes?",
+    a: "You're required to make quarterly estimated tax payments if you expect to owe at least $1,000 in federal income tax after withholding, AND your withholding won't cover at least 90% of current-year tax or 100% of prior-year tax. This applies to self-employed individuals, freelancers, gig workers, investors with significant capital gains or dividends, and anyone with substantial income not subject to withholding. The due dates are typically April 15, June 15, September 15, and January 15."
+  },
+  {
+    q: "What deductions does the calculator use?",
+    a: "This calculator applies the 2025 standard deduction: $15,000 for single filers and $30,000 for married filing jointly. It does not model itemized deductions (mortgage interest, state and local taxes, charitable contributions). If you itemize, your actual taxable income will be lower than the calculator's estimate — meaning this tool may slightly overstate your tax owed. For itemizers, subtracting your total itemized deductions from gross income before entering it will give you a closer estimate."
+  }
+];
+---
+<Base
+  title="Tax Withholding Estimator — NestMath"
+  description="Find out if you're over- or under-withholding federal income tax. Enter your income, filing status, and withholding to see your estimated 2025 tax bill and whether you need quarterly estimated payments."
+  canonical="https://nestmath.app/tax-withholding"
+  schemaName="NestMath — Tax Withholding Estimator"
+  schemaDescription="Free federal tax withholding estimator. Uses 2025 IRS tax brackets and standard deductions to show your estimated tax owed vs. current withholding, effective rate, marginal rate, and quarterly payment requirement."
+  breadcrumbTool="Tax Withholding"
+>
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
+    <TaxWithholdingCalculator client:load />
+  </div>
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator applies 2025 federal income tax brackets to your taxable income, defined as gross income minus the standard deduction ($15,000 single / $30,000 married filing jointly). It works through each bracket in order: 10% on the first $11,925 of taxable income, 12% on the next $36,550, 22% on income up to $103,350, and higher rates on income above that. This produces your total estimated federal income tax owed for the full year.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">FICA taxes (Social Security at 6.2% and Medicare at 1.45%) are calculated separately if you include W-2 income. These are not subject to the standard deduction and are applied to gross wages. The total tax obligation (income tax + FICA) is compared to your year-to-date withholding to produce the expected refund or amount owed at filing.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The quarterly estimated payment calculator checks whether your shortfall exceeds the safe harbor thresholds (90% of current-year tax or 100% of prior-year tax, whichever is smaller). If it does, the calculator shows you the estimated quarterly payment amount needed to cover the remaining liability across the remaining quarters in the tax year.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Your effective tax rate is the percentage of your total gross income going to federal tax. It's always lower than your marginal rate because the progressive bracket system taxes lower income tiers at lower rates. The effective rate is the right number to use when comparing job offers, evaluating tax planning strategies, or estimating your after-tax income for budgeting purposes.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">A large expected refund means you're giving the government an interest-free loan on your over-withheld amount. It's not free money. It's your own money returned. If you regularly receive large refunds, adjusting your W-4 to reduce withholding lets you keep that money in your paycheck throughout the year. Many people prefer a small refund or a small balance due. Both mean your withholding was well-calibrated to your actual tax bill.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+      <div class="flex flex-col gap-[8px]">
+        {faqItems.map((item) => (
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[12px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              {item.q}
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+      <div class="grid sm:grid-cols-2 gap-[12px]">
+        <a href="/side-income" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Side Income After-Tax Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See how freelance income interacts with your W-2 withholding</p>
+        </a>
+        <a href="/effective-hourly" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Effective Hourly Rate Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Model your true hourly earnings after all taxes</p>
+        </a>
+        <a href="/roth-vs-traditional" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Roth vs. Traditional IRA Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See how IRA contributions reduce your current-year tax bill</p>
+        </a>
+        <a href="/raise-vs-job-hop" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Raise vs. Job Hop Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Check if a new salary changes your marginal tax bracket</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('details.faq-item').forEach(details => {
+      const summary = details.querySelector('summary');
+      const grid = details.querySelector(':scope > div') as HTMLElement | null;
+      const chevron = summary?.querySelector('.faq-chevron');
+      summary?.addEventListener('click', e => {
+        e.preventDefault();
+        const isOpen = details.open;
+        if (!isOpen) {
+          details.open = true;
+          requestAnimationFrame(() => {
+            if (grid) grid.style.gridTemplateRows = '1fr';
+            chevron?.classList.add('rotate-180');
+          });
+        } else {
+          if (grid) grid.style.gridTemplateRows = '0fr';
+          chevron?.classList.remove('rotate-180');
+          grid?.addEventListener('transitionend', () => { details.open = false; }, { once: true });
+        }
+      });
+    });
+  </script>
+
+</Base>

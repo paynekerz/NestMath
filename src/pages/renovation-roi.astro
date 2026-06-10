@@ -1,14 +1,126 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import { RenovationROICalculator } from '../components/RenovationROI/RenovationROICalculator';
+
+const faqItems = [
+  {
+    q: "Is home renovation a good investment?",
+    a: "It depends on the renovation and your time horizon. Kitchen and bathroom remodels typically recover 60–80% of their cost at resale, while curb appeal projects (landscaping, garage doors, siding) often recover more than 100%. But 'recovery at resale' is not the same as 'better than investing the money.' This calculator compares the full financial return of a renovation — value gain compounding with home appreciation — against putting that same cash into the market for the same period."
+  },
+  {
+    q: "What home improvements have the best ROI?",
+    a: "Based on the Remodeling Cost vs. Value report, the highest-ROI projects tend to be exterior improvements: garage door replacement (~194%), steel entry door replacement (~188%), and manufactured stone veneer (~153%). These consistently return more than their cost at resale. High-end kitchen and bathroom remodels, despite their high dollar totals, typically return 60–70% — meaning you'll spend more than you recoup. The calculator lets you input your own value increase estimate to model any specific project."
+  },
+  {
+    q: "Is it better to renovate or invest the money?",
+    a: "It depends on how much the renovation actually increases your home's value, your appreciation rate, and your investment return assumption. If a $30,000 renovation increases your $400,000 home's value by 5% ($20,000), you've immediately lost $10,000 — that loss needs to compound away before the renovation path catches up to the market path. The calculator shows the full picture: renovation gain (appreciation-adjusted) vs. invested value over your planned ownership period."
+  },
+  {
+    q: "How do you calculate the return on a home renovation?",
+    a: "The renovation ROI in this calculator is: (net gain from renovation ÷ renovation cost) × 100, where net gain = (renovation value increase at sale − renovation cost). The value increase is your initial value boost compounded with annual home appreciation over the years until planned sale. For example, a 5% value increase on a $400,000 home is $20,000 upfront, which grows at your assumed appreciation rate until the sale date — giving you the total gain to compare against the original cost."
+  },
+  {
+    q: "Does renovating your home increase its value by the full cost of the renovation?",
+    a: "Rarely. The relationship between renovation cost and value increase is not one-to-one. A $50,000 kitchen remodel might add $30,000–$40,000 in market value, depending on the neighborhood and the quality of comparable homes. Over-improving for your neighborhood — spending more than buyers in your area typically pay — often yields the worst returns. The value increase percentage input in this calculator is your estimate of how much value the renovation adds as a percentage of current home value."
+  }
+];
 ---
 <Base
-  title="NestMath.app — Renovation ROI Calculator"
-  description="Is renovating your home worth it — or should you invest the money instead? Compare renovation returns against market growth."
+  title="Renovation ROI Calculator — NestMath"
+  description="Renovate or invest? Compare home renovation returns against market growth over your time horizon. Free renovation ROI calculator — no account required."
   canonical="https://nestmath.app/renovation-roi"
   schemaName="NestMath — Renovation ROI Calculator"
   schemaDescription="Compare the financial return of a home renovation against investing the same cash in the market."
   breadcrumbTool="Renovation ROI"
 >
-  <RenovationROICalculator client:load />
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
+    <RenovationROICalculator client:load />
+  </div>
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The renovation path starts with your home value increase (home value × value increase %). This upfront boost to the home's value then compounds with annual home appreciation for each year until your planned sale. At sale, the renovation gain is the final value increase minus the original renovation cost. That's the net return on the renovation investment.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The invest path is simpler: take the same renovation dollars and invest them at your assumed annual market return. After the same number of years, the investment value is renovation cost × (1 + return)^years. The net gain on the invest path is investment value minus the original cost. The winner is whichever path produces a higher net gain at the end of the period.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The renovation ROI percentage is net gain divided by cost, measuring how much you earn for each dollar spent on the renovation. A positive ROI means the renovation adds more value (at sale) than it costs. A negative ROI means you spent more than you recovered, even accounting for appreciation. The invest path ROI is simpler: the market return applied over the full period.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The delta shows which path wins at your planned sale date and by how much. A small delta in either direction means the decision is close, and non-financial factors like living quality or neighborhood fit should weigh heavily. A large delta toward the investment path often signals that the renovation's value-add is modest relative to cost, or that you're planning to sell before the appreciation has time to compound meaningfully.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Short time horizons heavily favor the invest path for anything but exceptional renovations, because there's not enough time for appreciation to compound the value increase. Longer holds (7+ years) give renovation projects more runway. The year-by-year table shows the crossing point, if any, where renovation cumulative gain overtakes market investment gain.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+      <div class="flex flex-col gap-[8px]">
+        {faqItems.map((item) => (
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[12px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              {item.q}
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+      <div class="grid sm:grid-cols-2 gap-[12px]">
+        <a href="/buy-vs-rent" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Buy vs. Rent Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Model the full financial comparison including opportunity cost</p>
+        </a>
+        <a href="/investment-fees" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Investment Fee Impact Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See how expense ratios compound into large losses over time</p>
+        </a>
+        <a href="/payoff" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Mortgage Payoff Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See how extra payments shorten your loan and save interest</p>
+        </a>
+        <a href="/refinance" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Mortgage Refinance Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Calculate the break-even point on a lower-rate refinance</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('details.faq-item').forEach(details => {
+      const summary = details.querySelector('summary');
+      const grid = details.querySelector(':scope > div') as HTMLElement | null;
+      const chevron = summary?.querySelector('.faq-chevron');
+      summary?.addEventListener('click', e => {
+        e.preventDefault();
+        const isOpen = details.open;
+        if (!isOpen) {
+          details.open = true;
+          requestAnimationFrame(() => {
+            if (grid) grid.style.gridTemplateRows = '1fr';
+            chevron?.classList.add('rotate-180');
+          });
+        } else {
+          if (grid) grid.style.gridTemplateRows = '0fr';
+          chevron?.classList.remove('rotate-180');
+          grid?.addEventListener('transitionend', () => { details.open = false; }, { once: true });
+        }
+      });
+    });
+  </script>
+
 </Base>

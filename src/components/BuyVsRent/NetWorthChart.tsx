@@ -8,6 +8,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import type { YearResult } from '../../lib/calculator';
+import { usePrintChart } from '../../lib/usePrintChart';
 
 interface Props {
   years: YearResult[];
@@ -29,6 +30,7 @@ const BUY_COLOR  = 'oklch(55% 0.18 250)';
 const RENT_COLOR = 'oklch(70% 0.15 150)';
 
 export function NetWorthChart({ years, breakEvenYear, yearsToModel }: Props) {
+  const chartRef = usePrintChart();
   const data = years.map(yr => ({
     year: yr.year,
     'Buy Net Worth': Math.round(yr.buyNetWorth),
@@ -39,11 +41,11 @@ export function NetWorthChart({ years, breakEvenYear, yearsToModel }: Props) {
   const buyWins = breakEvenYear !== null;
 
   return (
-    <div className="glass-card rounded-xl p-[24px] flex flex-col gap-[24px] min-w-0">
+    <div ref={chartRef} data-print="chart" className="glass-card rounded-xl p-[24px] flex flex-col gap-[24px] min-w-0">
       {/* Chart header */}
       <div className="flex items-center justify-between">
         <h2 className="text-headline-md font-semibold text-on-surface">
-          DRAFT - Equity Trajectory Over {yearsToModel} Years
+          Net Worth Over {yearsToModel} Years
         </h2>
         <div className="flex items-center gap-[16px]">
           <span className="flex items-center gap-[6px] text-label-sm text-on-surface-variant">
@@ -58,6 +60,7 @@ export function NetWorthChart({ years, breakEvenYear, yearsToModel }: Props) {
       </div>
 
       {years.length > 0 ? (
+        <div role="img" aria-label={`Net Worth Over ${yearsToModel} Years chart`}>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={data} margin={{ top: 4, right: 16, left: 0, bottom: 16 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="oklch(25% 0.01 240)" />
@@ -91,6 +94,7 @@ export function NetWorthChart({ years, breakEvenYear, yearsToModel }: Props) {
             <Line type="monotone" dataKey="Rent Net Worth" stroke={RENT_COLOR} strokeWidth={2.5} dot={false} strokeDasharray="5 3" activeDot={{ r: 4 }} />
           </LineChart>
         </ResponsiveContainer>
+        </div>
       ) : (
         <div className="h-[300px] flex items-center justify-center text-on-surface-variant text-body-sm">
           Enter your numbers to see the chart.
@@ -99,14 +103,14 @@ export function NetWorthChart({ years, breakEvenYear, yearsToModel }: Props) {
 
       {/* Recommendation box */}
       {finalYear && (
-        <div className="p-[16px] bg-surface-container-low rounded-lg border border-border-subtle">
+        <div className="p-[16px] bg-surface-container-low rounded-xl border border-border-subtle">
           <div className="flex items-start gap-[12px]">
             <span
               className={`material-symbols-outlined text-[18px] shrink-0 mt-[2px] ${buyWins ? 'text-primary-accent' : 'text-success-emerald'}`}
               aria-hidden="true"
             >verified</span>
             <p className="text-body-sm text-on-surface">
-              <span className={`font-bold ${buyWins ? 'text-primary-accent' : 'text-success-emerald'}`}>
+              <span className={`font-bold ${buyWins ? 'text-primary' : 'text-success-emerald'}`}>
                 Recommendation:{' '}
               </span>
               {buyWins ? (
@@ -116,9 +120,9 @@ export function NetWorthChart({ years, breakEvenYear, yearsToModel }: Props) {
                 </>
               ) : (
                 <>
-                  Renting and investing the down payment delta currently yields a{' '}
+                  Renting leads by{' '}
                   <span className="font-bold">{fmt.format(finalYear.rentNetWorth - finalYear.buyNetWorth)}</span>{' '}
-                  advantage over {yearsToModel} years given the current mortgage environment.
+                  over {yearsToModel} years.
                 </>
               )}
             </p>

@@ -58,7 +58,7 @@ export function EffectiveHourlyBar({ result }: Props) {
       </div>
 
       {/* 3-col insight row */}
-      <div className="grid grid-cols-3 gap-4 border-t border-border-subtle pt-lg mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-border-subtle pt-lg mt-6">
         <div>
           <p className="text-label-sm text-on-surface-variant mb-1">You lose</p>
           <p className="text-headline-md font-bold font-mono-data tabular-nums text-error">

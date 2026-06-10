@@ -10,8 +10,6 @@ import { RefinanceSummary } from './RefinanceSummary';
 import { RefinanceChart } from './RefinanceChart';
 import { RefinanceTable } from './RefinanceTable';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 function buildCsv(inputs: RefinanceInputs, result: ReturnType<typeof calcRefinance>): string {
@@ -63,29 +61,6 @@ function buildCsv(inputs: RefinanceInputs, result: ReturnType<typeof calcRefinan
 
   return rows.join('\n');
 }
-
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'How do I know if refinancing is worth it?',
-    a: 'Refinancing is worth it when the break-even point — the month you recoup closing costs through lower payments — falls before you plan to sell or pay off the home. If you break even in 24 months and plan to stay 10 more years, refinancing makes sense. If break-even is 60 months and you might move in 3 years, it probably does not.',
-  },
-  {
-    q: 'What is the break-even point for refinancing?',
-    a: 'The break-even point is when your cumulative monthly savings equal the closing costs you paid to refinance. For example: $6,000 in closing costs ÷ $200 monthly savings = 30 months. After month 30, every payment is money you keep. The calculator shows this date precisely based on your numbers.',
-  },
-  {
-    q: 'Is it worth refinancing for 1% lower interest rate?',
-    a: "A 1% rate drop is a common rule of thumb but it depends on your loan size and how long you'll stay. On a $300,000 balance, 1% lower saves roughly $170/month. With $6,000 in closing costs, you break even in about 35 months. If you're staying longer than that, refinancing makes financial sense regardless of the 1% rule.",
-  },
-  {
-    q: 'How much does refinancing save over the life of a loan?',
-    a: 'It depends on the rate difference, loan balance, and terms. Dropping from 7.5% to 6.5% on a $300,000 balance with 27 years remaining saves roughly $50,000 in total interest — even after accounting for closing costs on a new 30-year loan. The net savings stat above shows the exact figure for your inputs.',
-  },
-  {
-    q: 'What are typical refinancing closing costs?',
-    a: 'Closing costs for a refinance typically run 2–5% of the loan balance. On a $300,000 loan, expect $6,000–$15,000. The main components are origination fees, appraisal, title insurance, and prepaid items like property taxes and insurance. Some lenders offer no-closing-cost refinances, but those fees are rolled into a slightly higher rate.',
-  },
-];
 
 export function RefinanceCalculator() {
   const [inputs, setInputs] = useState<RefinanceInputs>(DEFAULT_REFINANCE_INPUTS);
@@ -141,7 +116,7 @@ export function RefinanceCalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">Refinance Break-Even Calculator</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">See exactly when you break even on closing costs — and whether refinancing makes financial sense.</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Find out whether refinancing your mortgage makes financial sense. Enter your current loan, the new rate and term, and estimated closing costs to see your break-even month, monthly savings, and total interest difference over the life of the loan.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -196,7 +171,7 @@ export function RefinanceCalculator() {
 
       {/* Ko-fi nudge */}
       {result && (
-        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
           If this helped you decide on your refinance,{' '}
           <KofiButton label="☕ a coffee seems fair." />
         </p>
@@ -209,9 +184,6 @@ export function RefinanceCalculator() {
         </div>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

@@ -15,6 +15,8 @@ import type { NetWorthInputs } from './net-worth';
 import type { RetirementProjectorInputs } from './retirement-projector';
 import type { RothVsTraditionalInputs } from './roth-vs-traditional';
 import type { SocialSecurityInputs } from './social-security';
+import type { TaxWithholdingInputs } from './tax-withholding';
+import type { SideIncomeInputs } from './side-income';
 
 export type ValidationErrors = Partial<Record<string, string>>;
 
@@ -487,6 +489,40 @@ export function validateSocialSecurityInputs(inputs: SocialSecurityInputs): Vali
   }
   if (!errors.currentAge && !errors.lifeExpectancy && inputs.lifeExpectancy <= inputs.currentAge) {
     errors['lifeExpectancy'] = 'Life expectancy must be greater than current age.';
+  }
+  return errors;
+}
+
+const TAX_WITHHOLDING_BOUNDS = {
+  grossW2Income:      { min: 0, max: 10_000_000, label: 'Gross W-2 income' },
+  currentWithholding: { min: 0, max: 5_000_000,  label: 'Current withholding' },
+  otherIncome:        { min: 0, max: 10_000_000, label: 'Other income' },
+  preTaxDeductions:   { min: 0, max: 500_000,    label: 'Pre-tax deductions' },
+};
+
+export function validateTaxWithholdingInputs(inputs: TaxWithholdingInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(TAX_WITHHOLDING_BOUNDS) as Array<keyof typeof TAX_WITHHOLDING_BOUNDS>) {
+    const err = checkRange(inputs[key], TAX_WITHHOLDING_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  return errors;
+}
+
+const SIDE_INCOME_BOUNDS = {
+  grossSideIncome: { min: 1,         max: 2_000_000,  label: 'Gross side income' },
+  businessExpenses: { min: 0,        max: 500_000,    label: 'Business expenses' },
+  primaryW2Income:  { min: 0,        max: 10_000_000, label: 'Primary W-2 income' },
+};
+
+export function validateSideIncomeInputs(inputs: SideIncomeInputs): ValidationErrors {
+  const errors: ValidationErrors = {};
+  for (const key of Object.keys(SIDE_INCOME_BOUNDS) as Array<keyof typeof SIDE_INCOME_BOUNDS>) {
+    const err = checkRange(inputs[key], SIDE_INCOME_BOUNDS[key]);
+    if (err) errors[key] = err;
+  }
+  if (!errors.businessExpenses && !errors.grossSideIncome && inputs.businessExpenses > inputs.grossSideIncome) {
+    errors['businessExpenses'] = 'Business expenses cannot exceed gross income.';
   }
   return errors;
 }

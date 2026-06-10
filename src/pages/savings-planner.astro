@@ -1,14 +1,126 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import { SavingsPlannerCalculator } from '../components/SavingsPlanner/SavingsPlannerCalculator';
+
+const faqItems = [
+  {
+    q: "How long does it take to save for a down payment?",
+    a: "At $1,000/month with $10,000 already saved, targeting a $400,000 home with 20% down ($80,000) plus 3% closing costs ($12,000), you need $92,000 total. In a 4.5% HYSA, you'd reach that goal in approximately 6 years and 8 months. The timeline is highly sensitive to your monthly savings rate and current savings — doubling your monthly contribution from $1,000 to $2,000 typically cuts the timeline nearly in half."
+  },
+  {
+    q: "Should I invest my down payment savings or keep them in cash?",
+    a: "For a down payment you need within 3 years, keep it in cash — in a HYSA or money market fund. The stock market can drop 30–40% in a short period, and you can't afford to have your down payment halved right before you plan to buy. For a timeline of 5+ years, some exposure to bonds or conservative stock allocation may make sense, but the conventional advice is to prioritize capital preservation for a near-term planned purchase over return maximization."
+  },
+  {
+    q: "How much should I save each month for a house?",
+    a: "A practical approach: calculate your target down payment plus closing costs, subtract your current savings, and divide by the number of months in your target timeline. If you want to buy in 5 years (60 months) and need $90,000 total with $15,000 already saved, you need to save $1,250/month before investment returns. Add in HYSA compounding and the required contribution is slightly lower. This calculator does that math automatically and shows the exact month you'll reach your goal."
+  },
+  {
+    q: "What is included in cash needed to close?",
+    a: "Cash needed to close is your down payment plus estimated closing costs. Down payment is your chosen percentage of the purchase price (20% is conventional, but 3–10% is common with FHA or conventional loans). Closing costs typically run 2–4% of the purchase price and include origination fees, appraisal, title insurance, prepaid property taxes and insurance, recording fees, and attorney fees depending on your state. This calculator uses your entered closing cost percentage to estimate the total cash required."
+  },
+  {
+    q: "What is the 20% down payment rule?",
+    a: "The 20% down payment threshold is important because going below it typically requires private mortgage insurance (PMI), which adds 0.5–1.5% of the loan amount per year to your housing costs. A 20% down payment eliminates PMI, results in a lower interest rate, and reduces your monthly payment. However, with home prices elevated in many markets, many buyers use 3–10% down and accept PMI — particularly if waiting for 20% down means missing out on appreciation or paying higher rent for several more years."
+  }
+];
 ---
 <Base
-  title="NestMath.app — Down Payment Savings Planner"
+  title="Down Payment Savings Calculator — NestMath"
   description="Find out exactly how long it takes to save for a down payment. Enter your target price, savings rate, and return on savings — see the month you'll be ready to buy."
   canonical="https://nestmath.app/savings-planner"
-  schemaName="NestMath — Down Payment Savings Planner"
+  schemaName="NestMath — Down Payment Savings Calculator"
   schemaDescription="Calculate how long it takes to save for a down payment and closing costs based on your monthly savings rate and investment return."
   breadcrumbTool="Savings Planner"
 >
-  <SavingsPlannerCalculator client:load />
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
+    <SavingsPlannerCalculator client:load />
+  </div>
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The cash-needed-to-close target is your down payment plus estimated closing costs, both calculated as percentages of the home price. From there, the calculator runs a month-by-month savings simulation: each month it applies interest to your current balance at (APY ÷ 12) and then adds your monthly contribution. This loop continues until the accumulated balance reaches the target. The number of months to reach that point is your "months to goal."</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The annual return on savings input lets you model different account types. Set it to the current HYSA rate (around 4.5%) to see what your savings earn in a high-yield savings account. If you're investing in bonds or a conservative portfolio, you might use 5–6%. The calculator is intentionally flexible here because the right rate depends on your risk tolerance and time horizon, which only you can determine.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The projected date converts months to goal into a calendar month and year. Growth from returns shows how much of your final balance came from investment earnings rather than raw contributions. This is the concrete value of saving in an interest-bearing account rather than a zero-yield checking account.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The months-to-goal figure is the headline result. Use the projected date to evaluate whether your timeline aligns with your housing plans. If the date is further out than you'd like, try increasing your monthly contribution. Even $200–$300 more per month can shorten the timeline by a year or more. Alternatively, reducing your down payment percentage (from 20% to 10%) dramatically cuts the cash needed and shortens the savings period, though it adds PMI costs once you buy.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The savings chart shows cumulative savings vs. the target line. This is useful for motivation: you can see the point where the savings curve intersects the target. The month-by-month table shows every contribution and interest payment in detail, which is helpful if you want to track actual progress against the plan over time.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+      <div class="flex flex-col gap-[8px]">
+        {faqItems.map((item) => (
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[12px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              {item.q}
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+      <div class="grid sm:grid-cols-2 gap-[12px]">
+        <a href="/affordability" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Home Affordability Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Find out how much home your income can support</p>
+        </a>
+        <a href="/hysa-calculator" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">HYSA Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See how a high-yield account accelerates your savings goal</p>
+        </a>
+        <a href="/buy-vs-rent" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Buy vs. Rent Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Decide if buying or continuing to rent makes more sense</p>
+        </a>
+        <a href="/emergency-fund" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Emergency Fund Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Build your safety net before committing to a purchase</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('details.faq-item').forEach(details => {
+      const summary = details.querySelector('summary');
+      const grid = details.querySelector(':scope > div') as HTMLElement | null;
+      const chevron = summary?.querySelector('.faq-chevron');
+      summary?.addEventListener('click', e => {
+        e.preventDefault();
+        const isOpen = details.open;
+        if (!isOpen) {
+          details.open = true;
+          requestAnimationFrame(() => {
+            if (grid) grid.style.gridTemplateRows = '1fr';
+            chevron?.classList.add('rotate-180');
+          });
+        } else {
+          if (grid) grid.style.gridTemplateRows = '0fr';
+          chevron?.classList.remove('rotate-180');
+          grid?.addEventListener('transitionend', () => { details.open = false; }, { once: true });
+        }
+      });
+    });
+  </script>
+
 </Base>

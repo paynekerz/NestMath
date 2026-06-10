@@ -22,11 +22,9 @@ export function YearTable({ years }: Props) {
         <span className="text-on-surface">Year-by-Year Breakdown</span>
         <span className="text-on-surface-variant text-label-sm">{open ? '▲' : '▼'}</span>
       </button>
-      <div
-        data-print="table-container"
-        className="overflow-x-auto"
-        style={open ? undefined : { display: 'none' }}
-      >
+      <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+        <div className="overflow-hidden">
+          <div data-print="table-container" className="overflow-x-auto">
           <table data-print="table" className="w-full text-body-sm font-mono-data border-t border-border-subtle">
             <thead>
               <tr className="bg-surface-container text-on-surface-variant text-label-sm uppercase tracking-wider">
@@ -46,25 +44,25 @@ export function YearTable({ years }: Props) {
                 <th className="px-lg py-xs text-right font-semibold">
                   <span className="inline-flex items-center justify-end gap-1.5">
                     Buy Net Worth
-                    <InfoTooltip text="Your total financial value if you bought — the home's worth minus what you still owe the bank." />
+                    <InfoTooltip text="Home value minus remaining loan balance." />
                   </span>
                 </th>
                 <th className="px-lg py-xs text-right font-semibold">
                   <span className="inline-flex items-center justify-end gap-1.5">
                     Rent Net Worth
-                    <InfoTooltip text="Your total financial value if you rented — your savings and investments added together." />
+                    <InfoTooltip text="Total value of savings and investments, compounded." />
                   </span>
                 </th>
                 <th className="px-lg py-xs text-right font-semibold">
                   <span className="inline-flex items-center justify-end gap-1.5">
                     Buy Cost/yr
-                    <InfoTooltip text="The total amount spent on the home this year — mortgage payments, taxes, insurance, HOA fees, and maintenance." />
+                    <InfoTooltip text="Total spent on the home this year: mortgage, taxes, insurance, HOA, and maintenance." />
                   </span>
                 </th>
                 <th className="px-lg py-xs text-right font-semibold">
                   <span className="inline-flex items-center justify-end gap-1.5">
                     Rent Cost/yr
-                    <InfoTooltip text="The total amount spent on renting this year — monthly rent plus renter's insurance." />
+                    <InfoTooltip text="Total spent on renting this year: monthly rent plus renter's insurance." />
                   </span>
                 </th>
               </tr>
@@ -90,6 +88,8 @@ export function YearTable({ years }: Props) {
               ))}
             </tbody>
           </table>
+          </div>
+        </div>
       </div>
     </div>
   );

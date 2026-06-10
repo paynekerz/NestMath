@@ -10,8 +10,6 @@ import { RothVsTraditionalSummary } from './RothVsTraditionalSummary';
 import { RothVsTraditionalChart } from './RothVsTraditionalChart';
 import { RothVsTraditionalTable } from './RothVsTraditionalTable';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 function buildCsv(inputs: RothVsTraditionalInputs, result: ReturnType<typeof calcRothVsTraditional>): string {
@@ -54,29 +52,6 @@ function buildCsv(inputs: RothVsTraditionalInputs, result: ReturnType<typeof cal
   return rows.join('\n');
 }
 
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'What is the difference between a Roth and Traditional IRA?',
-    a: "Both are individual retirement accounts with the same $7,000 annual contribution limit (2024). The difference is tax timing. Traditional IRA: you deduct contributions now (pre-tax), the money grows untaxed, and you pay ordinary income tax when you withdraw in retirement. Roth IRA: you contribute after-tax dollars, the money grows untaxed, and qualified withdrawals in retirement are completely tax-free — including all the growth.",
-  },
-  {
-    q: 'Which is better — Roth or Traditional IRA?',
-    a: "It depends almost entirely on whether you expect to be in a higher or lower tax bracket in retirement. If you expect your tax rate to be lower in retirement than it is today, Traditional usually wins — you defer taxes until you're in a cheaper bracket. If you expect your tax rate to be the same or higher, Roth wins — you pay taxes now at the lower rate and everything after grows tax-free. Young people early in their careers generally favor Roth; high earners at peak income often lean Traditional.",
-  },
-  {
-    q: 'Who qualifies to contribute to a Roth IRA?',
-    a: "For 2024, you can contribute the full $7,000 ($8,000 if 50+) if your modified AGI is under $146,000 (single) or $230,000 (married filing jointly). The contribution phases out above those limits and disappears at $161,000 (single) / $240,000 (married). There's no income limit for Traditional IRA contributions, though the deductibility phases out if you or your spouse has a workplace retirement plan. If you earn too much for Roth, look into the backdoor Roth IRA strategy.",
-  },
-  {
-    q: 'What is the 2024 IRA contribution limit?',
-    a: "$7,000 per year ($8,000 if you're 50 or older — the extra $1,000 is the catch-up contribution). This limit is shared across all your IRAs — you can split it between Roth and Traditional in any proportion, but the total can't exceed $7,000. If you're also contributing to a 401(k), that has a separate, higher limit ($23,000 in 2024), and it doesn't affect what you can put in your IRA.",
-  },
-  {
-    q: 'Can I convert a Traditional IRA to a Roth IRA?',
-    a: "Yes — a Roth conversion lets you move money from a Traditional to a Roth IRA at any time. You pay income tax on the converted amount in the year you convert, then that money grows tax-free forever. Conversions are often worth considering in low-income years (job transition, early retirement, temporary gap) when your marginal tax rate is unusually low. There's no income limit on conversions — this is also the mechanism behind the 'backdoor Roth IRA' strategy for high earners.",
-  },
-];
-
 export function RothVsTraditionalCalculator() {
   const [inputs, setInputs] = useState<RothVsTraditionalInputs>(DEFAULT_ROTH_VS_TRADITIONAL_INPUTS);
 
@@ -111,7 +86,7 @@ export function RothVsTraditionalCalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">Roth vs. Traditional IRA</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">Compare after-tax retirement wealth under both account types given your current and expected future tax rates.</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Enter your contribution amount, years to retirement, and tax rates to see which IRA account type produces more after-tax wealth, and by how much. The answer depends entirely on whether your tax rate is higher now or in retirement.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -165,7 +140,7 @@ export function RothVsTraditionalCalculator() {
 
       {/* Ko-fi nudge */}
       {result && (
-        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
           If this helped you think through your IRA strategy,{' '}
           <KofiButton label="☕ a coffee seems fair." />
         </p>
@@ -178,9 +153,6 @@ export function RothVsTraditionalCalculator() {
         </div>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

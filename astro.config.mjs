@@ -7,6 +7,9 @@ export default defineConfig({
   integrations: [react()],
   adapter: vercel(),
   output: 'static',
+  build: {
+    inlineStylesheets: 'always',
+  },
   vite: {
     plugins: [tailwindcss()],
   },

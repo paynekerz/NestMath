@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   DEFAULT_CC_INPUTS,
   calcCreditCardPayoff,
@@ -11,8 +11,6 @@ import { CreditCardPayoffSummary } from './CreditCardPayoffSummary';
 import { CreditCardPayoffChart } from './CreditCardPayoffChart';
 import { CreditCardPayoffTable } from './CreditCardPayoffTable';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 const cur2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -61,29 +59,6 @@ function buildCsv(inputs: CreditCardPayoffInputs, result: ReturnType<typeof calc
   return rows.join('\n');
 }
 
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'How long will it take to pay off my credit card?',
-    a: "It depends on your balance, interest rate, and monthly payment. At the national average APR of around 22%, a $5,000 balance paid with $150/month takes about 42 months and costs roughly $1,300 in interest. This calculator shows you the exact timeline and total cost for your numbers — and compares it against what minimum payments would cost.",
-  },
-  {
-    q: 'How much does the minimum payment really cost me?',
-    a: "A lot more than you think. Minimum payments are typically 2% of your remaining balance, which shrinks as the balance drops — so you pay very little principal each month. On a $5,000 balance at 22% APR, paying minimums can take over 20 years and cost more in interest than your original debt. Even a small increase above the minimum makes a significant difference.",
-  },
-  {
-    q: 'What is the fastest way to pay off credit card debt?',
-    a: "The fastest way is to pay as much as you can afford above the minimum each month. If you have multiple cards, the avalanche method (highest APR first) minimizes total interest paid — and the snowball method (smallest balance first) gives faster psychological wins. Either way, stop adding new charges to the card while paying it off.",
-  },
-  {
-    q: 'Is it better to pay off credit card debt or invest?',
-    a: "If your credit card APR is higher than your expected investment return, pay off the debt first. At 22% APR, the guaranteed 'return' of eliminating that interest beats typical market returns of 7–10%. Once high-APR debt is gone, redirect those payments toward investing. Low-rate debt (below 5%) is a closer call — investing may win there.",
-  },
-  {
-    q: 'How is credit card interest calculated?',
-    a: "Credit card interest accrues daily but is typically charged monthly. The daily rate is your APR divided by 365. Each day, interest is added to your average daily balance. This calculator simplifies to monthly compounding — the difference is negligible for planning purposes. The key insight: interest is charged on your entire remaining balance, so every dollar of principal you pay down reduces next month's interest charge.",
-  },
-];
-
 export function CreditCardPayoffCalculator() {
   const [inputs, setInputs] = useState<CreditCardPayoffInputs>(DEFAULT_CC_INPUTS);
 
@@ -100,6 +75,20 @@ export function CreditCardPayoffCalculator() {
     () => (hasErrors(errors) ? null : calcCreditCardPayoff(inputs)),
     [inputs, errors],
   );
+
+  useEffect(() => {
+    if (!result) return;
+    try {
+      localStorage.setItem('nm_debt', JSON.stringify({
+        totalDebt: inputs.balance,
+        monthsToDebtFree: result.payoffMonths,
+        monthlyPayment: result.effectivePayment,
+        updatedAt: new Date().toISOString(),
+      }));
+    } catch {
+      // localStorage may be unavailable
+    }
+  }, [result, inputs.balance]);
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -122,7 +111,7 @@ export function CreditCardPayoffCalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">Credit Card Payoff Calculator</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">See when you'll be debt-free and how much interest you'll save vs. paying minimums.</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Enter your balance, APR, and monthly payment to see your exact payoff date and total interest paid, plus a side-by-side comparison showing how much faster and cheaper your plan is compared to making minimum payments only.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -177,7 +166,7 @@ export function CreditCardPayoffCalculator() {
 
       {/* Ko-fi nudge */}
       {result && (
-        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
           If this helped you tackle your debt,{' '}
           <KofiButton label="☕ a coffee seems fair." />
         </p>
@@ -190,9 +179,6 @@ export function CreditCardPayoffCalculator() {
         </div>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

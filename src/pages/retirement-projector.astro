@@ -1,6 +1,29 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import { RetirementProjectorCalculator } from '../components/RetirementProjector/RetirementProjectorCalculator';
+
+const faqItems = [
+  {
+    q: "How do I know if I'm on track to retire?",
+    a: "A common benchmark is the 25x rule: multiply your expected annual retirement spending by 25 to get your target portfolio balance. This is derived from the 4% rule — withdrawing 4% of your portfolio per year has historically sustained a 30-year retirement. If your projected balance at retirement exceeds 25x your expected expenses, you're on track. If there's a shortfall, the calculator shows you the gap so you can decide whether to contribute more, retire later, or expect to spend less."
+  },
+  {
+    q: "How does employer 401(k) matching work?",
+    a: "Employer matching is free money added to your retirement account based on your contribution. A common match is 100% of your contributions up to 4% of your salary — meaning if you earn $75,000 and contribute 4% ($3,000), your employer also adds $3,000, for a total of $6,000 contributed that year. This calculator accepts a match percentage and a match limit (as a % of salary) to model the exact dollar value of your employer's contributions over your career."
+  },
+  {
+    q: "What is the 4% rule for retirement?",
+    a: "The 4% rule is a guideline developed from historical market data suggesting that retirees can withdraw 4% of their portfolio in year one and increase withdrawals with inflation each year, with a high probability of not running out of money over a 30-year retirement. It's based on research by William Bengen using US stock and bond returns. The rule works best as a planning benchmark — actual withdrawal strategy in retirement depends on market conditions, portfolio allocation, and personal spending flexibility."
+  },
+  {
+    q: "What is an inflation-adjusted retirement balance?",
+    a: "The inflation-adjusted balance (also called the 'real' balance or 'today's dollars' balance) shows what your projected retirement savings would be worth in terms of current purchasing power. A projected balance of $1.5 million in 35 years is not the same as $1.5 million today — inflation at 2.5% per year means that $1.5 million in 35 years buys roughly what $600,000 buys today. The inflation-adjusted figure lets you compare your projected outcome against today's cost of living."
+  },
+  {
+    q: "How much should I contribute to my 401(k)?",
+    a: "At minimum, contribute enough to capture your full employer match — that's a guaranteed 50–100% return on those dollars. Beyond the match, a common target is 15% of gross income toward retirement (including the employer match). The 2025 401(k) contribution limit is $23,500 for employees under 50, with a $7,500 catch-up contribution allowed for those 50 and older. If you can't reach 15% immediately, increase your contribution rate by 1% per year until you get there."
+  }
+];
 ---
 <Base
   title="401(k) / Retirement Projector — NestMath"
@@ -10,5 +33,94 @@ import { RetirementProjectorCalculator } from '../components/RetirementProjector
   schemaDescription="Free retirement projector. Enter your age, balance, contributions, and employer match to see your projected balance, inflation-adjusted value, estimated monthly income, and whether you're on track."
   breadcrumbTool="401(k) Projector"
 >
-  <RetirementProjectorCalculator client:load />
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
+    <RetirementProjectorCalculator client:load />
+  </div>
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The projection uses the future value formula for compound growth with annual contributions: FV = PV × (1 + r)^n + PMT × ((1 + r)^n − 1) / r, where r is the annual return rate, n is years until retirement, PV is your current balance, and PMT is your total annual contribution. The calculator adds your employer match to PMT each year (match = min(contribution%, matchLimit%) × salary), so the total annual contribution reflects both your savings and your employer's.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The inflation-adjusted balance divides the nominal projected balance by (1 + inflation rate)^n. This converts the future dollar amount into today's purchasing power, giving you a more realistic sense of what your savings will actually be worth when you retire. For example, projecting $1.2 million in 30 years at 2.5% inflation is equivalent to about $570,000 in today's dollars, which is still substantial but importantly different from the nominal number.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The estimated monthly income applies the 4% rule to the inflation-adjusted balance: (inflation-adjusted balance × 4%) ÷ 12. This is not a guarantee. It is a commonly used planning benchmark based on historical portfolio sustainability research. The target balance is calculated as 25× your expected annual expenses (the inverse of the 4% rule). If you leave the target income field blank, the calculator defaults to 25× the implied annual spend derived from your salary inputs.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The shortfall/surplus metric is the difference between your projected balance and your target balance. A surplus means your savings rate is on track; a shortfall tells you how large the gap is so you can decide how to close it: higher contributions, a later retirement date, or a lower spending target in retirement. Small changes in contribution rate or retirement age have surprisingly large effects due to compounding, which is why the year-by-year table is useful for experimenting.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The employer match total shows the cumulative lifetime dollars your employer contributes. This number is often striking. On a $75,000 salary with a 4% match over 35 years growing at 7%, the employer match alone can grow to over $300,000. This underscores why capturing the full match is the highest-priority retirement savings decision most employees face.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+      <div class="flex flex-col gap-[8px]">
+        {faqItems.map((item) => (
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[12px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              {item.q}
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+      <div class="grid sm:grid-cols-2 gap-[12px]">
+        <a href="/roth-vs-traditional" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Roth vs. Traditional IRA Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Find which account type saves you more in taxes at retirement</p>
+        </a>
+        <a href="/investment-fees" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Investment Fee Impact Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See how expense ratios compound into large losses over 30 years</p>
+        </a>
+        <a href="/social-security-break-even" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Social Security Break-Even Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Find the optimal age to start claiming Social Security benefits</p>
+        </a>
+        <a href="/hysa-calculator" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">HYSA Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Project your cash savings growth in a high-yield account</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('details.faq-item').forEach(details => {
+      const summary = details.querySelector('summary');
+      const grid = details.querySelector(':scope > div') as HTMLElement | null;
+      const chevron = summary?.querySelector('.faq-chevron');
+      summary?.addEventListener('click', e => {
+        e.preventDefault();
+        const isOpen = details.open;
+        if (!isOpen) {
+          details.open = true;
+          requestAnimationFrame(() => {
+            if (grid) grid.style.gridTemplateRows = '1fr';
+            chevron?.classList.add('rotate-180');
+          });
+        } else {
+          if (grid) grid.style.gridTemplateRows = '0fr';
+          chevron?.classList.remove('rotate-180');
+          grid?.addEventListener('transitionend', () => { details.open = false; }, { once: true });
+        }
+      });
+    });
+  </script>
+
 </Base>

@@ -9,8 +9,6 @@ import { SocialSecurityInputs as SocialSecurityInputsPanel } from './SocialSecur
 import { SocialSecuritySummary } from './SocialSecuritySummary';
 import { SocialSecurityChart } from './SocialSecurityChart';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 function buildCsv(inputs: SocialSecurityInputs, result: ReturnType<typeof calcSocialSecurity>): string {
@@ -50,29 +48,6 @@ function buildCsv(inputs: SocialSecurityInputs, result: ReturnType<typeof calcSo
   return rows.join('\n');
 }
 
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'At what age should I claim Social Security?',
-    a: "It depends on your life expectancy and financial situation. Claiming at 62 gives you money sooner but at 30% less than your full benefit. Waiting until 67 (Full Retirement Age for most people) gives you 100%. Delaying to 70 gives you 124%. The break-even point — when waiting pays off — is typically around age 78–80 for the 62 vs. 67 choice and age 82–84 for the 67 vs. 70 choice. If you expect to live past those ages, waiting is usually smarter.",
-  },
-  {
-    q: 'What happens if I claim Social Security at 62?',
-    a: "Claiming at 62 — the earliest age — permanently reduces your monthly benefit by about 30% compared to claiming at your Full Retirement Age (67 for most people). That reduction never goes away, even after you reach 67. On the plus side, you start collecting 5 years earlier. If you're in poor health, need the income, or expect a shorter-than-average lifespan, claiming early can make sense. The typical break-even point is your late 70s.",
-  },
-  {
-    q: 'Is it better to take Social Security early or wait?',
-    a: "Mathematically, if you live past the break-even age (typically 78–80 for the 62 vs. 67 choice), waiting is better. In practice, other factors matter: Do you need the income now? Do you have other retirement savings to bridge the gap? Are you still working? If you're healthy and have other income sources to cover ages 62–67 or 62–70, delaying nearly always pays off more over a lifetime.",
-  },
-  {
-    q: 'What is the Social Security break-even age?',
-    a: "The break-even age is the point at which the cumulative lifetime benefits from a later claiming strategy overtake the cumulative total from claiming earlier. For example, if claiming at 67 overtakes claiming at 62 at age 79, then anyone who lives past 79 would have been financially better off waiting. This calculator shows you your personal break-even ages based on your estimated benefit.",
-  },
-  {
-    q: 'Will Social Security run out of money?',
-    a: "The Social Security trust fund is projected to be depleted in the mid-2030s. This does NOT mean benefits go to zero — ongoing payroll taxes would still cover roughly 75–80% of scheduled benefits. Congress has always acted before trust fund depletion to prevent cuts, but there are no guarantees. This calculator includes a toggle to model the conservative scenario where benefits are reduced by 25%.",
-  },
-];
-
 export function SocialSecurityCalculator() {
   const [inputs, setInputs] = useState<SocialSecurityInputs>(DEFAULT_SS_INPUTS);
 
@@ -107,7 +82,7 @@ export function SocialSecurityCalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">Social Security Break-Even Calculator</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">Find the optimal claiming age based on your income, life expectancy, and a realistic view of trust fund uncertainty.</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Enter your income and planned claiming age to compare cumulative lifetime Social Security benefits at 62, 67, and 70, and see the break-even ages that determine when delayed claiming pays off.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -161,15 +136,12 @@ export function SocialSecurityCalculator() {
 
       {/* Ko-fi nudge */}
       {result && (
-        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
           If this helped you think through your Social Security strategy,{' '}
           <KofiButton label="☕ a coffee seems fair." />
         </p>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

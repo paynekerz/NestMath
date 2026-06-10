@@ -35,7 +35,7 @@ export function RefinanceSummary({ result }: Props) {
         {result?.worthIt && (
           <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-label-sm font-semibold bg-success-emerald/10 text-success-emerald border border-success-emerald/20">
             <span className="w-1.5 h-1.5 rounded-full bg-success-emerald animate-pulse inline-block" />
-            DRAFT - High Opportunity
+            High Opportunity
           </span>
         )}
       </div>
@@ -80,10 +80,10 @@ export function RefinanceSummary({ result }: Props) {
           <div className="bg-success-emerald/5 border-t border-success-emerald/10 px-lg py-sm">
             <p className="text-body-sm text-on-surface-variant">
               {!hasPositiveSavings
-                ? 'DRAFT - The new rate does not lower your monthly payment. Refinancing is not recommended with these numbers.'
+                ? 'The new rate does not lower your monthly payment. Refinancing is not recommended with these numbers.'
                 : result.worthIt
-                ? `DRAFT - Break-even by ${breakEvenDateStr(result.breakEvenMonths!)} — refinancing saves money before your loan ends.`
-                : `DRAFT - Break-even falls after your loan ends. These terms do not justify the closing costs.`}
+                ? `Break-even by ${breakEvenDateStr(result.breakEvenMonths!)}. Refinancing saves money before your loan ends.`
+                : `Break-even falls after your loan ends. These terms do not justify the closing costs.`}
             </p>
           </div>
         </>

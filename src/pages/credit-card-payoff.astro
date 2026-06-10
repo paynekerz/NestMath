@@ -1,6 +1,29 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import { CreditCardPayoffCalculator } from '../components/CreditCardPayoff/CreditCardPayoffCalculator';
+
+const faqItems = [
+  {
+    q: "How long does it take to pay off a credit card with minimum payments?",
+    a: "It depends on your balance and APR, but minimum payments are deliberately designed to keep you in debt for a very long time. On a $5,000 balance at 22% APR, paying 2% of the balance ($100 at first, decreasing over time) takes roughly 30 years and costs more than $8,000 in interest — nearly triple the original balance. Paying a fixed $150/month on the same balance cuts the timeline to about 4 years and saves over $6,000 in interest."
+  },
+  {
+    q: "What is the minimum payment on a credit card?",
+    a: "Most credit card issuers calculate minimum payments as a percentage of the outstanding balance — typically 1–3% — or a flat dollar floor, whichever is greater. A common formula is 2% of the balance or $25, whichever is higher. This calculator uses 2% / $25 minimum for the comparison track. Because the payment amount shrinks as the balance shrinks, minimum payment schedules are front-loaded with interest charges and back-loaded with principal reduction."
+  },
+  {
+    q: "Is it better to pay more than the minimum on a credit card?",
+    a: "Yes — substantially. Even a modest increase above the minimum has a large impact when interest rates are high. On a $5,000 balance at 22% APR, doubling the minimum payment from $100 to $200 cuts payoff time from 30 years to 3 years and saves over $7,000 in interest. The effect is nonlinear: the more you pay above the minimum, the faster the balance falls, the less interest accrues, and the more of each subsequent payment goes toward principal."
+  },
+  {
+    q: "What APR is considered high for a credit card?",
+    a: "The national average credit card APR as of 2025 is approximately 21–23%. Anything above 20% should be treated as a high-priority payoff target. Store cards and subprime cards frequently charge 28–36%. The credit card payoff calculator uses 22% as its default to reflect the national average — if your actual card rate is higher, update that field first, as the interest calculation is very sensitive to APR."
+  },
+  {
+    q: "Should I pay off debt or invest first?",
+    a: "The mathematically correct answer is to compare your debt's APR against your expected investment return. Credit card debt at 22% is a guaranteed 22% return when you pay it off — no market investment reliably beats that. Most financial advisors recommend paying off any debt above 7–10% APR before investing beyond an employer 401(k) match. Exception: if an employer matches 401(k) contributions, capture that match first — it's a 50–100% instant return that beats even high-interest debt payoff."
+  }
+];
 ---
 <Base
   title="Credit Card Payoff Calculator — NestMath"
@@ -10,5 +33,94 @@ import { CreditCardPayoffCalculator } from '../components/CreditCardPayoff/Credi
   schemaDescription="Calculate your credit card payoff timeline and see how much interest you save compared to minimum payments."
   breadcrumbTool="Credit Card Payoff"
 >
-  <CreditCardPayoffCalculator client:load />
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
+    <CreditCardPayoffCalculator client:load />
+  </div>
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator runs a month-by-month amortization loop. Each month it calculates interest as balance × (APR ÷ 12), adds that interest to the balance, then subtracts your fixed monthly payment. This continues until the balance reaches zero. The number of iterations is your payoff timeline; the sum of all interest charges is your total interest paid.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The minimum payment comparison runs in parallel with a different payment rule: each month it uses 2% of the remaining balance or $25, whichever is greater, which is the standard formula most major card issuers use. Because this payment shrinks as the balance falls, payoff takes dramatically longer than paying a fixed amount. The comparison track always assumes the minimum payment continues until zero, never rounding up.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">You can also work backward: enter your desired payoff timeline in months and the calculator will compute the fixed monthly payment needed to hit that target. This is useful for fitting a payoff plan into your budget: decide how many months you want to be debt-free, then see if the required payment is achievable.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The payoff date is the month and year your balance reaches zero. Interest saved vs. minimum is the most impactful number on this page. It shows the concrete dollar cost of a more passive approach to repayment. On high-APR balances, this figure is often larger than the original balance itself, making the decision to pay aggressively one of the highest-return financial moves available to most households.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The month-by-month table breaks down each payment into its principal and interest components. In the early months of a high-APR balance, most of each payment goes toward interest, which is why high-interest debt feels so hard to pay down at first. As the balance falls, the interest portion shrinks and principal paydown accelerates. Seeing this progression month by month often makes the case for paying more now rather than later.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+      <div class="flex flex-col gap-[8px]">
+        {faqItems.map((item) => (
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[12px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              {item.q}
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+      <div class="grid sm:grid-cols-2 gap-[12px]">
+        <a href="/debt-payoff-planner" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Debt Payoff Strategy Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Compare avalanche vs. snowball across all your debts at once</p>
+        </a>
+        <a href="/student-loan-payoff" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Student Loan Payoff Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See how extra payments shorten your loan term and save interest</p>
+        </a>
+        <a href="/emergency-fund" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Emergency Fund Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Make sure you have a buffer before aggressively paying debt</p>
+        </a>
+        <a href="/budget" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Personal Budget Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Find money in your budget to accelerate debt payoff</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('details.faq-item').forEach(details => {
+      const summary = details.querySelector('summary');
+      const grid = details.querySelector(':scope > div') as HTMLElement | null;
+      const chevron = summary?.querySelector('.faq-chevron');
+      summary?.addEventListener('click', e => {
+        e.preventDefault();
+        const isOpen = details.open;
+        if (!isOpen) {
+          details.open = true;
+          requestAnimationFrame(() => {
+            if (grid) grid.style.gridTemplateRows = '1fr';
+            chevron?.classList.add('rotate-180');
+          });
+        } else {
+          if (grid) grid.style.gridTemplateRows = '0fr';
+          chevron?.classList.remove('rotate-180');
+          grid?.addEventListener('transitionend', () => { details.open = false; }, { once: true });
+        }
+      });
+    });
+  </script>
+
 </Base>

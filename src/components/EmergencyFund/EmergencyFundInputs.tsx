@@ -68,7 +68,7 @@ export function EmergencyFundInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('monthlyExpenses', v)}
             prefix="$"
             step={100}
-            tooltip="Your true monthly essentials: rent or mortgage, food, utilities, insurance, and minimum debt payments. Exclude discretionary spending — this is your floor if income stopped."
+            tooltip="Your true monthly essentials: rent or mortgage, food, utilities, insurance, and minimum debt payments. Exclude discretionary spending. This is your floor if income stopped."
             error={errors.monthlyExpenses}
           />
           <Field
@@ -78,7 +78,7 @@ export function EmergencyFundInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('currentSavings', v)}
             prefix="$"
             step={500}
-            tooltip="Cash you already have set aside for emergencies — money in a savings account you could access quickly. Don't include investments or retirement accounts."
+            tooltip="Cash you already have set aside for emergencies: money in a savings account you could access quickly. Don't include investments or retirement accounts."
             error={errors.currentSavings}
           />
         </div>
@@ -104,7 +104,7 @@ export function EmergencyFundInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('monthlySavings', v)}
             prefix="$"
             step={50}
-            tooltip="How much you can add to your emergency fund each month. Even $100/month makes a meaningful difference — consistency matters more than the amount."
+            tooltip="How much you can add to your emergency fund each month. Even $100/month makes a meaningful difference; consistency matters more than the amount."
             error={errors.monthlySavings}
           />
           <Field

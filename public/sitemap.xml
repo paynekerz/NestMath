@@ -4,60 +4,168 @@
     <loc>https://nestmath.app/</loc>
     <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
   </url>
+
+  <!-- Home Buying -->
   <url>
     <loc>https://nestmath.app/buy-vs-rent</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://nestmath.app/affordability</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nestmath.app/payoff</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nestmath.app/savings-planner</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nestmath.app/refinance</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Budgeting -->
+  <url>
+    <loc>https://nestmath.app/budget</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://nestmath.app/raise-vs-job-hop</loc>
-    <lastmod>2026-06-03</lastmod>
+    <loc>https://nestmath.app/dashboard</loc>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://nestmath.app/renovation-roi</loc>
-    <lastmod>2026-06-03</lastmod>
+    <loc>https://nestmath.app/emergency-fund</loc>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://nestmath.app/car-lease-vs-buy</loc>
-    <lastmod>2026-06-03</lastmod>
+    <loc>https://nestmath.app/net-worth</loc>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Investing -->
+  <url>
+    <loc>https://nestmath.app/hysa-calculator</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nestmath.app/investment-fees</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nestmath.app/retirement-projector</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nestmath.app/roth-vs-traditional</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nestmath.app/social-security-break-even</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Debt -->
+  <url>
+    <loc>https://nestmath.app/credit-card-payoff</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nestmath.app/student-loan-payoff</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nestmath.app/debt-payoff-planner</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Life & Career -->
+  <url>
+    <loc>https://nestmath.app/raise-vs-job-hop</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nestmath.app/renovation-roi</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nestmath.app/car-lease-vs-buy</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://nestmath.app/effective-hourly</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://nestmath.app/hysa-calculator</loc>
-    <lastmod>2026-06-03</lastmod>
+    <loc>https://nestmath.app/tax-withholding</loc>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nestmath.app/side-income</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Content -->
+  <url>
+    <loc>https://nestmath.app/glossary</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nestmath.app/about</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

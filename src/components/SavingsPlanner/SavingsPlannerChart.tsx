@@ -10,6 +10,7 @@ import {
   ReferenceDot,
 } from 'recharts';
 import type { SavingsPlannerResult, SavingsPlannerMonthResult } from '../../lib/savings';
+import { usePrintChart } from '../../lib/usePrintChart';
 
 interface Props {
   result: SavingsPlannerResult;
@@ -32,10 +33,11 @@ function dateRange(result: SavingsPlannerResult): string {
   if (!lastMonth) return String(nowYear);
   const end = new Date();
   end.setMonth(end.getMonth() + lastMonth.month);
-  return `${nowYear} — ${end.getFullYear()}`;
+  return `${nowYear}–${end.getFullYear()}`;
 }
 
 export function SavingsPlannerChart({ result, currentSavings, bullCaseMonths }: Props) {
+  const chartRef = usePrintChart();
   const data = [
     {
       month: 0,
@@ -57,7 +59,7 @@ export function SavingsPlannerChart({ result, currentSavings, bullCaseMonths }: 
     : null;
 
   return (
-    <div className="glass-card p-xl rounded-xl">
+    <div ref={chartRef} data-print="chart" className="glass-card p-xl rounded-xl">
       {/* Header */}
       <div className="flex items-start justify-between mb-xs">
         <div>
@@ -79,6 +81,7 @@ export function SavingsPlannerChart({ result, currentSavings, bullCaseMonths }: 
         </div>
       </div>
 
+      <div role="img" aria-label="Growth Trajectory chart">
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data} margin={{ top: 8, right: 16, left: 0, bottom: 16 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="oklch(25% 0.01 240)" />
@@ -135,7 +138,7 @@ export function SavingsPlannerChart({ result, currentSavings, bullCaseMonths }: 
               stroke="oklch(15% 0.01 240)"
               strokeWidth={2}
               label={{
-                value: 'DRAFT - Milestone Reached',
+                value: 'Milestone Reached',
                 position: 'top',
                 fill: 'oklch(70% 0.15 150)',
                 fontSize: 10,
@@ -163,6 +166,7 @@ export function SavingsPlannerChart({ result, currentSavings, bullCaseMonths }: 
           )}
         </LineChart>
       </ResponsiveContainer>
+      </div>
     </div>
   );
 }

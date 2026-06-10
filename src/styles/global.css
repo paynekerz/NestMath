@@ -72,9 +72,49 @@
   --spacing-gutter:  24px;
 }
 
+/* ─── Light mode overrides ───────────────────────── */
+:root[data-theme="light"] {
+  --color-background:                oklch(98% 0.01 240);
+  --color-surface:                   oklch(96% 0.01 240);
+  --color-surface-elevated:          oklch(94% 0.01 240);
+  --color-surface-container-lowest:  oklch(99% 0.01 240);
+  --color-surface-container-low:     oklch(93% 0.01 240);
+  --color-surface-container:         oklch(91% 0.01 240);
+  --color-surface-container-high:    oklch(88% 0.01 240);
+  --color-surface-container-highest: oklch(85% 0.01 240);
+
+  --color-border-subtle:             oklch(80% 0.01 240);
+  --color-outline:                   oklch(55% 0.01 240);
+  --color-outline-variant:           oklch(75% 0.01 240);
+
+  --color-on-surface:                oklch(15% 0.01 240);
+  --color-on-surface-variant:        oklch(40% 0.01 240);
+
+  --color-primary:                   oklch(40% 0.18 250);
+  --color-primary-container:         oklch(85% 0.1 250);
+  --color-on-primary-container:      oklch(20% 0.18 250);
+
+  --color-secondary:                 oklch(35% 0.08 250);
+  --color-secondary-container:       oklch(88% 0.06 250);
+  --color-on-secondary-container:    oklch(25% 0.08 250);
+
+  --color-error:                     oklch(40% 0.2 25);
+  --color-error-container:           oklch(90% 0.05 25);
+}
+
+:root[data-theme="light"] .glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: oklch(80% 0.01 240);
+}
+
+:root[data-theme="light"] .zebra-row:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
 /* ─── Base ───────────────────────────────────────── */
 html {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -242,6 +282,25 @@ input[type="number"]:hover {
     color: #111827 !important;
   }
 
+  /* Force all background colors to print — otherwise browsers strip them */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Reset entrance animations — browsers restart them on print, starting at opacity: 0 */
+  .animate-reveal,
+  .animate-slide-up {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Full-width results column (input aside is already data-print="hide") */
+  [data-print="results-main"] {
+    grid-column: 1 / -1 !important;
+  }
+
   [data-print="hide"] {
     display: none !important;
   }
@@ -253,6 +312,29 @@ input[type="number"]:hover {
 
   [data-print="table"] {
     display: table !important;
+  }
+
+  /* Compress table columns to fit ~744px print area */
+  [data-print="table"] th,
+  [data-print="table"] td {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    font-size: 11px !important;
+  }
+
+  /* Tooltip icons are interactive-only — remove them to reclaim header width */
+  [data-print="table"] th button {
+    display: none !important;
+  }
+
+  /* Force collapsed breakdowns to expand */
+  .grid:has([data-print="table-container"]) {
+    grid-template-rows: 1fr !important;
+  }
+  .grid:has([data-print="table-container"]) > .overflow-hidden {
+    overflow: visible !important;
   }
 
   [data-print="title"]::before {
@@ -275,6 +357,17 @@ input[type="number"]:hover {
     background: white !important;
     backdrop-filter: none !important;
     border-color: #9ca3af !important;
+  }
+
+  /* ─── Prevent cards from splitting across page breaks ─── */
+  .glass-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* ─── Keep budget overview two-column in print ─── */
+  [data-budget-layout] {
+    grid-template-columns: 1fr 1fr !important;
   }
 
 }

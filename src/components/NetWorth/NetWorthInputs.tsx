@@ -62,7 +62,7 @@ export function NetWorthInputs({ inputs, onChange, errors, showYoy, onToggleYoy 
               label="Checking / savings"
               value={inputs.checkingSavings}
               onChange={v => onChange('checkingSavings', v)}
-              tooltip="Cash in your checking and savings accounts — money you can access right now."
+              tooltip="Cash in your checking and savings accounts: money you can access right now."
               error={errors.checkingSavings}
             />
             <Field
@@ -94,7 +94,7 @@ export function NetWorthInputs({ inputs, onChange, errors, showYoy, onToggleYoy 
               label="Vehicle value"
               value={inputs.vehicleValue}
               onChange={v => onChange('vehicleValue', v)}
-              tooltip="Current market value of your car(s) — check Kelley Blue Book or a similar source. Don't subtract the loan balance here; enter that under liabilities."
+              tooltip="Current market value of your car(s); check Kelley Blue Book or a similar source. Don't subtract the loan balance here; enter that under liabilities."
               error={errors.vehicleValue}
             />
             <Field
@@ -136,7 +136,7 @@ export function NetWorthInputs({ inputs, onChange, errors, showYoy, onToggleYoy 
               label="Credit card balances"
               value={inputs.creditCardBalances}
               onChange={v => onChange('creditCardBalances', v)}
-              tooltip="Total balances across all credit cards — use the statement balance or current balance, not the credit limit."
+              tooltip="Total balances across all credit cards; use the statement balance or current balance, not the credit limit."
               error={errors.creditCardBalances}
             />
             <Field
@@ -144,7 +144,7 @@ export function NetWorthInputs({ inputs, onChange, errors, showYoy, onToggleYoy 
               label="Student loans"
               value={inputs.studentLoans}
               onChange={v => onChange('studentLoans', v)}
-              tooltip="Remaining balance on all student loans — both federal and private. Check your loan servicer's dashboard."
+              tooltip="Remaining balance on all student loans: both federal and private. Check your loan servicer's dashboard."
               error={errors.studentLoans}
             />
             <Field

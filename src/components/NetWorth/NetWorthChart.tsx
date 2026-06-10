@@ -1,5 +1,6 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import type { NetWorthResult, NetWorthSlice } from '../../lib/net-worth';
+import { usePrintChart } from '../../lib/usePrintChart';
 
 interface Props {
   result: NetWorthResult;
@@ -52,7 +53,7 @@ function DonutChart({ title, data, total, colors, emptyLabel, totalLabel }: Donu
         </div>
       ) : (
         <>
-          <div className="relative">
+          <div className="relative" role="img" aria-label={`${title} chart`}>
             <ResponsiveContainer width="100%" height={200}>
               <PieChart>
                 <Pie
@@ -119,8 +120,9 @@ function DonutChart({ title, data, total, colors, emptyLabel, totalLabel }: Donu
 }
 
 export function NetWorthChart({ result }: Props) {
+  const chartRef = usePrintChart();
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4" data-print="chart">
+    <div ref={chartRef} className="grid grid-cols-1 md:grid-cols-2 gap-4" data-print="chart">
       <DonutChart
         title="Assets Breakdown"
         data={result.assetBreakdown}

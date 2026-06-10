@@ -1,15 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { SettingsMenu } from './SettingsMenu';
 
 interface Tool {
   href: string;
   label: string;
   desc: string;
 }
-
-const BUDGET_TOOLS: Tool[] = [
-  { href: '/emergency-fund', label: 'Emergency Fund',    desc: 'Do I have enough saved for an emergency?' },
-  { href: '/net-worth',      label: 'Net Worth Snapshot', desc: 'What am I actually worth right now?' },
-];
 
 const HOME_TOOLS: Tool[] = [
   { href: '/buy-vs-rent',     label: 'Buy vs. Rent',     desc: 'Should I buy or rent?' },
@@ -22,14 +18,15 @@ const HOME_TOOLS: Tool[] = [
 const DEBT_TOOLS: Tool[] = [
   { href: '/credit-card-payoff',   label: 'Credit Card Payoff',   desc: 'When will my credit card be paid off?' },
   { href: '/student-loan-payoff',  label: 'Student Loan Payoff',  desc: 'How long until my loans are gone?' },
-  { href: '/debt-payoff-planner',  label: 'Debt Payoff Planner',  desc: 'Avalanche vs. snowball — which saves more?' },
+  { href: '/debt-payoff-planner',  label: 'Debt Payoff Planner',  desc: 'Avalanche vs. snowball: which saves more?' },
 ];
 
 const INVEST_TOOLS: Tool[] = [
   { href: '/hysa-calculator',        label: 'HYSA Calculator',        desc: 'How much will my savings earn?' },
   { href: '/investment-fees',        label: 'Investment Fees',        desc: 'How much do fees cost me?' },
   { href: '/retirement-projector',   label: '401(k) Projector',       desc: 'Am I on track to retire?' },
-  { href: '/roth-vs-traditional',    label: 'Roth vs. Traditional',   desc: 'Which IRA saves me more in taxes?' },
+  { href: '/roth-vs-traditional',        label: 'Roth vs. Traditional',   desc: 'Which IRA saves me more in taxes?' },
+  { href: '/social-security-break-even', label: 'Social Security',        desc: 'When should I claim Social Security?' },
 ];
 
 const LIFE_TOOLS: Tool[] = [
@@ -37,6 +34,8 @@ const LIFE_TOOLS: Tool[] = [
   { href: '/renovation-roi',    label: 'Renovation ROI',     desc: 'Is renovating worth it?' },
   { href: '/car-lease-vs-buy',  label: 'Car Lease vs. Buy',  desc: 'Should I lease or buy a car?' },
   { href: '/effective-hourly',  label: 'Effective Hourly',   desc: 'What am I actually making?' },
+  { href: '/tax-withholding',   label: 'Tax Withholding',    desc: 'Am I withholding enough?' },
+  { href: '/side-income',       label: 'Side Income',        desc: 'What does freelance income net after taxes?' },
 ];
 
 function ToolDropdown({
@@ -100,8 +99,25 @@ interface NavProps {
 export function Nav({ currentPath }: NavProps) {
   const normalized = currentPath === '/' ? '/' : currentPath.replace(/\/$/, '');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    setIsLight(document.documentElement.dataset.theme === 'light');
+  }, []);
 
   const close = () => setMobileMenuOpen(false);
+
+  function toggleTheme() {
+    const next = !isLight;
+    setIsLight(next);
+    if (next) {
+      document.documentElement.dataset.theme = 'light';
+      localStorage.setItem('theme', 'light');
+    } else {
+      delete document.documentElement.dataset.theme;
+      localStorage.removeItem('theme');
+    }
+  }
 
   const navItemClass = (href: string) =>
     'flex flex-col px-4 py-3 rounded-xl transition-colors ' +
@@ -125,7 +141,7 @@ export function Nav({ currentPath }: NavProps) {
               <img src="/favicon.svg" alt="" aria-hidden="true" className="w-8 h-8" />
               NestMath
             </a>
-            <div className="hidden md:flex items-center gap-lg">
+            <div className="hidden lg:flex items-center gap-lg">
               <a
                 href="/about"
                 className={
@@ -137,7 +153,17 @@ export function Nav({ currentPath }: NavProps) {
               >
                 About
               </a>
-              <ToolDropdown label="Budget" tools={BUDGET_TOOLS} normalized={normalized} />
+              <a
+                href="/dashboard"
+                className={
+                  'text-body-sm font-medium transition-colors pb-1 ' +
+                  (normalized === '/dashboard'
+                    ? 'text-primary border-b-2 border-primary'
+                    : 'text-on-surface-variant hover:text-primary')
+                }
+              >
+                Dashboard
+              </a>
               <ToolDropdown label="Home" tools={HOME_TOOLS} normalized={normalized} />
               <ToolDropdown label="Debt" tools={DEBT_TOOLS} normalized={normalized} />
               <ToolDropdown label="Invest" tools={INVEST_TOOLS} normalized={normalized} />
@@ -158,7 +184,7 @@ export function Nav({ currentPath }: NavProps) {
 
           {/* Right: desktop icon buttons + mobile Calculate trigger */}
           <div className="flex items-center gap-xs">
-            <div className="hidden md:flex items-center gap-xs">
+            <div className="hidden lg:flex items-center gap-xs">
               <a
                 href="https://ko-fi.com/paynekerz"
                 target="_blank"
@@ -177,21 +203,15 @@ export function Nav({ currentPath }: NavProps) {
               >
                 code
               </a>
-              <button
-                type="button"
-                aria-label="Settings"
-                className="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors p-xs rounded-lg hover:bg-surface-container-high"
-              >
-                settings
-              </button>
+              <SettingsMenu />
             </div>
 
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
               aria-expanded={mobileMenuOpen}
-              aria-label="Open navigation menu"
-              className="md:hidden ml-xs bg-primary-container text-on-primary-container px-md py-xs rounded-lg text-label-md font-semibold flex items-center gap-0.5 hover:brightness-110 transition-all active:scale-95"
+              aria-label="Calculate — open navigation menu"
+              className="lg:hidden ml-xs bg-primary-container text-on-primary-container px-md py-xs rounded-lg text-label-md font-semibold flex items-center gap-0.5 hover:brightness-110 transition-all active:scale-95"
             >
               Calculate
               <span className="material-symbols-outlined text-[16px] leading-none" aria-hidden="true">
@@ -206,12 +226,16 @@ export function Nav({ currentPath }: NavProps) {
       <div
         data-print="hide"
         className={
-          'fixed inset-0 z-50 md:hidden flex flex-col transition-all duration-300 ease-out ' +
-          (mobileMenuOpen
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none')
+          'fixed inset-0 z-50 lg:hidden flex flex-col ' +
+          (mobileMenuOpen ? 'opacity-100' : 'opacity-0')
         }
-        style={{ background: 'var(--color-surface)' }}
+        style={{
+          background: 'var(--color-surface)',
+          visibility: mobileMenuOpen ? 'visible' : 'hidden',
+          transition: mobileMenuOpen
+            ? 'opacity 0.3s ease-out, visibility 0s 0s'
+            : 'opacity 0.3s ease-out, visibility 0s 0.3s',
+        }}
         aria-hidden={!mobileMenuOpen}
       >
         {/* Atmospheric blur — matches index page */}
@@ -264,25 +288,22 @@ export function Nav({ currentPath }: NavProps) {
             className={navItemClass('/about')}
           >
             <span className="text-body-sm font-semibold">About</span>
-            <span className="text-label-sm text-on-surface-variant mt-0.5">What is NestMath and why it's free</span>
+            <span className="text-label-sm text-on-surface-variant mt-0.5">About the project and why it's free</span>
           </a>
 
-          {/* Budget section */}
+          {/* Budget — direct link to dashboard */}
           <p className="px-4 pt-5 pb-2 text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">
             Budget
           </p>
-          {BUDGET_TOOLS.map(({ href, label, desc }) => (
-            <a
-              key={href}
-              href={href}
-              aria-current={normalized === href ? 'page' : undefined}
-              onClick={close}
-              className={navItemClass(href)}
-            >
-              <span className="text-body-sm font-semibold">{label}</span>
-              <span className="text-label-sm text-on-surface-variant mt-0.5">{desc}</span>
-            </a>
-          ))}
+          <a
+            href="/dashboard"
+            aria-current={normalized === '/dashboard' ? 'page' : undefined}
+            onClick={close}
+            className={navItemClass('/dashboard')}
+          >
+            <span className="text-body-sm font-semibold">Dashboard</span>
+            <span className="text-label-sm text-on-surface-variant mt-0.5">Your full financial picture in one place</span>
+          </a>
 
           {/* Home section */}
           <p className="px-4 pt-5 pb-2 text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest">
@@ -388,11 +409,13 @@ export function Nav({ currentPath }: NavProps) {
           </a>
           <button
             type="button"
-            onClick={close}
+            onClick={toggleTheme}
             className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors"
           >
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">settings</span>
-            <span className="text-body-sm font-medium">Settings</span>
+            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+              {isLight ? 'dark_mode' : 'light_mode'}
+            </span>
+            <span className="text-body-sm font-medium">{isLight ? 'Dark mode' : 'Light mode'}</span>
           </button>
 
           {/* Bottom breathing room */}

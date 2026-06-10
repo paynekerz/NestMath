@@ -10,8 +10,6 @@ import { HYSASummary } from './HYSASummary';
 import { HYSAChart } from './HYSAChart';
 import { HYSATable } from './HYSATable';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 function buildCsv(inputs: HYSAInputs, result: ReturnType<typeof calcHYSA>): string {
@@ -56,29 +54,6 @@ function buildCsv(inputs: HYSAInputs, result: ReturnType<typeof calcHYSA>): stri
   return rows.join('\n');
 }
 
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'What is a high-yield savings account?',
-    a: "A high-yield savings account (HYSA) is a savings account that pays a significantly higher interest rate than a traditional bank savings account. HYSAs are typically offered by online banks and credit unions, which have lower overhead costs than brick-and-mortar banks and pass those savings along as higher APYs. They are FDIC-insured up to $250,000 — just like a regular savings account — so your money is protected.",
-  },
-  {
-    q: 'What is a good APY for a high-yield savings account?',
-    a: "In mid-2024 to 2025, top HYSAs were offering APYs between 4% and 5.5%, compared to the national average of around 0.45% for traditional savings accounts. A good HYSA APY is anything meaningfully above the national average — 4%+ is excellent. Rates fluctuate with the Federal Reserve's benchmark rate, so the best rate today may be different in a year. Always compare current rates from multiple providers.",
-  },
-  {
-    q: 'How much can you earn in a high-yield savings account?',
-    a: "It depends on your balance, your monthly contributions, and the APY. At 4.5% APY with a $5,000 starting balance and $300/month in contributions, you'd have about $26,700 after 5 years — earning roughly $3,900 in interest. A traditional savings account at 0.45% APY would only earn about $400 in interest over the same period. The difference compounds over time, making HYSAs especially valuable for emergency funds or short-to-medium-term savings goals.",
-  },
-  {
-    q: 'Is a high-yield savings account worth it?',
-    a: "Yes, for money you need to keep liquid — emergency funds, short-term savings goals, or cash you're waiting to deploy. The downside: HYSA rates are variable and will drop if the Fed cuts rates. For money you won't need for 5+ years, investing in index funds typically outperforms even the best HYSA over the long run. The HYSA is the right tool for savings you might need within 1–3 years.",
-  },
-  {
-    q: 'How is HYSA interest calculated?',
-    a: "HYSA interest is calculated using APY (Annual Percentage Yield), which already accounts for compounding. Most HYSAs compound daily but pay interest monthly. This calculator uses monthly compounding, which is a very close approximation. The formula is: balance × (1 + APY/12) each month, plus any new contributions. The key insight is that interest earns interest — so the longer your money sits in the account, the faster it grows.",
-  },
-];
-
 export function HYSACalculator() {
   const [inputs, setInputs] = useState<HYSAInputs>(DEFAULT_HYSA_INPUTS);
 
@@ -113,7 +88,7 @@ export function HYSACalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">High-Yield Savings Account Calculator</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">See how much more your money earns in a HYSA vs. a traditional savings account.</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Compare how much your savings grow in a high-yield savings account versus a traditional bank account. Enter your deposit, monthly contributions, and APY to see the balance difference and extra interest earned over time.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -167,7 +142,7 @@ export function HYSACalculator() {
 
       {/* Ko-fi nudge */}
       {result && (
-        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
           If this helped you find a better place for your savings,{' '}
           <KofiButton label="☕ a coffee seems fair." />
         </p>
@@ -180,9 +155,6 @@ export function HYSACalculator() {
         </div>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

@@ -58,7 +58,7 @@ export function IncomePanel({ annualIncome, onChange, tax }: Props) {
       </div>
 
       <p className="text-label-sm text-on-surface-variant/50">
-        Federal income tax estimate only — 2024 brackets, single filer, standard deduction. State taxes, FICA, and benefits not included.
+        Federal income tax estimate only. 2024 brackets, single filer, standard deduction. State taxes, FICA, and benefits not included.
       </p>
     </div>
   );

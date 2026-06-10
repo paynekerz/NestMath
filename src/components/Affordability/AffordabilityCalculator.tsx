@@ -10,8 +10,6 @@ import { validateAffordabilityInputs, hasErrors } from '../../lib/validation';
 import { AffordabilityInputs as AffordabilityInputsPanel } from './AffordabilityInputs';
 import { AffordabilityResult } from './AffordabilityResult';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 const pctFmt = (v: number) => `${(v * 100).toFixed(0)}%`;
 
@@ -55,7 +53,7 @@ function buildProInsight(inputs: AffordabilityInputs, result: AffordabilityCalcR
 
   if (dti > 0.43) {
     const debtReduction = Math.ceil(((dti - 0.36) * inputs.grossMonthlyIncome) / 10) * 10;
-    return `Your back-end DTI is in the high range. Reducing monthly debts by ${cur.format(debtReduction)} would bring you into the healthy zone and could unlock lower interest rates.`;
+    return `Your back-end DTI is too high for most lenders. Reducing monthly debts by ${cur.format(debtReduction)} brings you under the 36% threshold and may qualify you for lower rates.`;
   }
 
   if (inputs.downPaymentPct < 0.20) {
@@ -69,34 +67,11 @@ function buildProInsight(inputs: AffordabilityInputs, result: AffordabilityCalcR
       ? r === 0 ? newLoan / n : (newLoan * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1)
       : 0;
     const savings = Math.round(currentPI - newPI);
-    return `Increasing your down payment to 20% would reduce your monthly P&I by approximately ${cur.format(savings)} and eliminate PMI requirements.`;
+    return `A 20% down payment cuts your monthly P&I by ${cur.format(savings)} and eliminates PMI.`;
   }
 
-  return `At ${(dti * 100).toFixed(1)}% DTI, you qualify for most conventional loan programs. A 15-year term would build equity faster — roughly double the principal paid in the first 5 years.`;
+  return `At ${(dti * 100).toFixed(1)}% DTI, you qualify for most conventional loan programs. A 15-year term builds equity faster, roughly double the principal paid in the first 5 years.`;
 }
-
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'How much house can I afford on my salary?',
-    a: 'A common rule is that your monthly housing costs should not exceed 28% of your gross monthly income. For example, if you earn $6,000 per month, your target is $1,680 or less for principal, interest, taxes, and insurance. Use the calculator above to find the exact home price that hits that target for your rate and down payment.',
-  },
-  {
-    q: 'What is the 28% rule for buying a house?',
-    a: 'The 28% rule says your total monthly housing payment — mortgage principal and interest, property taxes, homeowner\'s insurance, and HOA dues — should not exceed 28% of your gross monthly income. It\'s the most common front-end debt-to-income benchmark used by conventional lenders.',
-  },
-  {
-    q: 'What is debt-to-income ratio for a mortgage?',
-    a: 'Debt-to-income (DTI) ratio is your total monthly debt payments divided by your gross monthly income. Lenders look at two numbers: front-end DTI (housing costs only) and back-end DTI (housing plus all other debts like car loans, student loans, and credit cards). Most conventional loans require a back-end DTI of 43% or below.',
-  },
-  {
-    q: 'How much do I need to make to afford a $400,000 house?',
-    a: 'At a 6.75% rate, 20% down, 1.2% property tax, and 0.5% insurance, a $400,000 home has a monthly PITI of roughly $2,650. To keep housing at 28% of income, you need about $9,465 per month in gross income — or roughly $114,000 per year. Use the calculator to model your exact numbers.',
-  },
-  {
-    q: 'What is front-end vs. back-end DTI?',
-    a: 'Front-end DTI covers only housing costs (mortgage payment, taxes, insurance, HOA). Back-end DTI covers all monthly debt payments — housing plus car loans, student loans, credit cards, and any other installment debt. Lenders typically want front-end at or below 28% and back-end at or below 36–43%.',
-  },
-];
 
 export function AffordabilityCalculator() {
   const [inputs, setInputs] = useState<AffordabilityInputs>(DEFAULT_AFFORDABILITY_INPUTS);
@@ -138,8 +113,8 @@ export function AffordabilityCalculator() {
 
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-headline-lg text-on-surface font-bold">Home Affordability Engine</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">Analyze your purchase power based on income, debt, and current market conditions.</p>
+          <h1 className="text-headline-lg text-on-surface font-bold">Home Affordability</h1>
+          <p className="text-body-md text-on-surface-variant mt-1">Work backward from your income to find the maximum home price you can afford under standard mortgage lending guidelines, including front-end and back-end debt-to-income ratio limits, closing costs, and cash needed to close.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -182,7 +157,7 @@ export function AffordabilityCalculator() {
                 backEndDTILimit={inputs.backEndDTI}
                 proInsight={proInsight}
               />
-              <p data-print="hide" className="text-sm text-center text-muted">
+              <p data-print="hide" className="text-body-sm text-center text-on-surface-variant">
                 If this helped you figure out your budget,{' '}
                 <KofiButton label="☕ a coffee seems fair." />
               </p>
@@ -231,9 +206,6 @@ export function AffordabilityCalculator() {
         </section>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

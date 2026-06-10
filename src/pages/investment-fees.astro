@@ -1,6 +1,29 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import { InvestmentFeesCalculator } from '../components/InvestmentFees/InvestmentFeesCalculator';
+
+const faqItems = [
+  {
+    q: "How much does a 1% expense ratio cost over 30 years?",
+    a: "The cost is far larger than most investors expect because the fee drags on a growing portfolio — you're paying 1% of a larger balance every year. On a $50,000 initial investment with $500/month contributions at 8% gross return over 30 years, the difference between a 1% expense ratio and a 0.04% index fund expense ratio is approximately $200,000–$300,000 in final portfolio value. The compounding effect on fees is as powerful as compounding on returns — just in the wrong direction."
+  },
+  {
+    q: "What is a good expense ratio for an index fund?",
+    a: "Broad market index funds from Vanguard, Fidelity, and Schwab now offer expense ratios of 0.03%–0.10%. Fidelity's ZERO funds charge 0%. For context, the average actively managed mutual fund charges 0.50%–1.25%. There is no evidence that higher-fee actively managed funds consistently outperform low-cost index funds over long periods — making the expense ratio comparison one of the most impactful financial decisions in investing."
+  },
+  {
+    q: "What is the difference between an expense ratio and a management fee?",
+    a: "An expense ratio is the annual operating cost of a fund expressed as a percentage of assets under management — it covers portfolio management, administrative costs, and distribution fees. It's automatically deducted from the fund's returns; you never see it as a separate line item. A management fee or advisory fee is charged by a financial advisor for portfolio management services, typically 0.5%–1.5% of assets. Both compound over time in the same way — this calculator models the combined effect of any percentage-of-assets fee."
+  },
+  {
+    q: "Is a 0.5% expense ratio too high?",
+    a: "For a broad market index fund, yes — there's no reason to pay 0.5% when equivalent or better alternatives charge 0.03%–0.10%. For a specialized fund (small-cap international, sector funds, REITs) or an actively managed fund where you believe in the manager's edge, 0.5% may be acceptable if net-of-fee returns justify it. The key question is: does this fund's expected net-of-fee outperformance justify the extra cost vs. the comparable index? Research consistently shows most active managers don't clear this bar over 10+ year periods."
+  },
+  {
+    q: "How do investment fees affect long-term returns?",
+    a: "Investment fees reduce your effective return rate. A fund with 8% gross returns and a 1% expense ratio delivers a 7% net return to you. Over 30 years, the difference between 7% and 8% compounded — on a $50,000 portfolio with $500/month contributions — is over $200,000. The drag compounds year over year because the fee reduces not just your current balance but the base on which all future returns are calculated. This is why low-cost investing is one of the most reliable ways to improve long-term outcomes."
+  }
+];
 ---
 <Base
   title="Investment Fee Impact Calculator — NestMath"
@@ -10,5 +33,94 @@ import { InvestmentFeesCalculator } from '../components/InvestmentFees/Investmen
   schemaDescription="Calculate the long-term dollar impact of investment expense ratios by comparing a high-fee fund against a low-cost alternative."
   breadcrumbTool="Investment Fees"
 >
-  <InvestmentFeesCalculator client:load />
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
+    <InvestmentFeesCalculator client:load />
+  </div>
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Both portfolio paths use the future value formula with monthly compounding and monthly contributions: FV = PV × (1 + r)^n + PMT × ((1 + r)^n − 1) / r, where r is the monthly net return rate. The net return is your gross annual return minus the expense ratio, converted to a monthly rate. This means the fee reduces the effective compounding rate applied each month, so the portfolio grows more slowly year after year.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Fee drag is the difference in portfolio value between the low-cost path and the current-fee path at any given year. This number grows over time because the portfolio subject to the higher fee has a smaller base on which to compound returns. Fee drag is not just the fees paid. It's the fees paid plus all the returns that would have been earned on those fees if they had remained invested.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The year-by-year table shows portfolio value under both expense ratios, the annual fee drag, and the cumulative fee drag. Watching cumulative fee drag grow in the table is often the clearest illustration of how fees compound. The number that looked small in year 1 becomes significant by year 15 and substantial by year 30.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Fee drag (%) shows what percentage of your potential low-cost portfolio value you're giving up to fees. A 15% fee drag means your high-fee portfolio is 15% smaller than it would have been in a low-cost fund. That's 15% of your retirement savings gone to fund expenses. This framing is more visceral than looking at the absolute dollar amount or the annual expense ratio percentage.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">If you're currently in higher-fee funds, the calculator shows what switching to a lower-cost alternative would be worth in today's dollars. The decision to switch isn't always straightforward. There may be tax consequences from selling (capital gains in a taxable account) or transaction costs. But for funds held in tax-advantaged accounts (401k, IRA), switching to a lower-expense equivalent is almost always the right financial move.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+      <div class="flex flex-col gap-[8px]">
+        {faqItems.map((item) => (
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[12px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              {item.q}
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+      <div class="grid sm:grid-cols-2 gap-[12px]">
+        <a href="/retirement-projector" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Retirement Savings Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Project your 401(k) balance — use a low expense ratio here too</p>
+        </a>
+        <a href="/roth-vs-traditional" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Roth vs. Traditional IRA Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Find which account type saves more in taxes over your career</p>
+        </a>
+        <a href="/hysa-calculator" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">HYSA Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Compare cash savings growth for emergency funds and short-term goals</p>
+        </a>
+        <a href="/effective-hourly" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Effective Hourly Rate Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Find how much of each working hour actually reaches your investment account</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('details.faq-item').forEach(details => {
+      const summary = details.querySelector('summary');
+      const grid = details.querySelector(':scope > div') as HTMLElement | null;
+      const chevron = summary?.querySelector('.faq-chevron');
+      summary?.addEventListener('click', e => {
+        e.preventDefault();
+        const isOpen = details.open;
+        if (!isOpen) {
+          details.open = true;
+          requestAnimationFrame(() => {
+            if (grid) grid.style.gridTemplateRows = '1fr';
+            chevron?.classList.add('rotate-180');
+          });
+        } else {
+          if (grid) grid.style.gridTemplateRows = '0fr';
+          chevron?.classList.remove('rotate-180');
+          grid?.addEventListener('transitionend', () => { details.open = false; }, { once: true });
+        }
+      });
+    });
+  </script>
+
 </Base>

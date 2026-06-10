@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import interFont from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 import { KofiButton } from '../components/ui/KofiButton';
 import { Nav } from '../components/ui/Nav';
 import { Breadcrumb } from '../components/ui/Breadcrumb';
@@ -41,23 +42,32 @@ const schema = JSON.stringify({
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      const t = localStorage.getItem("theme");
+      if (t) document.documentElement.dataset.theme = t;
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <link rel="preload" as="font" href={interFont} type="font/woff2" crossorigin />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script type="application/ld+json" set:html={schema} />
   </head>
   <body>
-    <Nav currentPath={currentPath} client:load />
+    <Nav currentPath={currentPath} client:idle />
     {breadcrumbTool && <Breadcrumb tool={breadcrumbTool} />}
     <main>
       <slot />
     </main>
-    <footer data-print="hide" class="flex items-center justify-center gap-3 py-6 text-body-sm text-on-surface-variant border-t border-border-subtle mt-auto">
+    <footer data-print="hide" class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 py-6 text-body-sm text-on-surface-variant border-t border-border-subtle mt-auto">
       <KofiButton />
       <span aria-hidden="true">·</span>
       <a href="https://github.com/paynekerz/NestMath" target="_blank" rel="noopener" class="text-primary hover:underline">GitHub</a>

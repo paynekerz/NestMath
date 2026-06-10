@@ -1,15 +1,126 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import { BuyVsRent } from '../components/BuyVsRent/BuyVsRent';
+
+const faqItems = [
+  {
+    q: "How does the buy vs. rent calculator work?",
+    a: "The calculator models the full financial picture of both paths year by year. On the buy side it tracks your mortgage amortization, home value appreciation, equity buildup, property taxes, insurance, HOA, and closing costs. On the rent side it tracks rent payments and the growth of invested capital — your down payment and the monthly difference between renting and owning. It then compares total net worth under each path and finds the first year where buying pulls ahead."
+  },
+  {
+    q: "What is a break-even year in a buy vs. rent comparison?",
+    a: "The break-even year is when cumulative homeowner net worth (home equity minus remaining mortgage, minus all buying costs) first exceeds the renter's net worth (invested savings and investment returns). Before that point, renting and investing the difference is ahead. After it, owning has the edge. If buying never catches up within your modeled horizon, the calculator says renting wins over your time frame."
+  },
+  {
+    q: "Why does opportunity cost matter in this comparison?",
+    a: "A down payment of $60,000–$80,000 is real capital. If you rent instead of buy, that money can be invested in the market. The calculator applies your assumed investment return to both the lump sum down payment and the monthly cost difference between renting and owning. This is the opportunity cost of buying — the investment growth you give up by locking capital in a home instead. Ignoring it makes buying look much more favorable than it really is."
+  },
+  {
+    q: "What assumptions should I change to get a more accurate result?",
+    a: "The most impactful inputs are home appreciation rate, investment return, and years to model. The default 3% appreciation and 7% investment return are historically reasonable long-run averages, but local real estate markets vary widely. Check recent Zillow data for your metro's appreciation trend. Also confirm your actual mortgage rate — a 0.5% difference changes the break-even year significantly. Finally, set the years-to-model to your realistic planning horizon, not the maximum."
+  },
+  {
+    q: "Does the calculator account for mortgage interest deduction?",
+    a: "Yes. The advanced assumptions panel includes a marginal tax rate input that reduces the effective cost of mortgage interest. Note that since the 2017 Tax Cuts and Jobs Act, most homeowners take the standard deduction rather than itemizing, so the mortgage interest deduction only benefits you if your itemized deductions exceed the standard deduction threshold. If you're unsure, leave the tax rate at 0% for a conservative estimate."
+  }
+];
 ---
 <Base
-  title="NestMath.app — Buy vs. Rent Calculator"
+  title="Buy vs. Rent Calculator — NestMath"
   description="Free buy vs. rent calculator that models real costs — mortgage, opportunity cost, appreciation, and taxes — and tells you the exact year buying beats renting."
   canonical="https://nestmath.app/buy-vs-rent"
   schemaName="NestMath — Buy vs. Rent Calculator"
   breadcrumbTool="Buy vs. Rent"
 >
-  <div class="max-w-[1280px] mx-auto px-[24px] py-[32px]">
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
     <BuyVsRent client:load />
   </div>
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The buy side runs a monthly amortization loop from year 1 through your modeled horizon. Each year it tracks your remaining mortgage balance, the portion of payments going to principal vs. interest, home value growth (compounded at your appreciation rate), property taxes and insurance (as a percentage of home value), plus fixed HOA and maintenance costs. Closing costs are counted as an upfront expense in year one. The result is your equity (home value minus remaining balance) minus all cumulative costs paid.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The rent side is built around opportunity cost. Your down payment is invested from day one and compounds at your assumed investment return rate. Each month, any cost difference between renting and owning (rent vs. mortgage + taxes + insurance + HOA) is also invested. This "invest the difference" model is what makes the comparison fair, as it acknowledges that renters don't just spend the money they're not putting toward a house.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Both paths produce a net worth number each year. Buy net worth is home equity minus cumulative sunk costs. Rent net worth is the total invested portfolio. The calculator scans for the first year where buy net worth exceeds rent net worth. That's your break-even year. If it never crosses within your horizon, renting wins over that time frame.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The advanced assumptions panel lets you adjust home appreciation, investment return, and marginal tax rate (for mortgage interest deduction modeling). The defaults (3% appreciation, 7% investment return) are long-run historical averages. Your local market may behave very differently.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The break-even year tells you how long you need to stay in the home for buying to be the financially better decision. If you move before that year, renting would have left you with more money. The net worth chart shows the full trajectory. Watch for how quickly the lines converge or diverge based on your inputs. A short break-even (under 5 years) usually signals a low down payment, low closing costs, or a high-appreciation market. A long break-even (over 10 years) often means high prices relative to rent, a large required down payment, or a strong investment return assumption.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The year-by-year table lets you drill into any specific point in time. You can see exactly how much equity you've built, how much a renter would have invested, and which path is ahead at any given year. This is useful if you have a specific life event in mind, such as a likely job change, a planned move, or a retirement date.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+      <div class="flex flex-col gap-[8px]">
+        {faqItems.map((item) => (
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[12px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              {item.q}
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+      <div class="grid sm:grid-cols-2 gap-[12px]">
+        <a href="/affordability" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Home Affordability Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Find your maximum home price based on income and DTI limits</p>
+        </a>
+        <a href="/payoff" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Mortgage Payoff Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See how extra payments shorten your loan and save interest</p>
+        </a>
+        <a href="/savings-planner" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Down Payment Savings Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Find out exactly when you'll have enough saved to buy</p>
+        </a>
+        <a href="/refinance" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Mortgage Refinance Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Calculate the break-even point for refinancing your loan</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('details.faq-item').forEach(details => {
+      const summary = details.querySelector('summary');
+      const grid = details.querySelector(':scope > div') as HTMLElement | null;
+      const chevron = summary?.querySelector('.faq-chevron');
+      summary?.addEventListener('click', e => {
+        e.preventDefault();
+        const isOpen = details.open;
+        if (!isOpen) {
+          details.open = true;
+          requestAnimationFrame(() => {
+            if (grid) grid.style.gridTemplateRows = '1fr';
+            chevron?.classList.add('rotate-180');
+          });
+        } else {
+          if (grid) grid.style.gridTemplateRows = '0fr';
+          chevron?.classList.remove('rotate-180');
+          grid?.addEventListener('transitionend', () => { details.open = false; }, { once: true });
+        }
+      });
+    });
+  </script>
+
 </Base>

@@ -80,10 +80,14 @@ export function DebtPayoffTable({ result }: Props) {
         </span>
       </button>
 
-      <div className={`border-t border-border-subtle${open ? '' : ' hidden'}`} data-print="table-container">
+      <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+        <div className="overflow-hidden">
+          <div className="border-t border-border-subtle" data-print="table-container">
         <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-border-subtle">
-          <StrategyTable strategy={result.avalanche} label="Avalanche — Highest APR First" />
-          <StrategyTable strategy={result.snowball}  label="Snowball — Lowest Balance First" />
+          <StrategyTable strategy={result.avalanche} label="Avalanche: Highest APR First" />
+          <StrategyTable strategy={result.snowball}  label="Snowball: Lowest Balance First" />
+        </div>
+          </div>
         </div>
       </div>
     </div>

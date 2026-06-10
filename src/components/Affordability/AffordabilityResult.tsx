@@ -52,7 +52,7 @@ export function AffordabilityResult({ result, backEndDTILimit, proInsight }: Pro
           <div className="text-left">
             <div className="flex items-center gap-1 opacity-70">
               <span className="text-label-sm">Monthly P&amp;I</span>
-              <InfoTooltip text="The part of your monthly payment that goes to principal and interest — not counting taxes or insurance." />
+              <InfoTooltip text="The part of your monthly payment that goes to principal and interest, not counting taxes or insurance." />
             </div>
             <div className="text-headline-md font-bold font-mono-data">{cur.format(result.monthlyPI)}</div>
           </div>
@@ -92,7 +92,7 @@ export function AffordabilityResult({ result, backEndDTILimit, proInsight }: Pro
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-1.5">
             <h4 className="text-label-md text-on-surface font-bold">Debt-to-Income Ratio (DTI)</h4>
-            <InfoTooltip text="All your monthly debts — housing plus car loans, student loans, and credit cards — as a percentage of your gross income." />
+            <InfoTooltip text="All monthly debts (housing, car loans, student loans, and credit cards) as a percentage of your gross income." />
           </div>
           <span className="text-headline-md font-mono-data text-primary">{pctFmt(dti)}</span>
         </div>

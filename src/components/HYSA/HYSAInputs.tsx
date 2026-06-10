@@ -68,7 +68,7 @@ export function HYSAInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('initialDeposit', v)}
             prefix="$"
             step={500}
-            tooltip="The amount you're starting with — your current savings balance or a lump sum deposit."
+            tooltip="The amount you're starting with: your current savings balance or a lump sum deposit."
             error={errors.initialDeposit}
           />
           <Field
@@ -115,7 +115,7 @@ export function HYSAInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('hysaAPY', v / 100)}
             suffix="%"
             step={0.1}
-            tooltip="The annual percentage yield on your high-yield savings account. APY includes compounding — it's the real annual return on your deposit. Top HYSAs currently offer around 4–5%."
+            tooltip="The annual percentage yield on your high-yield savings account. APY includes compounding; it's the real annual return on your deposit. Top HYSAs currently offer around 4–5%."
             error={errors.hysaAPY}
           />
           <Field
@@ -125,7 +125,7 @@ export function HYSAInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('traditionalAPY', v / 100)}
             suffix="%"
             step={0.05}
-            tooltip="The APY on a typical bank savings account. The national average is around 0.45% — far below what HYSAs offer. This is the baseline you're comparing against."
+            tooltip="The APY on a typical bank savings account. The national average is around 0.45%, far below what HYSAs offer. This is the baseline you're comparing against."
             error={errors.traditionalAPY}
           />
 

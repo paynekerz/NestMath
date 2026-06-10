@@ -97,7 +97,7 @@ export function RothVsTraditionalSummary({ result }: Props) {
             <div className="px-sm py-md flex flex-col items-center text-center gap-1">
               <div className="flex items-center gap-1">
                 <p className="text-label-sm text-on-surface-variant">Tax Savings Now</p>
-                <InfoTooltip text="Annual tax savings from Traditional IRA contributions — your contribution × current marginal rate. This money comes back to you as a reduced tax bill or larger refund each year." />
+                <InfoTooltip text="Annual tax savings from Traditional IRA contributions: your contribution × current marginal rate. This money comes back to you as a reduced tax bill or larger refund each year." />
               </div>
               <p className="text-headline-md font-bold font-mono-data tabular-nums text-on-surface">
                 {cur.format(result.taxSavingsNowAnnual)}<span className="text-body-sm font-normal text-on-surface-variant">/yr</span>
@@ -110,7 +110,7 @@ export function RothVsTraditionalSummary({ result }: Props) {
           <div className="border-t border-border-subtle px-lg py-sm">
             <div className="flex items-center gap-1 mb-1">
               <p className="text-label-sm text-on-surface-variant">Tax owed at retirement (Traditional)</p>
-              <InfoTooltip text="The total taxes you would pay on Traditional IRA withdrawals — the full gross balance taxed at your expected retirement rate. Roth owes $0 at withdrawal." />
+              <InfoTooltip text="The total taxes you would pay on Traditional IRA withdrawals: the full gross balance taxed at your expected retirement rate. Roth owes $0 at withdrawal." />
             </div>
             <p className="text-headline-md font-bold font-mono-data tabular-nums" style={{ color: '#f87171' }}>
               {cur.format(result.taxOwedAtRetirement)}
@@ -127,7 +127,7 @@ export function RothVsTraditionalSummary({ result }: Props) {
           >
             <div className="flex items-center gap-1 mb-0.5">
               <p className="text-label-sm text-on-surface-variant">Total Traditional tax savings (career)</p>
-              <InfoTooltip text="The sum of all upfront tax deductions over your contribution years. This cash stays in your pocket each year — it can be invested elsewhere or used however you want." />
+              <InfoTooltip text="The sum of all upfront tax deductions over your contribution years. This cash stays in your pocket each year; it can be invested elsewhere or used however you want." />
             </div>
             <p className="text-body-md font-bold font-mono-data tabular-nums text-primary">
               {cur.format(result.taxSavingsNowTotal)}

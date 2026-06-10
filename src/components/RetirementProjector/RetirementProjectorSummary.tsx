@@ -66,7 +66,7 @@ export function RetirementProjectorSummary({ result }: Props) {
             <div className="px-sm py-md flex flex-col items-center text-center gap-1">
               <div className="flex items-center gap-1">
                 <p className="text-label-sm text-on-surface-variant">Monthly Income</p>
-                <InfoTooltip text="Estimated monthly income using the 4% rule — a common guideline suggesting you can safely withdraw 4% of your inflation-adjusted balance each year without running out of money." />
+                <InfoTooltip text="Estimated monthly income using the 4% rule: a common guideline suggesting you can safely withdraw 4% of your inflation-adjusted balance each year without running out of money." />
               </div>
               <p className="text-headline-md font-bold font-mono-data tabular-nums text-on-surface">
                 {cur.format(result.estimatedMonthlyIncome)}
@@ -76,7 +76,7 @@ export function RetirementProjectorSummary({ result }: Props) {
             <div className="px-sm py-md flex flex-col items-center text-center gap-1">
               <div className="flex items-center gap-1">
                 <p className="text-label-sm text-on-surface-variant">Target Balance</p>
-                <InfoTooltip text="Your retirement savings goal using the 25× rule — you need 25 times your annual expenses to sustain withdrawals indefinitely at 4% per year." />
+                <InfoTooltip text="Your retirement savings goal using the 25× rule: you need 25 times your annual expenses to sustain withdrawals indefinitely at 4% per year." />
               </div>
               <p className="text-headline-md font-bold font-mono-data tabular-nums text-on-surface">
                 {cur.format(result.targetBalance)}
@@ -90,7 +90,7 @@ export function RetirementProjectorSummary({ result }: Props) {
             <div className="flex items-center gap-1 mb-1">
               <p className="text-label-sm text-on-surface-variant">{hasSurplus ? 'Surplus vs. target' : 'Shortfall vs. target'}</p>
               <InfoTooltip text={hasSurplus
-                ? "Your inflation-adjusted projected balance exceeds your 25× target — you're on track."
+                ? "Your inflation-adjusted projected balance exceeds your 25× target. You're on track."
                 : "Your projected balance falls short of your 25× target in today's dollars. Consider increasing contributions or adjusting retirement age."
               } />
             </div>

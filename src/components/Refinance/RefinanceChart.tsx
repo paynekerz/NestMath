@@ -12,6 +12,7 @@ import {
   ReferenceDot,
 } from 'recharts';
 import type { RefinanceResult } from '../../lib/calculator';
+import { usePrintChart } from '../../lib/usePrintChart';
 
 interface Props {
   result: RefinanceResult;
@@ -27,6 +28,7 @@ const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',
 const fmtTooltip = (v: number) => cur.format(v);
 
 export function RefinanceChart({ result }: Props) {
+  const chartRef = usePrintChart();
   const [view, setView] = useState<'5yr' | 'lifetime'>('lifetime');
 
   const allData = [
@@ -53,7 +55,7 @@ export function RefinanceChart({ result }: Props) {
   const grossInterestSaved = result.totalInterestCurrent - result.totalInterestRefinanced;
 
   return (
-    <div className="bg-surface-elevated rounded-xl border border-border-subtle p-lg">
+    <div ref={chartRef} data-print="chart" className="bg-surface-elevated rounded-xl border border-border-subtle p-lg">
       {/* Header with toggle */}
       <div className="flex items-center justify-between mb-1">
         <h2 className="text-label-md font-semibold text-on-surface">Equity Recovery &amp; Break-Even</h2>
@@ -83,6 +85,7 @@ export function RefinanceChart({ result }: Props) {
         </span>
       </div>
 
+      <div role="img" aria-label="Equity Recovery and Break-Even chart">
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={data} margin={{ top: 8, right: 16, left: 0, bottom: 16 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="oklch(25% 0.02 260)" />
@@ -150,9 +153,10 @@ export function RefinanceChart({ result }: Props) {
           />
         </LineChart>
       </ResponsiveContainer>
+      </div>
 
       {/* 3-col insight row */}
-      <div className="grid grid-cols-3 gap-4 border-t border-border-subtle pt-lg mt-2">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-border-subtle pt-lg mt-2">
         <div>
           <p className="text-label-sm text-on-surface-variant mb-1">Closing Costs</p>
           <p className="text-headline-md font-bold font-mono-data tabular-nums text-on-surface">

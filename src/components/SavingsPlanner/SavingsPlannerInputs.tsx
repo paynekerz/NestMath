@@ -140,7 +140,7 @@ export function SavingsPlannerInputs({ inputs, onChange, errors, onCalculate }: 
           onChange={v => onChange('closingCostsPct', v / 100)}
           suffix="%"
           step={0.25}
-          tooltip="Extra fees at closing — paperwork, bank fees, title checks. Usually 2–5% of the purchase price."
+          tooltip="Extra fees at closing: paperwork, bank fees, title checks. Usually 2–5% of the purchase price."
           error={errors.closingCostsPct}
         />
       </div>
@@ -158,7 +158,7 @@ export function SavingsPlannerInputs({ inputs, onChange, errors, onCalculate }: 
       {/* Info box */}
       <div className="flex items-start gap-sm p-md rounded-lg bg-primary-container/10 border border-primary/20 text-label-sm text-on-surface-variant">
         <span className="material-symbols-outlined text-primary shrink-0" style={{ fontSize: '16px' }}>lightbulb</span>
-        <span>DRAFT - Increasing your monthly contribution by even $200 can shave years off your timeline. Combine it with a high-yield account to maximize compounding.</span>
+        <span>Increasing your monthly contribution by even $200 can shave years off your timeline. Combine it with a high-yield account to maximize compounding.</span>
       </div>
 
       {/* Calculate CTA */}

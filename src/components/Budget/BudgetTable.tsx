@@ -29,11 +29,9 @@ export function BudgetTable({ rows }: Props) {
           {open ? 'expand_less' : 'expand_more'}
         </span>
       </button>
-      <div
-        data-print="table-container"
-        className="overflow-x-auto"
-        style={open ? undefined : { display: 'none' }}
-      >
+      <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+        <div className="overflow-hidden">
+          <div data-print="table-container" className="overflow-x-auto">
         <table data-print="table" className="w-full text-body-sm border-t border-border-subtle">
           <thead>
             <tr className="bg-surface-container-high text-on-surface-variant text-label-sm uppercase tracking-wider">
@@ -54,6 +52,8 @@ export function BudgetTable({ rows }: Props) {
             ))}
           </tbody>
         </table>
+          </div>
+        </div>
       </div>
     </div>
   );

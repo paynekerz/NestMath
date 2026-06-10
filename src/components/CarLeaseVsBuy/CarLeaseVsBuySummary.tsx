@@ -82,7 +82,7 @@ export function CarLeaseVsBuySummary({ result }: Props) {
           </div>
 
           {/* 3-col net cost breakdown */}
-          <div className="grid grid-cols-3 divide-x divide-border-subtle border-t border-border-subtle">
+          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border-subtle border-t border-border-subtle">
             {/* Lease */}
             <div className="px-sm py-md flex flex-col items-center text-center gap-1">
               <span className="material-symbols-outlined text-[#f59e0b]" style={{ fontSize: '16px' }}>directions_car</span>

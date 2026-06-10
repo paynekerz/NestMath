@@ -130,7 +130,7 @@ export function SocialSecurityInputs({ inputs, onChange, errors }: Props) {
         <div className="p-lg flex flex-col gap-4 flex-1">
 
           {/* Estimated monthly benefits — read-only display */}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
               { label: 'Claim at 62', amount: monthly62, note: pctOfPIA(0.70) },
               { label: 'Claim at 67', amount: monthly67, note: 'Full Retirement Age' },

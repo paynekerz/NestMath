@@ -9,8 +9,6 @@ import { EmergencyFundInputs as EmergencyFundInputsPanel } from './EmergencyFund
 import { EmergencyFundSummary } from './EmergencyFundSummary';
 import { EmergencyFundChart } from './EmergencyFundChart';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 function fmtMonths(m: number): string {
@@ -63,29 +61,6 @@ function buildCsv(inputs: EmergencyFundInputs, result: ReturnType<typeof calcEme
   return rows.join('\n');
 }
 
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'How much should I have in an emergency fund?',
-    a: "Most financial experts recommend 3–6 months of essential living expenses. Three months covers most job losses and unexpected bills. Six months is the gold standard — enough for a serious medical situation, extended unemployment, or a major home repair. If you have variable income or are self-employed, aim for 6–12 months.",
-  },
-  {
-    q: 'What expenses should I include in my emergency fund calculation?',
-    a: "Only essential expenses — the bills you absolutely must pay to keep a roof over your head and food on the table. That means rent or mortgage, groceries, utilities (electricity, water, heat), insurance premiums, transportation to work, and minimum debt payments. Leave out dining out, subscriptions, entertainment, and other discretionary spending.",
-  },
-  {
-    q: 'Where should I keep my emergency fund?',
-    a: "In a high-yield savings account (HYSA) that's separate from your main checking account. You want it earning 4–5% APY while being accessible within 1–3 business days. Avoid: investing it in the stock market (too volatile), putting it in a CD (may lock it up), or keeping it in a checking account earning 0%.",
-  },
-  {
-    q: 'Should I pay off debt or build an emergency fund first?',
-    a: "Build a starter emergency fund of $1,000 first, then aggressively pay off high-interest debt (credit cards, payday loans). Once high-interest debt is gone, grow your emergency fund to 3 months, then continue paying off remaining debt. The order matters: without any emergency cushion, an unexpected expense sends you back into debt immediately.",
-  },
-  {
-    q: 'Can I use a Roth IRA as an emergency fund?',
-    a: "You can withdraw Roth IRA contributions (not earnings) at any time tax- and penalty-free, so some use it as a last resort backup. But this is generally a bad idea — you lose years of tax-free compound growth that you can never get back. The contribution limit is only $7,000/year, so money withdrawn is hard to replace. Use a HYSA for your emergency fund and let the Roth grow untouched.",
-  },
-];
-
 export function EmergencyFundCalculator() {
   const [inputs, setInputs] = useState<EmergencyFundInputs>(DEFAULT_EMERGENCY_FUND_INPUTS);
 
@@ -137,7 +112,7 @@ export function EmergencyFundCalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">Emergency Fund Calculator</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">How many months are you covered — and how long until you hit your target?</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Enter your monthly essential expenses, current savings, and monthly contribution to see how many months of coverage you have now and exactly when you'll reach your 3-month and 6-month emergency fund targets.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -191,15 +166,12 @@ export function EmergencyFundCalculator() {
 
       {/* Ko-fi nudge */}
       {result && (
-        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
           If this helped you plan your safety net,{' '}
           <KofiButton label="☕ a coffee seems fair." />
         </p>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

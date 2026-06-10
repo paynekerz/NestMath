@@ -10,8 +10,6 @@ import { StudentLoanPayoffSummary } from './StudentLoanPayoffSummary';
 import { StudentLoanPayoffChart } from './StudentLoanPayoffChart';
 import { StudentLoanPayoffTable } from './StudentLoanPayoffTable';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 const cur2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -56,29 +54,6 @@ function buildCsv(inputs: StudentLoanPayoffInputs, result: ReturnType<typeof cal
   return rows.join('\n');
 }
 
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'How long does it take to pay off student loans?',
-    a: "The standard federal student loan repayment plan is 10 years. Income-driven repayment plans can extend this to 20–25 years (with loan forgiveness at the end, which may be taxable). Private loans vary by lender — terms typically range from 5 to 20 years. The fastest payoff happens when you make extra payments toward principal whenever you can.",
-  },
-  {
-    q: 'How much do extra student loan payments save?',
-    a: "Extra payments go directly toward reducing your principal balance, which cuts future interest charges. On a $35,000 loan at 6.5% over 10 years, adding just $100/month extra saves over $1,200 in interest and pays off the loan about 14 months early. The effect compounds — earlier principal reduction means less interest accruing every month going forward.",
-  },
-  {
-    q: 'Should I pay extra on my student loans?',
-    a: "It depends on your interest rate and your alternatives. If your student loan rate is above 5–6%, paying it down is often a better guaranteed return than investing. If your rate is low (3–4%) and you have a 401(k) match you're not maxing, the match typically wins. Also, make sure you have a 3–6 month emergency fund before aggressively paying down student loans.",
-  },
-  {
-    q: 'Is it better to pay off student loans or invest?',
-    a: "Compare your loan's interest rate to your expected investment return. If your loan rate is 7% and the market returns 8%, the math slightly favors investing — but the loan payoff is risk-free. At rates above 7–8%, paying off student loans first is typically the better financial move. Always capture employer 401(k) match before either, since that's an instant 50–100% return.",
-  },
-  {
-    q: 'What is the fastest way to pay off student loans?',
-    a: "The fastest legal strategy: make extra principal payments whenever possible. Refinancing to a lower rate can help if your credit score qualifies. If you have multiple loans, target the highest-interest loan first (avalanche method) to minimize total interest paid. Avoid income-driven repayment plans unless you genuinely need lower payments — they extend your payoff timeline significantly.",
-  },
-];
-
 export function StudentLoanPayoffCalculator() {
   const [inputs, setInputs] = useState<StudentLoanPayoffInputs>(DEFAULT_STUDENT_LOAN_INPUTS);
 
@@ -113,7 +88,7 @@ export function StudentLoanPayoffCalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">Student Loan Payoff Calculator</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">See when you'll be debt-free and how much extra payments save you in interest.</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Enter your loan balance, interest rate, and an extra monthly payment to see exactly how much faster you'll be debt-free and how much interest you'll save compared to the standard repayment schedule.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -167,7 +142,7 @@ export function StudentLoanPayoffCalculator() {
 
       {/* Ko-fi nudge */}
       {result && (
-        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
           If this helped you plan your path to debt freedom,{' '}
           <KofiButton label="☕ a coffee seems fair." />
         </p>
@@ -180,9 +155,6 @@ export function StudentLoanPayoffCalculator() {
         </div>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

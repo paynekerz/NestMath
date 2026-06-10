@@ -136,7 +136,7 @@ export function StudentLoanPayoffInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('extraMonthly', v)}
             prefix="$"
             step={25}
-            tooltip="Any amount you pay above your standard monthly payment goes directly toward reducing your principal — which cuts the total interest you pay and shortens your payoff timeline."
+            tooltip="Any amount you pay above your standard monthly payment goes directly toward reducing your principal, which cuts the total interest you pay and shortens your payoff timeline."
             error={errors.extraMonthly}
           />
 

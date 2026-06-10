@@ -1,0 +1,43 @@
+# NestMath
+
+NestMath is a free suite of personal finance calculators. No account required. Fully client-side. No server-side storage. Your data stays in your browser.
+
+## Home Buying
+
+- Buy vs. Rent Calculator — models equity, opportunity cost, and break-even year (/buy-vs-rent)
+- Home Affordability Calculator — works backward from income to find max home price (/affordability)
+- Mortgage Payoff Calculator — shows time and interest saved from extra payments (/payoff)
+- Down Payment Savings Planner — projects how long until you can afford to buy (/savings-planner)
+- Refinance Break-Even Calculator — finds the month refinancing pays off (/refinance)
+
+## Budgeting
+
+- Personal Budget Calculator — tracks income, expenses, and savings rate (/budget)
+- Emergency Fund Calculator — shows current coverage and path to 3- and 6-month targets (/emergency-fund)
+- Net Worth Snapshot — calculates total assets minus liabilities (/net-worth)
+- Budget Dashboard — saves snapshots of emergency fund, net worth, and retirement projections (/dashboard)
+
+## Investing
+
+- HYSA Calculator — compares high-yield vs. traditional savings growth (/hysa-calculator)
+- Investment Fee Impact Calculator — shows the compounding cost of expense ratios (/investment-fees)
+- 401(k) Retirement Projector — projects balance at retirement with employer match (/retirement-projector)
+- Roth vs. Traditional IRA Calculator — compares after-tax wealth under both account types (/roth-vs-traditional)
+- Social Security Break-Even Calculator — finds optimal claiming age (/social-security-break-even)
+
+## Debt
+
+- Credit Card Payoff Calculator — payoff date and interest cost vs. minimum payments (/credit-card-payoff)
+- Student Loan Payoff Calculator — payoff date and savings from extra payments (/student-loan-payoff)
+- Debt Payoff Planner — compares avalanche vs. snowball methods across multiple debts (/debt-payoff-planner)
+
+## Life & Career
+
+- Raise vs. Job Hop Calculator — cumulative earnings comparison: raise vs. new offer (/raise-vs-job-hop)
+- Renovation ROI Calculator — compares renovation returns vs. investing the cash (/renovation-roi)
+- Car Lease vs. Buy Calculator — three-way cost comparison: lease, buy, invest the delta (/car-lease-vs-buy)
+- Effective Hourly Rate Calculator — true hourly rate after taxes, commute, and expenses (/effective-hourly)
+- Tax Withholding Estimator — estimates tax bill vs. current withholding (/tax-withholding)
+- Side Income After-Tax Calculator — self-employment tax and real take-home from freelance (/side-income)
+
+URL: https://nestmath.app

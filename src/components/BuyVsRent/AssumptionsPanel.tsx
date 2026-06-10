@@ -65,30 +65,32 @@ export function AssumptionsPanel({ assumptions, onAssumptionsChange, errors = {}
         <span className="text-on-surface">Advanced Assumptions</span>
         <span className="text-on-surface-variant text-label-sm">{open ? '▲' : '▼'}</span>
       </button>
-      {open && (
-        <div className="grid gap-3 px-lg pb-lg grid-cols-1 sm:grid-cols-3 border-t border-border-subtle pt-md">
-          <Field
-            id="assump-appreciation"
-            label="Home appreciation"
-            value={pct(assumptions.appreciation)}
-            onChange={v => onAssumptionsChange('appreciation', v / 100)}
-            suffix="% / yr"
-            step={0.5}
-            tooltip="How much the home's value is expected to grow each year. Homes have historically gone up about 3% per year on average."
-            error={errors['appreciation']}
-          />
-          <Field
-            id="assump-marginalTaxRate"
-            label="Marginal tax rate"
-            value={pct(assumptions.marginalTaxRate)}
-            onChange={v => onAssumptionsChange('marginalTaxRate', v / 100)}
-            suffix="%"
-            step={1}
-            tooltip="The percentage of your income that goes to federal taxes. Homeowners can sometimes reduce their tax bill by deducting mortgage interest."
-            error={errors['marginalTaxRate']}
-          />
+      <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+        <div className="overflow-hidden">
+          <div className="grid gap-3 px-lg pb-lg grid-cols-1 sm:grid-cols-3 border-t border-border-subtle pt-md">
+            <Field
+              id="assump-appreciation"
+              label="Home appreciation"
+              value={pct(assumptions.appreciation)}
+              onChange={v => onAssumptionsChange('appreciation', v / 100)}
+              suffix="% / yr"
+              step={0.5}
+              tooltip="How much the home's value is expected to grow each year. Homes have historically gone up about 3% per year on average."
+              error={errors['appreciation']}
+            />
+            <Field
+              id="assump-marginalTaxRate"
+              label="Marginal tax rate"
+              value={pct(assumptions.marginalTaxRate)}
+              onChange={v => onAssumptionsChange('marginalTaxRate', v / 100)}
+              suffix="%"
+              step={1}
+              tooltip="The percentage of your income that goes to federal taxes. Homeowners can sometimes reduce their tax bill by deducting mortgage interest."
+              error={errors['marginalTaxRate']}
+            />
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

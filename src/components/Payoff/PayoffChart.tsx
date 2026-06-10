@@ -10,6 +10,7 @@ import {
   ReferenceLine,
 } from 'recharts';
 import type { PayoffResult } from '../../lib/calculator';
+import { usePrintChart } from '../../lib/usePrintChart';
 
 interface Props {
   result: PayoffResult;
@@ -25,6 +26,7 @@ const fmtTooltip = (v: number) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v);
 
 export function PayoffChart({ result }: Props) {
+  const chartRef = usePrintChart();
   const data = result.years.map((yr, i) => {
     const prevCumOrig = i === 0 ? 0 : result.years[i - 1].cumulativeInterestOriginal;
     const prevCumExtra = i === 0 ? 0 : result.years[i - 1].cumulativeInterestExtra;
@@ -40,14 +42,15 @@ export function PayoffChart({ result }: Props) {
     : null;
 
   return (
-    <div className="glass-panel p-4 rounded-xl">
+    <div ref={chartRef} data-print="chart" className="glass-panel p-4 rounded-xl">
       <div className="flex items-center justify-between mb-1">
         <h2 className="text-label-md font-semibold text-on-surface">Annual Interest Cost</h2>
         <span className="text-label-sm text-on-surface-variant px-2 py-0.5 rounded bg-surface-container-high">Interest View</span>
       </div>
       <p className="text-label-sm text-on-surface-variant mb-4">
-        Interest paid each year — standard schedule vs. accelerated payoff
+        Interest paid each year: standard schedule vs. accelerated payoff
       </p>
+      <div role="img" aria-label="Annual Interest Cost chart">
       <ResponsiveContainer width="100%" height={280}>
         <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 4 }} barCategoryGap="25%">
           <CartesianGrid strokeDasharray="3 3" stroke="oklch(25% 0.01 240)" vertical={false} />
@@ -95,6 +98,7 @@ export function PayoffChart({ result }: Props) {
           <Bar dataKey="Accelerated" fill="oklch(55% 0.18 250)" radius={[2, 2, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
+      </div>
     </div>
   );
 }

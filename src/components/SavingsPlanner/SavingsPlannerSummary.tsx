@@ -29,7 +29,7 @@ export function SavingsPlannerSummary({ result, currentSavings }: Props) {
     : 100;
 
   const subText = result.monthsToGoal === null
-    ? 'Not reachable in 30 years — increase monthly savings'
+    ? 'Not reachable in 30 years: increase monthly savings'
     : result.monthsToGoal === 0
     ? 'You already have enough to close'
     : `${formatMonths(result.monthsToGoal)} to goal · On track for ${projectedDate(result.monthsToGoal)}`;

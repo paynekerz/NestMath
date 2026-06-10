@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { Dashboard } from '../components/Dashboard/Dashboard';
+---
+<Base
+  title="Budget Dashboard — NestMath"
+  description="Your full financial picture in one place — budget, net worth, housing, debt, savings, and income. All data stays on your device."
+  canonical="https://nestmath.app/dashboard"
+  schemaName="NestMath — Dashboard"
+  schemaDescription="Aggregate financial snapshot from NestMath calculators. All data stored locally in your browser — never sent to any server."
+  breadcrumbTool="Dashboard"
+>
+  <Dashboard client:load />
+</Base>

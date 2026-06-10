@@ -10,8 +10,6 @@ import { PayoffInputs as PayoffInputsPanel } from './PayoffInputs';
 import { PayoffSummary } from './PayoffSummary';
 import { PayoffChart } from './PayoffChart';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 function payoffDate(months: number): string {
@@ -68,7 +66,7 @@ function TaxAdvantageCard({ result }: { result: PayoffResult }) {
         <h3 className="text-label-md font-semibold text-on-surface">Tax Advantage</h3>
       </div>
       <p className="text-body-sm text-on-surface-variant">
-        DRAFT - In your first year, approximately {cur.format(firstYearInterest)} in mortgage interest may be tax-deductible. Accelerating payoff reduces this deduction over time as interest costs drop.
+        In your first year, approximately {cur.format(firstYearInterest)} in mortgage interest may be tax-deductible. Accelerating payoff reduces this deduction over time as interest costs drop.
       </p>
     </div>
   );
@@ -86,12 +84,12 @@ function StrategyCard({ result, extraMonthly, onApply }: { result: PayoffResult;
           Expert Recommendation
         </span>
         <h2 className="text-headline-md text-on-surface mb-2">
-          DRAFT - Even a small lump sum now dramatically accelerates your payoff.
+          A small lump sum now accelerates your payoff.
         </h2>
         <p className="text-body-md text-on-surface-variant">
           {extraMonthly > 0
-            ? `DRAFT - With ${cur.format(extraMonthly)}/mo extra, you're already saving ${interestPct}% in interest. Adding a one-time lump sum on top of that has an outsized effect — every dollar paid early eliminates all the future interest that would have accrued on it.`
-            : `DRAFT - Mortgage interest compounds daily on your remaining balance. A single extra payment of $5,000 today eliminates far more than $5,000 in lifetime interest cost. Start with a lump sum, then layer in monthly extra payments to maximize savings.`}
+            ? `With ${cur.format(extraMonthly)}/mo extra, you're already saving ${interestPct}% in interest. Adding a one-time lump sum on top of that has an outsized effect: every dollar paid early eliminates all the future interest that would have accrued on it.`
+            : `Mortgage interest compounds on your remaining balance. A single extra payment of $5,000 today eliminates far more than $5,000 in lifetime interest cost. Start with a lump sum, then layer in monthly extra payments to maximize savings.`}
         </p>
       </div>
       <button
@@ -126,29 +124,6 @@ function buildProjectionRows(result: PayoffResult, extraMonthly: number): Projec
     return { year: yr.year, principalPaid, interestPaid, extraPaid, endBalance: yr.balanceExtra };
   });
 }
-
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'How much do extra mortgage payments save?',
-    a: 'It depends on your loan balance, rate, and how much extra you pay. On a $320,000 loan at 6.75%, paying an extra $200 per month saves roughly $70,000 in interest and cuts about 6 years off a 30-year loan. Use the calculator above to model your exact numbers.',
-  },
-  {
-    q: 'Is it worth paying extra on your mortgage?',
-    a: 'Usually yes — especially when your mortgage rate is higher than what you can safely earn investing. If your rate is 6.75%, paying down the loan gives you a guaranteed 6.75% return. If you expect to earn more than that investing, you might be better off investing the difference. The right answer depends on your rate, tax situation, and risk tolerance.',
-  },
-  {
-    q: 'What happens if I pay an extra $500 a month on my mortgage?',
-    a: 'On a $320,000 loan at 6.75% with a 30-year term, an extra $500 per month saves over $140,000 in interest and pays off the loan about 10 years early. Enter your numbers in the calculator to see exactly what $500 extra does for your specific loan.',
-  },
-  {
-    q: 'How do I pay off my mortgage in 15 years instead of 30?',
-    a: 'Calculate the monthly payment for a 15-year loan at your current rate, then subtract your current payment — the difference is the extra amount you need to add each month. The calculator above shows you the payoff date for any extra payment amount. You can work backwards: increase the extra payment until the new payoff date hits your 15-year target.',
-  },
-  {
-    q: 'Does paying extra principal reduce monthly payment?',
-    a: 'No — for a standard fixed-rate mortgage, your required monthly payment stays the same regardless of extra principal you pay. What changes is the payoff date and total interest. The extra principal reduces your balance faster, which cuts interest charges, but your bank still expects the same minimum payment each month.',
-  },
-];
 
 export function PayoffCalculator() {
   const [inputs, setInputs] = useState<PayoffInputs>(DEFAULT_PAYOFF_INPUTS);
@@ -194,7 +169,7 @@ export function PayoffCalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">Mortgage Payoff Calculator</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">See how extra payments cut your payoff date and total interest paid.</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Enter your loan details and an extra monthly payment or lump sum to see the exact payoff date, months saved, and total interest avoided, with a year-by-year breakdown of the accelerated vs. standard repayment paths.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -229,7 +204,7 @@ export function PayoffCalculator() {
           <PayoffInputsPanel inputs={inputs} onChange={handleChange} errors={errors} />
           {result && <TaxAdvantageCard result={result} />}
           {result && (
-            <p data-print="hide" className="text-sm text-center text-on-surface-variant">
+            <p data-print="hide" className="text-body-sm text-center text-on-surface-variant">
               If this helped you figure out your payoff strategy,{' '}
               <KofiButton label="☕ a coffee seems fair." />
             </p>
@@ -313,9 +288,6 @@ export function PayoffCalculator() {
         </div>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

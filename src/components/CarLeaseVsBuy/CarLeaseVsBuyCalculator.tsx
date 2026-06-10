@@ -10,8 +10,6 @@ import { CarLeaseVsBuySummary } from './CarLeaseVsBuySummary';
 import { CarLeaseVsBuyChart } from './CarLeaseVsBuyChart';
 import { CarLeaseVsBuyTable } from './CarLeaseVsBuyTable';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 function buildCsv(inputs: CarLeaseVsBuyInputs, result: ReturnType<typeof calcCarLeaseVsBuy>): string {
@@ -63,29 +61,6 @@ function buildCsv(inputs: CarLeaseVsBuyInputs, result: ReturnType<typeof calcCar
   return rows.join('\n');
 }
 
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'Is it better to lease or buy a car?',
-    a: "It depends on how long you keep the car and what you'd do with the monthly savings. Leasing typically has lower monthly payments and lets you drive a new car every few years, but you never build equity. Buying costs more upfront and in the first few years, but you own an asset. The \"invest the delta\" path is often the mathematical winner — take the cheaper monthly option and put the difference in the market.",
-  },
-  {
-    q: 'Should I lease or buy a car in 2025?',
-    a: "With car prices elevated and loan rates near 6–7%, leasing has become more competitive. If you value predictable low monthly payments, don't drive over the mileage limit, and plan to swap cars in 3 years, leasing can make sense. If you drive a lot, customize your vehicle, or want to stop payments eventually, buying is usually better financially over the long run.",
-  },
-  {
-    q: 'What is the true cost of leasing vs. buying a car?',
-    a: "Leasing costs are simple to track: upfront fees plus monthly payments. Buying looks more expensive upfront, but you end up with a car worth money when the loan is paid off. The true cost comparison is: lease total cost vs. (total buy payments minus residual car value). This calculator shows both net costs side by side so you can see the real financial difference.",
-  },
-  {
-    q: 'Is it ever smarter to lease a car instead of buying?',
-    a: "Yes. If your monthly buy payment is significantly higher than the lease payment and you invest the difference consistently, leasing can win. Leasing also wins when you factor in that you avoid the risk of a depreciating asset — a car that drops 50% in value over 5 years is a liability, not an investment. Leasing essentially transfers that depreciation risk back to the dealer.",
-  },
-  {
-    q: 'What happens if I invest what I would have spent on a car?',
-    a: "The \"invest the delta\" strategy means: take the cheaper monthly payment option and invest the monthly difference at a market return. Over 5 years with a $200/month delta and 7% annual return, you'd accumulate roughly $14,400. That investment portfolio reduces the true cost of whichever path you chose, and in many scenarios it makes the overall \"invest the delta\" strategy the winner — lower net cost than either pure lease or pure buy.",
-  },
-];
-
 export function CarLeaseVsBuyCalculator() {
   const [inputs, setInputs] = useState<CarLeaseVsBuyInputs>(DEFAULT_CAR_LEASE_INPUTS);
 
@@ -120,7 +95,7 @@ export function CarLeaseVsBuyCalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">Car Lease vs. Buy Calculator</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">Compare the true financial cost of leasing, buying, and investing the monthly difference.</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Enter your car price, loan terms, lease payment, and depreciation assumptions to compare leasing, buying, and investing the monthly payment difference, and see which path costs you the least over your ownership period.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -174,7 +149,7 @@ export function CarLeaseVsBuyCalculator() {
 
       {/* Ko-fi nudge */}
       {result && (
-        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
           If this helped you think through a five-figure vehicle decision,{' '}
           <KofiButton label="☕ a coffee seems fair." />
         </p>
@@ -187,9 +162,6 @@ export function CarLeaseVsBuyCalculator() {
         </div>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

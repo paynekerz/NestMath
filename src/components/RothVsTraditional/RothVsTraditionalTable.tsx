@@ -27,7 +27,9 @@ export function RothVsTraditionalTable({ result }: Props) {
         </span>
       </button>
 
-      <div className={`overflow-x-auto border-t border-border-subtle${open ? '' : ' hidden'}`} data-print="table-container">
+      <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+        <div className="overflow-hidden">
+          <div className="overflow-x-auto border-t border-border-subtle" data-print="table-container">
         <table className="w-full text-left" data-print="table">
           <thead>
             <tr className="text-on-surface-variant text-label-sm uppercase tracking-wide bg-surface-container">
@@ -35,13 +37,13 @@ export function RothVsTraditionalTable({ result }: Props) {
               <th className="px-4 py-2.5 font-semibold text-right">
                 <span className="inline-flex items-center justify-end gap-1.5">
                   Roth Balance
-                  <InfoTooltip text="Your Roth IRA balance at year end. This is your full after-tax value — no taxes owed at withdrawal." />
+                  <InfoTooltip text="Your Roth IRA balance at year end. This is your full after-tax value; no taxes owed at withdrawal." />
                 </span>
               </th>
               <th className="px-4 py-2.5 font-semibold text-right">
                 <span className="inline-flex items-center justify-end gap-1.5">
                   Trad. Gross Balance
-                  <InfoTooltip text="Your Traditional IRA gross balance before any retirement taxes. Same as Roth gross — both receive the same contribution and earn the same return." />
+                  <InfoTooltip text="Your Traditional IRA gross balance before any retirement taxes. Same as Roth gross; both receive the same contribution and earn the same return." />
                 </span>
               </th>
               <th className="px-4 py-2.5 font-semibold text-right">
@@ -72,6 +74,8 @@ export function RothVsTraditionalTable({ result }: Props) {
             ))}
           </tbody>
         </table>
+          </div>
+        </div>
       </div>
     </div>
   );

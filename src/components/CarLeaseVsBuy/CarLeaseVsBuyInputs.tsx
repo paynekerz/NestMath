@@ -79,7 +79,7 @@ export function CarLeaseVsBuyInputs({ inputs, onChange, errors }: Props) {
             suffix="mo"
             step={12}
             min={12}
-            tooltip="How many months the lease runs — typically 24, 36, or 48 months."
+            tooltip="How many months the lease runs, typically 24, 36, or 48 months."
             error={errors.leaseTermMonths}
           />
           <Field

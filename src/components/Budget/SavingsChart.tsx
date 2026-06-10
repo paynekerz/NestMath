@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { usePrintChart } from '../../lib/usePrintChart';
 import {
   LineChart,
   Line,
@@ -35,6 +36,7 @@ interface Props {
 }
 
 export function SavingsChart({ monthlyNet, horizonMonths, onHorizonChange }: Props) {
+  const chartRef = usePrintChart();
   const data = useMemo(
     () => calcSavingsAccumulation(monthlyNet, horizonMonths),
     [monthlyNet, horizonMonths],
@@ -48,7 +50,7 @@ export function SavingsChart({ monthlyNet, horizonMonths, onHorizonChange }: Pro
   if (monthlyNet <= 0) return null;
 
   return (
-    <div className="bg-surface-elevated border border-border-subtle rounded-xl p-[24px] flex flex-col gap-[16px]">
+    <div ref={chartRef} data-print="chart" className="bg-surface-elevated border border-border-subtle rounded-xl p-[24px] flex flex-col gap-[16px]">
       <div className="flex items-center justify-between flex-wrap gap-[12px]">
         <div className="flex items-center gap-[10px]">
           <div className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-secondary-container">
@@ -74,6 +76,7 @@ export function SavingsChart({ monthlyNet, horizonMonths, onHorizonChange }: Pro
           ))}
         </div>
       </div>
+      <div role="img" aria-label="Savings Over Time chart">
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={data} margin={{ top: 4, right: 16, left: 0, bottom: 8 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="oklch(25% 0.01 240)" />
@@ -121,6 +124,7 @@ export function SavingsChart({ monthlyNet, horizonMonths, onHorizonChange }: Pro
           />
         </LineChart>
       </ResponsiveContainer>
+      </div>
     </div>
   );
 }

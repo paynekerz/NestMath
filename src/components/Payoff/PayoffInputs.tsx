@@ -75,7 +75,7 @@ export function PayoffInputs({ inputs, onChange, errors }: Props) {
           prefix="$"
           step={5000}
           min={1000}
-          tooltip="The remaining balance on your mortgage — not the original loan amount."
+          tooltip="The remaining balance on your mortgage: not the original loan amount."
           error={errors.loanAmount}
         />
 

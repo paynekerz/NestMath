@@ -135,7 +135,7 @@ export function RothVsTraditionalInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('currentTaxRate', v / 100)}
             suffix="%"
             step={1}
-            tooltip="Your marginal federal income tax bracket today. Traditional IRA contributions reduce your taxable income at this rate — it's your upfront tax break per dollar contributed."
+            tooltip="Your marginal federal income tax bracket today. Traditional IRA contributions reduce your taxable income at this rate: it's your upfront tax break per dollar contributed."
             error={errors.currentTaxRate}
           />
           <Field
@@ -156,21 +156,21 @@ export function RothVsTraditionalInputs({ inputs, onChange, errors }: Props) {
               <>
                 <p className="text-label-md font-semibold text-success-emerald">Going down in retirement</p>
                 <p className="text-label-sm text-on-surface-variant">
-                  Traditional saves you {pct(inputs.currentTaxRate - inputs.retirementTaxRate)}% on every withdrawal — you pay taxes when cheaper.
+                  Traditional saves you {pct(inputs.currentTaxRate - inputs.retirementTaxRate)}% on every withdrawal; you pay taxes when cheaper.
                 </p>
               </>
             ) : inputs.currentTaxRate < inputs.retirementTaxRate ? (
               <>
                 <p className="text-label-md font-semibold" style={{ color: '#f87171' }}>Going up in retirement</p>
                 <p className="text-label-sm text-on-surface-variant">
-                  Roth locks in your current {pct(inputs.currentTaxRate)}% rate — you avoid the higher future rate entirely.
+                  Roth locks in your current {pct(inputs.currentTaxRate)}% rate; you avoid the higher future rate entirely.
                 </p>
               </>
             ) : (
               <>
                 <p className="text-label-md font-semibold text-on-surface">Same rate</p>
                 <p className="text-label-sm text-on-surface-variant">
-                  At identical rates, Roth wins — the after-tax value is identical in theory but Roth offers more flexibility.
+                  At identical rates, Roth wins; the after-tax value is identical in theory but Roth offers more flexibility.
                 </p>
               </>
             )}

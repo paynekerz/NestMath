@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   DEFAULT_EFFECTIVE_HOURLY_INPUTS,
   calcEffectiveHourly,
@@ -9,8 +9,6 @@ import { EffectiveHourlyInputs as EffectiveHourlyInputsPanel } from './Effective
 import { EffectiveHourlySummary } from './EffectiveHourlySummary';
 import { EffectiveHourlyBar } from './EffectiveHourlyBar';
 import { KofiButton } from '../ui/KofiButton';
-import { FAQSection, type FAQItem } from '../ui/FAQSection';
-
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 const curH = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -49,29 +47,6 @@ function buildCsv(inputs: EffectiveHourlyInputs, result: ReturnType<typeof calcE
   return rows.join('\n');
 }
 
-const FAQ_ITEMS: FAQItem[] = [
-  {
-    q: 'How do I calculate my effective hourly rate?',
-    a: "Your effective hourly rate is your adjusted take-home pay divided by your total real hours worked. To get adjusted take-home: subtract all taxes (federal, state, FICA at 7.65%) and annual work-related expenses from your gross salary. To get total real hours: add contracted hours + unpaid overtime + commute time + prep/decompression time. The result is often 30–50% lower than your stated salary would suggest.",
-  },
-  {
-    q: 'What is my real hourly rate after taxes and commute?',
-    a: "Most people are surprised. A $75,000 salary sounds like about $36/hr, but after 22% federal tax, 5% state tax, and 7.65% FICA, you're taking home around $49,000. Subtract $2,400/year in work expenses and divide by 53 real hours per week (40 + 5 unpaid overtime + 5 commute + 3 prep), and you're looking at around $18–20/hr — roughly half the stated rate.",
-  },
-  {
-    q: 'How much does commuting cost in time per year?',
-    a: "A 1-hour daily round-trip commute (conservative) equals 5 hours per week × 50 weeks = 250 unpaid hours per year. At an effective rate of $20/hr, that's $5,000 worth of your time annually. This doesn't include out-of-pocket costs like gas, tolls, transit passes, or car maintenance — those belong in your monthly work expenses.",
-  },
-  {
-    q: 'Is my salary worth it after commute and expenses?',
-    a: "That depends on your effective hourly rate vs. your alternatives. The calculator surfaces the real number so you can compare: a remote job paying $65,000 with no commute, no work wardrobe, and no daily lunch costs might have a higher effective rate than a $75,000 in-office job. Compare the effective rates, not the stated salaries.",
-  },
-  {
-    q: 'How do I compare two job offers on a true hourly basis?',
-    a: "Run each offer through the calculator separately with its own tax situation, commute hours, and work expenses. Compare the effective hourly rates. A job with a higher salary but longer commute, fewer remote days, or mandatory professional dues may actually pay less per real hour than a lower-paying offer. The delta stat shows exactly how much ground the higher salary needs to make up.",
-  },
-];
-
 export function EffectiveHourlyCalculator() {
   const [inputs, setInputs] = useState<EffectiveHourlyInputs>(DEFAULT_EFFECTIVE_HOURLY_INPUTS);
 
@@ -84,6 +59,19 @@ export function EffectiveHourlyCalculator() {
     () => (hasErrors(errors) ? null : calcEffectiveHourly(inputs)),
     [inputs, errors],
   );
+
+  useEffect(() => {
+    if (!result) return;
+    try {
+      localStorage.setItem('nm_income', JSON.stringify({
+        effectiveHourlyRate: result.effectiveHourlyNet,
+        annualTakeHome: result.adjustedTakeHome,
+        updatedAt: new Date().toISOString(),
+      }));
+    } catch {
+      // localStorage may be unavailable
+    }
+  }, [result]);
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -106,7 +94,7 @@ export function EffectiveHourlyCalculator() {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-headline-lg text-on-surface font-bold">Effective Hourly Rate Calculator</h1>
-          <p className="text-body-md text-on-surface-variant mt-1">What are you actually making per hour after taxes, commute, and all the hours your job really takes?</p>
+          <p className="text-body-md text-on-surface-variant mt-1">Enter your salary, tax rates, real hours worked per week, and work-related expenses to find your true effective hourly rate, and see exactly how much the commute, unpaid overtime, and job expenses reduce what you actually earn per hour of your life.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
@@ -160,15 +148,12 @@ export function EffectiveHourlyCalculator() {
 
       {/* Ko-fi nudge */}
       {result && (
-        <p data-print="hide" className="text-sm text-center text-on-surface-variant mt-6">
+        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
           If this changed how you think about your job,{' '}
           <KofiButton label="☕ a coffee seems fair." />
         </p>
       )}
 
-      <div data-print="hide" className="mt-4">
-        <FAQSection items={FAQ_ITEMS} />
-      </div>
     </div>
   );
 }

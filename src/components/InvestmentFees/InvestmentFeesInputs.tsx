@@ -68,7 +68,7 @@ export function InvestmentFeesInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('initialInvestment', v)}
             prefix="$"
             step={1000}
-            tooltip="The lump sum you're starting with — your current portfolio balance or an initial deposit."
+            tooltip="The lump sum you're starting with: your current portfolio balance or an initial deposit."
             error={errors.initialInvestment}
           />
           <Field
@@ -99,7 +99,7 @@ export function InvestmentFeesInputs({ inputs, onChange, errors }: Props) {
             suffix="yrs"
             step={1}
             min={1}
-            tooltip="How many years to project into the future. The fee drag compounds every year — the longer the horizon, the bigger the gap."
+            tooltip="How many years to project into the future. The fee drag compounds every year; the longer the horizon, the bigger the gap."
             error={errors.yearsToModel}
           />
         </div>
@@ -135,7 +135,7 @@ export function InvestmentFeesInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('lowCostExpenseRatio', v / 100)}
             suffix="%"
             step={0.01}
-            tooltip="The annual fee of a low-cost index fund alternative. Vanguard VTSAX charges 0.04%, Fidelity ZERO charges 0%. These funds track the same market — you keep more of every dollar."
+            tooltip="The annual fee of a low-cost index fund alternative. Vanguard VTSAX charges 0.04%, Fidelity ZERO charges 0%. These funds track the same market; you keep more of every dollar."
             error={errors.lowCostExpenseRatio}
           />
 

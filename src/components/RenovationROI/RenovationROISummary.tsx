@@ -12,7 +12,7 @@ const pct = (v: number) => `${v >= 0 ? '+' : ''}${v.toFixed(1)}%`;
 function recommendation(result: RenovationROIResult, years: number): string {
   if (result.renoWins) {
     if (result.renoROIPct <= 0) {
-      return `The renovation loses money but still outperforms investing over ${years} years. Both paths are negative — the market return is worse in this scenario.`;
+      return `The renovation loses money but still outperforms investing over ${years} years. Both paths are negative; the market return is worse in this scenario.`;
     }
     return `The renovation returns more than investing the same cash over ${years} years. The compounding appreciation premium outpaces the market in this scenario.`;
   }

@@ -1,6 +1,29 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import { StudentLoanPayoffCalculator } from '../components/StudentLoanPayoff/StudentLoanPayoffCalculator';
+
+const faqItems = [
+  {
+    q: "How long does it take to pay off student loans?",
+    a: "The standard federal student loan repayment term is 10 years. Income-driven repayment plans extend this to 20–25 years. Private loans vary by lender. The standard 10-year plan minimizes total interest but requires the highest monthly payment. Making extra payments above the standard amount can cut the timeline further. This calculator models any extra payment amount and shows you the exact payoff date and interest savings."
+  },
+  {
+    q: "Should I pay off student loans or invest?",
+    a: "The comparison point is your loan interest rate vs. your expected investment return. Federal student loans typically carry rates of 5–7%. Historical stock market returns average around 7–10% annually. If your loan rate is 5%, investing in a diversified index fund may produce better expected returns over time. If your rate is 8%+, paying it down is a guaranteed return that's hard to beat. Many people split the difference: make standard payments and invest simultaneously, capturing market returns while reducing debt."
+  },
+  {
+    q: "Does paying extra on student loans reduce the monthly payment?",
+    a: "On standard fixed-term student loans, extra payments reduce your balance and total interest but do not reduce the required monthly payment — they shorten the number of payments remaining. Your servicer will apply extra payments to principal first unless you specify otherwise. Contact your servicer to confirm extra payment handling, especially for loans with multiple disbursements where payments may be applied across different sub-loans at the servicer's discretion."
+  },
+  {
+    q: "What is the avalanche method for student loans?",
+    a: "If you have multiple student loans with different interest rates, the avalanche method means making minimum payments on all loans and directing any extra money toward the highest-rate loan first. This minimizes total interest paid across your full loan portfolio. The debt payoff planner calculator handles multi-loan scenarios — if you have several student loans plus other debt, use that tool to find the optimal payoff order."
+  },
+  {
+    q: "Are student loan interest payments tax deductible?",
+    a: "Yes, up to $2,500 of student loan interest may be deductible per year, subject to income limits. For 2025, the deduction phases out for single filers earning $75,000–$90,000 and married filing jointly earning $155,000–$185,000. Above these thresholds, no deduction is available. This is an above-the-line deduction, meaning you can take it whether or not you itemize deductions on your return."
+  }
+];
 ---
 <Base
   title="Student Loan Payoff Calculator — NestMath"
@@ -10,5 +33,94 @@ import { StudentLoanPayoffCalculator } from '../components/StudentLoanPayoff/Stu
   schemaDescription="Calculate your student loan payoff date, total interest, and how much extra payments save you over the life of the loan."
   breadcrumbTool="Student Loan Payoff"
 >
-  <StudentLoanPayoffCalculator client:load />
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
+    <StudentLoanPayoffCalculator client:load />
+  </div>
+
+  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator runs two amortization schedules: your standard repayment (balance, rate, and term as entered) and an accelerated version that adds your extra monthly payment to each month's principal reduction. For each monthly period it applies the interest charge (balance × monthly rate), then subtracts the total payment. The accelerated schedule reaches zero earlier; the exact month and total interest paid are both shown in the summary.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The interest saved figure is the difference in cumulative interest paid between the two schedules. On a $35,000 loan at 6.5% over 10 years, the standard schedule costs roughly $12,400 in interest. Adding $200/month cuts the term to about 6.5 years and saves around $4,500. The relationship between extra payment and interest saved is nonlinear; the savings from the first $100/month of extra payment are larger than the savings from the fifth $100/month increment.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The year-by-year table shows both loan balances side by side at the end of each year, along with cumulative interest paid under each path. This lets you see exactly how far ahead the accelerated schedule runs at any point and helps you track progress against the projection if you're following the plan in real time.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
+      <div class="max-w-[720px] flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Months saved and interest saved are the two headline metrics. Months saved translates directly into how many fewer payments you make. Each month earlier you pay off the loan is a month with more disposable income. For people planning major purchases or life events (buying a home, having children), the payoff date relative to those milestones is often more important than the interest number itself.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">If you have multiple student loans, this calculator handles one loan at a time. For a multi-loan strategy comparison between the avalanche (highest rate first) and snowball (lowest balance first) methods, use the debt payoff planner, which handles up to six debts simultaneously and shows the optimal payoff order for each approach.</p>
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+      <div class="flex flex-col gap-[8px]">
+        {faqItems.map((item) => (
+          <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
+            <summary class="cursor-pointer list-none flex items-center justify-between px-[24px] py-[12px] text-body-sm font-medium text-on-surface select-none hover:bg-surface-container-high/30 transition-colors rounded-xl">
+              {item.q}
+              <span class="faq-chevron material-symbols-outlined text-on-surface-variant text-[16px] ml-[8px] shrink-0 transition-transform duration-300 ease-in-out" aria-hidden="true">expand_more</span>
+            </summary>
+            <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
+              <div class="overflow-hidden">
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-border-subtle pt-[48px]">
+      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+      <div class="grid sm:grid-cols-2 gap-[12px]">
+        <a href="/debt-payoff-planner" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Debt Payoff Strategy Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Compare avalanche vs. snowball across all your debts at once</p>
+        </a>
+        <a href="/credit-card-payoff" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Credit Card Payoff Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Model payoff timelines for your highest-rate balances</p>
+        </a>
+        <a href="/net-worth" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Net Worth Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Track how paying down debt improves your overall net worth</p>
+        </a>
+        <a href="/effective-hourly" class="glass-card p-[16px] rounded-xl group block">
+          <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Effective Hourly Rate Calculator</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">See your true take-home to better plan your debt payoff budget</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('details.faq-item').forEach(details => {
+      const summary = details.querySelector('summary');
+      const grid = details.querySelector(':scope > div') as HTMLElement | null;
+      const chevron = summary?.querySelector('.faq-chevron');
+      summary?.addEventListener('click', e => {
+        e.preventDefault();
+        const isOpen = details.open;
+        if (!isOpen) {
+          details.open = true;
+          requestAnimationFrame(() => {
+            if (grid) grid.style.gridTemplateRows = '1fr';
+            chevron?.classList.add('rotate-180');
+          });
+        } else {
+          if (grid) grid.style.gridTemplateRows = '0fr';
+          chevron?.classList.remove('rotate-180');
+          grid?.addEventListener('transitionend', () => { details.open = false; }, { once: true });
+        }
+      });
+    });
+  </script>
+
 </Base>

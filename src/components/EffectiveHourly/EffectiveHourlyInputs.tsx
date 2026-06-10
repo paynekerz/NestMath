@@ -68,7 +68,7 @@ export function EffectiveHourlyInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('annualGrossSalary', v)}
             prefix="$"
             step={1000}
-            tooltip="Your total annual salary before taxes and deductions — the number on your offer letter."
+            tooltip="Your total annual salary before taxes and deductions: the number on your offer letter."
             error={errors.annualGrossSalary}
           />
           <Field
@@ -136,7 +136,7 @@ export function EffectiveHourlyInputs({ inputs, onChange, errors }: Props) {
             suffix="hrs"
             step={0.5}
             min={1}
-            tooltip="Your contracted or standard work hours per week — what you're technically paid to work."
+            tooltip="Your contracted or standard work hours per week: what you're technically paid to work."
             error={errors.weeklyHoursWorked}
           />
           <Field
@@ -146,7 +146,7 @@ export function EffectiveHourlyInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('weeklyUnpaidOvertime', v)}
             suffix="hrs"
             step={0.5}
-            tooltip="Extra hours you work beyond your contract with no additional pay — early starts, late finishes, weekend check-ins."
+            tooltip="Extra hours you work beyond your contract with no additional pay: early starts, late finishes, weekend check-ins."
             error={errors.weeklyUnpaidOvertime}
           />
           <Field
@@ -166,7 +166,7 @@ export function EffectiveHourlyInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('weeklyPrepDecompression', v)}
             suffix="hrs"
             step={0.5}
-            tooltip="Time spent getting ready for work and unwinding after — shower, coffee, changing, mentally checking out. These hours belong to the job."
+            tooltip="Time spent getting ready for work and unwinding after: shower, coffee, changing, mentally checking out. These hours belong to the job."
             error={errors.weeklyPrepDecompression}
           />
 

@@ -118,7 +118,7 @@ export function EmergencyFundSummary({ result }: Props) {
           label="6-month goal"
           current={result.months[0].savings}
           target={result.sixMonthTarget}
-          tooltip="A 6-month emergency fund is the gold standard — enough to cover a serious illness, job loss, or major unexpected expense without going into debt."
+          tooltip="A 6-month emergency fund covers a serious illness, job loss, or major unexpected expense without going into debt."
         />
       </div>
 
@@ -148,7 +148,7 @@ export function EmergencyFundSummary({ result }: Props) {
       <div className={`border-t ${border} ${bg} px-lg py-sm`}>
         <div className="flex items-center gap-1">
           <p className="text-label-sm text-on-surface-variant">Interest earned along the way</p>
-          <InfoTooltip text="Total HYSA interest your savings will earn between now and hitting the 6-month goal — money you get for free just by keeping funds in a high-yield account." />
+          <InfoTooltip text="Total HYSA interest earned between now and hitting the 6-month goal, just from keeping funds in a high-yield account." />
         </div>
         <p className="text-body-md font-bold font-mono-data tabular-nums text-success-emerald mt-0.5">
           {cur.format(result.interestEarned)}

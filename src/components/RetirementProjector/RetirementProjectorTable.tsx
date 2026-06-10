@@ -27,7 +27,9 @@ export function RetirementProjectorTable({ result }: Props) {
         </span>
       </button>
 
-      <div className={`overflow-x-auto border-t border-border-subtle${open ? '' : ' hidden'}`} data-print="table-container">
+      <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+        <div className="overflow-hidden">
+          <div className="overflow-x-auto border-t border-border-subtle" data-print="table-container">
         <table className="w-full text-left" data-print="table">
           <thead>
             <tr className="text-on-surface-variant text-label-sm uppercase tracking-wide bg-surface-container">
@@ -42,7 +44,7 @@ export function RetirementProjectorTable({ result }: Props) {
               <th className="px-4 py-2.5 font-semibold text-right">
                 <span className="inline-flex items-center justify-end gap-1.5">
                   Employer Match
-                  <InfoTooltip text="The employer match contribution added this year — free money that compounds alongside your own savings." />
+                  <InfoTooltip text="The employer match contribution added this year: free money that compounds alongside your own savings." />
                 </span>
               </th>
               <th className="px-4 py-2.5 font-semibold text-right">
@@ -65,6 +67,8 @@ export function RetirementProjectorTable({ result }: Props) {
             ))}
           </tbody>
         </table>
+          </div>
+        </div>
       </div>
     </div>
   );

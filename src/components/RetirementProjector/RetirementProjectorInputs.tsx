@@ -150,7 +150,7 @@ export function RetirementProjectorInputs({ inputs, onChange, errors }: Props) {
             onChange={v => onChange('annualSalary', v)}
             prefix="$"
             step={1000}
-            tooltip="Your gross annual salary. Used only to calculate the employer match dollar amount — it doesn't affect the contribution growth calculation."
+            tooltip="Your gross annual salary. Used only to calculate the employer match dollar amount; it doesn't affect the contribution growth calculation."
             error={errors.annualSalary}
           />
           <div className="grid grid-cols-2 gap-4">
