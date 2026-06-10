@@ -5,19 +5,19 @@ import { SocialSecurityCalculator } from '../components/SocialSecurity/SocialSec
 const faqItems = [
   {
     q: "What is the Social Security break-even age?",
-    a: "The break-even age is when cumulative lifetime benefits from delaying become equal to the cumulative benefits from claiming earlier. For example, claiming at 67 vs. 62 means a larger monthly benefit starting later. The break-even is the age at which the total received from the delayed start catches up to the total that would have been received from the earlier start. After the break-even age, delayed claiming has paid more in total. If you don't live past the break-even age, earlier claiming would have been financially better."
+    a: "The <a href=\"/glossary#break-even\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">break-even</a> age is when cumulative lifetime benefits from delaying become equal to the cumulative benefits from claiming earlier. For example, claiming at 67 vs. 62 means a larger monthly benefit starting later. The break-even is the age at which the total received from the delayed start catches up to the total that would have been received from the earlier start. After the break-even age, delayed claiming has paid more in total. If you don't live past the break-even age, earlier claiming would have been financially better."
   },
   {
     q: "Should I claim Social Security at 62 or wait until 70?",
-    a: "Claiming at 62 maximizes total benefits if you have below-average life expectancy or urgent financial need. Claiming at 70 maximizes the monthly amount (up to 32% more than full retirement age) and is optimal if you expect to live past 82–83. For most people, the break-even between 62 and 70 is around age 82. If you're healthy and have family longevity, delaying to 70 is generally advantageous. If you have health concerns or need the income, claiming earlier may be correct. There's no universally right answer — it depends entirely on life expectancy."
+    a: "Claiming at 62 maximizes total benefits if you have below-average life expectancy or urgent financial need. Claiming at 70 maximizes the monthly amount (up to 32% more than full retirement age) and is optimal if you expect to live past 82–83. For most people, the break-even between 62 and 70 is around age 82. If you're healthy and have family longevity, delaying to 70 is generally advantageous. If you have health concerns or need the income, claiming earlier may be correct. There's no universally right answer it depends entirely on life expectancy."
   },
   {
     q: "How does Social Security calculate my monthly benefit?",
-    a: "The Social Security Administration calculates your Primary Insurance Amount (PIA) using a bend-point formula applied to your Average Indexed Monthly Earnings (AIME). The formula is progressive: a higher replacement rate applies to lower earnings tiers. The first $1,174/month of AIME (2025) receives 90% replacement. Earnings between $1,174 and $7,078 receive 32%. Earnings above that receive 15%. This calculator uses the bend-point formula to estimate your benefit from your income — you can get your official estimate from your SSA.gov My Social Security account."
+    a: "The Social Security Administration calculates your Primary Insurance Amount (PIA) using a bend-point formula applied to your Average Indexed Monthly Earnings (AIME). The formula is progressive: a higher replacement rate applies to lower earnings tiers. The first $1,174/month of AIME (2025) receives 90% replacement. Earnings between $1,174 and $7,078 receive 32%. Earnings above that receive 15%. This calculator uses the bend-point formula to estimate your benefit from your income you can get your official estimate from your SSA.gov My Social Security account."
   },
   {
     q: "What happens to Social Security if the trust fund is depleted?",
-    a: "The Social Security trustees project that the combined trust fund reserves may be depleted around 2033–2035. At that point, ongoing payroll tax revenue would support an estimated 77–83% of scheduled benefits — not zero. This is not a collapse scenario, but it does mean future benefits may be reduced without legislative action. The calculator includes a trust fund reduction toggle so you can see your projected benefits under the reduced scenario, helping you plan for the more conservative outcome."
+    a: "The Social Security trustees project that the combined trust fund reserves may be depleted around 2033–2035. At that point, ongoing payroll tax revenue would support an estimated 77–83% of scheduled benefits not zero. This is not a collapse scenario, but it does mean future benefits may be reduced without legislative action. The calculator includes a trust fund reduction toggle so you can see your projected benefits under the reduced scenario, helping you plan for the more conservative outcome."
   },
   {
     q: "Does working after 62 affect Social Security benefits?",
@@ -26,10 +26,10 @@ const faqItems = [
 ];
 ---
 <Base
-  title="Social Security Break-Even Calculator — NestMath"
+  title="Social Security Break-Even Calculator NestMath"
   description="Find the optimal age to claim Social Security. Compare lifetime benefits at 62, 67, and 70, see your break-even ages, and model what happens if trust fund reserves are depleted."
   canonical="https://nestmath.app/social-security-break-even"
-  schemaName="NestMath — Social Security Break-Even Calculator"
+  schemaName="NestMath Social Security Break-Even Calculator"
   schemaDescription="Free Social Security break-even calculator. Estimates your monthly benefit from income using the SSA bend-point formula, shows cumulative lifetime totals at 62/67/70, and identifies the optimal claiming age based on your life expectancy."
   breadcrumbTool="Social Security Break-Even"
 >
@@ -38,27 +38,27 @@ const faqItems = [
     <SocialSecurityCalculator client:load />
   </div>
 
-  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+  <div data-print="hide" class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">How the calculator works</h2>
+      <div class="flex flex-col gap-[16px]">
         <p class="text-body-md text-on-surface-variant leading-relaxed">The benefit estimate uses the SSA bend-point formula. Your income is treated as an approximation of your Average Indexed Monthly Earnings (AIME). The formula then applies three replacement rates: 90% on the first $1,174/month of AIME, 32% on AIME between $1,174 and $7,078, and 15% above that. The result is your Primary Insurance Amount (PIA), which is the monthly benefit you'd receive at full retirement age (67 for those born after 1960).</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">Claiming at 62 reduces the monthly benefit by up to 30% (5/9 of 1% for each month before FRA up to 36 months, then 5/12 of 1% for each additional month). Claiming at 70 increases the benefit by 8% per year past FRA (delayed retirement credits), capping at a 24% increase over the FRA benefit. The cumulative totals are calculated by multiplying the monthly benefit by the number of months from the claiming age to your life expectancy, giving total lifetime benefits for each scenario.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The trust fund reduction scenario applies the SSA's projected 77–83% reduction factor to all benefit estimates. This conservative view models benefits as they'd be paid if trust fund reserves are depleted and no legislative changes are made. The break-even ages are found by solving for the age at which cumulative benefits from each strategy become equal, shown as a crossover point on the cumulative benefit chart.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The trust fund reduction scenario applies the SSA's projected 77–83% reduction factor to all benefit estimates. This conservative view models benefits as they'd be paid if trust fund reserves are depleted and no legislative changes are made. The <a href="/glossary#break-even" class="text-primary hover:underline" target="_blank" rel="noopener">break-even</a> ages are found by solving for the age at which cumulative benefits from each strategy become equal, shown as a crossover point on the cumulative benefit chart.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The break-even age is the key decision number. For the 62 vs. 70 comparison, it's typically around age 82–83 for average earners. If you expect to live significantly past this age (due to health, family history, or personal optimism), delaying to 70 is likely optimal. If your health is uncertain or you have financial need before 70, claiming earlier makes sense. The decision is also influenced by spousal benefits, survivor benefits if you're married, and whether you're still working.</p>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Understanding your results</h2>
+      <div class="flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The <a href="/glossary#break-even" class="text-primary hover:underline" target="_blank" rel="noopener">break-even</a> age is the key decision number. For the 62 vs. 70 comparison, it's typically around age 82–83 for average earners. If you expect to live significantly past this age (due to health, family history, or personal optimism), delaying to 70 is likely optimal. If your health is uncertain or you have financial need before 70, claiming earlier makes sense. The decision is also influenced by spousal benefits, survivor benefits if you're married, and whether you're still working.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The monthly benefit amounts at each claiming age matter beyond just the break-even math. A higher monthly benefit from delaying provides better inflation protection (benefits are COLA-adjusted annually) and larger survivor benefits for a spouse. These non-financial dimensions aren't captured in the cumulative totals but should inform your real-world decision. For the most accurate personalized estimate, visit SSA.gov and create a My Social Security account to see your official earnings record and projected benefits.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Frequently asked questions</h2>
       <div class="flex flex-col gap-[8px]">
         {faqItems.map((item) => (
           <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
@@ -68,7 +68,7 @@ const faqItems = [
             </summary>
             <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
               <div class="overflow-hidden">
-                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle" set:html={item.a}></p>
               </div>
             </div>
           </details>
@@ -76,8 +76,8 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Related calculators</h2>
       <div class="grid sm:grid-cols-2 gap-[12px]">
         <a href="/retirement-projector" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Retirement Savings Calculator</p>
@@ -89,7 +89,7 @@ const faqItems = [
         </a>
         <a href="/tax-withholding" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Tax Withholding Estimator</p>
-          <p class="text-label-sm text-on-surface-variant mt-[2px]">Social Security benefits may be taxable — model your withholding</p>
+          <p class="text-label-sm text-on-surface-variant mt-[2px]">Social Security benefits may be taxable model your withholding</p>
         </a>
         <a href="/net-worth" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Net Worth Calculator</p>

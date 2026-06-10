@@ -5,7 +5,7 @@ import { SideIncomeCalculator } from '../components/SideIncome/SideIncomeCalcula
 const faqItems = [
   {
     q: "How much tax do I pay on freelance income?",
-    a: "Freelance and self-employment income is subject to two separate tax obligations. First, self-employment (SE) tax: 15.3% on net self-employment income (92.35% of gross to account for the employer-equivalent deduction). This covers both the employee and employer portions of Social Security and Medicare. Second, federal income tax: your net self-employment income is added to your regular income and taxed at your marginal rate. The combined effective tax rate on freelance income typically ranges from 25–40% for someone with a W-2 job."
+    a: "Freelance and self-employment income is subject to two separate tax obligations. First, <a href=\"/glossary#self-employment-tax\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">self-employment (SE) tax</a>: 15.3% on net self-employment income (92.35% of gross to account for the employer-equivalent deduction). This covers both the employee and employer portions of Social Security and Medicare. Second, federal income tax: your net self-employment income is added to your regular income and taxed at your <a href=\"/glossary#marginal-tax-rate\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">marginal rate</a>. The combined <a href=\"/glossary#effective-tax-rate\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">effective tax rate</a> on freelance income typically ranges from 25–40% for someone with a W-2 job."
   },
   {
     q: "What business expenses can I deduct from freelance income?",
@@ -17,19 +17,19 @@ const faqItems = [
   },
   {
     q: "How does the self-employment tax deduction work?",
-    a: "You can deduct half of your SE tax (the employer-equivalent portion) from your income before calculating federal income tax. This mirrors the treatment of employees, whose employer pays half of FICA separately. So on $50,000 of net self-employment income, you pay $7,065 in SE tax (14.13% effective rate after the 92.35% adjustment), and you can deduct $3,533 (half of SE tax) from income before applying income tax brackets. The calculator applies this deduction automatically."
+    a: "You can deduct half of your <a href=\"/glossary#self-employment-tax\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">SE tax</a> (the employer-equivalent portion) from your income before calculating federal income tax. This mirrors the treatment of employees, whose employer pays half of <a href=\"/glossary#fica-tax\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">FICA</a> separately. So on $50,000 of net self-employment income, you pay $7,065 in SE tax (14.13% effective rate after the 92.35% adjustment), and you can deduct $3,533 (half of SE tax) from income before applying income <a href=\"/glossary#tax-bracket\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">tax brackets</a>. The calculator applies this deduction automatically."
   },
   {
     q: "Is the first $400 of self-employment income tax-free?",
-    a: "Not exactly. SE tax is only required if your net self-employment income exceeds $400 for the year. Below that threshold, you still may owe federal income tax on the income, but you don't owe SE tax. Above $400, SE tax applies to all net self-employment income, not just the amount above $400. The $400 threshold is simply the floor for SE tax filing — it doesn't create a $400 tax-free allowance."
+    a: "Not exactly. SE tax is only required if your net self-employment income exceeds $400 for the year. Below that threshold, you still may owe federal income tax on the income, but you don't owe SE tax. Above $400, SE tax applies to all net self-employment income, not just the amount above $400. The $400 threshold is simply the floor for SE tax filing it doesn't create a $400 tax-free allowance."
   }
 ];
 ---
 <Base
-  title="Side Income After-Tax Calculator — NestMath"
+  title="Side Income After-Tax Calculator NestMath"
   description="Find out what your freelance or side hustle income actually nets after self-employment tax and federal income tax. Enter your gross side income, business expenses, and W-2 income to see your true take-home."
   canonical="https://nestmath.app/side-income"
-  schemaName="NestMath — Side Income After-Tax Calculator"
+  schemaName="NestMath Side Income After-Tax Calculator"
   schemaDescription="Free side income tax calculator for freelancers and gig workers. Shows SE tax, federal income tax at your marginal rate, true take-home, and quarterly estimated payment amounts using 2025 tax brackets."
   breadcrumbTool="Side Income"
 >
@@ -38,27 +38,27 @@ const faqItems = [
     <SideIncomeCalculator client:load />
   </div>
 
-  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+  <div data-print="hide" class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator applies two separate tax calculations to your side income. First, self-employment (SE) tax: net self-employment income is gross side income minus business expenses. SE tax is calculated on 92.35% of net SE income (this 92.35% adjustment accounts for the deductibility of the employer-equivalent portion). The SE tax rate is 15.3% (12.4% for Social Security and 2.9% for Medicare), applied to that adjusted amount. Half of SE tax is then deductible from your total income before calculating federal income tax.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">Federal income tax is calculated by adding your net self-employment income (minus the half SE tax deduction) to your W-2 income, subtracting the standard deduction ($15,000 single / $30,000 MFJ for 2025), and applying the 2025 marginal tax brackets. The incremental federal tax from adding side income is the difference between your total income tax and your W-2-only income tax. This is the federal tax attributable specifically to your side income.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">True take-home is gross side income minus business expenses minus total SE tax minus the incremental federal income tax. The effective rate on side income (total taxes ÷ gross side income) is typically higher than your W-2 effective rate because of the SE tax burden and the fact that side income is often taxed at your marginal rate rather than benefiting from the lower brackets already consumed by W-2 income.</p>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">How the calculator works</h2>
+      <div class="flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator applies two separate tax calculations to your side income. First, <a href="/glossary#self-employment-tax" class="text-primary hover:underline" target="_blank" rel="noopener">self-employment (SE) tax</a>: net self-employment income is gross side income minus business expenses. SE tax is calculated on 92.35% of net SE income (this 92.35% adjustment accounts for the deductibility of the employer-equivalent portion). The SE tax rate is 15.3% (12.4% for Social Security and 2.9% for Medicare), applied to that adjusted amount. Half of SE tax is then deductible from your total income before calculating federal income tax.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Federal income tax is calculated by adding your net self-employment income (minus the half SE tax deduction) to your W-2 income, subtracting the standard deduction ($15,000 single / $30,000 MFJ for 2025), and applying the 2025 <a href="/glossary#marginal-tax-rate" class="text-primary hover:underline" target="_blank" rel="noopener">marginal tax</a> brackets. The incremental federal tax from adding side income is the difference between your total income tax and your W-2-only income tax. This is the federal tax attributable specifically to your side income.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">True take-home is gross side income minus business expenses minus total SE tax minus the incremental federal income tax. The <a href="/glossary#effective-tax-rate" class="text-primary hover:underline" target="_blank" rel="noopener">effective tax rate</a> on side income (total taxes ÷ gross side income) is typically higher than your W-2 effective rate because of the SE tax burden and the fact that side income is often taxed at your <a href="/glossary#marginal-tax-rate" class="text-primary hover:underline" target="_blank" rel="noopener">marginal rate</a> rather than benefiting from the lower brackets already consumed by W-2 income.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Understanding your results</h2>
+      <div class="flex flex-col gap-[16px]">
         <p class="text-body-md text-on-surface-variant leading-relaxed">The true take-home is the most important output. For a W-2 worker adding significant side income, it's common to see an effective tax rate of 30–40% on the side income because it stacks on top of an existing W-2 salary at the highest marginal rate. A $10,000 side income might net $6,500–$7,000 after SE tax and federal income tax. The exact amount depends on your W-2 salary and filing status. This number helps you evaluate whether a given freelance opportunity, contract rate, or side project is financially worth pursuing.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The quarterly estimated payment amounts tell you how much to set aside and when. Making quarterly payments on time avoids the IRS underpayment penalty. The easiest approach is to estimate your total side income for the year, run this calculator, and divide the total SE + income tax by four. If side income is variable, recalculate each quarter as actual income becomes clearer.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Frequently asked questions</h2>
       <div class="flex flex-col gap-[8px]">
         {faqItems.map((item) => (
           <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
@@ -68,7 +68,7 @@ const faqItems = [
             </summary>
             <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
               <div class="overflow-hidden">
-                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle" set:html={item.a}></p>
               </div>
             </div>
           </details>
@@ -76,8 +76,8 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Related calculators</h2>
       <div class="grid sm:grid-cols-2 gap-[12px]">
         <a href="/tax-withholding" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Tax Withholding Estimator</p>

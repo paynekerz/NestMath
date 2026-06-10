@@ -151,17 +151,11 @@ export function AffordabilityCalculator() {
         {/* Results column */}
         <div className="lg:col-span-5 flex flex-col gap-4">
           {result ? (
-            <>
-              <AffordabilityResult
-                result={result}
-                backEndDTILimit={inputs.backEndDTI}
-                proInsight={proInsight}
-              />
-              <p data-print="hide" className="text-body-sm text-center text-on-surface-variant">
-                If this helped you figure out your budget,{' '}
-                <KofiButton label="☕ a coffee seems fair." />
-              </p>
-            </>
+            <AffordabilityResult
+              result={result}
+              backEndDTILimit={inputs.backEndDTI}
+              proInsight={proInsight}
+            />
           ) : (
             <div className="glass-panel p-8 rounded-xl flex flex-col items-center justify-center gap-3 text-center min-h-[200px]">
               <span className="material-symbols-outlined text-on-surface-variant" style={{ fontSize: '32px' }}>
@@ -174,6 +168,8 @@ export function AffordabilityCalculator() {
           )}
         </div>
       </div>
+
+      {result && <KofiButton message="If this helped you figure out your home budget," />}
 
       {/* Cost Breakdown Table */}
       {result && amortization.length > 0 && (

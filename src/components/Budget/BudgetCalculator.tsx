@@ -12,6 +12,7 @@ import { ExpensesPanel } from './ExpensesPanel';
 import { BudgetSummary } from './BudgetSummary';
 import { SavingsChart } from './SavingsChart';
 import { BudgetTable } from './BudgetTable';
+import { KofiButton } from '../ui/KofiButton';
 
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 const pct = new Intl.NumberFormat('en-US', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -151,6 +152,7 @@ export function BudgetCalculator() {
           horizonMonths={horizonMonths}
           onHorizonChange={setHorizonMonths}
         />
+        {monthlyNet > 0 && <KofiButton message="If this helped you map out your monthly budget," className="" />}
         <BudgetTable rows={yearRows} />
       </div>
     </div>

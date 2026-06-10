@@ -5,32 +5,32 @@ import { NetWorthCalculator } from '../components/NetWorth/NetWorthCalculator';
 const faqItems = [
   {
     q: "What is net worth and how do I calculate it?",
-    a: "Net worth is total assets minus total liabilities. Assets are everything you own with financial value: cash, investments, retirement accounts, home equity, vehicle value, and other property. Liabilities are everything you owe: mortgage balance, car loans, credit card debt, student loans, and other obligations. The difference is your net worth — it can be positive (you own more than you owe) or negative (common early in life with student loans and no significant assets yet)."
+    a: "<a href=\"/glossary#net-worth\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">Net worth</a> is total assets minus total liabilities. Assets are everything you own with financial value: cash, investments, retirement accounts, home <a href=\"/glossary#equity\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">equity</a>, vehicle value, and other property. Liabilities are everything you owe: <a href=\"/glossary#mortgage\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">mortgage</a> balance, car loans, credit card debt, student loans, and other obligations. The difference is your net worth it can be positive (you own more than you owe) or negative (common early in life with student loans and no significant assets yet)."
   },
   {
     q: "What is a good net worth by age?",
-    a: "A common benchmark is to have a net worth equal to your annual income by age 30, 3x by age 40, 7x by age 50, and 12x by age 60. These are rough guidelines derived from common retirement planning assumptions — they're not universal standards. More relevant is whether your net worth is trending in the right direction over time. Tracking year-over-year change is more actionable than comparing to an arbitrary age benchmark."
+    a: "A common benchmark is to have a net worth equal to your annual income by age 30, 3x by age 40, 7x by age 50, and 12x by age 60. These are rough guidelines derived from common retirement planning assumptions they're not universal standards. More relevant is whether your net worth is trending in the right direction over time. Tracking year-over-year change is more actionable than comparing to an arbitrary age benchmark."
   },
   {
     q: "Should I include my home value in my net worth?",
-    a: "Yes, but include only the equity portion: current home value minus remaining mortgage balance. Including the full home value without subtracting the mortgage would overstate your net worth. The equity represents what you'd actually pocket if you sold today after paying off the loan. Note that home equity is illiquid — it's not easily converted to cash without selling or taking out a home equity loan, so it's useful to track liquid vs. illiquid assets separately."
+    a: "Yes, but include only the <a href=\"/glossary#equity\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">equity</a> portion: current home value minus remaining <a href=\"/glossary#mortgage\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">mortgage</a> balance. Including the full home value without subtracting the mortgage would overstate your <a href=\"/glossary#net-worth\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">net worth</a>. The equity represents what you'd actually pocket if you sold today after paying off the loan. Note that home equity is illiquid it's not easily converted to cash without selling or taking out a home equity loan, so it's useful to track liquid vs. illiquid assets separately."
   },
   {
     q: "Should I include retirement accounts in my net worth?",
-    a: "Yes — 401(k), IRA, and other retirement accounts are assets and should be included at their current balance. The fact that withdrawals will eventually be taxed is accounted for when you eventually withdraw; the standard practice is to include the pre-tax balance and not try to estimate the future tax liability. If you want a more conservative net worth figure, you can reduce retirement account values by your expected tax rate, but most personal finance tracking uses the full balance."
+    a: "Yes <a href=\"/glossary#401k\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">401(k)</a>, IRA, and other retirement accounts are assets and should be included at their current balance. The fact that withdrawals will eventually be taxed is accounted for when you eventually withdraw; the standard practice is to include the pre-tax balance and not try to estimate the future tax liability. If you want a more conservative <a href=\"/glossary#net-worth\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">net worth</a> figure, you can reduce retirement account values by your expected <a href=\"/glossary#effective-tax-rate\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">effective tax rate</a>, but most personal finance tracking uses the full balance."
   },
   {
     q: "How often should I calculate my net worth?",
-    a: "Once or twice a year is usually sufficient for most people. Calculating too frequently introduces noise from market volatility that doesn't reflect real financial progress. Annual snapshots let you see meaningful trends — whether your assets are growing faster than your debt, whether you're making progress toward financial goals, and whether your debt-to-asset ratio is improving. Storing year-over-year snapshots in the Budget Dashboard lets you track the trend automatically."
+    a: "Once or twice a year is usually sufficient for most people. Calculating too frequently introduces noise from market volatility that doesn't reflect real financial progress. Annual snapshots let you see meaningful trends whether your assets are growing faster than your debt, whether you're making progress toward financial goals, and whether your debt-to-asset ratio is improving. Storing year-over-year snapshots in the Budget Dashboard lets you track the trend automatically."
   }
 ];
 ---
 <Base
-  title="Net Worth Calculator — NestMath"
-  description="Calculate your net worth in minutes. Add up your assets and liabilities to see exactly where you stand — with a year-over-year comparison and visual breakdown."
+  title="Net Worth Calculator NestMath"
+  description="Calculate your net worth in minutes. Add up your assets and liabilities to see exactly where you stand with a year-over-year comparison and visual breakdown."
   canonical="https://nestmath.app/net-worth"
-  schemaName="NestMath — Net Worth Calculator"
-  schemaDescription="Free net worth snapshot calculator. Enter assets and liabilities to get your total net worth, debt-to-asset ratio, and a category breakdown — with optional year-over-year delta."
+  schemaName="NestMath Net Worth Calculator"
+  schemaDescription="Free net worth snapshot calculator. Enter assets and liabilities to get your total net worth, debt-to-asset ratio, and a category breakdown with optional year-over-year delta."
   breadcrumbTool="Net Worth Calculator"
 >
 
@@ -38,27 +38,27 @@ const faqItems = [
     <NetWorthCalculator client:load />
   </div>
 
-  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+  <div data-print="hide" class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculation is straightforward: total assets minus total liabilities equals net worth. The calculator groups assets into categories (cash and savings, investments, retirement accounts, home equity, vehicles, and other assets) and liabilities into their corresponding categories (mortgage balance, car loans, credit cards, student loans, and other debt). Each category is totaled separately to produce a breakdown alongside the net worth figure.</p>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">How the calculator works</h2>
+      <div class="flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The calculation is straightforward: total assets minus total liabilities equals <a href="/glossary#net-worth" class="text-primary hover:underline" target="_blank" rel="noopener">net worth</a>. The calculator groups assets into categories (cash and savings, investments, retirement accounts, home <a href="/glossary#equity" class="text-primary hover:underline" target="_blank" rel="noopener">equity</a>, vehicles, and other assets) and liabilities into their corresponding categories (<a href="/glossary#mortgage" class="text-primary hover:underline" target="_blank" rel="noopener">mortgage</a> balance, car loans, credit cards, student loans, and other debt). Each category is totaled separately to produce a breakdown alongside the net worth figure.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The two donut charts visualize the composition of your assets and liabilities. This is useful for spotting concentration risk (too much wealth tied up in a single asset like home equity) or understanding which liabilities are most significant. The charts help answer not just "what is my net worth" but "what does my net worth consist of."</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">If you enter last year's net worth, the calculator shows the year-over-year change in both dollar terms and percentage terms. This delta is more informative than the absolute net worth figure for tracking financial progress. A net worth increase of $15,000 in one year is meaningful regardless of whether your starting point was $50,000 or $500,000.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
-        <p class="text-body-md text-on-surface-variant leading-relaxed">Net worth is a snapshot, not a score. A negative net worth is common and expected at certain life stages, particularly for people in their 20s with student loans and limited savings. What matters is whether your net worth is trending upward over time: assets growing (through savings, investment returns, home appreciation, retirement contributions) faster than liabilities are growing. The year-over-year comparison is the most actionable part of this tool for most users.</p>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Understanding your results</h2>
+      <div class="flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed"><a href="/glossary#net-worth" class="text-primary hover:underline" target="_blank" rel="noopener">Net worth</a> is a snapshot, not a score. A negative net worth is common and expected at certain life stages, particularly for people in their 20s with student loans and limited savings. What matters is whether your net worth is trending upward over time: assets growing (through savings, investment returns, home appreciation, retirement contributions) faster than liabilities are growing. The year-over-year comparison is the most actionable part of this tool for most users.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The asset-to-liability breakdown helps identify where to focus. A high concentration in home equity with limited liquid assets might suggest focusing on building cash savings. A large credit card or consumer debt balance relative to total liabilities suggests prioritizing those high-rate balances. Net worth tells you your current position; the other NestMath calculators help you improve it.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Frequently asked questions</h2>
       <div class="flex flex-col gap-[8px]">
         {faqItems.map((item) => (
           <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
@@ -68,7 +68,7 @@ const faqItems = [
             </summary>
             <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
               <div class="overflow-hidden">
-                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle" set:html={item.a}></p>
               </div>
             </div>
           </details>
@@ -76,8 +76,8 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Related calculators</h2>
       <div class="grid sm:grid-cols-2 gap-[12px]">
         <a href="/debt-payoff-planner" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Debt Payoff Strategy Calculator</p>

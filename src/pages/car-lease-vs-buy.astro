@@ -1,11 +1,11 @@
----
+﻿---
 import Base from '../layouts/Base.astro';
 import { CarLeaseVsBuyCalculator } from '../components/CarLeaseVsBuy/CarLeaseVsBuyCalculator';
 
 const faqItems = [
   {
     q: "Is it better to lease or buy a car?",
-    a: "Neither is universally better — it depends on how you use the car, how long you keep it, and what you do with the payment difference. Leasing typically has lower monthly payments and you always drive a newer car, but you build no equity and face mileage limits. Buying costs more upfront but the car becomes an asset after payoff, and you can drive it as long as you want. The most important comparison isn't lease vs. buy — it's lease vs. buy vs. buying a cheaper car and investing the payment difference."
+    a: "How long you keep the car and what you do with the monthly savings determine the answer. Leasing has lower payments but no <a href=\"/glossary#equity\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">equity</a> and mileage caps. Buying costs more upfront but you own an asset after payoff. The three-way comparison that matters: lease vs. buy vs. investing the payment difference."
   },
   {
     q: "What does 'invest the delta' mean in the car calculator?",
@@ -17,19 +17,19 @@ const faqItems = [
   },
   {
     q: "How is car depreciation modeled in this calculator?",
-    a: "The buy path applies annual depreciation as a percentage of the current car value — not the original price. This is compound depreciation. At 15% annual depreciation, a $35,000 car is worth $29,750 after year 1, $25,288 after year 2, and so on. The car value at the end of your model period is subtracted from total payments made to arrive at net cost. Depreciation rates vary significantly by make and model — luxury cars often depreciate faster, while trucks and certain Japanese brands depreciate slower."
+    a: "The buy path applies annual <a href=\"/glossary#depreciation\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">depreciation</a> as a percentage of the current car value not the original price. This is compound depreciation. At 15% annual depreciation, a $35,000 car is worth $29,750 after year 1, $25,288 after year 2, and so on. The car value at the end of your model period is subtracted from total payments made to arrive at net cost. Depreciation rates vary significantly by make and model luxury cars often depreciate faster, while trucks and certain Japanese brands depreciate slower."
   },
   {
     q: "Should I lease or buy a car in 2025?",
-    a: "With interest rates elevated in 2025, auto loan APRs are higher than they were a few years ago, which increases the cost of buying financed. Some manufacturers are offering subvented (subsidized) lease rates that are more favorable than retail financing. However, lease residual values (what the manufacturer guarantees the car will be worth at lease end) have also normalized after the high used-car prices of 2021–2022. Run your specific numbers — the best deal depends on the manufacturer incentives available for the specific car you want."
+    a: "With interest rates elevated in 2025, auto loan <a href=\"/glossary#apr\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">APRs</a> are higher than they were a few years ago, which increases the cost of buying financed. Some manufacturers are offering subvented (subsidized) lease rates that are more favorable than retail financing. However, lease residual values (what the manufacturer guarantees the car will be worth at lease end) have also normalized after the high used-car prices of 2021–2022. Your specific numbers determine the answer — manufacturer incentive programs shift frequently and vary by model."
   }
 ];
 ---
 <Base
-  title="Car Lease vs. Buy Calculator — NestMath"
+  title="Car Lease vs. Buy Calculator NestMath"
   description="Should you lease, buy, or buy cheaper and invest the difference? A true three-way comparison of total financial impact over your vehicle ownership period."
   canonical="https://nestmath.app/car-lease-vs-buy"
-  schemaName="NestMath — Car Lease vs. Buy Calculator"
+  schemaName="NestMath Car Lease vs. Buy Calculator"
   schemaDescription="Compare the true financial cost of leasing, buying, and investing the difference over a vehicle ownership period."
   breadcrumbTool="Car Lease vs. Buy"
 >
@@ -38,27 +38,27 @@ const faqItems = [
     <CarLeaseVsBuyCalculator client:load />
   </div>
 
-  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+  <div data-print="hide" class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">How the calculator works</h2>
+      <div class="flex flex-col gap-[16px]">
         <p class="text-body-md text-on-surface-variant leading-relaxed">The lease path totals all payments over the lease term plus upfront costs (cap cost reduction, fees, first month). Since you return the car at the end, there's no residual asset to subtract, so the total lease cost is the full out-of-pocket amount. If the model horizon extends beyond the lease term, the calculator assumes you lease again on the same terms.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The buy path totals the down payment and all loan payments over the loan term. At each year, the car's remaining value is calculated using compound depreciation (value × (1 − depreciation rate)^year). The net cost of buying is total paid minus car value at the end of the model period, because you still own an asset. If the loan is paid off before the model period ends, subsequent years have no payment but depreciation continues reducing the car's value.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The invest-the-delta path identifies the more expensive option at each month and invests the difference in payment cost. These monthly investments compound at your assumed annual return rate. At the end of the model period, this investment portfolio balance reduces the net cost of the more expensive path, showing the true financial comparison after accounting for the opportunity to grow the payment savings.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The buy path totals the <a href="/glossary#down-payment" class="text-primary hover:underline" target="_blank" rel="noopener">down payment</a> and all loan payments over the loan term. At each year, the car's remaining value is calculated using compound <a href="/glossary#depreciation" class="text-primary hover:underline" target="_blank" rel="noopener">depreciation</a> (value × (1 − depreciation rate)^year). The net cost of buying is total paid minus car value at the end of the model period, because you still own an asset. If the loan is paid off before the model period ends, subsequent years have no payment but depreciation continues reducing the car's value.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The invest-the-delta path identifies the more expensive option at each month and invests the difference in payment cost. These monthly investments compound at your assumed annual return rate. At the end of the model period, this investment portfolio balance reduces the net cost of the more expensive path, showing the true financial comparison after accounting for the <a href="/glossary#opportunity-cost" class="text-primary hover:underline" target="_blank" rel="noopener">opportunity cost</a> to grow the payment savings.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Understanding your results</h2>
+      <div class="flex flex-col gap-[16px]">
         <p class="text-body-md text-on-surface-variant leading-relaxed">The winner is the path with the lowest net cost at your model horizon. Net cost for the buy path is adjusted for the car's remaining value (since you can sell it). Net cost for the lease path is the total paid, since you have no asset at the end. The invest-the-delta path is a hybrid that can beat both: it captures the lower payment of one option while building an investment portfolio with the savings.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The result is highly sensitive to the depreciation rate and model period. Cars that depreciate slowly (trucks, certain Japanese makes) favor buying, because the retained value at the end of the period is higher. Short model periods (3–4 years) often favor leasing because you return the car before major depreciation hits the buy path's net asset value. Try adjusting your years-to-model to match your realistic vehicle ownership horizon.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Frequently asked questions</h2>
       <div class="flex flex-col gap-[8px]">
         {faqItems.map((item) => (
           <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
@@ -68,7 +68,7 @@ const faqItems = [
             </summary>
             <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
               <div class="overflow-hidden">
-                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle" set:html={item.a}></p>
               </div>
             </div>
           </details>
@@ -76,8 +76,8 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Related calculators</h2>
       <div class="grid sm:grid-cols-2 gap-[12px]">
         <a href="/effective-hourly" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Effective Hourly Rate Calculator</p>

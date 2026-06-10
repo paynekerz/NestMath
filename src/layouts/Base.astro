@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
 import interFont from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
-import { KofiButton } from '../components/ui/KofiButton';
 import { Nav } from '../components/ui/Nav';
 import { Breadcrumb } from '../components/ui/Breadcrumb';
 
@@ -68,7 +67,7 @@ const schema = JSON.stringify({
       <slot />
     </main>
     <footer data-print="hide" class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 py-6 text-body-sm text-on-surface-variant border-t border-border-subtle mt-auto">
-      <KofiButton />
+      <a href="https://ko-fi.com/paynekerz" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Support on Ko-fi</a>
       <span aria-hidden="true">·</span>
       <a href="https://github.com/paynekerz/NestMath" target="_blank" rel="noopener" class="text-primary hover:underline">GitHub</a>
       <span aria-hidden="true">·</span>

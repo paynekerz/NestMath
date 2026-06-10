@@ -5,31 +5,31 @@ import { DebtPayoffCalculator } from '../components/DebtPayoff/DebtPayoffCalcula
 const faqItems = [
   {
     q: "What is the difference between avalanche and snowball debt payoff?",
-    a: "Both methods make minimum payments on all debts and direct any extra money toward one target debt at a time. The difference is which debt gets targeted first. The avalanche method targets the highest interest rate first — this minimizes total interest paid and is mathematically optimal. The snowball method targets the lowest balance first — this produces faster early wins (paying off individual debts sooner) which many people find motivating. For most borrowers, the avalanche saves more money; the snowball keeps more people on track psychologically."
+    a: "Both methods make <a href=\"/glossary#minimum-payment\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">minimum payments</a> on all debts and direct any extra money toward one target debt at a time. The difference is which debt gets targeted first. The <a href=\"/glossary#avalanche-method\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">avalanche method</a> targets the highest interest rate first this minimizes total interest paid and is mathematically optimal. The <a href=\"/glossary#snowball-method\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">snowball method</a> targets the lowest balance first this produces faster early wins (paying off individual debts sooner) which many people find motivating. For most borrowers, the avalanche saves more money; the snowball keeps more people on track psychologically."
   },
   {
     q: "How much does the debt strategy choice actually matter?",
-    a: "For most people, the difference in total interest between avalanche and snowball is relatively small — typically 2–5% of total debt balance. On $30,000 of debt, that's $600–$1,500. The bigger driver of total interest paid is how much extra money you put toward debt each month, not the payoff order. The real risk of snowball is behavioral: if paying off small debts first leads you to stay more consistent and not abandon the plan, its slightly higher interest cost is worth it. If you have high-APR credit card debt alongside low-rate student loans, avalanche creates a much larger margin."
+    a: "The difference in total interest is typically 2–5% of total debt balance. On $30,000 of debt, that's $600–$1,500. The bigger driver of total interest paid is how much extra money you put toward debt each month, not the payoff order. The real risk of snowball is behavioral: if paying off small debts first leads you to stay more consistent and not abandon the plan, its slightly higher interest cost is worth it. If you have high-APR credit card debt alongside low-rate student loans, avalanche creates a much larger margin."
   },
   {
     q: "What is the debt cascade when a debt is paid off?",
-    a: "When one debt reaches zero using either method, its former minimum payment is freed up. In a disciplined payoff plan, this freed minimum rolls into the payment on the next target debt — increasing the amount hitting the new target each month. This creates a 'cascade' or 'snowball' effect where payment power grows as debts are eliminated. The calculator automatically models this cascade, so payoff speed accelerates as you proceed through the debt list."
+    a: "When one debt reaches zero using either method, its former minimum payment is freed up. In a disciplined payoff plan, this freed minimum rolls into the payment on the next target debt increasing the amount hitting the new target each month. This creates a 'cascade' or 'snowball' effect where payment power grows as debts are eliminated. The calculator automatically models this cascade, so payoff speed accelerates as you proceed through the debt list."
   },
   {
     q: "How do I choose which debts to include in the planner?",
-    a: "Include all consumer debts: credit cards, personal loans, car loans, student loans. Generally exclude mortgages from the priority payoff list — mortgage rates are typically lower and the interest may be deductible. Also consider your emergency fund: paying down debt aggressively while holding no cash reserve is risky — any unexpected expense would require new debt. A common approach is to hold 1 month of expenses in cash before aggressive payoff, and build to 3 months after becoming debt-free."
+    a: "Include all consumer debts: credit cards, personal loans, car loans, student loans. Generally exclude <a href=\"/glossary#mortgage\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">mortgages</a> from the priority payoff list mortgage rates are typically lower and the interest may be deductible. Also consider your <a href=\"/glossary#emergency-fund\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">emergency fund</a>: paying down debt aggressively while holding no cash reserve is risky any unexpected expense would require new debt. A common approach is to hold 1 month of expenses in cash before aggressive payoff, and build to 3 months after becoming debt-free."
   },
   {
     q: "How much extra monthly payment should I allocate?",
-    a: "Any amount above your minimums accelerates payoff. Start by reviewing your budget for expenses that could be temporarily redirected. Even $100–$200/month extra makes a meaningful difference over a multi-year payoff period. The 'debt-free date' output makes the tradeoff concrete: you can see exactly how many months earlier you'd be debt-free for each additional $100 you commit. Use the budget calculator to identify where that money might come from in your current spending."
+    a: "Any amount above your minimums accelerates payoff. Start by reviewing your budget for expenses that could be temporarily redirected. Even $100–$200/month extra makes a meaningful difference over a multi-year payoff period. The debt-free date shows exactly how many months earlier you'd pay off everything for each additional $100 you commit. The budget calculator can help identify where that money comes from."
   }
 ];
 ---
 <Base
-  title="Debt Payoff Calculator — Avalanche vs. Snowball — NestMath"
+  title="Debt Payoff Calculator Avalanche vs. Snowball NestMath"
   description="Compare the avalanche and snowball debt payoff methods across up to 6 debts. See which strategy saves you the most interest and when you'll be debt-free."
   canonical="https://nestmath.app/debt-payoff-planner"
-  schemaName="NestMath — Debt Payoff Planner"
+  schemaName="NestMath Debt Payoff Planner"
   schemaDescription="Compare avalanche vs. snowball debt payoff strategies. See payoff timelines, total interest, and which method saves you more money."
   breadcrumbTool="Debt Payoff Planner"
 >
@@ -38,27 +38,27 @@ const faqItems = [
     <DebtPayoffCalculator client:load />
   </div>
 
-  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+  <div data-print="hide" class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">How the calculator works</h2>
+      <div class="flex flex-col gap-[16px]">
         <p class="text-body-md text-on-surface-variant leading-relaxed">Both methods run a monthly simulation. Each month, the calculator charges interest on every debt's remaining balance, applies the minimum payment to each debt, and then directs the extra monthly budget amount to the current target debt. When a debt reaches zero, it's paid off and its freed minimum payment is added to the payment on the next target. This cascade continues until all debts are eliminated.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">For the avalanche path, the target order is sorted by APR descending, so the highest-interest debt always receives the extra budget. For the snowball path, the target order is sorted by balance ascending, so the smallest balance always gets the extra budget. The total interest paid and the debt-free month differ between the two paths because different debts are targeted at different times, changing how quickly high-interest balances are reduced.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">For the <a href="/glossary#avalanche-method" class="text-primary hover:underline" target="_blank" rel="noopener">avalanche</a> path, the target order is sorted by APR descending, so the highest-interest debt always receives the extra budget. For the <a href="/glossary#snowball-method" class="text-primary hover:underline" target="_blank" rel="noopener">snowball</a> path, the target order is sorted by balance ascending, so the smallest balance always gets the extra budget. The total interest paid and the debt-free month differ between the two paths because different debts are targeted at different times, changing how quickly high-interest balances are reduced.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The output includes a payoff order for each method showing the projected payoff date for each individual debt. This is useful for planning. You might want to know when a specific debt (like a car loan whose payoff changes your monthly payment obligations) will be gone under each strategy.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Understanding your results</h2>
+      <div class="flex flex-col gap-[16px]">
         <p class="text-body-md text-on-surface-variant leading-relaxed">The comparison shows months to debt-free and total interest for each method. The "interest saved by choosing avalanche" metric tells you the concrete financial cost of the snowball approach, which you can weigh against the psychological benefit of earlier wins. Neither method is wrong; the best one is the one you'll actually stick with.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The cumulative debt chart shows remaining total debt over time under both strategies. In the early months, the lines may be very close; the difference becomes more apparent as debts are eliminated and the cascade effect kicks in. If you have one debt with a significantly higher APR than the others, avalanche will show a clear lead in this chart because that high-rate balance stops compounding sooner.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Frequently asked questions</h2>
       <div class="flex flex-col gap-[8px]">
         {faqItems.map((item) => (
           <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
@@ -68,7 +68,7 @@ const faqItems = [
             </summary>
             <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
               <div class="overflow-hidden">
-                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle" set:html={item.a}></p>
               </div>
             </div>
           </details>
@@ -76,8 +76,8 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Related calculators</h2>
       <div class="grid sm:grid-cols-2 gap-[12px]">
         <a href="/credit-card-payoff" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Credit Card Payoff Calculator</p>

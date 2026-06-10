@@ -5,31 +5,31 @@ import { RothVsTraditionalCalculator } from '../components/RothVsTraditional/Rot
 const faqItems = [
   {
     q: "Should I choose a Roth or Traditional IRA?",
-    a: "The core question is whether your tax rate is higher now or will be higher in retirement. If you're in a lower tax bracket today and expect to be in a higher one at retirement, Roth is usually better — you pay taxes at the lower current rate and withdraw tax-free later. If you're in a higher bracket now and expect a lower bracket in retirement, Traditional gives you an upfront tax break that's worth more than the taxes you'll pay on withdrawal. If you're genuinely uncertain, splitting contributions between both accounts hedges the risk."
+    a: "The core question is whether your tax rate is higher now or will be higher in retirement. If you're in a lower <a href=\"/glossary#tax-bracket\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">tax bracket</a> today and expect to be in a higher one at retirement, <a href=\"/glossary#roth-ira\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">Roth</a> is usually better you pay taxes at the lower current rate and withdraw tax-free later. If you're in a higher bracket now and expect a lower bracket in retirement, <a href=\"/glossary#traditional-ira\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">Traditional</a> gives you an upfront tax break that's worth more than the taxes you'll pay on withdrawal. If you're genuinely uncertain, splitting contributions between both accounts hedges the risk."
   },
   {
     q: "What is the difference between Roth and Traditional IRA taxes?",
-    a: "Traditional IRA contributions may be tax-deductible in the year you make them, reducing your taxable income now. However, all withdrawals in retirement are taxed as ordinary income — both your original contributions and all investment growth. Roth IRA contributions are made with after-tax dollars, so there's no upfront deduction. But qualified withdrawals in retirement — both contributions and growth — are completely tax-free. The total lifetime tax bill depends on which tax rate applies to more of your money."
+    a: "<a href=\"/glossary#traditional-ira\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">Traditional IRA</a> contributions may be tax-deductible in the year you make them, reducing your taxable income now. However, all withdrawals in retirement are taxed as ordinary income both your original contributions and all investment growth. <a href=\"/glossary#roth-ira\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">Roth IRA</a> contributions are made with after-tax dollars, so there's no upfront deduction. But qualified withdrawals in retirement both contributions and growth are completely tax-free. The total lifetime tax bill depends on which <a href=\"/glossary#marginal-tax-rate\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">tax rate</a> applies to more of your money."
   },
   {
     q: "What are the 2025 IRA contribution limits?",
-    a: "For 2025, the IRA contribution limit is $7,000 per year for individuals under 50 and $8,000 for those 50 and older (the extra $1,000 is the catch-up contribution). This limit applies across all your IRAs combined — not per account. Roth IRA eligibility phases out at higher income levels: $150,000–$165,000 for single filers and $236,000–$246,000 for married filing jointly. Traditional IRA deductibility also phases out if you're covered by a workplace plan and earn above certain thresholds."
+    a: "For 2025, the IRA contribution limit is $7,000 per year for individuals under 50 and $8,000 for those 50 and older (the extra $1,000 is the catch-up contribution). This limit applies across all your IRAs combined not per account. Roth IRA eligibility phases out at higher income levels: $150,000–$165,000 for single filers and $236,000–$246,000 for married filing jointly. Traditional IRA deductibility also phases out if you're covered by a workplace plan and earn above certain thresholds."
   },
   {
     q: "Can I have both a Roth and Traditional IRA?",
-    a: "Yes. You can contribute to both types in the same year, as long as your total contributions across both accounts don't exceed the annual limit ($7,000 for under 50 in 2025). Many people split their contributions to hedge against future tax rate uncertainty. You can also have a 401(k) at work alongside one or both IRA types — workplace plan and IRA limits are separate."
+    a: "Yes. You can contribute to both types in the same year, as long as your total contributions across both accounts don't exceed the annual limit ($7,000 for under 50 in 2025). Many people split their contributions to hedge against future tax rate uncertainty. You can also have a 401(k) at work alongside one or both IRA types workplace plan and IRA limits are separate."
   },
   {
     q: "What happens if my tax rate in retirement is the same as now?",
-    a: "If your current marginal tax rate exactly equals your retirement tax rate, the Roth and Traditional IRA produce identical after-tax wealth — the math balances out perfectly. In this case, the Roth has a slight practical advantage: it has no required minimum distributions (RMDs), and tax-free income in retirement gives you more flexibility in managing your tax bracket. Traditional accounts require mandatory withdrawals starting at age 73, which can push you into higher brackets."
+    a: "If your current <a href=\"/glossary#marginal-tax-rate\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">marginal tax rate</a> exactly equals your retirement tax rate, the <a href=\"/glossary#roth-ira\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">Roth</a> and <a href=\"/glossary#traditional-ira\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">Traditional IRA</a> produce identical after-tax wealth the math balances out perfectly. In this case, the Roth has a slight practical advantage: it has no required minimum distributions (RMDs), and tax-free income in retirement gives you more flexibility in managing your <a href=\"/glossary#tax-bracket\" class=\"text-primary hover:underline\" target=\"_blank\" rel=\"noopener\">tax bracket</a>. Traditional accounts require mandatory withdrawals starting at age 73, which can push you into higher brackets."
   }
 ];
 ---
 <Base
-  title="Roth vs. Traditional IRA Calculator — NestMath"
+  title="Roth vs. Traditional IRA Calculator NestMath"
   description="Compare Roth vs. Traditional IRA after-tax wealth at retirement. See which account type saves you more in taxes given your current and expected future tax rates."
   canonical="https://nestmath.app/roth-vs-traditional"
-  schemaName="NestMath — Roth vs. Traditional IRA Calculator"
+  schemaName="NestMath Roth vs. Traditional IRA Calculator"
   schemaDescription="Free Roth vs. Traditional IRA calculator. Enter your annual contribution, years to retirement, and tax rates to see which account type produces more after-tax wealth."
   breadcrumbTool="Roth vs. Traditional IRA"
 >
@@ -38,27 +38,27 @@ const faqItems = [
     <RothVsTraditionalCalculator client:load />
   </div>
 
-  <div class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
+  <div data-print="hide" class="max-w-[1280px] mx-auto px-[24px] pb-[80px] flex flex-col gap-[56px]">
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">How the calculator works</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
-        <p class="text-body-md text-on-surface-variant leading-relaxed">Both accounts use the same compound growth formula. The difference is entirely in when taxes are applied. For the Roth path, contributions are after-tax (no current deduction), so the full contribution amount compounds and the entire balance is withdrawn tax-free. The Roth after-tax value equals the projected balance at retirement with no further adjustment.</p>
-        <p class="text-body-md text-on-surface-variant leading-relaxed">For the Traditional path, contributions reduce your taxable income today at your current marginal rate. The full pre-tax contribution compounds over time. At retirement, the entire balance, including all growth, is taxed as ordinary income at your expected retirement tax rate. The Traditional after-tax value is the projected balance minus the estimated tax bill: balance × (1 − retirement tax rate).</p>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">How the calculator works</h2>
+      <div class="flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">Both accounts use the same <a href="/glossary#compound-interest" class="text-primary hover:underline" target="_blank" rel="noopener">compound</a> growth formula. The difference is entirely in when taxes are applied. For the <a href="/glossary#roth-ira" class="text-primary hover:underline" target="_blank" rel="noopener">Roth</a> path, contributions are after-tax (no current deduction), so the full contribution amount compounds and the entire balance is withdrawn tax-free. The Roth after-tax value equals the projected balance at retirement with no further adjustment.</p>
+        <p class="text-body-md text-on-surface-variant leading-relaxed">For the <a href="/glossary#traditional-ira" class="text-primary hover:underline" target="_blank" rel="noopener">Traditional</a> path, contributions reduce your taxable income today at your current <a href="/glossary#marginal-tax-rate" class="text-primary hover:underline" target="_blank" rel="noopener">marginal rate</a>. The full pre-tax contribution compounds over time. At retirement, the entire balance, including all growth, is taxed as ordinary income at your expected retirement tax rate. The Traditional after-tax value is the projected balance minus the estimated tax bill: balance × (1 − retirement tax rate).</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">The calculator also shows the tax savings now from the Traditional deduction (annual contribution × current tax rate) and the tax owed at retirement on the Traditional balance. This breakdown makes the tax trade-off explicit: you save money today with Traditional, but pay it back (potentially more or less) at retirement depending on how your bracket compares. The line chart shows both account values over time, with the Traditional track showing gross balance and after-tax value on separate lines.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Understanding your results</h2>
-      <div class="max-w-[720px] flex flex-col gap-[16px]">
-        <p class="text-body-md text-on-surface-variant leading-relaxed">The winner is the account type with the higher after-tax value at retirement. The net advantage shows the dollar difference. This figure is sensitive to the gap between your current and retirement tax rates. Even a 2–3% rate difference compounded over 30 years produces a significant advantage for one account type. If the margin is small, Roth often wins on non-financial grounds: no required minimum distributions, more flexible estate planning, and tax-free income that gives you more control over your retirement tax bracket.</p>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Understanding your results</h2>
+      <div class="flex flex-col gap-[16px]">
+        <p class="text-body-md text-on-surface-variant leading-relaxed">The winner is the account type with the higher after-tax value at retirement. The net advantage shows the dollar difference. This figure is sensitive to the gap between your current and retirement tax rates. Even a 2–3% rate difference compounded over 30 years produces a significant advantage for one account type. If the margin is small, <a href="/glossary#roth-ira" class="text-primary hover:underline" target="_blank" rel="noopener">Roth</a> often wins on non-financial grounds: no required minimum distributions, more flexible estate planning, and tax-free income that gives you more control over your retirement <a href="/glossary#tax-bracket" class="text-primary hover:underline" target="_blank" rel="noopener">tax bracket</a>.</p>
         <p class="text-body-md text-on-surface-variant leading-relaxed">A common mistake is comparing Roth and Traditional contributions as if they're equivalent dollar amounts. They're not: a $7,000 Traditional contribution costs you less out-of-pocket if it generates a tax deduction. To make an apples-to-apples comparison, some analysts adjust the Traditional contribution to reflect the after-tax cost. This calculator compares equal nominal contributions, which is how most people actually make the decision in practice.</p>
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Frequently asked questions</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Frequently asked questions</h2>
       <div class="flex flex-col gap-[8px]">
         {faqItems.map((item) => (
           <details class="faq-item rounded-xl border border-border-subtle bg-surface-elevated">
@@ -68,7 +68,7 @@ const faqItems = [
             </summary>
             <div class="grid transition-[grid-template-rows] duration-300 ease-in-out" style="grid-template-rows: 0fr">
               <div class="overflow-hidden">
-                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle">{item.a}</p>
+                <p class="px-[24px] pb-[24px] pt-[8px] text-body-sm text-on-surface-variant leading-relaxed border-t border-border-subtle" set:html={item.a}></p>
               </div>
             </div>
           </details>
@@ -76,8 +76,8 @@ const faqItems = [
       </div>
     </section>
 
-    <section class="border-t border-border-subtle pt-[48px]">
-      <h2 class="text-headline-md font-semibold text-on-surface mb-[20px]">Related calculators</h2>
+    <section class="border-t border-border-subtle pt-[48px] grid grid-cols-1 md:grid-cols-[220px_1fr] gap-x-[48px] gap-y-[20px]">
+      <h2 class="text-headline-md font-semibold text-on-surface">Related calculators</h2>
       <div class="grid sm:grid-cols-2 gap-[12px]">
         <a href="/retirement-projector" class="glass-card p-[16px] rounded-xl group block">
           <p class="text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Retirement Savings Calculator</p>

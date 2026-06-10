@@ -134,13 +134,7 @@ export function SocialSecurityCalculator() {
         )}
       </div>
 
-      {/* Ko-fi nudge */}
-      {result && (
-        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
-          If this helped you think through your Social Security strategy,{' '}
-          <KofiButton label="☕ a coffee seems fair." />
-        </p>
-      )}
+      {result && <KofiButton message="If this helped you think through your Social Security strategy," />}
 
     </div>
   );

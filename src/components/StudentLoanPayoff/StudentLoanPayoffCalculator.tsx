@@ -140,13 +140,7 @@ export function StudentLoanPayoffCalculator() {
         )}
       </div>
 
-      {/* Ko-fi nudge */}
-      {result && (
-        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
-          If this helped you plan your path to debt freedom,{' '}
-          <KofiButton label="☕ a coffee seems fair." />
-        </p>
-      )}
+      {result && <KofiButton message="If this helped you plan your path to debt freedom," />}
 
       {/* Year-by-year table */}
       {result && (

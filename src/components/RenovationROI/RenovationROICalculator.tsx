@@ -12,51 +12,109 @@ import { RenovationROITable } from './RenovationROITable';
 import { KofiButton } from '../ui/KofiButton';
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
-function buildCsv(inputs: RenovationROIInputs, result: ReturnType<typeof calcRenovationROI>): string {
+async function captureChartPng(): Promise<string | null> {
+  const svg = document.querySelector<SVGSVGElement>('.recharts-wrapper > svg');
+  if (!svg) return null;
+
+  const w = svg.clientWidth || 800;
+  const h = svg.clientHeight || 300;
+
+  const clone = svg.cloneNode(true) as SVGSVGElement;
+  clone.setAttribute('width', String(w));
+  clone.setAttribute('height', String(h));
+  clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+
+  const svgStr = new XMLSerializer().serializeToString(clone);
+  const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d')!;
+      ctx.fillStyle = 'oklch(20% 0.01 240)';
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0);
+      URL.revokeObjectURL(url);
+      resolve(canvas.toDataURL('image/png'));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+    img.src = url;
+  });
+}
+
+async function buildXlsx(
+  inputs: RenovationROIInputs,
+  result: ReturnType<typeof calcRenovationROI>,
+  chartPng: string | null,
+): Promise<ArrayBuffer> {
+  const { default: ExcelJS } = await import('exceljs');
   const today = new Date().toISOString().split('T')[0];
-  const rows: string[] = [];
 
-  const c = (s: string) => `"${s.replace(/"/g, '""')}"`;
-  const row = (...cells: string[]) => rows.push(cells.map(c).join(','));
+  const wb = new ExcelJS.Workbook();
+  wb.creator = 'nestmath.app';
+  wb.created = new Date();
 
-  row('Renovation ROI vs. Investing Analysis', `Generated: ${today}`);
-  row('', '');
-  row('--- Inputs ---', '');
-  row('Renovation cost', cur.format(inputs.renovationCost));
-  row('Current home value', cur.format(inputs.homeValue));
-  row('Expected value increase', `${(inputs.valueIncreasePct * 100).toFixed(2)}%`);
-  row('Years until planned sale', String(inputs.yearsUntilSale));
-  row('Annual home appreciation', `${(inputs.annualAppreciation * 100).toFixed(2)}%`);
-  row('Annual investment return', `${(inputs.annualInvestReturn * 100).toFixed(2)}%`);
-  row('', '');
-  row('--- Summary ---', '');
-  row('Renovation ROI %', `${result.renoROIPct.toFixed(1)}%`);
-  row('Renovation net gain', result.renoNetGain >= 0 ? `+${cur.format(result.renoNetGain)}` : cur.format(result.renoNetGain));
-  row('Investment net gain', `+${cur.format(result.investNetGain)}`);
-  row('Winner', result.renoWins ? 'Renovation' : 'Invest');
-  row('Winner advantage', `+${cur.format(result.delta)}`);
+  const ws = wb.addWorksheet('Renovation ROI');
+  ws.columns = [
+    { key: 'a', width: 30 },
+    { key: 'b', width: 20 },
+    { key: 'c', width: 14 },
+    { key: 'd', width: 14 },
+    { key: 'e', width: 16 },
+    { key: 'f', width: 16 },
+    { key: 'g', width: 16 },
+    { key: 'h', width: 14 },
+  ];
+
+  ws.addRow(['Renovation ROI vs. Investing Analysis', `Generated: ${today}`]).getCell(1).font = { bold: true };
+  ws.addRow([]);
+  ws.addRow(['--- Inputs ---']).getCell(1).font = { bold: true };
+  ws.addRow(['Renovation cost', cur.format(inputs.renovationCost)]);
+  ws.addRow(['Current home value', cur.format(inputs.homeValue)]);
+  ws.addRow(['Expected value increase', `${(inputs.valueIncreasePct * 100).toFixed(2)}%`]);
+  ws.addRow(['Years until planned sale', inputs.yearsUntilSale]);
+  ws.addRow(['Annual home appreciation', `${(inputs.annualAppreciation * 100).toFixed(2)}%`]);
+  ws.addRow(['Annual investment return', `${(inputs.annualInvestReturn * 100).toFixed(2)}%`]);
+  ws.addRow([]);
+  ws.addRow(['--- Summary ---']).getCell(1).font = { bold: true };
+  ws.addRow(['Renovation ROI %', `${result.renoROIPct.toFixed(1)}%`]);
+  ws.addRow(['Renovation net gain', result.renoNetGain >= 0 ? `+${cur.format(result.renoNetGain)}` : cur.format(result.renoNetGain)]);
+  ws.addRow(['Investment net gain', `+${cur.format(result.investNetGain)}`]);
+  ws.addRow(['Winner', result.renoWins ? 'Renovation' : 'Invest']);
+  ws.addRow(['Winner advantage', `+${cur.format(result.delta)}`]);
+
+  if (chartPng) {
+    const imgId = wb.addImage({ base64: chartPng.replace(/^data:image\/png;base64,/, ''), extension: 'png' });
+    ws.addImage(imgId, { tl: { col: 2, row: 0 }, ext: { width: 700, height: 340 } });
+  }
 
   if (result.years.length > 0) {
-    row('', '');
-    row('Year', 'Home Value (w/ Reno)', 'Renovation Gain', 'Reno Net Gain', 'Investment Value', 'Invest Net Gain', 'Delta');
+    ws.addRow([]);
+    const headerRow = ws.addRow(['Year', 'Home Value (w/ Reno)', 'Renovation Gain', 'Reno Net Gain', 'Investment Value', 'Invest Net Gain', 'Delta']);
+    headerRow.eachCell(cell => { cell.font = { bold: true }; });
     for (const y of result.years) {
-      row(
-        String(y.year),
+      ws.addRow([
+        y.year,
         cur.format(y.homeValueWithReno),
         cur.format(y.renovationGain),
         y.renovationNetGain >= 0 ? `+${cur.format(y.renovationNetGain)}` : cur.format(y.renovationNetGain),
         cur.format(y.investmentValue),
         `+${cur.format(y.investmentNetGain)}`,
         y.delta >= 0 ? `+${cur.format(y.delta)}` : cur.format(y.delta),
-      );
+      ]);
     }
   }
 
-  return rows.join('\n');
+  return wb.xlsx.writeBuffer();
 }
 
 export function RenovationROICalculator() {
   const [inputs, setInputs] = useState<RenovationROIInputs>(DEFAULT_RENOVATION_ROI_INPUTS);
+  const [exporting, setExporting] = useState(false);
 
   function handleChange(key: keyof RenovationROIInputs, value: number) {
     setInputs(prev => ({ ...prev, [key]: value }));
@@ -70,16 +128,22 @@ export function RenovationROICalculator() {
 
   const today = new Date().toISOString().split('T')[0];
 
-  function handleCsv() {
-    if (!result) return;
-    const csv = buildCsv(inputs, result);
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `renovation-roi-${today}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
+  async function handleExport() {
+    if (!result || exporting) return;
+    setExporting(true);
+    try {
+      const chartPng = await captureChartPng();
+      const buffer = await buildXlsx(inputs, result, chartPng);
+      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `renovation-roi-${today}.xlsx`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } finally {
+      setExporting(false);
+    }
   }
 
   return (
@@ -94,12 +158,12 @@ export function RenovationROICalculator() {
         <div data-print="hide" className="flex gap-2 shrink-0">
           <button
             type="button"
-            onClick={handleCsv}
-            disabled={!result}
+            onClick={handleExport}
+            disabled={!result || exporting}
             className="flex items-center gap-1.5 px-md py-xs rounded-lg border border-border-subtle text-label-md text-on-surface-variant hover:border-primary-accent hover:text-on-surface transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>download</span>
-            Download CSV
+            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>{exporting ? 'hourglass_empty' : 'download'}</span>
+            {exporting ? 'Exporting…' : 'Download XLSX'}
           </button>
           <button
             type="button"
@@ -141,13 +205,7 @@ export function RenovationROICalculator() {
         )}
       </div>
 
-      {/* Ko-fi nudge */}
-      {result && (
-        <p data-print="hide" className="text-body-sm text-center text-on-surface-variant mt-6">
-          If this helped you make your renovation decision,{' '}
-          <KofiButton label="☕ a coffee seems fair." />
-        </p>
-      )}
+      {result && <KofiButton message="If this helped you make your renovation decision," />}
 
       {/* Year-by-year table */}
       {result && (

@@ -211,17 +211,11 @@ export function BuyVsRent() {
 
           {result.years.length > 0 && <AffordabilitySnapshot buy={buy} />}
 
-          <p
-            data-print="hide"
-            className="text-body-sm text-center text-on-surface-variant"
-          >
-            If this helped you think through a six-figure decision,{" "}
-            <KofiButton label="☕ a coffee seems fair." />
-          </p>
-
           <YearTable years={result.years} />
         </main>
       </div>
+
+      {result.years.length > 0 && <KofiButton message="If this helped you think through a six-figure decision," />}
     </div>
   );
 }
