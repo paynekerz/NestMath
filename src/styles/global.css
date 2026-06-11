@@ -4,6 +4,7 @@
 @import "@fontsource/inter/600.css";
 @import "@fontsource/inter/700.css";
 @import "@fontsource/material-symbols-outlined/400.css";
+@import "@fontsource-variable/bricolage-grotesque";
 
 @theme {
   /* ─── Surface hierarchy ───────────────────────── */
@@ -47,6 +48,7 @@
 
   /* ─── Font families ───────────────────────────── */
   --font-sans:        Inter, sans-serif;
+  --font-display:     'Bricolage Grotesque Variable', Inter, sans-serif;
   --font-mono-data:   ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* ─── Type scale ──────────────────────────────── */
@@ -222,6 +224,27 @@ input[type="number"]:hover {
 .animate-slide-up  { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 .animate-pulse-dot { animation: pulse   1.8s ease-in-out infinite; }
 
+/* ─── Scroll-triggered reveal (homepage) ─────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-d1.is-visible { transition-delay: 0.08s; }
+.reveal-d2.is-visible { transition-delay: 0.16s; }
+.reveal-d3.is-visible { transition-delay: 0.24s; }
+
+/* No-JS / crawler safety: only hide when the observer script has marked readiness */
+html:not(.js) .reveal {
+  opacity: 1;
+  transform: none;
+}
+
 .stagger-1 { animation-delay: 0.1s; }
 .stagger-2 { animation-delay: 0.2s; }
 .stagger-3 { animation-delay: 0.3s; }
@@ -253,6 +276,59 @@ input[type="number"]:hover {
 }
 .glass-card:hover {
   border-color: var(--color-primary-accent);
+}
+
+/* ─── Hero blueprint grid ────────────────────────── */
+.blueprint-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-border-subtle) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-border-subtle) 55%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, black 30%, transparent 75%);
+}
+
+/* ─── Hero calculator card glow ──────────────────── */
+.hero-card {
+  background: color-mix(in oklab, var(--color-surface-elevated) 88%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in oklab, var(--color-primary-accent) 35%, var(--color-border-subtle));
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--color-primary-accent) 10%, transparent),
+    0 24px 64px -24px color-mix(in oklab, var(--color-primary-accent) 45%, transparent);
+}
+
+/* Bigger touch targets for the hero sliders */
+.hero-card input[type="range"] {
+  padding-block: 8px;
+}
+.hero-card input[type="range"]::-webkit-slider-thumb {
+  height: 20px;
+  width: 20px;
+  margin-top: -8px;
+}
+.hero-card input[type="range"]::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-reveal,
+  .animate-slide-up,
+  .animate-pulse-dot {
+    animation: none;
+    opacity: 1;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* ─── Print ──────────────────────────────────────── */
