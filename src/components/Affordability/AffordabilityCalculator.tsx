@@ -10,6 +10,7 @@ import { validateAffordabilityInputs, hasErrors } from '../../lib/validation';
 import { AffordabilityInputs as AffordabilityInputsPanel } from './AffordabilityInputs';
 import { AffordabilityResult } from './AffordabilityResult';
 import { KofiButton } from '../ui/KofiButton';
+import { ToolDisclaimer } from '../ui/ToolDisclaimer';
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 const pctFmt = (v: number) => `${(v * 100).toFixed(0)}%`;
 
@@ -168,6 +169,8 @@ export function AffordabilityCalculator() {
           )}
         </div>
       </div>
+
+      {result && <ToolDisclaimer note="An estimate of borrowing capacity, not a lending decision or a recommendation to borrow the maximum. Lenders weigh credit, reserves, and other factors, and a payment you can qualify for may still be more than you should take on. Confirm with a lender." />}
 
       {result && <KofiButton message="If this helped you figure out your home budget," />}
 
