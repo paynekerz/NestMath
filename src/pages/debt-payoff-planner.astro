@@ -26,13 +26,13 @@ const faqItems = [
 ];
 ---
 <Base
-  title="Debt Payoff Calculator Avalanche vs. Snowball NestMath"
-  description="Compare the avalanche and snowball debt payoff methods across up to 6 debts. See which strategy saves you the most interest and when you'll be debt-free."
+  title="Debt Payoff Planner — Avalanche vs. Snowball | NestMath"
+  description="Compare the avalanche and snowball methods across all your debts and see which saves more interest and time. Free debt payoff planner, no account required."
   canonical="https://nestmath.app/debt-payoff-planner"
   schemaName="NestMath Debt Payoff Planner"
   schemaDescription="Compare avalanche vs. snowball debt payoff strategies. See payoff timelines, total interest, and which method saves you more money."
   breadcrumbTool="Debt Payoff Planner"
->
+  faqItems={faqItems}>
 
   <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
     <DebtPayoffCalculator client:load />

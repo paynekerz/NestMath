@@ -1,5 +1,5 @@
-// 2025 Social Security wage base — update annually
-const SS_WAGE_BASE_2025 = 176_100;
+// 2026 Social Security wage base — update annually
+const SS_WAGE_BASE = 184_500;
 
 import { type FilingStatus, getStandardDeduction, calcFederalIncomeTax } from './tax-withholding';
 export type { FilingStatus };
@@ -40,8 +40,8 @@ export function calcSideIncome(inputs: SideIncomeInputs): SideIncomeResult {
   const seTaxBase = netSEIncome * 0.9235;
 
   // SE tax: 15.3% up to SS wage base ($176,100 in 2025), 2.9% Medicare-only above
-  const ssTaxable = Math.min(seTaxBase, SS_WAGE_BASE_2025);
-  const selfEmploymentTax = ssTaxable * 0.153 + Math.max(0, seTaxBase - SS_WAGE_BASE_2025) * 0.029;
+  const ssTaxable = Math.min(seTaxBase, SS_WAGE_BASE);
+  const selfEmploymentTax = ssTaxable * 0.153 + Math.max(0, seTaxBase - SS_WAGE_BASE) * 0.029;
 
   const seTaxDeduction = selfEmploymentTax / 2;
   const taxableSEIncome = Math.max(0, netSEIncome - seTaxDeduction);

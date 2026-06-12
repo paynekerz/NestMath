@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/react": "5.0.4",
     "@astrojs/vercel": "10.0.8",
+    "@fontsource-variable/bricolage-grotesque": "^5.2.10",
     "@fontsource/inter": "5.2.8",
     "@fontsource/material-symbols-outlined": "5.2.45",
     "@vercel/analytics": "^2.0.1",
