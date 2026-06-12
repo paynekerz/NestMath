@@ -1,0 +1,121 @@
+---
+import Base from '../layouts/Base.astro';
+
+const updated = 'June 2026';
+---
+
+<Base
+  title="Terms of Use — Estimates, Not Advice | NestMath"
+  description="NestMath terms of use: free educational financial calculators provided as-is, without warranty. Estimates only, not financial, tax, or legal advice."
+  canonical="https://nestmath.app/terms"
+  schemaName="NestMath Terms of Use"
+  schemaDescription="Terms of use for NestMath free financial calculators. Estimates for educational use only."
+>
+  <div class="relative overflow-hidden">
+    <div
+      class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary-accent/20 blur-[120px] pointer-events-none -translate-y-1/4 translate-x-1/4"
+      aria-hidden="true"
+    ></div>
+
+    <div class="max-w-[768px] mx-auto px-[24px] py-[64px]">
+      <div class="mb-[48px]">
+        <h1 class="text-headline-xl font-bold text-on-surface leading-tight -tracking-[0.02em] mb-[12px]">
+          Terms of Use
+        </h1>
+        <p class="text-label-sm text-on-surface-variant">Last updated {updated}</p>
+      </div>
+
+      <div class="flex flex-col gap-[40px]">
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Not financial advice</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            NestMath provides calculators and educational content for general informational purposes only.
+            Nothing on this site is financial, investment, tax, accounting, or legal advice, and nothing here
+            creates an advisor relationship. Every result is an estimate based on the assumptions you enter and
+            on general formulas and tax or rate values that change over time. Before making any financial
+            decision, confirm the numbers and consult a qualified professional who can account for your full
+            situation.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Accuracy and assumptions</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            We work to keep the math correct and the assumptions current, and the calculation logic is open
+            source so anyone can review it. Even so, the tools may contain errors, use simplified models, or
+            rely on figures that have since changed. Tax brackets, contribution limits, and similar values are
+            labeled with the year they reflect where relevant. We make no guarantee that any result is accurate,
+            complete, or applicable to your circumstances.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Provided "as is"</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            The site and all tools are provided "as is" and "as available," without warranties of any kind,
+            express or implied, including any implied warranties of merchantability, fitness for a particular
+            purpose, or non-infringement. To the fullest extent permitted by law, ArcLayer LLC and the site's
+            contributors are not liable for any loss or damages arising out of your use of, or reliance on, the
+            site or its results.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Limitation of liability</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            To the fullest extent permitted by law, in no event will ArcLayer LLC, its members, or contributors
+            be liable for any indirect, incidental, special, consequential, or punitive damages, or for any loss
+            of profits, savings, data, or goodwill, arising out of or related to your use of, or inability to
+            use, the site or its results — whether based in contract, tort, negligence, strict liability, or any
+            other theory, and even if advised of the possibility of such damages. Because the site is provided
+            free of charge, the total aggregate liability of ArcLayer LLC for all claims relating to the site
+            will not exceed the greater of the amount you paid to use it (which is zero) or one hundred US
+            dollars ($100). Some jurisdictions do not allow certain limitations, so parts of this section may
+            not apply to you.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Indemnification</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            You agree to indemnify and hold harmless ArcLayer LLC, its members, and contributors from any
+            claims, losses, liabilities, damages, costs, or expenses (including reasonable legal fees) arising
+            out of your use or misuse of the site, your reliance on its results, your violation of these terms,
+            or your presentation of any result as professional advice to another person.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Governing law and venue</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            These terms are governed by the laws of the State of Kansas, United States, without regard to its
+            conflict-of-laws rules. Any dispute arising out of or relating to the site or these terms will be
+            brought exclusively in the state or federal courts located in Kansas, and you consent to the
+            personal jurisdiction of those courts. If any provision of these terms is found unenforceable, the
+            remaining provisions stay in full effect.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Acceptable use</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            Use the site lawfully and don't attempt to disrupt it, abuse it, or misrepresent its results as
+            professional advice to others. The NestMath source code is open source under the license stated in
+            its
+            <a href="https://github.com/paynekerz/NestMath" target="_blank" rel="noopener" class="text-primary hover:underline">GitHub repository</a>;
+            your use of the code is governed by that license.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Changes and contact</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            We may update these terms as the site changes. Continued use after an update means you accept the
+            revised terms. The site is operated by ArcLayer LLC. Questions can be raised through the GitHub
+            repository.
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</Base>

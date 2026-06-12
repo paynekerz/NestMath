@@ -112,16 +112,31 @@ const faqSchema = faqItems && faqItems.length
     <main>
       <slot />
     </main>
-    <footer data-print="hide" class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 py-6 text-body-sm text-on-surface-variant border-t border-border-subtle mt-auto">
-      <a href="https://ko-fi.com/paynekerz" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Support on Ko-fi</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://github.com/paynekerz/NestMath" target="_blank" rel="noopener" class="text-primary hover:underline">GitHub</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://www.linkedin.com/in/paynekerz" target="_blank" rel="noopener" class="text-primary hover:underline">LinkedIn</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://www.flaticon.com/free-icons/furniture-and-household" title="furniture and household icons created by Grafixpoint - Flaticon" target="_blank" rel="noopener" class="text-primary hover:underline">Icons by Grafixpoint</a>
-      <span aria-hidden="true">·</span>
-      <span data-portfolio-link>Made by Payne Kerz</span>
+    <footer data-print="hide" class="mt-auto border-t border-border-subtle">
+      <div class="max-w-[1280px] mx-auto px-4 py-6 flex flex-col items-center gap-3 text-center">
+        <p class="text-label-sm text-on-surface-variant/80 max-w-[640px] leading-relaxed">
+          NestMath provides estimates for educational and informational purposes only. It is not financial,
+          tax, investment, or legal advice. Figures are projections based on the assumptions you enter and
+          may use tax or rate values that change over time. Verify any decision with a qualified professional.
+          Provided without warranty of any kind.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-body-sm text-on-surface-variant">
+          <a href="/privacy" class="text-primary hover:underline">Privacy</a>
+          <span aria-hidden="true">·</span>
+          <a href="/terms" class="text-primary hover:underline">Terms</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://ko-fi.com/paynekerz" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Support on Ko-fi</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://github.com/paynekerz/NestMath" target="_blank" rel="noopener" class="text-primary hover:underline">GitHub</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://www.linkedin.com/in/paynekerz" target="_blank" rel="noopener" class="text-primary hover:underline">LinkedIn</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://www.flaticon.com/free-icons/furniture-and-household" title="furniture and household icons created by Grafixpoint - Flaticon" target="_blank" rel="noopener" class="text-primary hover:underline">Icons by Grafixpoint</a>
+        </div>
+        <p class="text-label-sm text-on-surface-variant/70">
+          © {new Date().getFullYear()} ArcLayer LLC · <span data-portfolio-link>Built by Payne Kerz</span>
+        </p>
+      </div>
     </footer>
   </body>
 </html>

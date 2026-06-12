@@ -9,6 +9,7 @@ import { SocialSecurityInputs as SocialSecurityInputsPanel } from './SocialSecur
 import { SocialSecuritySummary } from './SocialSecuritySummary';
 import { SocialSecurityChart } from './SocialSecurityChart';
 import { KofiButton } from '../ui/KofiButton';
+import { ToolDisclaimer } from '../ui/ToolDisclaimer';
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
 function buildCsv(inputs: SocialSecurityInputs, result: ReturnType<typeof calcSocialSecurity>): string {
@@ -133,6 +134,8 @@ export function SocialSecurityCalculator() {
           </div>
         )}
       </div>
+
+      {result && <ToolDisclaimer note="A simplified estimate based on the 2026 bend-point formula and your stated income, not your actual earnings record. Get your official benefit from your SSA.gov account, and remember that claiming age is a permanent, one-time decision." />}
 
       {result && <KofiButton message="If this helped you think through your Social Security strategy," />}
 

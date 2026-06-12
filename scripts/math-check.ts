@@ -287,3 +287,6 @@ check('zero-rate payment', computeMonthlyPayment(120_000, 0, 10), 1000);
 
 console.log(`\n${pass} passed, ${fail} failed`);
 issues.forEach((i) => console.log(' -', i));
+
+// Gate CI: a failed math check must fail the build.
+if (fail > 0) process.exit(1);
