@@ -127,6 +127,12 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Display identity: every page title carries the brand face */
+h1 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
 /* ─── Material Symbols ───────────────────────────── */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined', sans-serif;
@@ -245,39 +251,6 @@ html:not(.js) .reveal {
   transform: none;
 }
 
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-
-/* ─── Table helpers ──────────────────────────────── */
-.zebra-row:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.02);
-}
-
-/* ─── Glass panel ────────────────────────────────── */
-.glass-panel {
-  background: rgba(27, 32, 39, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid oklch(25% 0.01 240);
-  border-radius: 12px;
-}
-
-/* ─── Glass card ─────────────────────────────────── */
-.glass-card {
-  background: var(--color-surface-elevated);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: 12px;
-  transition: border-color 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.glass-card:hover {
-  border-color: var(--color-primary-accent);
-}
-
 /* ─── Hero blueprint grid ────────────────────────── */
 .blueprint-grid {
   background-image:
@@ -329,6 +302,46 @@ html:not(.js) .reveal {
   html {
     scroll-behavior: auto;
   }
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+
+/* ─── Table helpers ──────────────────────────────── */
+.zebra-row:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* ─── Glass panel ────────────────────────────────── */
+.glass-panel {
+  background: rgba(27, 32, 39, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(25% 0.01 240);
+  border-radius: 12px;
+}
+
+/* ─── Glass card ─────────────────────────────────── */
+.glass-card {
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 12px;
+  transition: border-color 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.glass-card:hover {
+  border-color: var(--color-primary-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -16px color-mix(in oklab, var(--color-primary-accent) 35%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .glass-card:hover { transform: none; }
 }
 
 /* ─── Print ──────────────────────────────────────── */

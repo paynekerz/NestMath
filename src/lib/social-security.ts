@@ -1,6 +1,6 @@
-// 2024 SSA bend points (monthly AIME)
-const BP1 = 1_174;
-const BP2 = 7_078;
+// 2026 SSA bend points (monthly AIME) — update annually
+const BP1 = 1_286;
+const BP2 = 7_749;
 
 export interface SocialSecurityInputs {
   annualIncome: number;

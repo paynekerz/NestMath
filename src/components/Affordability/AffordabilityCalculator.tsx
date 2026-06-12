@@ -113,7 +113,7 @@ export function AffordabilityCalculator() {
 
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-headline-lg text-on-surface font-bold">Home Affordability</h1>
+          <h1 className="text-headline-lg text-on-surface font-bold">How Much House Can I Afford?</h1>
           <p className="text-body-md text-on-surface-variant mt-1">Work backward from your income to find the maximum home price you can afford under standard mortgage lending guidelines, including front-end and back-end debt-to-income ratio limits, closing costs, and cash needed to close.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">

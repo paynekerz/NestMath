@@ -26,13 +26,13 @@ const faqItems = [
 ];
 ---
 <Base
-  title="Net Worth Calculator NestMath"
-  description="Calculate your net worth in minutes. Add up your assets and liabilities to see exactly where you stand with a year-over-year comparison and visual breakdown."
+  title="Net Worth Calculator — Free Snapshot Tool | NestMath"
+  description="What are you actually worth? Add up assets minus liabilities for a clear net worth snapshot and track it year over year. Free calculator, no account required."
   canonical="https://nestmath.app/net-worth"
   schemaName="NestMath Net Worth Calculator"
   schemaDescription="Free net worth snapshot calculator. Enter assets and liabilities to get your total net worth, debt-to-asset ratio, and a category breakdown with optional year-over-year delta."
   breadcrumbTool="Net Worth Calculator"
->
+  faqItems={faqItems}>
 
   <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
     <NetWorthCalculator client:load />

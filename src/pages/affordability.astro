@@ -26,13 +26,13 @@ const faqItems = [
 ];
 ---
 <Base
-  title="Home Affordability Calculator NestMath"
-  description="How much house can I afford? Work backward from income, debts, and down payment to find your maximum home price and DTI limits. Free calculator no account required."
+  title="How Much House Can I Afford? Free Calculator | NestMath"
+  description="Find the max home price you can afford from your income, debts, and down payment. Applies 28/36 DTI rules. Free home affordability calculator, no account."
   canonical="https://nestmath.app/affordability"
   schemaName="NestMath Home Affordability Calculator"
   schemaDescription="Calculate the maximum home price you can afford based on income, debts, and DTI limits."
   breadcrumbTool="Affordability"
->
+  faqItems={faqItems}>
 
   <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
     <AffordabilityCalculator client:load />

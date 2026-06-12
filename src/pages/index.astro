@@ -29,28 +29,16 @@ const faqItems = [
   },
 ];
 
-const faqSchema = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqItems.map(({ q, a }) => ({
-    '@type': 'Question',
-    name: q,
-    acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') },
-  })),
-});
 ---
 
 <Base
-  title="NestMath Free Financial Calculators"
-  description="Free calculators for home buying, debt payoff, investing, and career decisions. No account. Your data stays on your device."
+  title="Free Financial Calculators for Home, Debt & Investing | NestMath"
+  description="Free calculators for buying a home, paying off debt, and investing. Run buy vs. rent, affordability, payoff, and 20+ more. No account, no tracking."
   canonical="https://nestmath.app/"
   schemaName="NestMath"
   schemaDescription="Free calculators for every home buying decision. No account. Your data stays on your device."
->
+  faqItems={faqItems}>
   <div class="relative overflow-hidden">
-    <!-- Blueprint grid backdrop — pure CSS, replaces the hero video -->
-    <div class="blueprint-grid absolute inset-x-0 top-0 h-[760px] pointer-events-none" aria-hidden="true"></div>
-
     <!-- Atmospheric glows -->
     <div
       class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary-accent/20 blur-[120px] pointer-events-none -translate-y-1/4 translate-x-1/4"
@@ -179,7 +167,7 @@ const faqSchema = JSON.stringify({
 
       <!-- ── Budget Module ──────────────────────── -->
       <section id="budget" aria-label="Budget calculator" class="mt-[48px] reveal reveal-d1">
-        <p class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">BUDGET MODULE</p>
+        <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">BUDGET MODULE</h2>
         <a
           href="/budget"
           class="glass-card p-[32px] rounded-xl flex items-start gap-[24px] relative overflow-hidden group block"
@@ -192,7 +180,7 @@ const faqSchema = JSON.stringify({
             <span class="material-symbols-outlined text-primary text-[20px]" aria-hidden="true">account_balance_wallet</span>
           </div>
           <div class="relative">
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Where is my money going?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Where is my money going?</h3>
             <p class="text-body-md text-on-surface-variant max-w-[576px]">
               Enter your pre-tax income and monthly expenses to see your real take-home, track where it goes, and project your savings over time.
             </p>
@@ -236,7 +224,7 @@ const faqSchema = JSON.stringify({
 
       <!-- ── Tool cards ─────────────────────────── -->
       <section id="tools" aria-label="Available calculators" class="mt-[48px]">
-        <p class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">HOME MODULES</p>
+        <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">HOME MODULES</h2>
 
         <div class="grid md:grid-cols-3 gap-[24px]">
 
@@ -254,7 +242,7 @@ const faqSchema = JSON.stringify({
               <div class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary-container/20 mb-[24px]">
                 <span class="material-symbols-outlined text-primary text-[20px]" aria-hidden="true">analytics</span>
               </div>
-              <h2 class="text-headline-lg font-semibold text-on-surface mb-[12px]">Should I buy or rent?</h2>
+              <h3 class="text-headline-lg font-semibold text-on-surface mb-[12px]">Should I buy or rent?</h3>
               <p class="text-body-md text-on-surface-variant max-w-[480px]">
                 Model the full financial picture of buying vs. renting: equity, opportunity cost, and the exact year buying pays off.
               </p>
@@ -272,7 +260,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">payments</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much house can I afford?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much house can I afford?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">
               Work backward from your income to find your real buying power.
             </p>
@@ -289,7 +277,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">schedule</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">What if I pay extra each month?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">What if I pay extra each month?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">
               See how extra payments shrink your loan term and total interest paid.
             </p>
@@ -334,7 +322,7 @@ const faqSchema = JSON.stringify({
 
       <!-- ── Invest tools ───────────────────────── -->
       <section id="invest-tools" aria-label="Investment calculators" class="mt-[48px]">
-        <p class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">INVEST MODULES</p>
+        <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">INVEST MODULES</h2>
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-[16px]">
 
@@ -344,7 +332,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">account_balance</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much will my savings earn?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much will my savings earn?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Compare HYSA growth against a traditional savings account over time.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -358,7 +346,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">percent</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much do fees cost me?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much do fees cost me?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">See the compounding dollar drag of a high-fee fund vs. a low-cost alternative.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -372,7 +360,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">savings</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Am I on track to retire?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Am I on track to retire?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Project your 401(k) balance at retirement and see the real value of your employer match.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -386,7 +374,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">compare_arrows</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Which IRA saves me more in taxes?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Which IRA saves me more in taxes?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Compare Roth vs. Traditional IRA after-tax wealth based on your current and future tax rates.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -400,7 +388,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">elderly</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">When should I claim Social Security?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">When should I claim Social Security?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Find the optimal claiming age and your personal break-even point between early and late benefits.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -413,7 +401,7 @@ const faqSchema = JSON.stringify({
 
       <!-- ── Life tools ──────────────────────────── -->
       <section id="life-tools" aria-label="Life calculators" class="mt-[48px]">
-        <p class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">LIFE MODULES</p>
+        <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">LIFE MODULES</h2>
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-[16px]">
 
@@ -423,7 +411,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">trending_up</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Should I stay or switch jobs?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Should I stay or switch jobs?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Model cumulative earnings for a raise vs. a new offer and find the break-even year.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -437,7 +425,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">construction</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Is renovating worth it?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Is renovating worth it?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Compare renovation returns against putting that same cash in the market.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -451,7 +439,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">directions_car</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Should I lease or buy a car?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Should I lease or buy a car?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">True three-way comparison: lease, buy, or buy cheaper and invest the difference.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -465,7 +453,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">schedule</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">What am I actually making?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">What am I actually making?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Adjust for commute, unpaid overtime, and expenses to find your true hourly rate.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -479,7 +467,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">receipt_long</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Am I withholding enough from my paycheck?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Am I withholding enough from my paycheck?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">See your estimated tax bill vs. current withholding and whether you owe at filing time.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -493,7 +481,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">laptop</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">What does freelance income net after taxes?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">What does freelance income net after taxes?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Calculate self-employment tax, deductions, and your real take-home from side work.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -506,7 +494,7 @@ const faqSchema = JSON.stringify({
 
       <!-- ── Debt tools ─────────────────────────── -->
       <section id="debt-tools" aria-label="Debt calculators" class="mt-[48px]">
-        <p class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">DEBT MODULES</p>
+        <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">DEBT MODULES</h2>
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-[16px]">
 
@@ -516,7 +504,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">credit_card</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">When will my credit card be paid off?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">When will my credit card be paid off?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">See your payoff date and how much interest you save vs. paying only the minimum.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -530,7 +518,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">school</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">When will my student loans be gone?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">When will my student loans be gone?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">See your payoff date and how much extra payments save over the life of your loans.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -544,7 +532,7 @@ const faqSchema = JSON.stringify({
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">stacked_bar_chart</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Avalanche or snowball: which saves more?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Avalanche or snowball: which saves more?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Compare debt payoff strategies across multiple debts and see which keeps more in your pocket.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -556,7 +544,6 @@ const faqSchema = JSON.stringify({
       </section>
 
       <!-- ── FAQ ───────────────────────────────── -->
-      <script type="application/ld+json" set:html={faqSchema} />
       <section aria-label="Frequently asked questions" class="mt-[48px] mb-[64px]">
         <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[8px]">FAQ</h2>
         <div class="flex flex-col gap-[8px]">

@@ -152,7 +152,7 @@ export function RenovationROICalculator() {
       {/* Header row */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-headline-lg text-on-surface font-bold">Renovation ROI vs. Investing Calculator</h1>
+          <h1 className="text-headline-lg text-on-surface font-bold">Renovation ROI Calculator</h1>
           <p className="text-body-md text-on-surface-variant mt-1">Enter your renovation cost, the expected value increase to your home, and your planned years until sale to see whether the renovation outperforms putting that same cash in the market, with a year-by-year comparison of both paths.</p>
         </div>
         <div data-print="hide" className="flex gap-2 shrink-0">

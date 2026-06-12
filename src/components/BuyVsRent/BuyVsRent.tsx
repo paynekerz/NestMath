@@ -121,7 +121,7 @@ export function BuyVsRent() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-headline-lg text-on-surface font-bold">Buy vs. Rent</h1>
+          <h1 className="text-headline-lg text-on-surface font-bold">Buy vs. Rent Calculator</h1>
           <p className="text-body-md text-on-surface-variant mt-1">Model the full financial impact of buying vs. renting, including mortgage amortization, home appreciation, opportunity cost, and taxes, and find the exact year buying breaks even with renting and investing the difference.</p>
         </div>
         <ExportPanel

@@ -26,13 +26,13 @@ const faqItems = [
 ];
 ---
 <Base
-  title="Mortgage Refinance Calculator NestMath"
-  description="Should I refinance my mortgage? Enter your current rate, new rate, and closing costs to find your exact break-even month and total interest saved. Free calculator."
+  title="Refinance Break-Even Calculator — Free Tool | NestMath"
+  description="Should you refinance your mortgage? Find the exact month your refinance pays off after closing costs, plus monthly and lifetime savings. Free, no account."
   canonical="https://nestmath.app/refinance"
   schemaName="NestMath Refinance Break-Even Calculator"
   schemaDescription="Calculate the break-even point for refinancing your mortgage based on rate, term, and closing costs."
   breadcrumbTool="Refinance"
->
+  faqItems={faqItems}>
 
   <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
     <RefinanceCalculator client:load />

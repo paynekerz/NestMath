@@ -26,13 +26,13 @@ const faqItems = [
 ];
 ---
 <Base
-  title="401(k) / Retirement Projector NestMath"
-  description="Project your 401(k) balance at retirement, see the real value of your employer match, and find out if you're on track to retire. Free retirement calculator."
+  title="401(k) Retirement Projector — Free Calculator | NestMath"
+  description="Project your 401(k) balance at retirement, including employer match and inflation. See if you're on track. Free retirement projector, no account required."
   canonical="https://nestmath.app/retirement-projector"
   schemaName="NestMath 401(k) / Retirement Projector"
   schemaDescription="Free retirement projector. Enter your age, balance, contributions, and employer match to see your projected balance, inflation-adjusted value, estimated monthly income, and whether you're on track."
   breadcrumbTool="401(k) Projector"
->
+  faqItems={faqItems}>
 
   <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
     <RetirementProjectorCalculator client:load />

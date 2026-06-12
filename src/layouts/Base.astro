@@ -12,6 +12,7 @@ interface Props {
   schemaName?: string;
   schemaDescription?: string;
   breadcrumbTool?: string;
+  faqItems?: { q: string; a: string }[];
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   schemaName = 'NestMath',
   schemaDescription = description,
   breadcrumbTool,
+  faqItems,
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
@@ -36,6 +38,45 @@ const schema = JSON.stringify({
   operatingSystem: 'All',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
 });
+
+// Global identity schemas — emitted on every page.
+const identitySchema = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'NestMath',
+    url: SITE_URL,
+    description: 'Free personal finance calculators for home buying, debt payoff, and investing decisions.',
+    sameAs: ['https://www.linkedin.com/in/paynekerz'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'NestMath',
+    url: SITE_URL,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'NestMath',
+    url: SITE_URL,
+    description: 'Free personal finance calculators. No account required.',
+    priceRange: 'Free',
+  },
+]);
+
+// Per-page FAQ schema, built from the same items the page renders.
+const faqSchema = faqItems && faqItems.length
+  ? JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') },
+      })),
+    })
+  : null;
 ---
 <!doctype html>
 <html lang="en">
@@ -58,11 +99,14 @@ const schema = JSON.stringify({
     <link rel="preload" as="font" href={interFont} type="font/woff2" crossorigin />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="en" href={canonicalUrl} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" title="NestMath" />
     <script type="application/ld+json" set:html={schema} />
+    <script type="application/ld+json" set:html={identitySchema} />
+    {faqSchema && <script type="application/ld+json" set:html={faqSchema} />}
     <Analytics />
   </head>
   <body>
+    <div class="blueprint-grid absolute inset-x-0 top-0 h-[420px] pointer-events-none opacity-60" aria-hidden="true" data-print="hide"></div>
     <Nav currentPath={currentPath} client:idle />
     {breadcrumbTool && <Breadcrumb tool={breadcrumbTool} />}
     <main>
@@ -72,6 +116,8 @@ const schema = JSON.stringify({
       <a href="https://ko-fi.com/paynekerz" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Support on Ko-fi</a>
       <span aria-hidden="true">·</span>
       <a href="https://github.com/paynekerz/NestMath" target="_blank" rel="noopener" class="text-primary hover:underline">GitHub</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://www.linkedin.com/in/paynekerz" target="_blank" rel="noopener" class="text-primary hover:underline">LinkedIn</a>
       <span aria-hidden="true">·</span>
       <a href="https://www.flaticon.com/free-icons/furniture-and-household" title="furniture and household icons created by Grafixpoint - Flaticon" target="_blank" rel="noopener" class="text-primary hover:underline">Icons by Grafixpoint</a>
       <span aria-hidden="true">·</span>
