@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+
+const updated = 'June 2026';
+---
+
+<Base
+  title="Privacy Policy — No Account, No Tracking | NestMath"
+  description="How NestMath handles your data: calculations run in your browser, no account, no selling data. Privacy-friendly analytics only. Read the full policy."
+  canonical="https://nestmath.app/privacy"
+  schemaName="NestMath Privacy Policy"
+  schemaDescription="How NestMath handles your data. Calculations run in your browser; no account required."
+>
+  <div class="relative overflow-hidden">
+    <div
+      class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary-accent/20 blur-[120px] pointer-events-none -translate-y-1/4 translate-x-1/4"
+      aria-hidden="true"
+    ></div>
+
+    <div class="max-w-[768px] mx-auto px-[24px] py-[64px]">
+      <div class="mb-[48px]">
+        <h1 class="text-headline-xl font-bold text-on-surface leading-tight -tracking-[0.02em] mb-[12px]">
+          Privacy Policy
+        </h1>
+        <p class="text-label-sm text-on-surface-variant">Last updated {updated}</p>
+      </div>
+
+      <div class="flex flex-col gap-[40px]">
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">The short version</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            Every calculation runs in your browser. The numbers you type into a calculator are never sent to a
+            server, never stored by us, and never shared or sold. There are no accounts and no logins. You can
+            use the entire site without giving up any personal information.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">What stays on your device</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            Some tools, like the Dashboard, let you save a snapshot of your results so they're there when you
+            return. Those snapshots are written to your browser's local storage on your own device. They are
+            not transmitted anywhere. You can delete them at any time with the "Clear all data" button on the
+            Dashboard, or by clearing your browser's site data. On a shared or public computer, clear your data
+            before you leave.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Analytics</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            We use Vercel Web Analytics to understand which pages are visited and roughly how the site
+            performs. It is privacy-friendly by design: it does not use cookies, does not build a profile of
+            you, and does not track you across other websites. It collects aggregate, anonymized data such as
+            page views, referring site, and general device type. It does not receive the values you enter into
+            any calculator. You can read more in
+            <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener" class="text-primary hover:underline">Vercel's analytics privacy documentation</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Cookies</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            NestMath does not set advertising or tracking cookies. Your theme preference and any saved
+            snapshots are stored in local storage on your device, not in cookies sent to a server.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Third-party links</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            The site links to outside services such as Ko-fi, GitHub, and LinkedIn. Once you follow a link to
+            another site, that site's own privacy policy applies. We don't control how they handle your data.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Children</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            NestMath is intended for a general adult audience and is not directed at children under 13. We do
+            not knowingly collect personal information from anyone, including children.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-headline-md font-semibold text-on-surface mb-[12px]">Changes and contact</h2>
+          <p class="text-body-md text-on-surface-variant leading-relaxed">
+            We may update this policy as the site evolves. Material changes will be reflected in the "last
+            updated" date above. The site is operated by ArcLayer LLC. For questions, reach out through
+            <a href="https://github.com/paynekerz/NestMath" target="_blank" rel="noopener" class="text-primary hover:underline">the GitHub repository</a>.
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</Base>

@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "npm audit --audit-level=high && astro build",
+    "build": "npm audit --audit-level=high && npm run test:math && astro build",
     "preview": "astro preview",
     "remotion:studio": "remotion studio remotion/Root.tsx",
     "remotion:render": "remotion render remotion/Root.tsx HeroBg public/hero-bg.mp4",
-    "remotion:render-light": "remotion render remotion/Root.tsx HeroBgLight public/hero-bg-light.mp4"
+    "remotion:render-light": "remotion render remotion/Root.tsx HeroBgLight public/hero-bg-light.mp4",
+    "test:math": "node scripts/run-math-check.mjs"
   },
   "dependencies": {
     "@astrojs/react": "5.0.4",

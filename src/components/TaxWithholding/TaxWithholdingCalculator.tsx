@@ -10,6 +10,7 @@ import { TaxWithholdingInputs as TaxWithholdingInputsPanel } from './TaxWithhold
 import { TaxWithholdingSummary } from './TaxWithholdingSummary';
 import { TaxWithholdingChart } from './TaxWithholdingChart';
 import { KofiButton } from '../ui/KofiButton';
+import { ToolDisclaimer } from '../ui/ToolDisclaimer';
 const cur = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 const pct = (v: number) => `${(v * 100).toFixed(1)}%`;
 
@@ -142,6 +143,8 @@ export function TaxWithholdingCalculator() {
           </div>
         )}
       </div>
+
+      {result && <ToolDisclaimer note="Estimate only, using 2026 federal brackets and the standard deduction. It does not model state tax, itemized deductions, or credits. Confirm your W-4 against IRS guidance or a tax professional before changing your withholding." />}
 
       {result && <KofiButton message="If this helped you sort out your withholding," />}
 
