@@ -63,7 +63,13 @@ function pitiForPrice(homePrice: number, inputs: AffordabilityInputs): number {
 }
 
 export function calcMaxHomePrice(inputs: AffordabilityInputs): AffordabilityCalcResult {
-  const targetPITI = inputs.grossMonthlyIncome * inputs.frontEndDTI;
+  // Front-end limit: housing (PITI) alone vs frontEndDTI of income.
+  const frontTargetPITI = inputs.grossMonthlyIncome * inputs.frontEndDTI;
+  // Back-end limit: housing leaves only (backEndDTI of income − existing debts) for PITI.
+  const backTargetPITI = inputs.grossMonthlyIncome * inputs.backEndDTI - inputs.monthlyDebts;
+  // The binding constraint is whichever leaves less room for housing.
+  const targetPITI = Math.max(0, Math.min(frontTargetPITI, backTargetPITI));
+  const backEndIsBinding = backTargetPITI < frontTargetPITI;
 
   let lo = 0;
   let hi = 50_000_000;
@@ -94,7 +100,7 @@ export function calcMaxHomePrice(inputs: AffordabilityInputs): AffordabilityCalc
     cashToClose: downPayment + closingCosts,
     downPayment,
     closingCosts,
-    backEndExceeded: (monthlyPITI + inputs.monthlyDebts) / inputs.grossMonthlyIncome > inputs.backEndDTI,
+    backEndExceeded: backEndIsBinding,
   };
 }
 

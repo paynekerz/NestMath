@@ -26,13 +26,13 @@ const faqItems = [
 ];
 ---
 <Base
-  title="Down Payment Savings Calculator NestMath"
-  description="Find out exactly how long it takes to save for a down payment. Enter your target price, savings rate, and return on savings see the month you'll be ready to buy."
+  title="Down Payment Savings Calculator — Free Tool | NestMath"
+  description="How long until you can afford a house? Project your down payment timeline from current savings, monthly contributions, and interest. Free, no account."
   canonical="https://nestmath.app/savings-planner"
   schemaName="NestMath Down Payment Savings Calculator"
   schemaDescription="Calculate how long it takes to save for a down payment and closing costs based on your monthly savings rate and investment return."
   breadcrumbTool="Savings Planner"
->
+  faqItems={faqItems}>
 
   <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
     <SavingsPlannerCalculator client:load />

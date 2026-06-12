@@ -26,13 +26,13 @@ const faqItems = [
 ];
 ---
 <Base
-  title="Tax Withholding Estimator NestMath"
-  description="Find out if you're over- or under-withholding federal income tax. Enter your income, filing status, and withholding to see your estimated 2025 tax bill and whether you need quarterly estimated payments."
+  title="Tax Withholding Estimator — Free 2026 Calculator | NestMath"
+  description="Are you withholding enough? Estimate your 2026 federal tax bill vs. current withholding and see if you'll owe at filing. Free tax estimator, no account."
   canonical="https://nestmath.app/tax-withholding"
   schemaName="NestMath Tax Withholding Estimator"
   schemaDescription="Free federal tax withholding estimator. Uses 2025 IRS tax brackets and standard deductions to show your estimated tax owed vs. current withholding, effective rate, marginal rate, and quarterly payment requirement."
   breadcrumbTool="Tax Withholding"
->
+  faqItems={faqItems}>
 
   <div class="max-w-[1280px] mx-auto px-[24px] pb-[32px]">
     <TaxWithholdingCalculator client:load />

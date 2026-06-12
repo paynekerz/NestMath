@@ -1,4 +1,4 @@
-// 2025 federal income tax brackets and standard deductions
+// 2026 federal income tax brackets and standard deductions (Rev. Proc. 2025-32)
 // Update annually when IRS publishes inflation adjustments
 
 export type FilingStatus = 'single' | 'mfj' | 'hoh';
@@ -14,41 +14,41 @@ interface FilingConfig {
   brackets: TaxBracket[];
 }
 
-const TAX_CONFIG_2025: Record<FilingStatus, FilingConfig> = {
+const TAX_CONFIG_2026: Record<FilingStatus, FilingConfig> = {
   single: {
-    standardDeduction: 15_000,
+    standardDeduction: 16_100,
     brackets: [
-      { rate: 0.10, min: 0,       max: 11_925 },
-      { rate: 0.12, min: 11_925,  max: 48_475 },
-      { rate: 0.22, min: 48_475,  max: 103_350 },
-      { rate: 0.24, min: 103_350, max: 197_300 },
-      { rate: 0.32, min: 197_300, max: 250_525 },
-      { rate: 0.35, min: 250_525, max: 626_350 },
-      { rate: 0.37, min: 626_350, max: Infinity },
+      { rate: 0.10, min: 0,       max: 12_400 },
+      { rate: 0.12, min: 12_400,  max: 50_400 },
+      { rate: 0.22, min: 50_400,  max: 105_700 },
+      { rate: 0.24, min: 105_700, max: 201_775 },
+      { rate: 0.32, min: 201_775, max: 256_225 },
+      { rate: 0.35, min: 256_225, max: 640_600 },
+      { rate: 0.37, min: 640_600, max: Infinity },
     ],
   },
   mfj: {
-    standardDeduction: 30_000,
+    standardDeduction: 32_200,
     brackets: [
-      { rate: 0.10, min: 0,       max: 23_850 },
-      { rate: 0.12, min: 23_850,  max: 96_950 },
-      { rate: 0.22, min: 96_950,  max: 206_700 },
-      { rate: 0.24, min: 206_700, max: 394_600 },
-      { rate: 0.32, min: 394_600, max: 501_050 },
-      { rate: 0.35, min: 501_050, max: 751_600 },
-      { rate: 0.37, min: 751_600, max: Infinity },
+      { rate: 0.10, min: 0,       max: 24_800 },
+      { rate: 0.12, min: 24_800,  max: 100_800 },
+      { rate: 0.22, min: 100_800, max: 211_400 },
+      { rate: 0.24, min: 211_400, max: 403_550 },
+      { rate: 0.32, min: 403_550, max: 512_450 },
+      { rate: 0.35, min: 512_450, max: 768_700 },
+      { rate: 0.37, min: 768_700, max: Infinity },
     ],
   },
   hoh: {
-    standardDeduction: 22_500,
+    standardDeduction: 24_150,
     brackets: [
-      { rate: 0.10, min: 0,       max: 17_000 },
-      { rate: 0.12, min: 17_000,  max: 64_850 },
-      { rate: 0.22, min: 64_850,  max: 103_350 },
-      { rate: 0.24, min: 103_350, max: 197_300 },
-      { rate: 0.32, min: 197_300, max: 250_500 },
-      { rate: 0.35, min: 250_500, max: 626_350 },
-      { rate: 0.37, min: 626_350, max: Infinity },
+      { rate: 0.10, min: 0,       max: 17_700 },
+      { rate: 0.12, min: 17_700,  max: 67_450 },
+      { rate: 0.22, min: 67_450,  max: 105_700 },
+      { rate: 0.24, min: 105_700, max: 201_775 },
+      { rate: 0.32, min: 201_775, max: 256_200 },
+      { rate: 0.35, min: 256_200, max: 640_600 },
+      { rate: 0.37, min: 640_600, max: Infinity },
     ],
   },
 };
@@ -109,16 +109,16 @@ function applyBrackets(taxableIncome: number, brackets: TaxBracket[]): { total: 
 }
 
 export function getStandardDeduction(filingStatus: FilingStatus): number {
-  return TAX_CONFIG_2025[filingStatus].standardDeduction;
+  return TAX_CONFIG_2026[filingStatus].standardDeduction;
 }
 
 export function calcFederalIncomeTax(taxableIncome: number, filingStatus: FilingStatus): number {
-  const { total } = applyBrackets(taxableIncome, TAX_CONFIG_2025[filingStatus].brackets);
+  const { total } = applyBrackets(taxableIncome, TAX_CONFIG_2026[filingStatus].brackets);
   return Math.round(total);
 }
 
 export function calcTaxWithholding(inputs: TaxWithholdingInputs): TaxWithholdingResult {
-  const config = TAX_CONFIG_2025[inputs.filingStatus];
+  const config = TAX_CONFIG_2026[inputs.filingStatus];
   const adjustedGrossIncome = Math.max(0, inputs.grossW2Income + inputs.otherIncome - inputs.preTaxDeductions);
   const taxableIncome = Math.max(0, adjustedGrossIncome - config.standardDeduction);
 

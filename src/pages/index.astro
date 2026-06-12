@@ -1,6 +1,6 @@
 ﻿---
 import Base from '../layouts/Base.astro';
-import { HeroVideo } from '../components/ui/HeroVideo';
+import { HeroCalculator } from '../components/ui/HeroCalculator';
 
 const faqItems = [
   {
@@ -29,89 +29,84 @@ const faqItems = [
   },
 ];
 
-const faqSchema = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqItems.map(({ q, a }) => ({
-    '@type': 'Question',
-    name: q,
-    acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') },
-  })),
-});
 ---
 
 <Base
-  title="NestMath Free Financial Calculators"
-  description="Free calculators for home buying, debt payoff, investing, and career decisions. No account. Your data stays on your device."
+  title="Free Financial Calculators for Home, Debt & Investing | NestMath"
+  description="Free calculators for buying a home, paying off debt, and investing. Run buy vs. rent, affordability, payoff, and 20+ more. No account, no tracking."
   canonical="https://nestmath.app/"
   schemaName="NestMath"
   schemaDescription="Free calculators for every home buying decision. No account. Your data stays on your device."
->
+  faqItems={faqItems}>
   <div class="relative overflow-hidden">
-    <!-- Hero video background: renders on black, screen-blended so dark areas vanish -->
-    <div class="absolute inset-x-0 top-0 h-[680px] pointer-events-none" aria-hidden="true">
-      <HeroVideo client:only="react" />
-      <!-- Fade to page background -->
-      <div class="absolute inset-x-0 bottom-0 h-[500px]" style="background: linear-gradient(to bottom, transparent 0%, var(--color-background) 85%)"></div>
-    </div>
-
-    <!-- Atmospheric blur -->
+    <!-- Atmospheric glows -->
     <div
       class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-primary-accent/20 blur-[120px] pointer-events-none -translate-y-1/4 translate-x-1/4"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="absolute top-[400px] left-0 w-[400px] h-[400px] rounded-full bg-success-emerald/10 blur-[140px] pointer-events-none -translate-x-1/2"
       aria-hidden="true"
     ></div>
 
     <div class="max-w-[1280px] mx-auto px-[24px]">
 
       <!-- ── Hero ───────────────────────────────── -->
-      <section class="pt-24 pb-16 relative">
-        <!-- Status badge -->
-        <div class="inline-flex items-center gap-[8px] rounded-full bg-primary-container/10 border border-primary/20 px-[16px] py-[8px] mb-[32px]">
-          <span class="w-2 h-2 rounded-full bg-success-emerald animate-pulse-dot" aria-hidden="true"></span>
-          <span class="text-label-sm text-primary">Free &amp; Open Source</span>
+      <section class="pt-16 sm:pt-24 pb-16 relative grid lg:grid-cols-2 gap-[48px] lg:gap-[64px] items-center">
+        <div>
+          <!-- Status badge -->
+          <div class="inline-flex items-center gap-[8px] rounded-full bg-primary-container/10 border border-primary/20 px-[16px] py-[8px] mb-[28px] animate-reveal">
+            <span class="w-2 h-2 rounded-full bg-success-emerald animate-pulse-dot" aria-hidden="true"></span>
+            <span class="text-label-sm text-primary">Free &amp; Open Source</span>
+          </div>
+
+          <h1 class="font-display text-[40px] sm:text-[52px] font-bold text-on-surface leading-[1.05] -tracking-[0.02em] animate-reveal stagger-1">
+            Run the numbers before you sign.
+          </h1>
+          <p class="text-body-lg text-on-surface-variant mt-[24px] max-w-[480px] animate-reveal stagger-2">
+            Free calculators for buying a home, killing debt, and every money decision in between. No account. Your data never leaves your device.
+          </p>
+
+          <!-- Trust bar -->
+          <div class="flex flex-wrap items-center gap-x-[24px] gap-y-[8px] mt-[24px] animate-reveal stagger-3">
+            <span class="flex items-center gap-[6px] text-label-sm text-on-surface-variant">
+              <span class="material-symbols-outlined text-success-emerald text-[16px]" aria-hidden="true">check_circle</span>
+              Free, always.
+            </span>
+            <span class="flex items-center gap-[6px] text-label-sm text-on-surface-variant">
+              <span class="material-symbols-outlined text-success-emerald text-[16px]" aria-hidden="true">no_accounts</span>
+              No account required.
+            </span>
+            <span class="flex items-center gap-[6px] text-label-sm text-on-surface-variant">
+              <span class="material-symbols-outlined text-success-emerald text-[16px]" aria-hidden="true">security</span>
+              Your data stays on your device.
+            </span>
+          </div>
+
+          <div class="hidden lg:flex flex-wrap gap-[16px] mt-[32px] animate-reveal stagger-3">
+            <a
+              href="/dashboard"
+              class="inline-flex items-center bg-primary-accent text-white px-[32px] py-[16px] rounded-lg text-label-md font-semibold hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary-accent/20"
+            >
+              Browse all 20+ tools
+            </a>
+            <a
+              href="#how-it-works"
+              class="inline-flex items-center border border-border-subtle bg-surface-container-low px-[32px] py-[16px] rounded-lg text-label-md font-semibold text-on-surface hover:border-primary-accent/50 transition-all"
+            >
+              How It Works
+            </a>
+          </div>
         </div>
 
-        <h1 class="text-headline-xl font-bold text-on-surface max-w-2xl leading-tight -tracking-[0.02em]">
-          Free financial tools for the decisions that matter.
-        </h1>
-        <p class="text-body-lg text-on-surface-variant mt-[24px] max-w-[576px]">
-          Free calculators for every home buying decision. No account. Your data stays on your device.
-        </p>
-
-        <!-- Trust bar -->
-        <div class="flex flex-wrap items-center gap-x-[24px] gap-y-[8px] mt-[24px]">
-          <span class="flex items-center gap-[6px] text-label-sm text-on-surface-variant">
-            <span class="material-symbols-outlined text-success-emerald text-[16px]" aria-hidden="true">check_circle</span>
-            Free, always.
-          </span>
-          <span class="flex items-center gap-[6px] text-label-sm text-on-surface-variant">
-            <span class="material-symbols-outlined text-success-emerald text-[16px]" aria-hidden="true">no_accounts</span>
-            No account required.
-          </span>
-          <span class="flex items-center gap-[6px] text-label-sm text-on-surface-variant">
-            <span class="material-symbols-outlined text-success-emerald text-[16px]" aria-hidden="true">security</span>
-            Your data stays on your device.
-          </span>
-        </div>
-
-        <div class="flex flex-wrap gap-[16px] mt-[32px]">
-          <a
-            href="/dashboard"
-            class="inline-flex items-center bg-primary-accent text-white px-[32px] py-[16px] rounded-lg text-label-md font-semibold hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary-accent/20"
-          >
-            Get Started
-          </a>
-          <a
-            href="#how-it-works"
-            class="inline-flex items-center border border-border-subtle bg-surface-container-low px-[32px] py-[16px] rounded-lg text-label-md font-semibold text-on-surface hover:border-primary-accent/50 transition-all"
-          >
-            How It Works
-          </a>
+        <!-- Live calculator — the answer before the first click -->
+        <div class="animate-slide-up stagger-2">
+          <HeroCalculator client:load />
         </div>
       </section>
 
       <!-- ── How It Works ──────────────────────── -->
-      <section id="how-it-works" aria-label="How it works" class="mt-[48px] animate-reveal stagger-2">
+      <section id="how-it-works" aria-label="How it works" class="mt-[48px] reveal reveal-d2">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-[24px] rounded-xl border border-border-subtle bg-surface-container-low p-[24px] sm:p-[32px]">
 
           <div class="flex items-start gap-[16px]">
@@ -151,7 +146,7 @@ const faqSchema = JSON.stringify({
       </section>
 
       <!-- ── Trust signals ──────────────────────── -->
-      <div class="mt-[96px] grid grid-cols-2 md:grid-cols-4 gap-[24px] border-t border-border-subtle pt-[24px] animate-reveal stagger-2">
+      <div class="mt-[96px] grid grid-cols-2 md:grid-cols-4 gap-[24px] border-t border-border-subtle pt-[24px] reveal reveal-d2">
         <div>
           <p class="text-headline-md font-semibold text-on-surface">Free, always.</p>
           <p class="text-label-sm text-on-surface-variant mt-[4px]">No credit card. No plan.</p>
@@ -171,8 +166,8 @@ const faqSchema = JSON.stringify({
       </div>
 
       <!-- ── Budget Module ──────────────────────── -->
-      <section id="budget" aria-label="Budget calculator" class="mt-[48px] animate-reveal stagger-1">
-        <p class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">BUDGET MODULE</p>
+      <section id="budget" aria-label="Budget calculator" class="mt-[48px] reveal reveal-d1">
+        <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">BUDGET MODULE</h2>
         <a
           href="/budget"
           class="glass-card p-[32px] rounded-xl flex items-start gap-[24px] relative overflow-hidden group block"
@@ -185,7 +180,7 @@ const faqSchema = JSON.stringify({
             <span class="material-symbols-outlined text-primary text-[20px]" aria-hidden="true">account_balance_wallet</span>
           </div>
           <div class="relative">
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Where is my money going?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Where is my money going?</h3>
             <p class="text-body-md text-on-surface-variant max-w-[576px]">
               Enter your pre-tax income and monthly expenses to see your real take-home, track where it goes, and project your savings over time.
             </p>
@@ -229,14 +224,14 @@ const faqSchema = JSON.stringify({
 
       <!-- ── Tool cards ─────────────────────────── -->
       <section id="tools" aria-label="Available calculators" class="mt-[48px]">
-        <p class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">HOME MODULES</p>
+        <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">HOME MODULES</h2>
 
         <div class="grid md:grid-cols-3 gap-[24px]">
 
           <!-- Feature card: Buy vs. Rent -->
           <a
             href="/buy-vs-rent"
-            class="glass-card p-[32px] rounded-xl md:col-span-2 md:row-span-2 relative overflow-hidden group block animate-reveal stagger-1"          >
+            class="glass-card p-[32px] rounded-xl md:col-span-2 md:row-span-2 relative overflow-hidden group block reveal reveal-d1"          >
             <!-- Decorative watermark icon -->
             <span
               class="material-symbols-outlined absolute bottom-4 right-4 text-[120px] text-on-surface opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none select-none"
@@ -247,7 +242,7 @@ const faqSchema = JSON.stringify({
               <div class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary-container/20 mb-[24px]">
                 <span class="material-symbols-outlined text-primary text-[20px]" aria-hidden="true">analytics</span>
               </div>
-              <h2 class="text-headline-lg font-semibold text-on-surface mb-[12px]">Should I buy or rent?</h2>
+              <h3 class="text-headline-lg font-semibold text-on-surface mb-[12px]">Should I buy or rent?</h3>
               <p class="text-body-md text-on-surface-variant max-w-[480px]">
                 Model the full financial picture of buying vs. renting: equity, opportunity cost, and the exact year buying pays off.
               </p>
@@ -261,11 +256,11 @@ const faqSchema = JSON.stringify({
           <!-- Small card 1: Affordability -->
           <a
             href="/affordability"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-2"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d2"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">payments</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much house can I afford?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much house can I afford?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">
               Work backward from your income to find your real buying power.
             </p>
@@ -278,11 +273,11 @@ const faqSchema = JSON.stringify({
           <!-- Small card 2: Payoff -->
           <a
             href="/payoff"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-3"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d3"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">schedule</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">What if I pay extra each month?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">What if I pay extra each month?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">
               See how extra payments shrink your loan term and total interest paid.
             </p>
@@ -293,7 +288,7 @@ const faqSchema = JSON.stringify({
           </a>
 
           <!-- Horizontal strip: Savings Planner + Refinance -->
-          <div class="md:col-span-3 bg-surface-container-low rounded-xl border border-border-subtle overflow-hidden animate-reveal stagger-4">
+          <div class="md:col-span-3 bg-surface-container-low rounded-xl border border-border-subtle overflow-hidden reveal reveal-d3">
             <div class="grid grid-cols-2 divide-x divide-border-subtle">
               <a
                 href="/savings-planner"
@@ -327,17 +322,17 @@ const faqSchema = JSON.stringify({
 
       <!-- ── Invest tools ───────────────────────── -->
       <section id="invest-tools" aria-label="Investment calculators" class="mt-[48px]">
-        <p class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">INVEST MODULES</p>
+        <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">INVEST MODULES</h2>
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-[16px]">
 
           <a
             href="/hysa-calculator"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-1"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d1"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">account_balance</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much will my savings earn?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much will my savings earn?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Compare HYSA growth against a traditional savings account over time.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -347,11 +342,11 @@ const faqSchema = JSON.stringify({
 
           <a
             href="/investment-fees"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-2"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d2"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">percent</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much do fees cost me?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">How much do fees cost me?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">See the compounding dollar drag of a high-fee fund vs. a low-cost alternative.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -361,11 +356,11 @@ const faqSchema = JSON.stringify({
 
           <a
             href="/retirement-projector"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-3"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d3"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">savings</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Am I on track to retire?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Am I on track to retire?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Project your 401(k) balance at retirement and see the real value of your employer match.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -375,11 +370,11 @@ const faqSchema = JSON.stringify({
 
           <a
             href="/roth-vs-traditional"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-4"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d3"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">compare_arrows</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Which IRA saves me more in taxes?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Which IRA saves me more in taxes?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Compare Roth vs. Traditional IRA after-tax wealth based on your current and future tax rates.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -389,11 +384,11 @@ const faqSchema = JSON.stringify({
 
           <a
             href="/social-security-break-even"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-1"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d1"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">elderly</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">When should I claim Social Security?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">When should I claim Social Security?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Find the optimal claiming age and your personal break-even point between early and late benefits.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -406,17 +401,17 @@ const faqSchema = JSON.stringify({
 
       <!-- ── Life tools ──────────────────────────── -->
       <section id="life-tools" aria-label="Life calculators" class="mt-[48px]">
-        <p class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">LIFE MODULES</p>
+        <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">LIFE MODULES</h2>
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-[16px]">
 
           <a
             href="/raise-vs-job-hop"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-1"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d1"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">trending_up</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Should I stay or switch jobs?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Should I stay or switch jobs?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Model cumulative earnings for a raise vs. a new offer and find the break-even year.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -426,11 +421,11 @@ const faqSchema = JSON.stringify({
 
           <a
             href="/renovation-roi"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-2"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d2"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">construction</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Is renovating worth it?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Is renovating worth it?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Compare renovation returns against putting that same cash in the market.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -440,11 +435,11 @@ const faqSchema = JSON.stringify({
 
           <a
             href="/car-lease-vs-buy"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-3"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d3"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">directions_car</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Should I lease or buy a car?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Should I lease or buy a car?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">True three-way comparison: lease, buy, or buy cheaper and invest the difference.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -454,11 +449,11 @@ const faqSchema = JSON.stringify({
 
           <a
             href="/effective-hourly"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-4"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d3"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">schedule</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">What am I actually making?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">What am I actually making?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Adjust for commute, unpaid overtime, and expenses to find your true hourly rate.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -468,11 +463,11 @@ const faqSchema = JSON.stringify({
 
           <a
             href="/tax-withholding"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-1"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d1"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">receipt_long</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Am I withholding enough from my paycheck?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Am I withholding enough from my paycheck?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">See your estimated tax bill vs. current withholding and whether you owe at filing time.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -482,11 +477,11 @@ const faqSchema = JSON.stringify({
 
           <a
             href="/side-income"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-2"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d2"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">laptop</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">What does freelance income net after taxes?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">What does freelance income net after taxes?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Calculate self-employment tax, deductions, and your real take-home from side work.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -499,17 +494,17 @@ const faqSchema = JSON.stringify({
 
       <!-- ── Debt tools ─────────────────────────── -->
       <section id="debt-tools" aria-label="Debt calculators" class="mt-[48px]">
-        <p class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">DEBT MODULES</p>
+        <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[24px]">DEBT MODULES</h2>
 
         <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-[16px]">
 
           <a
             href="/credit-card-payoff"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-1"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d1"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">credit_card</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">When will my credit card be paid off?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">When will my credit card be paid off?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">See your payoff date and how much interest you save vs. paying only the minimum.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -519,11 +514,11 @@ const faqSchema = JSON.stringify({
 
           <a
             href="/student-loan-payoff"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-2"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d2"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">school</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">When will my student loans be gone?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">When will my student loans be gone?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">See your payoff date and how much extra payments save over the life of your loans.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -533,11 +528,11 @@ const faqSchema = JSON.stringify({
 
           <a
             href="/debt-payoff-planner"
-            class="glass-card p-[24px] rounded-xl group block animate-reveal stagger-3"          >
+            class="glass-card p-[24px] rounded-xl group block reveal reveal-d3"          >
             <div class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-secondary-container mb-[16px]">
               <span class="material-symbols-outlined text-on-secondary-container text-[18px]" aria-hidden="true">stacked_bar_chart</span>
             </div>
-            <h2 class="text-headline-md font-semibold text-on-surface mb-[8px]">Avalanche or snowball: which saves more?</h2>
+            <h3 class="text-headline-md font-semibold text-on-surface mb-[8px]">Avalanche or snowball: which saves more?</h3>
             <p class="text-body-sm text-on-surface-variant mb-[16px]">Compare debt payoff strategies across multiple debts and see which keeps more in your pocket.</p>
             <span class="inline-flex items-center gap-[8px] text-label-md font-semibold text-primary group-hover:gap-[12px] transition-all">
               Calculate
@@ -549,7 +544,6 @@ const faqSchema = JSON.stringify({
       </section>
 
       <!-- ── FAQ ───────────────────────────────── -->
-      <script type="application/ld+json" set:html={faqSchema} />
       <section aria-label="Frequently asked questions" class="mt-[48px] mb-[64px]">
         <h2 class="text-label-md font-semibold text-primary uppercase tracking-widest mb-[8px]">FAQ</h2>
         <div class="flex flex-col gap-[8px]">
@@ -594,4 +588,28 @@ const faqSchema = JSON.stringify({
 
     </div>
   </div>
+
+  <script>
+    // Scroll-triggered reveals. The .js class gates the hidden state so
+    // crawlers and no-JS visitors always see full content.
+    document.documentElement.classList.add('js');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = document.querySelectorAll('.reveal');
+    if (reduced || !('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-visible'));
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.1 },
+      );
+      els.forEach((el) => io.observe(el));
+    }
+  </script>
 </Base>
